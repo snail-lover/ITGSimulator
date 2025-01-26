@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BaseInteract : MonoBehaviour, IInteractable
 {
@@ -6,7 +7,24 @@ public class BaseInteract : MonoBehaviour, IInteractable
     {
         Debug.Log("On click fired");
 
-    GameObject player = GameObject.FindGameObjectsWithTag("Player");
+    GameObject player = GameObject.FindGameObjectWithTag("Player");
+    if (player != null)
+    {
+        NavMeshAgent agent = player.GetComponent<NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.SetDestination(transform.position);
+            Debug.Log("Player is moving to interactable object");
+        }
+        else
+        {
+            Debug.LogWarning("player does not have a NavMeshAgent component");
+        }
+    }
+    else
+    {
+        Debug.LogWarning("Player not found in scene");
+    }
 
 
     }
