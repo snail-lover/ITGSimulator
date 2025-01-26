@@ -5,6 +5,10 @@ public class BaseInteract : MonoBehaviour, IInteractable
     public virtual void OnClick()
     {
         Debug.Log("On click fired");
+
+    GameObject player = GameObject.FindGameObjectsWithTag("Player");
+
+
     }
 
     public virtual void Interact()
