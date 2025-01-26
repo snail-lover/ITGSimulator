@@ -1,26 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\UnityHub\\Projects\\ITGSimulator\\",
+  "WorkspaceRootPath": "C:\\Users\\Tadus\\Documents\\ITGSimulator\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\BaseInteract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\BaseInteract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\IInteractable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Tadus\\Documents\\ITGSimulator\\Assets\\Scripts\\IInteractable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\IInteractable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\CameraFollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Tadus\\Documents\\ITGSimulator\\Assets\\Scripts\\CameraFollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\CameraFollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\PointAndClickMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Tadus\\Documents\\ITGSimulator\\Assets\\Scripts\\PointAndClickMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\PointAndClickMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\CharacterMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\CharacterMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Tadus\\Documents\\ITGSimulator\\Assets\\Scripts\\BaseInteract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\BaseInteract.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\CharacterMovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,53 +29,51 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "BaseInteract.cs",
-              "DocumentMoniker": "E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\BaseInteract.cs",
+              "DocumentMoniker": "C:\\Users\\Tadus\\Documents\\ITGSimulator\\Assets\\Scripts\\BaseInteract.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\BaseInteract.cs",
-              "ToolTip": "E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\BaseInteract.cs",
+              "ToolTip": "C:\\Users\\Tadus\\Documents\\ITGSimulator\\Assets\\Scripts\\BaseInteract.cs",
               "RelativeToolTip": "Assets\\Scripts\\BaseInteract.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAlAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-26T00:02:22.02Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-26T00:02:22.02Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "PointAndClickMovement.cs",
-              "DocumentMoniker": "E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\PointAndClickMovement.cs",
+              "DocumentMoniker": "C:\\Users\\Tadus\\Documents\\ITGSimulator\\Assets\\Scripts\\PointAndClickMovement.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PointAndClickMovement.cs",
-              "ToolTip": "E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\PointAndClickMovement.cs",
+              "ToolTip": "C:\\Users\\Tadus\\Documents\\ITGSimulator\\Assets\\Scripts\\PointAndClickMovement.cs",
               "RelativeToolTip": "Assets\\Scripts\\PointAndClickMovement.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAQAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-25T22:39:09.585Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "CameraFollow.cs",
-              "DocumentMoniker": "E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\CameraFollow.cs",
+              "DocumentMoniker": "C:\\Users\\Tadus\\Documents\\ITGSimulator\\Assets\\Scripts\\CameraFollow.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CameraFollow.cs",
-              "ToolTip": "E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\CameraFollow.cs",
+              "ToolTip": "C:\\Users\\Tadus\\Documents\\ITGSimulator\\Assets\\Scripts\\CameraFollow.cs",
               "RelativeToolTip": "Assets\\Scripts\\CameraFollow.cs",
-              "ViewState": "AQIAAC0AAAAAAAAAAIBJwEIAAAA/AAAA",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAABwAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-25T22:29:52.627Z"
+              "WhenOpened": "2025-01-25T22:29:52.627Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "CharacterMovement.cs",
               "DocumentMoniker": "E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\CharacterMovement.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\CharacterMovement.cs",
               "ToolTip": "E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\CharacterMovement.cs",
-              "RelativeToolTip": "Assets\\Scripts\\CharacterMovement.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-25T22:05:46.498Z"
@@ -89,13 +86,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "IInteractable.cs",
-              "DocumentMoniker": "E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\IInteractable.cs",
+              "DocumentMoniker": "C:\\Users\\Tadus\\Documents\\ITGSimulator\\Assets\\Scripts\\IInteractable.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\IInteractable.cs",
-              "ToolTip": "E:\\UnityHub\\Projects\\ITGSimulator\\Assets\\Scripts\\IInteractable.cs",
+              "ToolTip": "C:\\Users\\Tadus\\Documents\\ITGSimulator\\Assets\\Scripts\\IInteractable.cs",
               "RelativeToolTip": "Assets\\Scripts\\IInteractable.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAALAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-25T23:35:45.051Z",
               "EditorCaption": ""
