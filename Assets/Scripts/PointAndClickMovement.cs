@@ -18,10 +18,30 @@ public class PointAndClickMovement : MonoBehaviour
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            // Raycast only hits objects in the groundLayer
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
+            // Perform a single raycast
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
             {
-                agent.SetDestination(hit.point);
+                Debug.Log("It hit: " + hit.collider.gameObject.name); // Log what was hit
+
+                // Check if the object is interactable
+                IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    interactable.OnClick(); // Call OnClick for interactables
+                }
+                else
+                {
+                    // Move the player if the object is in the groundLayer
+                    if (((1 << hit.collider.gameObject.layer) & groundLayer) != 0)
+                    {
+                        agent.SetDestination(hit.point);
+                        Debug.Log("Player is moving to: " + hit.point);
+                    }
+                    else
+                    {
+                        Debug.Log("IInteractable not found on: " + hit.collider.gameObject.name);
+                    }
+                }
             }
         }
     }
