@@ -40,7 +40,7 @@ public class HolmBehaviur : MonoBehaviour
 
             // Move Holm closer to the nearest player
             holm.transform.position = Vector3.MoveTowards(holm.transform.position, players[0].transform.position, step);
-            holm.
+        
         }
         else
         {

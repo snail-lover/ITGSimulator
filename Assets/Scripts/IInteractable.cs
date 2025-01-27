@@ -6,4 +6,5 @@ public interface IInteractable
     void Interact(); //called when interaction occurs
     void WhenHovered(); //called when the object is hovered
     bool CanInteract(); // returns when it can be interacted with
+    void HideHover();
 }
