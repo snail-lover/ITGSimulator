@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,54 +7,64 @@ public class BaseInteract : MonoBehaviour, IInteractable
 {
     private GameObject currentHoverText;
     public GameObject hoverTextPrefab; // Assign the prefab for the hover text in the Inspector
-   public float interactionRange = 2f;
-   
+    public float interactionRange = 2f;
+    private bool isPlayerMovingToInteract = false;
+    public AudioClip soundEffect;
+    private AudioSource audioSource;
+
+    void Start()
+    {
+
+        audioSource = gameObject.GetComponent<AudioSource>();
+        if (audioSource == null)  
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.volume = 0.5f;
+       
+    }
+
+
+
+
+    void Update()
+    {
+        if (isPlayerMovingToInteract)
+        {
+            // Check if the player has arrived within interaction range
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                float distance = Vector3.Distance(player.transform.position, transform.position);
+                if (distance <= interactionRange)
+                {
+                    Interact(); // Trigger interaction
+                    isPlayerMovingToInteract = false; // Stop checking
+                }
+            }
+        }
+    }
     public virtual void OnClick()
     {
-        Debug.Log("On click fired");
-
-    GameObject player = GameObject.FindGameObjectWithTag("Player");
-    if (player != null)
-    {
-        NavMeshAgent agent = player.GetComponent<NavMeshAgent>();
-        if (agent != null)
+        // Get the player and their NavMeshAgent
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
-            agent.SetDestination(transform.position);
-            Debug.Log("Player is moving to interactable object");
+            NavMeshAgent playerAgent = player.GetComponent<NavMeshAgent>();
+            if (playerAgent != null)
+            {
+                // Move the player toward this object
+                playerAgent.SetDestination(transform.position);
+                isPlayerMovingToInteract = true; // Mark as moving to interact
+            }
         }
-        else
-        {
-            Debug.LogWarning("player does not have a NavMeshAgent component");
-        }
-    }
-    else
-    {
-        Debug.LogWarning("Player not found in scene");
-    }
-
-
     }
 
     public virtual void Interact()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-         if (player != null)
-          {
-              float distance = Vector3.Distance(player.transform.position, transform.position);
-               if (distance <= interactionRange)
-        {
-            Debug.Log($"{gameObject.name} interacted with!");
-        }
+        Debug.Log($"{gameObject.name} interacted with!");
+        if (soundEffect != null)
+            audioSource.PlayOneShot(soundEffect);
     }
 
-       NavMeshAgent playerAgent = GameObject.FindGameObjectWithTag("Player").GetComponent<NavMeshAgent>();
-        if (playerAgent != null)
-        {
-            playerAgent.isStopped = true;
-        }
-
-
-    }
 
     public virtual void WhenHovered()
     {
