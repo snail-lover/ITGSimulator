@@ -12,7 +12,7 @@ public class BaseInteract : MonoBehaviour, IInteractable
     public AudioClip soundEffect;
     private AudioSource audioSource;
 
-    void Start()
+    protected virtual void Start()
     {
 
         audioSource = gameObject.GetComponent<AudioSource>();
@@ -21,9 +21,6 @@ public class BaseInteract : MonoBehaviour, IInteractable
             audioSource.volume = 0.5f;
        
     }
-
-
-
 
     void Update()
     {
