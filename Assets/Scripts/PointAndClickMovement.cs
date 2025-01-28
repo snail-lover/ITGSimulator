@@ -35,15 +35,16 @@ public class PointAndClickMovement : MonoBehaviour
                 {
                     interactable.OnClick(); // Call OnClick for interactables
                 }
-                else if (hit.collider.GetComponent<BaseNPC>() != null) 
+                if (hit.collider.GetComponent<BaseNPC>() != null) 
                 {
                     BaseNPC npc = hit.collider.GetComponent<BaseNPC>();
                     npc.Interact();
                 }
-                else if (((1 << hit.collider.gameObject.layer) & groundLayer) != 0)
+                if (((1 << hit.collider.gameObject.layer) & groundLayer) != 0)
                 {          
                         agent.SetDestination(hit.point);
                         Debug.Log("Player is moving to: " + hit.point);
+                        BaseNPC.ClearCurrentTarget();
                     
                 }
             }
