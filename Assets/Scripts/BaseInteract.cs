@@ -9,6 +9,7 @@ public class BaseInteract : MonoBehaviour, IInteractable
     public GameObject hoverTextPrefab; // Assign the prefab for the hover text in the Inspector
     public float interactionRange = 2f;
     private bool isPlayerMovingToInteract = false;
+    private static BaseInteract currentlyClickedObject;
     public AudioClip soundEffect;
     private AudioSource audioSource;
 
@@ -39,26 +40,51 @@ public class BaseInteract : MonoBehaviour, IInteractable
             }
         }
     }
+
+    public static void ResetCurrentInteractable()
+    {
+        if (currentlyClickedObject != null)
+        {
+            currentlyClickedObject.isPlayerMovingToInteract = false;
+            currentlyClickedObject = null;
+        }
+    }
+
+
     public virtual void OnClick()
     {
-        // Get the player and their NavMeshAgent
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+         // Reset the previously clicked object's intent
+      if (currentlyClickedObject != null && currentlyClickedObject != this)
         {
-            NavMeshAgent playerAgent = player.GetComponent<NavMeshAgent>();
-            if (playerAgent != null)
-            {
-                // Move the player toward this object
-                playerAgent.SetDestination(transform.position);
-                isPlayerMovingToInteract = true; // Mark as moving to interact
-            }
+            currentlyClickedObject.isPlayerMovingToInteract = false;
         }
+
+       // Set this object as the currently clicked object
+       currentlyClickedObject = this;
+
+      // Move the player to this object
+         GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+          {
+                NavMeshAgent playerAgent = player.GetComponent<NavMeshAgent>();
+              if (playerAgent != null)
+          {
+            playerAgent.SetDestination(transform.position);
+            isPlayerMovingToInteract = true;
+         }
+          }
     }
 
     public virtual void Interact()
     {
-        Debug.Log($"{gameObject.name} interacted with!");
-        if (soundEffect != null)
+
+        //cancels movement when you interact
+       GameObject.FindGameObjectWithTag("Player")
+        ?.GetComponent<NavMeshAgent>()
+        ?.ResetPath();
+
+        Debug.Log($"{gameObject.name} interacted with!"); //tells you what you
+        if (soundEffect != null) //plays sound when interact
             audioSource.PlayOneShot(soundEffect);
     }
 

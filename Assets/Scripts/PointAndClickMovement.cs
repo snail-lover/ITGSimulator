@@ -1,5 +1,7 @@
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class PointAndClickMovement : MonoBehaviour
 {
@@ -23,21 +25,26 @@ public class PointAndClickMovement : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
             {
                 Debug.Log("It hit: " + hit.collider.gameObject.name); // Log what was hit
-
                 // Check if the object is interactable
                 IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+                if (interactable == null)
+                {
+                  BaseInteract.ResetCurrentInteractable();
+                }
                 if (interactable != null)
                 {
                     interactable.OnClick(); // Call OnClick for interactables
                 }
-                else
+                else if (hit.collider.GetComponent<BaseNPC>() != null) 
                 {
-                    // Move the player if the object is in the groundLayer
-                    if (((1 << hit.collider.gameObject.layer) & groundLayer) != 0)
-                    {
+                    BaseNPC npc = hit.collider.GetComponent<BaseNPC>();
+                    npc.Interact();
+                }
+                else if (((1 << hit.collider.gameObject.layer) & groundLayer) != 0)
+                {          
                         agent.SetDestination(hit.point);
                         Debug.Log("Player is moving to: " + hit.point);
-                    }
+                    
                 }
             }
         }

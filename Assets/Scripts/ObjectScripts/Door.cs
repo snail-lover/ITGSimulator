@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Door : BaseInteract
 {
@@ -9,6 +10,7 @@ public class Door : BaseInteract
     private bool isOpen = false; // Track if the door is open
     private Quaternion openRotation; // The target rotation for the open state
     private Quaternion closeRotation; // The target rotation for the closed state
+    private NavMeshObstacle navObstacle;
 
     protected override void Start()
     {
@@ -16,7 +18,7 @@ public class Door : BaseInteract
         // Calculate the target rotations based on localEulerAngles
         openRotation = Quaternion.Euler(0f, openAngle, 0f);
         closeRotation = Quaternion.Euler(0f, closeAngle, 0f);
-        
+        navObstacle = GetComponent<NavMeshObstacle>();
     }
 
     public override void Interact()
@@ -26,9 +28,17 @@ public class Door : BaseInteract
         // Toggle between open and close
         isOpen = !isOpen;
 
+ // Toggle NavMeshObstacle carving based on door state
+         if (navObstacle != null)
+         {
+             navObstacle.carving = !isOpen; // Enable carving only when the door is closed
+         }
+
+
         // Start the rotation coroutine
         StopAllCoroutines(); // In case there's already a rotation in progress
         StartCoroutine(RotateDoor(isOpen ? openRotation : closeRotation));
+        
     }
 
     private System.Collections.IEnumerator RotateDoor(Quaternion targetRotation)
