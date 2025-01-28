@@ -6,22 +6,28 @@ ITGSimulator is a game where you are a new student to the prestigious school of 
 # Gameplay.
 
 **Point and click**
-	ITG Simulator is a point and click game. The camera is in a 3d top down perspective. You use the mouse to click and move. In the game there are different **objects** and **entities** you can interact with.
+
+ ITG Simulator is a point and click game. The camera is in a 3d top down perspective. You use the mouse to click and move. In the game there are different **objects** and **entities** you can interact with.
 
 **Interactables**
-	Interactables are, door, windows, light switches, ECT, anything that exists in the 3d gamespace that you can click on and something happens in the game.  The player should be able to click on a Interactable, walk towards it, and when arrived to the Interactable a specific function should fire
+
+ Interactables are, door, windows, light switches, ECT, anything that exists in the 3d gamespace that you can click on and something happens in the game.  The player should be able to click on a Interactable, walk towards it, and when arrived to the Interactable a specific function should fire
 
 **NPC**
-	NPCs are the characters in the game. When you click on an NPC, the player character should walk towards it, and when arrived to the NPC, a dialogue window should appear.
+
+ NPCs are the characters in the game. When you click on an NPC, the player character should walk towards it, and when arrived to the NPC, a dialogue window should appear.
 
 **Objects**
-	Objects are things that can be picked up and put in the players inventory. The player should be able to click on an object, walk towards it, and when arrived, pick it up.
+
+ Objects are things that can be picked up and put in the players inventory. The player should be able to click on an object, walk towards it, and when arrived, pick it up.
 
 **Where the game takes place**
-	The game takes place at the school of ITG. There is no day and night cycle. The game takes place in a continous simulation of the school until you finish the game.
+
+ The game takes place at the school of ITG. There is no day and night cycle. The game takes place in a continous simulation of the school until you finish the game.
 
 **How you win**
-	The goal of the game is to romance one of the famous characters of ITG. Do romance a character you will have to complete different tasks. When you have reached 10/10 reputation with a NPC, you will unlock the ability to finish the game and see the romance conclusion.
+
+ The goal of the game is to romance one of the famous characters of ITG. Do romance a character you will have to complete different tasks. When you have reached 10/10 reputation with a NPC, you will unlock the ability to finish the game and see the romance conclusion.
 
 ---
 # Systems in the game
