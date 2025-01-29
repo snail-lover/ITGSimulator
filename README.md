@@ -4,6 +4,8 @@
 ![The game](https://i.imgur.com/S9a6ONh.png)
 
 
+# Feature Status
+
 | Feature              | Started | Prototype made | All features implemendet | Code looked over and approved by scrum master (Exipe) |
 | -------------------- | ------- | -------------- | ------------------------ | ----------------------------------------------------- |
 | NPCs                 | 🟢      | 🟢             | 🔴                       | 🔴                                                    |
