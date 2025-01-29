@@ -4,6 +4,26 @@
 ![The game](https://i.imgur.com/S9a6ONh.png)
 
 
+| Feature              | Started | Prototype made | All features implemendet | Code looked over and approved by scrum master (Exipe) |
+| -------------------- | ------- | -------------- | ------------------------ | ----------------------------------------------------- |
+| NPCs                 | 🟢      | 🟢             | 🔴                       | 🔴                                                    |
+| Love target system   | 🔴      | 🔴             | 🔴                       | 🔴                                                    |
+| Inventory/items      | 🔴      | 🔴             | 🔴                       | 🔴                                                    |
+| Interactable objects | 🟢      | 🟢             | 🔴                       | 🔴                                                    |
+| Dialogue System      | 🟡      | 🔴             | 🔴                       | 🔴                                                    |
+
+
+
+
+
+
+
+
+
+
+
+
+
 to compile press green play button
 
 to play dm on discord
