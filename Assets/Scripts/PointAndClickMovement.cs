@@ -58,6 +58,13 @@ public class PointAndClickMovement : MonoBehaviour
                     interactable.OnClick(); // Call OnClick for interactables
                 }
 
+                ItemDefiner itemDefiner = hit.collider.GetComponent<ItemDefiner>();
+                if (itemDefiner != null)
+                {
+                    itemDefiner.Pickup(); // Calls pickup in ItemDefiner
+                }
+
+
                 // Check if the hit object is a BaseNPC
                 BaseNPC npc = hit.collider.GetComponent<BaseNPC>();
                 if (npc != null)
