@@ -1,144 +1,237 @@
-using System;
-using System.Collections;                // For IEnumerator and Coroutines
-using System.Collections.Generic;        // For List<>
-using System.Threading.Tasks;
-using UnityEngine;                       // For Unity-specific functionality
-using UnityEngine.AI;                    // For NavMeshAgent
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
 
 public class BaseNPC : MonoBehaviour
 {
     [Header("Interaction Settings")]
     public float interactRange = 2.0f;    // Interaction range in Unity units
-    private Transform player;            // Reference to the player's transform
-    private NavMeshAgent playerAgent;    // Reference to the player's NavMeshAgent
-    private bool isInteracting = false;  // Prevent multiple interactions
+    private Transform player;             // Reference to the player's transform
+    private NavMeshAgent playerAgent;     // Reference to the player's NavMeshAgent
+    private bool isInteracting = false;   // Prevent multiple interactions
+    private bool isTalking = false;       // Tracks if the player is talking to the NPC
     private static BaseNPC currentTarget; // Track the currently targeted NPC
 
     [Header("Task Management")]
-    public List<TaskObject> taskPool;    // List of tasks the NPC can perform
-    public float taskDelay = 2.0f;       // Delay between tasks (seconds)
+    public List<TaskObject> taskPool;      // List of tasks the NPC can perform
+    public float taskDelay = 2.0f;         // Delay between tasks (seconds)
 
     [Header("NPC Movement")]
-    private NavMeshAgent agent;          // Reference to the NPC's NavMeshAgent
-    private TaskObject currentTask;      // The NPC's current task
+    private NavMeshAgent agent;            // Reference to the NPC's NavMeshAgent
+    private TaskObject currentTask;        // The NPC's current task
+    private Coroutine taskCoroutine;       // Reference to the task coroutine
 
     private void Start()
     {
         // Find the player in the scene (ensure the player is tagged "Player")
-        player = GameObject.FindWithTag("Player").transform;
-        playerAgent = player.GetComponent<NavMeshAgent>();
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            player = playerObj.transform;
+            playerAgent = player.GetComponent<NavMeshAgent>();
+        }
+        else
+        {
+            Debug.LogError("Player not found. Ensure the player is tagged 'Player'.");
+        }
 
         // Initialize the NPC's NavMeshAgent
         agent = GetComponent<NavMeshAgent>();
+        if (agent == null)
+        {
+            Debug.LogError("NavMeshAgent component missing from NPC.");
+        }
 
-        // Assign the first task
-        AssignNextTask();
-   
+        // Start the task loop coroutine
+        taskCoroutine = StartCoroutine(TaskLoop());
     }
 
-    public void Update()
+    private void Update()
     {
-        //Debug.Log("BaseNPC: " + taskDelay);
+    
     }
 
+    /// <summary>
+    /// Initiates interaction with the NPC.
+    /// </summary>
     public virtual void Interact()
     {
-        if (isInteracting) return; // Prevent multiple interactions
+        if (isInteracting || isTalking) return; // Prevent multiple interactions
         isInteracting = true;
+        isTalking = true;
 
         // Set this NPC as the current target
         currentTarget = this;
 
-        float distance = Vector3.Distance(player.position, transform.position);
-
-        if (distance <= interactRange)
-        {
-            // Player is already in range, start dialogue
-            StartDialogue();
-        }
-        else
-        {
-            // Move the player closer
-            Debug.Log($"Moving player towards {name}...");
-            playerAgent.SetDestination(transform.position);
-            StartCoroutine(WaitForPlayerArrival());
-        }
+        // Start following the NPC until within interactRange
+        StartCoroutine(FollowPlayerToNPC());
     }
 
-    private IEnumerator WaitForPlayerArrival()
+    /// <summary>
+    /// Coroutine that moves the player towards the NPC's current position.
+    /// Continuously updates the destination to handle moving NPCs.
+    /// </summary>
+    private IEnumerator FollowPlayerToNPC()
     {
-        // Wait until the player is within interaction range or the target is cleared
         while (currentTarget == this && Vector3.Distance(player.position, transform.position) > interactRange)
         {
-            yield return null;
+            playerAgent.SetDestination(transform.position);
+
+            // Wait for a short interval before updating destination again
+            yield return new WaitForSeconds(0.5f);
         }
 
-        // If the current target is no longer this NPC, cancel interaction
         if (currentTarget != this)
         {
             Debug.Log($"Interaction with {name} was canceled.");
             isInteracting = false;
+            isTalking = false;
             yield break;
         }
 
         // Stop player movement and start dialogue
-        playerAgent.ResetPath(); // Stops the player from moving
+        playerAgent.ResetPath(); 
+        StopNPC();
         StartDialogue();
     }
 
-    private void StartDialogue()
+    /// <summary>
+    /// Stops the NPC's movement and pauses task execution.
+    /// </summary>
+    private void StopNPC()
     {
-        Debug.Log($"Starting dialogue with {name}");
-        BaseDialogue.Instance.StartDialoguePlaceholder(this);
-        isInteracting = false;
+        agent.isStopped = true;
+        Debug.Log($"{name} has stopped for conversation.");
 
-        // Clear the current target after interaction starts
-        currentTarget = null;
+        // Pause task execution by stopping the task coroutine
+        if (taskCoroutine != null)
+        {
+            StopCoroutine(taskCoroutine);
+            taskCoroutine = null;
+        }
     }
 
-    // Static method to clear the current target (e.g., when clicking elsewhere)
+    /// <summary>
+    /// Initiates the dialogue using the BaseDialogue system.
+    /// </summary>
+    private void StartDialogue()
+    {
+        Debug.Log($"Starting dialogue with {name}.");
+
+        // Start dialogue via BaseDialogue system
+        BaseDialogue.Instance.StartDialogue(this);
+
+        isInteracting = false;
+        // currentTarget remains set until dialogue is closed
+    }
+
+    /// <summary>
+    /// Clears the current NPC target, typically when the player clicks elsewhere.
+    /// </summary>
     public static void ClearCurrentTarget()
     {
         if (currentTarget != null)
         {
             Debug.Log($"Clearing target: {currentTarget.name}");
             currentTarget.isInteracting = false;
+            currentTarget.isTalking = false;
             currentTarget = null;
         }
     }
 
+    /// <summary>
+    /// Resumes the NPC's tasks after dialogue has ended.
+    /// </summary>
+    public void ResumeNPC()
+    {
+        isTalking = false;
+        agent.isStopped = false;
+        Debug.Log($"{name} has resumed tasks.");
+
+        // Restart the task loop coroutine
+        if (taskCoroutine == null)
+        {
+            taskCoroutine = StartCoroutine(TaskLoop());
+        }
+    }
+
+    #region Task System
+
+    /// <summary>
+    /// Main loop for assigning and performing tasks.
+    /// </summary>
+    private IEnumerator TaskLoop()
+    {
+        while (true)
+        {
+            if (isTalking)
+            {
+                // Wait until not talking before assigning the next task
+                yield return null;
+                continue;
+            }
+
+            AssignNextTask();
+
+            // Wait until the current task is completed before assigning the next
+            while (currentTask != null)
+            {
+                yield return null;
+            }
+
+            // Wait for the task delay before the next task
+            yield return new WaitForSeconds(taskDelay);
+        }
+    }
+
+    /// <summary>
+    /// Assigns the next task from the task pool.
+    /// </summary>
     private void AssignNextTask()
     {
-    // Select a random task from the task pool
-    currentTask = GetRandomTask();
+        currentTask = GetRandomTask();
 
-      if (currentTask != null)
-      {
-        Debug.Log($"{name} is starting task: {currentTask.taskName}");
-        MoveToTask(currentTask);
-      }
-      else
-      {
-               Debug.LogWarning($"{name} has no tasks to perform.");
-      }
+        if (currentTask != null)
+        {
+            Debug.Log($"{name} is starting task: {currentTask.taskName}");
+            MoveToTask(currentTask);
+        }
+        else
+        {
+            Debug.LogWarning($"{name} has no tasks to perform.");
+        }
     }
 
+    /// <summary>
+    /// Retrieves a random task from the task pool.
+    /// </summary>
     private TaskObject GetRandomTask()
     {
-        // Ensure there are always tasks to choose from
-     if (taskPool.Count > 0)
+        // Ensure there are tasks available
+        if (taskPool.Count > 0)
         {
-         // Pick a random task from the pool
-         int randomIndex = UnityEngine.Random.Range(0, taskPool.Count);
-         return taskPool[randomIndex];
-      }
+            // Select a random task
+            int randomIndex = UnityEngine.Random.Range(0, taskPool.Count);
+            return taskPool[randomIndex];
+        }
 
-      Debug.LogWarning("Task pool is empty! NPC cannot assign new tasks.");
-      return null;
+        Debug.LogWarning("Task pool is empty! NPC cannot assign new tasks.");
+        return null;
     }
 
+    /// <summary>
+    /// Commands the NPC to move to the specified task location.
+    /// </summary>
     private void MoveToTask(TaskObject task)
     {
+        if (task == null || task.transform == null)
+        {
+            Debug.LogError("Invalid task or task location.");
+            currentTask = null;
+            return;
+        }
+
         // Move the NPC to the task's location
         agent.SetDestination(task.transform.position);
 
@@ -146,35 +239,44 @@ public class BaseNPC : MonoBehaviour
         StartCoroutine(PerformTaskWhenArrived(task));
     }
 
+    /// <summary>
+    /// Coroutine that waits until the NPC arrives at the task location before performing the task.
+    /// </summary>
     private IEnumerator PerformTaskWhenArrived(TaskObject task)
     {
-        // Wait until the NPC has "arrived" at the task location
+        // Wait until the NPC has arrived at the task location
         while (agent.remainingDistance > agent.stoppingDistance)
-     {
-          yield return null;
-      }
+        {
+            yield return null;
+        }
 
-      // Debugging: Confirm arrival
-      Debug.Log($"Arrived at task {task.taskName}");
+        // Confirm arrival
+        Debug.Log($"Arrived at task {task.taskName}.");
 
-       // Perform the task
-       PerformTask(task);
+        // Perform the task
+        PerformTask(task);
     }
 
+    /// <summary>
+    /// Executes the specified task.
+    /// </summary>
     private void PerformTask(TaskObject task)
     {
+        if (task == null)
+        {
+            Debug.LogError("Cannot perform a null task.");
+            currentTask = null;
+            return;
+        }
+
         Debug.Log($"{name} is performing task: {task.taskName} with action: {task.action}");
 
         // Trigger the task's action
         task.PerformTask();
 
-        // Wait for the task's duration before moving to the next task
-        StartCoroutine(WaitAndAssignNextTask(task.duration + taskDelay));
+        // Indicate that the task has been completed
+        currentTask = null;
     }
 
-    private IEnumerator WaitAndAssignNextTask(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        AssignNextTask();
-    }
+    #endregion
 }

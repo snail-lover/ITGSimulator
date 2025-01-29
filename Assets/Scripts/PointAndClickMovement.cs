@@ -1,60 +1,93 @@
-using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 public class PointAndClickMovement : MonoBehaviour
 {
-    public Camera mainCamera; // Assign the main camera in the Inspector
-    public LayerMask groundLayer; // Layer for the ground
+    public Camera mainCamera;            // Assign the main camera in the Inspector
+    public LayerMask groundLayer;        // Layer for the ground
     private NavMeshAgent agent;
-    private IInteractable lastHovered; 
+    private IInteractable lastHovered;
 
-    void Start()
+    private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        if (agent == null)
+        {
+            Debug.LogError("NavMeshAgent component missing from Player.");
+        }
+
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+            if (mainCamera == null)
+            {
+                Debug.LogError("Main camera not found. Please assign a camera to 'mainCamera'.");
+            }
+        }
     }
 
-    void Update()
+    private void Update()
     {
-    
-     Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        // Prevent player input if dialogue is active
+        if (BaseDialogue.IsDialogueActive)
+        {
+            return;
+        }
+
+        HandleMovementInput();
+        HandleHoverEffects();
+    }
+
+    /// <summary>
+    /// Handles player movement based on mouse input.
+    /// </summary>
+    private void HandleMovementInput()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
         if (Input.GetMouseButtonDown(0)) // Left-click
-        {            
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+        {
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer | LayerMask.GetMask("Interactable")))
             {
-                Debug.Log("It hit: " + hit.collider.gameObject.name); // Log what was hit
+                Debug.Log("Clicked on: " + hit.collider.gameObject.name);
+
                 // Check if the object is interactable
                 IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-                if (interactable == null)
-                {
-                  BaseInteract.ResetCurrentInteractable();
-                }
                 if (interactable != null)
                 {
                     interactable.OnClick(); // Call OnClick for interactables
                 }
-                if (hit.collider.GetComponent<BaseNPC>() != null) 
+
+                // Check if the hit object is a BaseNPC
+                BaseNPC npc = hit.collider.GetComponent<BaseNPC>();
+                if (npc != null)
                 {
-                    BaseNPC npc = hit.collider.GetComponent<BaseNPC>();
-                    npc.Interact();
+                    npc.Interact(); // Initiate interaction with NPC
                 }
+
+                // If the clicked object is on the ground layer, move the player
                 if (((1 << hit.collider.gameObject.layer) & groundLayer) != 0)
-                {          
-                        agent.SetDestination(hit.point);
-                        Debug.Log("Player is moving to: " + hit.point);
-                        BaseNPC.ClearCurrentTarget();
-                    
+                {
+                    agent.SetDestination(hit.point);
+                    Debug.Log("Player is moving to: " + hit.point);
+                    BaseNPC.ClearCurrentTarget(); // Clear any existing NPC interaction
                 }
             }
         }
-        if (Physics.Raycast(ray, out RaycastHit hover, Mathf.Infinity))
+    }
+
+    /// <summary>
+    /// Handles hover effects for interactable objects.
+    /// </summary>
+    private void HandleHoverEffects()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hover, Mathf.Infinity, LayerMask.GetMask("Interactable")))
         {
             IInteractable interactable = hover.collider.GetComponent<IInteractable>();
-            if (interactable !=null)
+            if (interactable != null)
             {
-
                 interactable.WhenHovered();
 
                 if (interactable != lastHovered)
@@ -72,7 +105,7 @@ public class PointAndClickMovement : MonoBehaviour
         else
         {
             lastHovered?.HideHover();
-                lastHovered = null;
+            lastHovered = null;
         }
     }
 }
