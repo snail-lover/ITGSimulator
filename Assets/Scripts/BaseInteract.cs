@@ -1,116 +1,127 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
-public class BaseInteract : MonoBehaviour, IInteractable
+public class BaseInteract : MonoBehaviour, IClickable
 {
     private GameObject currentHoverText;
-    public GameObject hoverTextPrefab; // Assign the prefab for the hover text in the Inspector
+    public GameObject hoverTextPrefab; 
+    private RectTransform hoverTextRect;
     public float interactionRange = 2f;
     private bool isPlayerMovingToInteract = false;
-    private static BaseInteract currentlyClickedObject;
     public AudioClip soundEffect;
     private AudioSource audioSource;
 
-    protected virtual void Start()
+    // Initialize AudioSource in Awake to ensure it's ready earlier
+    protected virtual void Awake()
     {
-
-        audioSource = gameObject.GetComponent<AudioSource>();
-        if (audioSource == null)  
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
             audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.volume = 0.5f;
-       
+        }
+        audioSource.volume = 0.5f;
     }
 
-    void Update()
+    public void OnClick()
+    {
+        if (PointAndClickMovement.currentTarget != null && (object)PointAndClickMovement.currentTarget != this)
+        {
+            PointAndClickMovement.currentTarget.ResetInteractionState();
+        }
+
+        PointAndClickMovement.currentTarget = this;
+        MovePlayerToInteractable();
+    }
+
+    private void Update()
     {
         if (isPlayerMovingToInteract)
         {
-            // Check if the player has arrived within interaction range
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
+            if (player != null && 
+                Vector3.Distance(player.transform.position, transform.position) <= interactionRange)
             {
-                float distance = Vector3.Distance(player.transform.position, transform.position);
-                if (distance <= interactionRange)
-                {
-                    Interact(); // Trigger interaction
-                    isPlayerMovingToInteract = false; // Stop checking
-                }
+                Interact();
+                ResetInteractionState(); // Ensure state is reset
+            }
+        }
+        if (currentHoverText != null)
+        {
+            Vector2 mousePos = Input.mousePosition;
+            hoverTextRect.position = mousePos + new Vector2(10f, 10f); // Offset slightly
+        }
+    }
+
+    public virtual void ResetInteractionState()
+    {
+        isPlayerMovingToInteract = false;
+        PointAndClickMovement.currentTarget = null;
+    }
+
+    private void MovePlayerToInteractable()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            NavMeshAgent playerAgent = player.GetComponent<NavMeshAgent>();
+            if (playerAgent != null && !isPlayerMovingToInteract)
+            {
+                playerAgent.SetDestination(transform.position);
+                isPlayerMovingToInteract = true;
             }
         }
     }
 
-    public static void ResetCurrentInteractable()
-    {
-        if (currentlyClickedObject != null)
-        {
-            currentlyClickedObject.isPlayerMovingToInteract = false;
-            currentlyClickedObject = null;
-        }
-    }
-
-
-    public virtual void OnClick()
-    {
-         // Reset the previously clicked object's intent
-      if (currentlyClickedObject != null && currentlyClickedObject != this)
-        {
-            currentlyClickedObject.isPlayerMovingToInteract = false;
-        }
-
-       // Set this object as the currently clicked object
-       currentlyClickedObject = this;
-
-      // Move the player to this object
-         GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
-          {
-                NavMeshAgent playerAgent = player.GetComponent<NavMeshAgent>();
-              if (playerAgent != null)
-          {
-            playerAgent.SetDestination(transform.position);
-            isPlayerMovingToInteract = true;
-         }
-          }
-    }
-
     public virtual void Interact()
     {
+        Debug.Log($"{gameObject.name} interacted with!");
 
-        //cancels movement when you interact
-       GameObject.FindGameObjectWithTag("Player")
-        ?.GetComponent<NavMeshAgent>()
-        ?.ResetPath();
+        // Stop player movement
+        GameObject.FindGameObjectWithTag("Player")
+            ?.GetComponent<NavMeshAgent>()
+            ?.ResetPath();
 
-        Debug.Log($"{gameObject.name} interacted with!"); //tells you what you
-        if (soundEffect != null) //plays sound when interact
-            audioSource.PlayOneShot(soundEffect);
-    }
-
-
-    public virtual void WhenHovered()
-    {
-        //If there is no Hover text, Instantiate the hover thext
-        if (currentHoverText == null)
+        // Play sound effect only if AudioSource exists
+        if (soundEffect != null && audioSource != null)
         {
-            currentHoverText = Instantiate(hoverTextPrefab, Input.mousePosition, Quaternion.identity);
-            currentHoverText.transform.SetParent(GameObject.Find("HoverTextCanva").transform, false); // Add to Canvas
+            audioSource.PlayOneShot(soundEffect);
+            Debug.Log($"Playing sound: {soundEffect.name}");
         }
-
-        currentHoverText.GetComponent<UnityEngine.UI.Text>().text = gameObject.name; //get the name of the thing hovered
-        currentHoverText.transform.position = Input.mousePosition; //put the hover text where the mouse is
+        else
+        {
+            Debug.LogWarning("AudioSource or soundEffect missing!");
+        }
     }
-    
-     public virtual void HideHover()
+
+    public void WhenHovered()
     {
-        if (currentHoverText != null) //if there is a hover text showing, destroy it
+        if (currentHoverText == null && hoverTextPrefab != null)
+        {
+            currentHoverText = Instantiate(hoverTextPrefab, UnityEngine.Object.FindFirstObjectByType<Canvas>().transform);
+            hoverTextRect = currentHoverText.GetComponent<RectTransform>();
+
+            Text textComponent = currentHoverText.GetComponent<Text>();
+            if (textComponent == null)
+            {
+                Debug.LogError("Hover text prefab is missing a Text component!");
+                return;
+            }
+            textComponent.text = gameObject.name;
+        }
+    }
+
+    public void HideHover()
+    {
+        if (currentHoverText != null)
         {
             Destroy(currentHoverText);
             currentHoverText = null;
         }
     }
     
-    public virtual bool CanInteract()
-    {  return true; }
+
+
+
 }

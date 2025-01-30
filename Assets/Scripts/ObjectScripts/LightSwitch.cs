@@ -7,12 +7,11 @@ public class LightSwitch : BaseInteract
 
     public override void Interact()
     {
-        base.Interact();
-
         if (controlledLight != null)
         {
             isLightOn = !isLightOn;
             controlledLight.enabled = isLightOn;
         }
+        base.Interact();
     }
 }

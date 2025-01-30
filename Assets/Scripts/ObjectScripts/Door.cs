@@ -12,9 +12,8 @@ public class Door : BaseInteract
     private Quaternion closeRotation; // The target rotation for the closed state
     private NavMeshObstacle navObstacle;
 
-    protected override void Start()
+    protected  void Start()
     {
-        base.Start();
         // Calculate the target rotations based on localEulerAngles
         openRotation = Quaternion.Euler(0f, openAngle, 0f);
         closeRotation = Quaternion.Euler(0f, closeAngle, 0f);
@@ -24,7 +23,6 @@ public class Door : BaseInteract
     public override void Interact()
     {
         //prints the name of the object in console when interacted with
-        base.Interact();
         // Toggle between open and close
         isOpen = !isOpen;
 
@@ -38,6 +36,7 @@ public class Door : BaseInteract
         // Start the rotation coroutine
         StopAllCoroutines(); // In case there's already a rotation in progress
         StartCoroutine(RotateDoor(isOpen ? openRotation : closeRotation));
+        base.Interact();
         
     }
 

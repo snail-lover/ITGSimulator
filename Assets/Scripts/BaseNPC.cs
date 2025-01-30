@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BaseNPC : MonoBehaviour
+public class BaseNPC : MonoBehaviour, IClickable
 {
     [Header("Interaction Settings")]
     public float interactRange = 2.0f;    // Interaction range in Unity units
@@ -24,7 +24,7 @@ public class BaseNPC : MonoBehaviour
 
     private void Start()
     {
-        // Find the player in the scene (ensure the player is tagged "Player")
+        // Find the player in the scene
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj != null)
         {
@@ -51,6 +51,32 @@ public class BaseNPC : MonoBehaviour
     {
     
     }
+    public void OnClick()
+    {
+        if (PointAndClickMovement.currentTarget != null && (object)PointAndClickMovement.currentTarget != this)
+        {
+            PointAndClickMovement.currentTarget.ResetInteractionState();
+        }
+
+        PointAndClickMovement.currentTarget = this;
+        Interact();
+    }
+
+    public void ResetInteractionState()
+    {
+        isInteracting = false;
+        isTalking = false;
+        StopAllCoroutines();
+        
+        // Resume normal NPC behavior
+        if (taskCoroutine == null)
+        {
+            taskCoroutine = StartCoroutine(TaskLoop());
+        }
+    }
+
+
+
 
     /// <summary>
     /// Initiates interaction with the NPC.
@@ -84,7 +110,7 @@ public class BaseNPC : MonoBehaviour
 
         if (currentTarget != this)
         {
-            Debug.Log($"Interaction with {name} was canceled.");
+            //Debug.Log($"Interaction with {name} was canceled.");
             isInteracting = false;
             isTalking = false;
             yield break;
@@ -102,7 +128,7 @@ public class BaseNPC : MonoBehaviour
     private void StopNPC()
     {
         agent.isStopped = true;
-        Debug.Log($"{name} has stopped for conversation.");
+        //Debug.Log($"{name} has stopped for conversation.");
 
         // Pause task execution by stopping the task coroutine
         if (taskCoroutine != null)
@@ -117,7 +143,7 @@ public class BaseNPC : MonoBehaviour
     /// </summary>
     private void StartDialogue()
     {
-        Debug.Log($"Starting dialogue with {name}.");
+        //Debug.Log($"Starting dialogue with {name}.");
 
         // Start dialogue via BaseDialogue system
         BaseDialogue.Instance.StartDialogue(this);
@@ -194,7 +220,7 @@ public class BaseNPC : MonoBehaviour
 
         if (currentTask != null)
         {
-            Debug.Log($"{name} is starting task: {currentTask.taskName}");
+            //Debug.Log($"{name} is starting task: {currentTask.taskName}");
             MoveToTask(currentTask);
         }
         else
@@ -251,7 +277,7 @@ public class BaseNPC : MonoBehaviour
         }
 
         // Confirm arrival
-        Debug.Log($"Arrived at task {task.taskName}.");
+        //Debug.Log($"Arrived at task {task.taskName}.");
 
         // Perform the task
         PerformTask(task);
@@ -269,7 +295,7 @@ public class BaseNPC : MonoBehaviour
             return;
         }
 
-        Debug.Log($"{name} is performing task: {task.taskName} with action: {task.action}");
+        //Debug.Log($"{name} is performing task: {task.taskName} with action: {task.action}");
 
         // Trigger the task's action
         task.PerformTask();
@@ -277,6 +303,17 @@ public class BaseNPC : MonoBehaviour
         // Indicate that the task has been completed
         currentTask = null;
     }
-
     #endregion
+
+    public virtual void WhenHovered()
+    {
+
+    }
+
+    public virtual void HideHover()
+    {
+
+    }
+
+
 }
