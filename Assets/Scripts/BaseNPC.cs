@@ -22,6 +22,33 @@ public class BaseNPC : MonoBehaviour, IClickable
     private TaskObject currentTask;        // The NPC's current task
     private Coroutine taskCoroutine;       // Reference to the task coroutine
 
+    public TextAsset dialogueFile;
+    public int currentLove;
+    private DialogueData dialogueData;
+    private Inventory inventory;
+    
+    public DialogueData GetDialogueData() => dialogueData;
+
+   void Awake() 
+    {
+        Debug.Log("Loaded JSON: " + dialogueFile.text);
+        dialogueData = JsonUtility.FromJson<DialogueData>(dialogueFile.text);
+        dialogueData.nodeDictionary = new Dictionary<string, DialogueNode>();
+        foreach (var node in dialogueData.nodes) {
+        if (node.itemGate != null && node.itemGate.requiredItem == null) {
+            node.itemGate = null;
+        }
+    }
+    
+        foreach (var node in dialogueData.nodes)
+        {
+            dialogueData.nodeDictionary.Add(node.nodeID, node);
+            Debug.Log($"Added node: {node.nodeID}"); // Verify nodes are added
+        }
+    
+        currentLove = dialogueData.startingLove;
+    }
+
     private void Start()
     {
         // Find the player in the scene
@@ -75,10 +102,7 @@ public class BaseNPC : MonoBehaviour, IClickable
         }
     }
 
-
-
-
-    /// <summary>
+    // <summary>
     /// Initiates interaction with the NPC.
     /// </summary>
     public virtual void Interact()
@@ -121,7 +145,6 @@ public class BaseNPC : MonoBehaviour, IClickable
         StopNPC();
         StartDialogue();
     }
-
     /// <summary>
     /// Stops the NPC's movement and pauses task execution.
     /// </summary>
@@ -145,8 +168,10 @@ public class BaseNPC : MonoBehaviour, IClickable
     {
         //Debug.Log($"Starting dialogue with {name}.");
 
-        // Start dialogue via BaseDialogue system
-        BaseDialogue.Instance.StartDialogue(this);
+        // Start dialogue via DialogueSystem system
+        
+        Object.FindFirstObjectByType<DialogueSystem>().StartDialogue(this);
+        inventory = FindAnyObjectByType<Inventory>(); 
 
         isInteracting = false;
         // currentTarget remains set until dialogue is closed

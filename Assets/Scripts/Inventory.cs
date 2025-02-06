@@ -29,4 +29,10 @@ public class Inventory : MonoBehaviour
     {
         return items.Exists(i => i.itemName == itemName);
     }
+
+    public void RemoveItemByID(string itemID)
+    {
+        items.RemoveAll(item => item.id == itemID);
+    }
+
 }

@@ -29,10 +29,10 @@ public class PointAndClickMovement : MonoBehaviour
 
     private void Update()
     {
-        // Prevent player input if dialogue is active
-        if (BaseDialogue.IsDialogueActive)
+        //Prevent player input if dialogue is active
+        if (DialogueSystem.IsDialogueActive)
         {
-            return;
+           return;
         }
 
         HandleMovementInput();

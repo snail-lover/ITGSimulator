@@ -1,0 +1,53 @@
+{
+  "npcID": "test",
+  "startingLove": 0,
+  "nodes": [
+    {
+      "nodeID": "start",
+      "text": "Do you see choices?",
+      "choices": [
+        {
+          "text": "YES (Test)",
+          "targetNode": "second",
+          "loveChange": 1
+        },
+        {
+          "text": "NO (Exit)TESTNO (Exit)TESTNO (Exit)TESTNO (Exit)TESTNO (Exit)TESTNO (Exit)TESTNO (Exit)TEST",
+          "targetNode": "exit",
+          "loveChange": 0
+        },
+        {
+          "text": "Maybe?",
+          "targetNode": "third",
+          "loveChange": 1
+        }
+      ]
+    },
+    {
+      "nodeID": "second",
+      "text": "This is the second dialogue!",
+      "choices": [
+        {
+          "text": "Back to start",
+          "targetNode": "start",
+          "loveChange": 0
+        }
+      ]
+    },
+    {
+      "nodeID": "third",
+      "text": "You seem unsure...",
+      "choices": [
+        {
+          "text": "Back to start",
+          "targetNode": "start",
+          "loveChange": 0
+        }
+      ]
+    },
+    {
+      "nodeID": "exit",
+      "text": "Goodbye!"
+    }
+  ]
+}

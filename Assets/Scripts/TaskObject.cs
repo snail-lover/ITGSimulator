@@ -26,7 +26,7 @@ public class TaskObject : MonoBehaviour
     }
     public void PerformTask()
     {
-        Debug.Log($"Performing task: {taskName}. Action: {action}");
+        //Debug.Log($"Performing task: {taskName}. Action: {action}");
 
         // Trigger the optional animation if an Animator is set
         if (taskAnimator != null && !string.IsNullOrEmpty(animationTrigger))
