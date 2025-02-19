@@ -9,9 +9,9 @@ public class BaseNPC : MonoBehaviour, IClickable
     public float interactRange = 2.0f;    // Interaction range in Unity units
     private Transform player;             // Reference to the player's transform
     private NavMeshAgent playerAgent;     // Reference to the player's NavMeshAgent
-    private bool isInteracting = false;   // Prevent multiple interactions
-    private bool isTalking = false;       // Tracks if the player is talking to the NPC
-    private static BaseNPC currentTarget; // Track the currently targeted NPC
+    public bool isInteracting = false;   // Prevent multiple interactions
+    public bool isTalking = false;       // Tracks if the player is talking to the NPC
+    public static BaseNPC currentTarget; // Track the currently targeted NPC
 
     [Header("Task Management")]
     public List<TaskObject> taskPool;      // List of tasks the NPC can perform
@@ -22,6 +22,8 @@ public class BaseNPC : MonoBehaviour, IClickable
     private TaskObject currentTask;        // The NPC's current task
     private Coroutine taskCoroutine;       // Reference to the task coroutine
 
+    [Header("NPC Info")]
+    public string npcName = "NPC Name";
     public TextAsset dialogueFile;
     public int currentLove;
     private DialogueData dialogueData;
@@ -166,15 +168,15 @@ public class BaseNPC : MonoBehaviour, IClickable
     /// </summary>
     private void StartDialogue()
     {
-        //Debug.Log($"Starting dialogue with {name}.");
-
-        // Start dialogue via DialogueSystem system
-        
-        Object.FindFirstObjectByType<DialogueSystem>().StartDialogue(this);
-        inventory = FindAnyObjectByType<Inventory>(); 
-
-        isInteracting = false;
-        // currentTarget remains set until dialogue is closed
+        if (DialogueManager.Instance != null)
+    {
+        DialogueManager.Instance.StartDialogue(this);
+        Object.FindFirstObjectByType<DialogueManager>().StartDialogue(this);
+    }
+    else
+    {
+        Debug.LogError("DialogueManager instance not found in the scene.");
+    }
     }
 
     /// <summary>

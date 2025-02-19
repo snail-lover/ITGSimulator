@@ -5,6 +5,8 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory Instance;
     public List<CreateInventoryItem> items = new List<CreateInventoryItem>();
+    private HashSet<string> playerItems = new HashSet<string>(); // Stores item names
+
 
     private void Awake()
     {
@@ -21,14 +23,31 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(CreateInventoryItem item)
     {
-        items.Add(item);
+        items.Add(item); // Keep storing the full object
+        playerItems.Add(item.itemName); // Store its name in the HashSet too
         Debug.Log(item.itemName + " added to inventory!");
     }
 
     public bool HasItem(string itemName)
+{
+    Debug.Log("Checking if inventory contains: " + itemName);
+    
+    if (playerItems.Count == 0)
     {
-        return items.Exists(i => i.itemName == itemName);
+        Debug.Log("Inventory is empty!");
     }
+    else
+    {
+        Debug.Log("Current items in inventory:");
+        foreach (var item in playerItems)
+        {
+            Debug.Log("- " + item);
+        }
+    }
+
+    return playerItems.Contains(itemName);
+}
+
 
     public void RemoveItemByID(string itemID)
     {

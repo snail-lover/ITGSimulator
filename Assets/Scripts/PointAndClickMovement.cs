@@ -29,12 +29,6 @@ public class PointAndClickMovement : MonoBehaviour
 
     private void Update()
     {
-        //Prevent player input if dialogue is active
-        if (DialogueSystem.IsDialogueActive)
-        {
-           return;
-        }
-
         HandleMovementInput();
         HandleHoverEffects();
     }
@@ -43,6 +37,10 @@ public class PointAndClickMovement : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (BaseNPC.currentTarget != null && BaseNPC.currentTarget.isTalking)
+            {
+            return; // Do nothing while talking
+            }
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
