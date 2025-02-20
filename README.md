@@ -9,10 +9,10 @@
 | Feature              | Started | Prototype made | All features implemented | Code looked over and approved by scrum master (Exipe) |
 | -------------------- | ------- | -------------- | ------------------------ | ----------------------------------------------------- |
 | NPCs                 | 🟢      | 🟢             | 🔴                       | 🔴                                                    |
-| Love target system   | 🔴      | 🔴             | 🔴                       | 🔴                                                    |
+| Love target system   | 🟢      | 🔴             | 🔴                       | 🔴                                                    |
 | Inventory/items      | 🟢       | 🟢             | 🔴                       | 🔴                                                    |
 | Interactable objects | 🟢      | 🟢             | 🔴                       | 🔴                                                    |
-| Dialogue System      | 🟢      | 🟡             | 🔴                       | 🔴                                                    |
+| Dialogue System      | 🟢      | 🟢             | 🔴                       | 🔴                                                    |
 
 
 
