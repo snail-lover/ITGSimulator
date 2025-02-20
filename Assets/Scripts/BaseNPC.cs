@@ -26,21 +26,28 @@ public class BaseNPC : MonoBehaviour, IClickable
     public string npcName = "NPC Name";
     public TextAsset dialogueFile;
     public int currentLove;
+    public int npcAge;
+    public string npcGender;
+    public string npcBloodType;
+    public string npcZodiacSign;
+    public int npcCockLength;
+    public string npcLikes;
+    public string npcDislikes;
     private DialogueData dialogueData;
     private Inventory inventory;
     
     public DialogueData GetDialogueData() => dialogueData;
 
-   void Awake() 
+    void Awake() 
     {
         Debug.Log("Loaded JSON: " + dialogueFile.text);
         dialogueData = JsonUtility.FromJson<DialogueData>(dialogueFile.text);
         dialogueData.nodeDictionary = new Dictionary<string, DialogueNode>();
         foreach (var node in dialogueData.nodes) {
-        if (node.itemGate != null && node.itemGate.requiredItem == null) {
-            node.itemGate = null;
+            if (node.itemGate != null && node.itemGate.requiredItem == null) {
+                node.itemGate = null;
+            }
         }
-    }
     
         foreach (var node in dialogueData.nodes)
         {
@@ -80,6 +87,20 @@ public class BaseNPC : MonoBehaviour, IClickable
     {
     
     }
+
+    public string GetStats()
+    {
+        return $"Name: {npcName}\n" +
+               $"Age: {npcAge}\n" +
+               $"Gender: {npcGender}\n" +
+               $"Blood Type: {npcBloodType}\n" +
+               $"Zodiac Sign: {npcZodiacSign}\n" +
+               $"Cock Length: {npcCockLength}\n" +
+               $"Likes: {npcLikes}\n" +
+               $"Dislikes: {npcDislikes}\n" +
+               $"Current Love: {currentLove}";
+    }
+
     public void OnClick()
     {
         if (PointAndClickMovement.currentTarget != null && (object)PointAndClickMovement.currentTarget != this)
@@ -101,6 +122,13 @@ public class BaseNPC : MonoBehaviour, IClickable
         if (taskCoroutine == null)
         {
             taskCoroutine = StartCoroutine(TaskLoop());
+        }
+
+        // Notify PointAndClickMovement that interaction has ended
+        if ((object)PointAndClickMovement.currentTarget == this)
+        {
+            PointAndClickMovement.currentTarget = null;
+            Object.FindAnyObjectByType<PointAndClickMovement>().EndInteraction();
         }
     }
 
@@ -147,6 +175,7 @@ public class BaseNPC : MonoBehaviour, IClickable
         StopNPC();
         StartDialogue();
     }
+
     /// <summary>
     /// Stops the NPC's movement and pauses task execution.
     /// </summary>
@@ -169,14 +198,13 @@ public class BaseNPC : MonoBehaviour, IClickable
     private void StartDialogue()
     {
         if (DialogueManager.Instance != null)
-    {
-        DialogueManager.Instance.StartDialogue(this);
-        Object.FindFirstObjectByType<DialogueManager>().StartDialogue(this);
-    }
-    else
-    {
-        Debug.LogError("DialogueManager instance not found in the scene.");
-    }
+        {
+            DialogueManager.Instance.StartDialogue(this);
+        }
+        else
+        {
+            Debug.LogError("DialogueManager instance not found in the scene.");
+        }
     }
 
     /// <summary>
@@ -341,6 +369,4 @@ public class BaseNPC : MonoBehaviour, IClickable
     {
 
     }
-
-
 }

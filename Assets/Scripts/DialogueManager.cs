@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Text dialogueText;
     [SerializeField] private Transform choicesContainer;
     [SerializeField] private GameObject choiceButtonPrefab;
+    [SerializeField] private Button statsButton; // Reference to the stats button
+    [SerializeField] private NPCStatPage npcStatPage; // Reference to the NPCStatPage script
     
     private BaseNPC currentNPC; 
     private DialogueData currentData;
@@ -28,6 +31,11 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public BaseNPC GetCurrentNPC()
+    {
+        return currentNPC?.GetComponent<BaseNPC>();
+    }
+
     public void StartDialogue(BaseNPC npc)
     {
         currentNPC = npc;
@@ -44,6 +52,16 @@ public class DialogueManager : MonoBehaviour
         if (!string.IsNullOrEmpty(startNodeID) && currentData.nodeDictionary.TryGetValue(startNodeID, out currentNode))
         {
             dialogueUI.ShowDialogue(this, currentNode);
+            statsButton.gameObject.SetActive(true); // Show the stats button
+            statsButton.onClick.RemoveAllListeners(); // Remove any existing listeners
+            statsButton.onClick.AddListener(OnStatsButtonClick); // Add listener to the stats button
+
+            // Load the stats into the NPCStatPage
+            if (npcStatPage != null)
+            {
+                npcStatPage.currentNPC = currentNPC; // Set the current NPC
+                npcStatPage.LoadStats(); // Load the stats
+            }
         }
         else
         {
@@ -53,19 +71,38 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-        public void EndDialogue()
+    public void EndDialogue()
     {
         dialogueUI.HideDialogue();
         
         if (currentNPC != null)
         {
-        currentNPC.isTalking = false; // Re-enable movement input
-        currentNPC.ResumeNPC();
+            currentNPC.isTalking = false; // Re-enable movement input
+            currentNPC.ResumeNPC();
         }
         dialoguePanel.SetActive(false);
         currentNPC = null;
         currentData = null;
         currentNode = null;
+        statsButton.gameObject.SetActive(false); // Hide the stats button
+        statsButton.onClick.RemoveAllListeners(); // Remove listener from the stats button
+
+        // Hide the stats panel
+        if (npcStatPage != null)
+        {
+            npcStatPage.HideStatsPanel();
+        }
+
+        // Ensure EndInteraction is called to reset the flag
+        Object.FindFirstObjectByType<PointAndClickMovement>().EndInteraction();
+    }
+
+    private void OnStatsButtonClick()
+    {
+        if (npcStatPage != null)
+        {
+            npcStatPage.ToggleStatsPanel(); // Toggle the stats panel
+        }
     }
 
     private string FindStartNodeIDForLove(int lovePoints, DialogueData data)
@@ -79,9 +116,6 @@ public class DialogueManager : MonoBehaviour
         }
         return null; // If no tier matches
     }
-
-
-
 
     public void HandleChoiceSelected(DialogueChoice choice)
     {
@@ -135,12 +169,12 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-        public bool IsChoiceAvailable(DialogueChoice choice)
+    public bool IsChoiceAvailable(DialogueChoice choice)
     {
         // If no item is required, the choice is available
         if (choice.itemGate == null || string.IsNullOrEmpty(choice.itemGate.itemName))
         {
-        return true;
+            return true;
         }
 
         // Check if the player has the required item
@@ -189,6 +223,4 @@ public class DialogueManager : MonoBehaviour
         currentNode = currentData.nodeDictionary[nextNodeID];
         DisplayNode();
     }
-
-
 }

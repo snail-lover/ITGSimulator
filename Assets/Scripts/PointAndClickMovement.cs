@@ -8,6 +8,7 @@ public class PointAndClickMovement : MonoBehaviour
     private NavMeshAgent agent;
     private IClickable lastHovered;
     public static IClickable currentTarget; // Tracks the current interaction target
+    private bool isInteracting = false; // Add this flag
 
     private void Start()
     {
@@ -35,12 +36,14 @@ public class PointAndClickMovement : MonoBehaviour
 
     private void HandleMovementInput()
     {
+        // Prevent further clicks if currently interacting with an NPC
+        if (isInteracting)
+        {
+            return; // Do nothing while interacting
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
-            if (BaseNPC.currentTarget != null && BaseNPC.currentTarget.isTalking)
-            {
-            return; // Do nothing while talking
-            }
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
@@ -55,6 +58,13 @@ public class PointAndClickMovement : MonoBehaviour
 
                     currentTarget = clickable;
                     clickable.OnClick();
+
+                    // Check if the NPC is talking after clicking
+                    if (BaseNPC.currentTarget != null && BaseNPC.currentTarget.isTalking)
+                    {
+                        isInteracting = true; // Set the flag to true
+                        return; // Do nothing while talking
+                    }
                 }
                 else
                 {
@@ -65,9 +75,19 @@ public class PointAndClickMovement : MonoBehaviour
                         currentTarget.ResetInteractionState();
                         currentTarget = null;
                     }
+                    // Clear NPC interaction state
+                    if (BaseNPC.currentTarget != null)
+                    {
+                        BaseNPC.currentTarget.ResetInteractionState();
+                    }
                 }
             }
         }
+    }
+
+    public void EndInteraction()
+    {
+        isInteracting = false; // Reset the flag when interaction ends
     }
 
     private void HandleHoverEffects()
