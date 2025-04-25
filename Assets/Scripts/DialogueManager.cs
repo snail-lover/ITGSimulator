@@ -1,226 +1,242 @@
 using UnityEngine;
-using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Collections.Generic;
+
 
 public class DialogueManager : MonoBehaviour
 {
-    // UI or references for displaying text, choices, etc.
-    // (Hook these up via the Inspector or dynamically in code.)
-    [SerializeField] private DialogueUI dialogueUI;
-    [SerializeField] private GameObject dialoguePanel;
-    [SerializeField] private UnityEngine.UI.Text dialogueText;
-    [SerializeField] private Transform choicesContainer;
-    [SerializeField] private GameObject choiceButtonPrefab;
-    [SerializeField] private Button statsButton; // Reference to the stats button
-    [SerializeField] private NPCStatPage npcStatPage; // Reference to the NPCStatPage script
-    
-    private BaseNPC currentNPC; 
-    private DialogueData currentData;
-    private DialogueNode currentNode;
+
     public static DialogueManager Instance { get; private set; }
 
+    //UI References (Assign in Inspector)
+    [Header("UI References")]
+    [SerializeField] private DialogueUI dialogueUI; 
+    [SerializeField] private Button statsButton;   
+    [SerializeField] private NPCStatPage npcStatPage; 
+
+    private BaseNPC currentNPC;
+    private DialogueData currentData;
+    private DialogueNode currentNode;
+
+    private PointAndClickMovement playerMovement;
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
+
+        if (Instance == null) { Instance = this; } else { Destroy(gameObject); return; }
+
+        if (dialogueUI == null) Debug.LogError("[DialogueManager] DialogueUI reference not set!");
+        if (statsButton == null) Debug.LogError("[DialogueManager] Stats Button reference not set!");
+        if (npcStatPage == null) Debug.LogError("[DialogueManager] NPC Stat Page reference not set!");
+
+
+        FindAndCachePlayerMovement();
+        if (npcStatPage != null) npcStatPage.HideStatsPanel(); 
+    }
+
+    private void FindAndCachePlayerMovement()
+    {
+
+         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null) {
+            playerMovement = playerObj.GetComponent<PointAndClickMovement>();
+            if (playerMovement == null) Debug.LogError("[DialogueManager] Player missing PointAndClickMovement script!");
+        } else {
+            Debug.LogError("[DialogueManager] Player object with tag 'Player' not found!");
         }
     }
 
-    public BaseNPC GetCurrentNPC()
-    {
-        return currentNPC?.GetComponent<BaseNPC>();
-    }
 
     public void StartDialogue(BaseNPC npc)
     {
+        //Null checks, check if already in dialogue
+         if (npc == null) { Debug.LogError("[DialogueManager] StartDialogue called with null NPC."); return; }
+        if (currentNPC != null) { Debug.LogWarning($"[DialogueManager] Starting dialogue with {npc.name} while already in dialogue with {currentNPC.name}. Ending previous."); EndDialogue(); }
+
+
+        Debug.Log($"[DialogueManager] Starting Dialogue with {npc.npcName}"); // Use npcName
         currentNPC = npc;
         currentData = npc.GetDialogueData();
-        if (currentData == null) return;
 
-        // 1. Get NPC's current love
-        int lovePoints = npc.currentLove;
+        //Check for null currentData/nodeDictionary - keep as is
+         if (currentData == null || currentData.nodeDictionary == null) { /* ... error handling ... */ CleanupFailedDialogueStart(); return; }
 
-        // 2. Find the correct tier
-        string startNodeID = FindStartNodeIDForLove(lovePoints, currentData);
 
-        // 3. If found, show that node
-        if (!string.IsNullOrEmpty(startNodeID) && currentData.nodeDictionary.TryGetValue(startNodeID, out currentNode))
+        LockPlayerMovement();
+
+        string startNodeID = FindStartNodeIDForLove(currentNPC.currentLove, currentData);
+        if (!currentData.nodeDictionary.TryGetValue(startNodeID, out currentNode) || currentNode == null)
         {
-            dialogueUI.ShowDialogue(this, currentNode);
-            statsButton.gameObject.SetActive(true); // Show the stats button
-            statsButton.onClick.RemoveAllListeners(); // Remove any existing listeners
-            statsButton.onClick.AddListener(OnStatsButtonClick); // Add listener to the stats button
+            Debug.LogError($"[DialogueManager] Failed to find valid start node '{startNodeID}'.");
+            CleanupFailedDialogueStart();
+            return;
+        }
 
-            // Load the stats into the NPCStatPage
-            if (npcStatPage != null)
-            {
-                npcStatPage.currentNPC = currentNPC; // Set the current NPC
-                npcStatPage.LoadStats(); // Load the stats
-            }
-        }
-        else
+        Debug.Log($"[DialogueManager] Successfully found starting node: {currentNode.nodeID}");
+
+        //Show Dialogue UI with New Info
+        if (dialogueUI == null)
         {
-            // If no tier found, or node is missing, we can end or do fallback
-            Debug.LogWarning("No valid tier or node found for NPC's current love. Ending dialogue.");
-            EndDialogue();
+            Debug.LogError("[DialogueManager] DialogueUI reference is missing.");
+            CleanupFailedDialogueStart();
+            return;
         }
+
+        // Get required info from NPC
+        string speakerName = currentNPC.npcName;
+        Sprite portrait = currentNPC.npcImage;
+
+        Debug.Log("[DialogueManager] Calling dialogueUI.ShowDialogue...");
+        dialogueUI.ShowDialogue(this, currentNode, speakerName, portrait);
+
+        SetupStatsButton(); // Setup listener etc.
+
+        if (npcStatPage != null)
+        {
+            npcStatPage.currentNPC = currentNPC; // Set NPC for stats page
+            npcStatPage.LoadStats();             // Pre-load stats but don't show panel yet
+        } else {
+             Debug.LogWarning("[DialogueManager] NPCStatPage reference is missing.");
+        }
+
+        Debug.Log($"[DialogueManager] StartDialogue for {npc.npcName} completed successfully.");
     }
 
     public void EndDialogue()
     {
-        dialogueUI.HideDialogue();
-        
+        //Prevent ending if not in dialogue
+        if (currentNPC == null && currentNode == null) { /* Debug.LogWarning("[DialogueManager] EndDialogue called but no dialogue active."); */ UnlockPlayerMovement(); return; }
+
+        Debug.Log($"[DialogueManager] Ending Dialogue with {(currentNPC != null ? currentNPC.npcName : "Unknown")}.");
+
+        // 1. Hide Dialogue UI (calls fade out)
+        if (dialogueUI != null)
+        {
+            dialogueUI.HideDialogue();
+        }
+
+        // 2. Hide Stats Button & Panel
+        if (statsButton != null)
+        {
+            // statsButton.gameObject.SetActive(false);
+            statsButton.onClick.RemoveAllListeners(); // Still clean up listeners
+        }
+        if (npcStatPage != null)
+        {
+            npcStatPage.HideStatsPanel(); // Hide the separate stats panel
+        }
+
+        // 3. Tell the NPC to Resume
         if (currentNPC != null)
         {
-            currentNPC.isTalking = false; // Re-enable movement input
             currentNPC.ResumeNPC();
         }
-        dialoguePanel.SetActive(false);
+
+        // 4. Unlock Player Movement
+        UnlockPlayerMovement();
+
+        // 5. Clear Dialogue State
         currentNPC = null;
         currentData = null;
         currentNode = null;
-        statsButton.gameObject.SetActive(false); // Hide the stats button
-        statsButton.onClick.RemoveAllListeners(); // Remove listener from the stats button
-
-        // Hide the stats panel
-        if (npcStatPage != null)
-        {
-            npcStatPage.HideStatsPanel();
-        }
-
-        // Ensure EndInteraction is called to reset the flag
-        Object.FindFirstObjectByType<PointAndClickMovement>().EndInteraction();
-    }
-
-    private void OnStatsButtonClick()
-    {
-        if (npcStatPage != null)
-        {
-            npcStatPage.ToggleStatsPanel(); // Toggle the stats panel
-        }
-    }
-
-    private string FindStartNodeIDForLove(int lovePoints, DialogueData data)
-    {
-        foreach (var tier in data.loveTiers)
-        {
-            if (lovePoints >= tier.minLove && lovePoints <= tier.maxLove)
-            {
-                return tier.startNodeID;
-            }
-        }
-        return null; // If no tier matches
+        Debug.Log("--- DIALOGUE MANAGER: EndDialogue COMPLETE ---");
     }
 
     public void HandleChoiceSelected(DialogueChoice choice)
     {
-        // Apply the love point change
-        currentNPC.currentLove += choice.lovePointChange;
+        //Null checks for state
+        if (currentNPC == null || currentData == null || choice == null) { Debug.LogError("..."); EndDialogue(); return; }
 
-        // Next node?
-        if (string.IsNullOrEmpty(choice.nextNodeID) || 
-            !currentData.nodeDictionary.ContainsKey(choice.nextNodeID))
+        Debug.Log($"[DialogueManager] Choice selected: '{choice.choiceText}' -> Next Node: '{choice.nextNodeID}'");
+
+
+        ApplyLovePointChange(choice.lovePointChange, choice);
+
+        if (string.IsNullOrEmpty(choice.nextNodeID) || !currentData.nodeDictionary.TryGetValue(choice.nextNodeID, out DialogueNode nextNode))
         {
+            Debug.Log($"[DialogueManager] Next node ID ('{choice.nextNodeID ?? "null"}') invalid or missing. Ending dialogue.");
             EndDialogue();
         }
         else
         {
-            currentNode = currentData.nodeDictionary[choice.nextNodeID];
-            dialogueUI.ShowDialogue(this, currentNode);
-        }
-    }
-
-    private void DisplayNode()
-    {
-        // Clear previous choice buttons
-        foreach (Transform child in choicesContainer)
-        {
-            Destroy(child.gameObject);
-        }
-
-        // Set main text
-        dialogueText.text = currentNode.text;
-
-        // Create choice buttons
-        foreach (var choice in currentNode.choices)
-        {
-            // Check for item gating if love points are at thresholds 3,6,9
-            if (RequiresItemToProceed() && !HasRequiredItem(choice))
+            currentNode = nextNode;
+            if (dialogueUI != null)
             {
-                // If player doesn't have the required item, skip creating this button or mark it locked
-                continue;
+                //Pass speaker info again when showing the next node
+                dialogueUI.ShowDialogue(this, currentNode, currentNPC.npcName, currentNPC.npcImage);
             }
-
-            var buttonObj = Instantiate(choiceButtonPrefab, choicesContainer);
-            var buttonText = buttonObj.GetComponentInChildren<UnityEngine.UI.Text>();
-            buttonText.text = choice.choiceText;
-
-            // Add listener to handle the choice
-            buttonObj.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
+            else
             {
-                ApplyLovePointChange(choice.lovePointChange);
-                GoToNextNode(choice.nextNodeID);
-            });
+                Debug.LogError("[DialogueManager] DialogueUI reference missing, cannot show next node.");
+                EndDialogue();
+            }
         }
     }
 
     public bool IsChoiceAvailable(DialogueChoice choice)
     {
-        // If no item is required, the choice is available
-        if (choice.itemGate == null || string.IsNullOrEmpty(choice.itemGate.itemName))
-        {
-            return true;
-        }
-
-        // Check if the player has the required item
+        if (choice == null || choice.itemGate == null || string.IsNullOrEmpty(choice.itemGate.itemName)) return true;
+        if (Inventory.Instance == null) { Debug.LogError("[DialogueManager] Inventory instance is null!"); return false; }
         return Inventory.Instance.HasItem(choice.itemGate.itemName);
     }
 
-    private bool RequiresItemToProceed()
+    public BaseNPC GetCurrentNPC() => currentNPC;
+
+    private string FindStartNodeIDForLove(int lovePoints, DialogueData data)
     {
-        // Example check: if current love is exactly 3,6,9 => must have an item
-        int love = currentNPC.currentLove;
-        return (love == 3 || love == 6 || love == 9);
+         if (data == null || data.loveTiers == null) { /*...*/ return data?.startNodeID; }
+         foreach (var tier in data.loveTiers) {
+             if (tier != null && lovePoints >= tier.minLove && lovePoints <= tier.maxLove) { return tier.startNodeID; }
+         }
+         return data.startNodeID; 
     }
 
-    private bool HasRequiredItem(DialogueChoice choice)
+    private void SetupStatsButton()
     {
-        // Example check: does Inventory have the item needed for this choice?
-        // Adapt to your actual inventory system
-        if (choice.itemGate != null && !Inventory.Instance.HasItem(choice.itemGate.itemName))
+        if (statsButton != null)
         {
-            return false;
+            statsButton.onClick.RemoveAllListeners();
+            statsButton.onClick.AddListener(OnStatsButtonClick);
+            Debug.Log("[DialogueManager] Stats button listener configured.");
         }
-        return true;
+         else
+        {
+            Debug.LogError("[DialogueManager] Stats Button reference is missing in Inspector!");
+        }
     }
 
-    private void ApplyLovePointChange(int changeAmount)
+    private void OnStatsButtonClick()
     {
-        // Prevent love from going higher if at 3,6,9 but missing item
-        if (RequiresItemToProceed() && changeAmount > 0)
+         Debug.Log("[DialogueManager] Stats Button clicked.");
+        if (npcStatPage != null)
         {
-            // If an item is needed and the player doesn't have it, skip
-            // or handle how you want (maybe partial block)
-            return;
+            npcStatPage.ToggleStatsPanel(); // Tell the stats page script to handle toggling
         }
+        else
+        {
+            Debug.LogWarning("[DialogueManager] Stats Button clicked, but NPCStatPage reference is missing.");
+        }
+    }
+
+    private void ApplyLovePointChange(int changeAmount, DialogueChoice choice) { 
+        if (currentNPC == null) return;
         currentNPC.currentLove += changeAmount;
+        Debug.Log($"[DialogueManager] Applied {changeAmount} love. New total for {currentNPC.npcName}: {currentNPC.currentLove}");
     }
 
-    private void GoToNextNode(string nextNodeID)
-    {
-        // If nextNodeID is empty, we end dialogue
-        if (string.IsNullOrEmpty(nextNodeID) || !currentData.nodeDictionary.ContainsKey(nextNodeID))
-        {
-            EndDialogue();
-            return;
-        }
+    private bool RequiresItemToProceed(int currentLove) { return (currentLove == 3 || currentLove == 6 || currentLove == 9); }
 
-        currentNode = currentData.nodeDictionary[nextNodeID];
-        DisplayNode();
+    private void LockPlayerMovement() { /* ... existing logic ... */ if (playerMovement != null) playerMovement.LockMovement(); else Debug.LogWarning("..."); }
+
+    private void UnlockPlayerMovement() { /* ... existing logic ... */ if (playerMovement != null) playerMovement.EndInteraction(); else Debug.LogWarning("..."); }
+
+    private void CleanupFailedDialogueStart()
+    {
+        Debug.LogError("[DialogueManager] Cleaning up after failed dialogue start.");
+        UnlockPlayerMovement();
+        currentNPC = null;
+        currentData = null;
+        currentNode = null;
+        if (dialogueUI != null) dialogueUI.HideDialogue(); // Use HideDialogue for fading
+        if (npcStatPage != null) npcStatPage.HideStatsPanel();
     }
 }

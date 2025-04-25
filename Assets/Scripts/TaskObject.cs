@@ -2,49 +2,44 @@ using UnityEngine;
 
 public class TaskObject : MonoBehaviour
 {
-    [Header("Task Settings")]
-    public string taskName;  // Name of the task (e.g., "Wash Hands", "Teach Class")
-    public string action;    // Action to perform (e.g., "Wash", "Teach")
-    public float duration = 3.0f; // Time it takes to complete this task (seconds)
+    [Header("Task Definition")]
+    public string taskName = "Unnamed Task"; 
+    [Tooltip("How long the NPC stays performing the action after arriving (seconds).")]
+    public float duration = 3.0f;
+    [Tooltip("The Trigger name in the NPC's Animator Controller for this task's action.")]
+    public string animationBoolName;
 
-    [Header("Optional Task Settings")]
-    public Animator taskAnimator; // Animator to trigger animations, if applicable
-    public string animationTrigger; // Name of the animation trigger to play
+    [Tooltip("(Optional) Precise target spot and orientation for the NPC.")]
+    public Transform specificTargetPoint;
 
     [Header("Debug Options")]
-    public bool showDebugGizmo = true; // Toggle debug visualization in the Scene view
-    public Color gizmoColor = Color.yellow; // Color of the debug sphere in the Scene view
+    public bool showDebugGizmo = true;
+    public Color gizmoColor = Color.cyan; // Changed color for distinction
 
-    /// <summary>
-    /// Called by NPCs when they start interacting with this task.
-    /// </summary>
-    /// 
 
-   public void Update()
+    public Vector3 GetTargetPosition() /// Gets the target position for the NPC's NavMeshAgent.
+
     {
-        //Debug.Log("TaskObject: " + duration);
-    }
-    public void PerformTask()
-    {
-        //Debug.Log($"Performing task: {taskName}. Action: {action}");
-
-        // Trigger the optional animation if an Animator is set
-        if (taskAnimator != null && !string.IsNullOrEmpty(animationTrigger))
-        {
-            Debug.Log($"Triggering animation: {animationTrigger}");
-            taskAnimator.SetTrigger(animationTrigger);
-        }
+        return specificTargetPoint != null ? specificTargetPoint.position : transform.position;
     }
 
-    /// <summary>
-    /// Draws a gizmo to visualize the task location in the Scene view.
-    /// </summary>
+    public Quaternion GetTargetRotation() /// Gets the target rotation for the NPC upon arrival (if specified).
+    {
+        return specificTargetPoint != null ? specificTargetPoint.rotation : transform.rotation; 
+    }
+
     private void OnDrawGizmos()
     {
         if (showDebugGizmo)
         {
+            Vector3 pos = GetTargetPosition();
             Gizmos.color = gizmoColor;
-            Gizmos.DrawSphere(transform.position, 0.3f); // Draw a small sphere at the task's position
+            Gizmos.DrawSphere(pos, 0.3f);
+ 
+            if (specificTargetPoint != null) // Optionally draw the forward direction if using specificTargetPoint
+            {
+                Gizmos.DrawLine(pos, pos + specificTargetPoint.forward * 0.5f);
+            }
         }
     }
 }

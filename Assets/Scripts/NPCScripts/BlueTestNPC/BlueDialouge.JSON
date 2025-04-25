@@ -33,12 +33,12 @@
             "text": "i'm a little soyboy that is bluepilled :(",
             "choices": [
               {
-                "choiceText": "Cuck!",
+                "choiceText": "This is a really long dialogue option that is meant to test the length of the text and how it wraps around in the dialogue box. It should be long enough to see if it breaks properly and doesn't overflow the box.",
                 "lovePointChange": 0,
                 "nextNodeID": ""
               },
               {
-                "choiceText": "kill yourself",
+                "choiceText": "This is a short option.",
                 "lovePointChange": 0,
                 "nextNodeID": ""
               }

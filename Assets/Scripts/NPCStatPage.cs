@@ -3,14 +3,12 @@ using UnityEngine.UI;
 
 public class NPCStatPage : MonoBehaviour
 {
-    public Button statsButton;
     public Text statsText;
     public GameObject statsPanel; // Reference to the stats panel
     public BaseNPC currentNPC;
 
     void Start()
     {
-        statsButton.onClick.AddListener(OnStatsButtonClick);
         statsPanel.SetActive(false); // Hide the stats panel at the start
     }
 
@@ -22,10 +20,6 @@ public class NPCStatPage : MonoBehaviour
         }
     }
 
-    void OnStatsButtonClick()
-    {
-        ToggleStatsPanel();
-    }
 
     public void ToggleStatsPanel()
     {
