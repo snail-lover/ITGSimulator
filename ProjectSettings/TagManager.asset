@@ -14,10 +14,10 @@ TagManager:
   - Water
   - UI
   - Interactable
-  - 
-  - 
-  - 
-  - 
+  - Wall
+  - Floor_Lower
+  - Floor_First
+  - Floor_Second
   - 
   - 
   - 
