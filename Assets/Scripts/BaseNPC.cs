@@ -46,12 +46,35 @@ public class BaseNPC : MonoBehaviour, IClickable
     private NavMeshAgent playerAgent;
     private Coroutine interactionCoroutine;
 
+    [Header("Floor Management")]
+    [Tooltip("The current floor this NPC is on. Needs to be updated by game logic when NPC changes floors (e.g., via tasks).")]
+    public FloorVisibilityManager.FloorLevel currentNpcFloorLevel = FloorVisibilityManager.FloorLevel.Lower; // Default or set in Inspector
+
+    private Renderer[] _npcRenderers;
+    private Collider[] _npcColliders;
+
     protected virtual void Awake()
     {
         CachePlayerReferences();
         InitializeNPC();
         LoadDialogueData();
         InitializeLove(); // Needs dialogueData loaded first
+        // Cache NPC's own renderers and colliders
+        _npcRenderers = GetComponentsInChildren<Renderer>(true);
+        _npcColliders = GetComponentsInChildren<Collider>(true); // Get all colliders, including the main one
+
+       // Initial visibility check if FloorVisibilityManager is ready
+        if (FloorVisibilityManager.Instance != null)
+        {
+            UpdateVisibilityBasedOnPlayerFloor(FloorVisibilityManager.Instance.CurrentVisibleFloor);
+        }
+        else
+        {
+            // Fallback: Make NPC visible by default if manager isn't ready yet (it will be corrected in FVM.Start)
+            // Or, you could subscribe to an event from FVM once it's initialized.
+            // For simplicity, FVM.Start() will call NotifyAllNpcsOfFloorChange, which will set it correctly.
+            // So, no explicit action needed here for that case.
+        }
     }
 
     private void Start()
@@ -525,6 +548,55 @@ private IEnumerator ExecuteTaskAction(TaskObject task)     /// Coroutine that pl
             npcAnimator.SetBool(walkingParameterName, isWalking);
         }
     }
+    public void UpdateVisibilityBasedOnPlayerFloor(FloorVisibilityManager.FloorLevel playerCurrentFloor)
+    {
+        bool shouldBeVisible = (this.currentNpcFloorLevel == playerCurrentFloor);
+
+        // Debug.Log($"[{name}] On floor {currentNpcFloorLevel}. Player on {playerCurrentFloor}. Should be visible: {shouldBeVisible}");
+
+        if (_npcRenderers != null)
+        {
+            foreach (Renderer rend in _npcRenderers)
+            {
+                rend.enabled = shouldBeVisible;
+            }
+        }
+
+        if (_npcColliders != null)
+        {
+            foreach (Collider col in _npcColliders)
+            {
+                // Be careful if some colliders should always be active for physics reasons
+                // other than clicking (e.g. a trigger for NPC internal logic).
+                // For typical character controllers and click detection, this is usually fine.
+                col.enabled = shouldBeVisible;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Call this method when game logic moves this NPC to a different floor.
+    /// For example, after a "Use Stairs" task is completed.
+    /// </summary>
+    /// <param name="newFloor">The new floor the NPC is now on.</param>
+    public void NotifyNpcChangedFloor(FloorVisibilityManager.FloorLevel newNpcFloor)
+    {
+        if (currentNpcFloorLevel == newNpcFloor) return; // No change
+
+        Debug.Log($"[{name}] changed floor from {currentNpcFloorLevel} to {newNpcFloor}.");
+        currentNpcFloorLevel = newNpcFloor;
+
+        // Update visibility immediately based on the player's current floor
+        if (FloorVisibilityManager.Instance != null)
+        {
+            UpdateVisibilityBasedOnPlayerFloor(FloorVisibilityManager.Instance.CurrentVisibleFloor);
+        }
+        else
+        {
+            Debug.LogWarning($"[{name}] FloorVisibilityManager not found when trying to update visibility after NPC floor change.");
+        }
+    }
+
 
     // --- Utility ---
     public DialogueData GetDialogueData() => dialogueData;

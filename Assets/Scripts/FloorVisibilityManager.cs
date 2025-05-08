@@ -1,24 +1,14 @@
 using UnityEngine;
-using System.Collections.Generic; // Required for Lists
+using System.Collections.Generic;
 
 public class FloorVisibilityManager : MonoBehaviour
 {
-    // Assign these floor parent GameObjects in the Inspector
+    public static FloorVisibilityManager Instance { get; private set; }
+
     public GameObject lowerFloorParent;
     public GameObject firstFloorParent;
     public GameObject secondFloorParent;
 
-    // Optional: Store references to renderers and colliders for performance
-    private List<Renderer> lowerFloorRenderers;
-    private List<Renderer> firstFloorRenderers;
-    private List<Renderer> secondFloorRenderers;
-
-    private List<Collider> lowerFloorColliders;
-    private List<Collider> firstFloorColliders;
-    private List<Collider> secondFloorColliders;
-
-
-    // Enum to make floor identification clearer
     public enum FloorLevel
     {
         Lower = 0,
@@ -26,93 +16,59 @@ public class FloorVisibilityManager : MonoBehaviour
         Second = 2
     }
 
-    private FloorLevel currentVisibleFloor = FloorLevel.Lower; // Example starting floor
+    private FloorLevel _currentVisibleFloor = FloorLevel.Lower;
+    public FloorLevel CurrentVisibleFloor => _currentVisibleFloor; // Public getter
+
+    // Optional Caching (can be uncommented and used if preferred)
+    /*
+    private List<Renderer> lowerFloorRenderers;
+    private List<Collider> lowerFloorColliders;
+    // ... and for other floors
+    */
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            // DontDestroyOnLoad(gameObject); // Optional: if this manager needs to persist across scenes
+        }
+        else
+        {
+            Debug.LogWarning("Multiple FloorVisibilityManager instances found. Destroying this one.");
+            Destroy(gameObject);
+            return;
+        }
+    }
 
     void Start()
     {
-        // Optional: Pre-cache components if needed
-        CacheFloorComponents();
-
-        // Set the initial visibility based on the starting floor
-        UpdateFloorVisibility(currentVisibleFloor);
+        // CacheFloorComponents(); // If using caching
+        UpdateFloorVisibility(_currentVisibleFloor, true); // Initial setup
     }
 
-    // --- Optional: Caching for potential performance improvement ---
-    void CacheFloorComponents()
+    // Renamed to avoid conflict and added an initialSetup flag
+    public void UpdateFloorVisibility(FloorLevel targetFloor, bool isInitialSetup = false)
     {
-        lowerFloorRenderers = GetAllComponentsInChildren<Renderer>(lowerFloorParent);
-        firstFloorRenderers = GetAllComponentsInChildren<Renderer>(firstFloorParent);
-        secondFloorRenderers = GetAllComponentsInChildren<Renderer>(secondFloorParent);
-        Debug.Log($"Cached {lowerFloorRenderers.Count} renderers for Lower Floor.");
-        Debug.Log($"Cached {firstFloorRenderers.Count} renderers for First Floor.");
-        Debug.Log($"Cached {secondFloorRenderers.Count} renderers for Second Floor.");
+        if (!isInitialSetup && _currentVisibleFloor == targetFloor)
+        {
+            // Debug.Log($"Player already on floor: {targetFloor}. No change needed for floor objects.");
+            // Still notify NPCs in case an NPC changed floor while player was on current floor
+            NotifyAllNpcsOfFloorChange(targetFloor);
+            return;
+        }
 
-        lowerFloorColliders = GetAllComponentsInChildren<Collider>(lowerFloorParent);
-        firstFloorColliders = GetAllComponentsInChildren<Collider>(firstFloorParent);
-        secondFloorColliders = GetAllComponentsInChildren<Collider>(secondFloorParent);
-        Debug.Log($"Cached {lowerFloorColliders.Count} colliders for Lower Floor.");
-        Debug.Log($"Cached {firstFloorColliders.Count} colliders for First Floor.");
-        Debug.Log($"Cached {secondFloorColliders.Count} colliders for Second Floor.");
-    }
-
-    List<T> GetAllComponentsInChildren<T>(GameObject parent) where T : Component
-    {
-        if (parent == null) return new List<T>();
-        // Use 'true' to include inactive Components as well,
-        // in case they start disabled for some reason.
-        return new List<T>(parent.GetComponentsInChildren<T>(true));
-    }
-    // --- End Optional Caching ---
-
-
-    /// <summary>
-    /// Makes the target floor visible and interactive, and hides/disables others.
-    /// </summary>
-    /// <param name="targetFloor">The floor level to make visible.</param>
-    public void UpdateFloorVisibility(FloorLevel targetFloor)
-    {
         Debug.Log($"Switching visible floor to: {targetFloor}");
-        currentVisibleFloor = targetFloor;
+        _currentVisibleFloor = targetFloor;
 
-        // Set visibility and interactivity based on the target floor
-        // Using cached lists (if enabled):
-        if (lowerFloorRenderers != null && lowerFloorColliders != null) // Check if caching was done
-        {
-            SetFloorComponentsEnabled(lowerFloorRenderers, lowerFloorColliders, targetFloor == FloorLevel.Lower);
-            SetFloorComponentsEnabled(firstFloorRenderers, firstFloorColliders, targetFloor == FloorLevel.First);
-            SetFloorComponentsEnabled(secondFloorRenderers, secondFloorColliders, targetFloor == FloorLevel.Second);
-        }
-        else // Fallback to finding components on demand
-        {
-            SetFloorActiveState(lowerFloorParent, targetFloor == FloorLevel.Lower);
-            SetFloorActiveState(firstFloorParent, targetFloor == FloorLevel.First);
-            SetFloorActiveState(secondFloorParent, targetFloor == FloorLevel.Second);
-        }
+        SetFloorActiveState(lowerFloorParent, targetFloor == FloorLevel.Lower);
+        SetFloorActiveState(firstFloorParent, targetFloor == FloorLevel.First);
+        SetFloorActiveState(secondFloorParent, targetFloor == FloorLevel.Second);
+
+        // Notify all NPCs about the player's new floor
+        NotifyAllNpcsOfFloorChange(targetFloor);
     }
 
-    /// <summary>
-    /// Enables or disables all Renderer and Collider components for a floor using cached lists.
-    /// </summary>
-    private void SetFloorComponentsEnabled(List<Renderer> renderers, List<Collider> colliders, bool isEnabled)
-    {
-        foreach (Renderer rend in renderers)
-        {
-            rend.enabled = isEnabled;
-        }
-        foreach (Collider col in colliders)
-        {
-            col.enabled = isEnabled;
-        }
-        // Optional: Log
-        // if (renderers.Count > 0) Debug.Log($"{renderers[0].transform.root.name}: Set {renderers.Count} renderers and {colliders.Count} colliders to enabled={isEnabled}");
-    }
-
-
-    /// <summary>
-    /// Enables or disables all Renderer and Collider components within a parent GameObject (on-demand version).
-    /// </summary>
-    /// <param name="floorParent">The parent GameObject of the floor.</param>
-    /// <param name="isEnabled">True to enable components, false to disable.</param>
     private void SetFloorActiveState(GameObject floorParent, bool isEnabled)
     {
         if (floorParent == null)
@@ -121,35 +77,67 @@ public class FloorVisibilityManager : MonoBehaviour
             return;
         }
 
-        // Find all renderers each time
         Renderer[] renderers = floorParent.GetComponentsInChildren<Renderer>(true);
         foreach (Renderer rend in renderers)
         {
             rend.enabled = isEnabled;
         }
 
-        // Find all colliders each time
         Collider[] colliders = floorParent.GetComponentsInChildren<Collider>(true);
         foreach (Collider col in colliders)
         {
             col.enabled = isEnabled;
         }
-
-        // Optional: Log how many components were affected
-        // Debug.Log($"{floorParent.name}: Set {renderers.Length} renderers and {colliders.Length} colliders to enabled={isEnabled}");
+        // Debug.Log($"{floorParent.name}: Set renderers & colliders to enabled={isEnabled}");
     }
 
 
-    // --- Example Trigger Method (called from staircase script) ---
-    public void PlayerChangedFloor(int floorIndex) // 0=Lower, 1=First, 2=Second
+    private void NotifyAllNpcsOfFloorChange(FloorLevel playerFloor)
     {
-         if (System.Enum.IsDefined(typeof(FloorLevel), floorIndex))
-         {
-             UpdateFloorVisibility((FloorLevel)floorIndex);
-         }
-         else
-         {
-             Debug.LogError($"Invalid floor index received: {floorIndex}");
-         }
+        // FindObjectsOfType can be a bit slow if you have many NPCs and call this very frequently.
+        // For a more optimized solution, consider a registration system where NPCs register/unregister.
+        BaseNPC[] allNpcs = FindObjectsOfType<BaseNPC>();
+        // Debug.Log($"Notifying {allNpcs.Length} NPCs of floor change to: {playerFloor}");
+        foreach (BaseNPC npc in allNpcs)
+        {
+            npc.UpdateVisibilityBasedOnPlayerFloor(playerFloor);
+        }
     }
+
+    public void PlayerChangedFloor(int floorIndex)
+    {
+        if (System.Enum.IsDefined(typeof(FloorLevel), floorIndex))
+        {
+            UpdateFloorVisibility((FloorLevel)floorIndex);
+        }
+        else
+        {
+            Debug.LogError($"Invalid floor index received: {floorIndex}");
+        }
+    }
+
+    // --- Optional Caching (Example if you uncomment) ---
+    /*
+    void CacheFloorComponents()
+    {
+        lowerFloorRenderers = GetAllComponentsInChildren<Renderer>(lowerFloorParent);
+        lowerFloorColliders = GetAllComponentsInChildren<Collider>(lowerFloorParent);
+        // ... for other floors ...
+        Debug.Log($"Cached components for floors.");
+    }
+
+    List<T> GetAllComponentsInChildren<T>(GameObject parent) where T : Component
+    {
+        if (parent == null) return new List<T>();
+        return new List<T>(parent.GetComponentsInChildren<T>(true));
+    }
+
+    // If using cached lists, SetFloorActiveState would become:
+    private void SetFloorComponentsEnabled(List<Renderer> renderers, List<Collider> colliders, bool isEnabled)
+    {
+        foreach (Renderer rend in renderers) rend.enabled = isEnabled;
+        foreach (Collider col in colliders) col.enabled = isEnabled;
+    }
+    // And UpdateFloorVisibility would call SetFloorComponentsEnabled with the cached lists.
+    */
 }

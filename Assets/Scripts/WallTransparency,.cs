@@ -7,10 +7,10 @@ using UnityEngine.Rendering; // Required for BlendMode enum
 public class WallTransparency : MonoBehaviour
 {
     [Tooltip("How long the fade in/out animation should take.")]
-    public float fadeDuration = 0.25f;
+    public float fadeDuration = 0.0f;
 
     [Tooltip("The target alpha value when the wall is faded out (e.g., 0.3 for 30% visible).")]
-    public float targetAlpha = 0.3f;
+    public float targetAlpha = 0.0f;
 
     [Header("URP Shader Property Names (Default for Lit/Unlit)")]
     [Tooltip("Shader property for main color and alpha.")]
