@@ -1,0 +1,45 @@
+{
+    "startingLove": 10,
+    "loveTiers": [
+      {
+        "minLove": 10,
+        "maxLove": 10,
+        "startNodeID": "zozk_end_1"
+      },
+            {
+        "minLove": 10,
+        "maxLove": 10,
+        "startNodeID": "zozk_end_2"
+      },
+      {
+        "minLove": 10,
+        "maxLove": 10,
+        "startNodeID": "zozk_end_3"
+      }
+    ],
+    "nodes": [
+        {
+          "nodeID": "zozk_end_1",
+            "text": "Wow, i can't believe you made it to the final cutscene with me.",
+          "choices": [
+        { 
+          "choiceText": "yeah i'm a progamer", "lovePointChange": 0, "nextNodeID": "zozk_end_2" }
+        ]
+          },
+          {
+           "nodeID": "zozk_end_2",
+            "text": "here is where there is gonna be an awesome sex scene, but it's not implemented yet.",
+             "choices": [
+             { "choiceText": "Continue...", "lovePointChange": 0, "nextNodeID": "CUTSCENE_SEGMENT_END" }
+                         ]      
+          },
+                  {
+          "nodeID": "zozk_end_3",
+            "text": "This is an added ending node to test the system.",
+          "choices": [
+        { 
+          "choiceText": "epic, go to main menue", "lovePointChange": 0, "nextNodeID": "CUTSCENE_SEGMENT_END" }
+        ]
+          }
+    ]
+  }

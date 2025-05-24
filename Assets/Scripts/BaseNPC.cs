@@ -40,6 +40,15 @@ public class BaseNPC : MonoBehaviour, IClickable
     public string npcDislikes;
     public Sprite npcImage;
 
+    [Header("Cutscene Settings")]
+    [SerializeField] protected Cutscene finalLoveCutsceneAsset; // Assign your "win" cutscene here for NPCs that have one
+    private bool isPausedByCutscene = false;
+    private bool wasAgentStoppedBeforeCutscene; // To restore agent's previous 'isStopped' state
+
+    public NavMeshAgent Agent => agent;
+    public Animator NpcAnimator => npcAnimator;
+    public bool IsPausedByCutscene => isPausedByCutscene;
+
     // Cached References
     private DialogueData dialogueData;
     private Transform playerTransform;
@@ -49,9 +58,10 @@ public class BaseNPC : MonoBehaviour, IClickable
     [Header("Floor Management")]
     [Tooltip("The current floor this NPC is on. Needs to be updated by game logic when NPC changes floors (e.g., via tasks).")]
     public FloorVisibilityManager.FloorLevel currentNpcFloorLevel = FloorVisibilityManager.FloorLevel.Lower; // Default or set in Inspector
+    [Tooltip("Assign the main collider used for player interaction and general NPC presence.")]
+    public Collider interactionCollider; // Assign this in the Inspector
 
     private Renderer[] _npcRenderers;
-    private Collider[] _npcColliders;
 
     protected virtual void Awake()
     {
@@ -59,26 +69,46 @@ public class BaseNPC : MonoBehaviour, IClickable
         InitializeNPC();
         LoadDialogueData();
         InitializeLove(); // Needs dialogueData loaded first
-        // Cache NPC's own renderers and colliders
-        _npcRenderers = GetComponentsInChildren<Renderer>(true);
-        _npcColliders = GetComponentsInChildren<Collider>(true); // Get all colliders, including the main one
 
-       // Initial visibility check if FloorVisibilityManager is ready
-        if (FloorVisibilityManager.Instance != null)
+        _npcRenderers = GetComponentsInChildren<Renderer>(true);
+
+        if (interactionCollider == null)
         {
-            UpdateVisibilityBasedOnPlayerFloor(FloorVisibilityManager.Instance.CurrentVisibleFloor);
+            Debug.LogError($"[{npcName}] BaseNPC is missing a reference to its 'interactionCollider'. Please assign it in the Inspector.", this);
         }
         else
         {
-            // Fallback: Make NPC visible by default if manager isn't ready yet (it will be corrected in FVM.Start)
-            // Or, you could subscribe to an event from FVM once it's initialized.
-            // For simplicity, FVM.Start() will call NotifyAllNpcsOfFloorChange, which will set it correctly.
-            // So, no explicit action needed here for that case.
+            Debug.Log($"[{npcName}-Awake] Interaction Collider: {interactionCollider.name}. Initial floor: {currentNpcFloorLevel}");
         }
+        Debug.Log($"[{npcName}-Awake] Cached {_npcRenderers.Length} renderers. Initial floor: {currentNpcFloorLevel}");
+
+        // Initial visibility check if FloorVisibilityManager is ready
+        // This will be handled by FloorVisibilityManager.Start() -> NotifyAllNpcsOfFloorChange
     }
 
     private void Start()
     {
+        // It's good practice to ensure FVM is up before NPCs heavily rely on it in Start.
+        // However, FVM's Start() should call NotifyAllNpcsOfFloorChange, covering NPCs present at scene load.
+        if (FloorVisibilityManager.Instance == null)
+        {
+            Debug.LogWarning($"[{npcName}-Start] FloorVisibilityManager.Instance is null. Initial visibility might be incorrect until FVM initializes and notifies.");
+        }
+        // If NPC is instantiated at runtime *after* FVM.Start(), it needs to set its own visibility:
+        else if (!FloorVisibilityManager.Instance.isActiveAndEnabled) // A check to see if FVM is likely done with its Start
+        {
+            Debug.LogWarning($"[{npcName}-Start] FloorVisibilityManager.Instance found, but might not have run its Start() yet. Deferring explicit visibility update slightly or relying on FVM's initial broadcast.");
+        }
+        else
+        {
+            // If FVM is ready, ensure this NPC's visibility is correct based on current player floor.
+            // This is especially for NPCs spawned after initial FVM broadcast.
+            // Debug.Log($"[{npcName}-Start] FVM Instance found. Explicitly updating visibility.");
+            // UpdateVisibilityBasedOnPlayerFloor(FloorVisibilityManager.Instance.CurrentVisibleFloor);
+            // Let's rely on FVM's initial broadcast for scene-loaded NPCs.
+            // For runtime spawned NPCs, the above line is more critical.
+        }
+
         StartTaskLoop();
     }
 
@@ -155,7 +185,7 @@ public class BaseNPC : MonoBehaviour, IClickable
             dialogueData = null; // Ensure it's null on error
         }
     }
-
+    
     private void ValidateDialogueData()
     {
         // Basic validation already done implicitly by checking dialogueData != null after parse
@@ -186,6 +216,62 @@ public class BaseNPC : MonoBehaviour, IClickable
             }
         }
     }
+
+    public virtual void TriggerFinalCutscene()
+    {
+        if (finalLoveCutsceneAsset != null)
+        {
+            Debug.Log($"[{npcName}] Triggering final love cutscene: {finalLoveCutsceneAsset.name}");
+            CutsceneManager.Instance.StartCutscene(finalLoveCutsceneAsset, this);
+        }
+        else
+        {
+            Debug.LogWarning($"[{npcName}] No final love cutscene asset assigned.");
+            // Optionally, add fallback logic here if needed
+        }
+    }
+
+    public virtual void PauseAIForCutscene(bool pause)
+    {
+    if (pause)
+    {
+        isPausedByCutscene = true;
+        if (taskExecutionCoroutine != null)
+        {
+            StopCoroutine(taskExecutionCoroutine);
+            taskExecutionCoroutine = null; // Important to allow restart later
+        }
+        if (agent != null && agent.isOnNavMesh)
+        {
+            wasAgentStoppedBeforeCutscene = agent.isStopped; // Store current state
+            agent.isStopped = true; // Stop movement for cutscene control
+            // agent.ResetPath(); // Optional: clear path if cutscene will move it
+        }
+        Debug.Log($"[{name}] AI Paused for cutscene.");
+    }
+    else // Resume
+    {
+        isPausedByCutscene = false;
+        // Agent's 'isStopped' will be handled by TaskLoop resumption or interaction logic.
+        // Or explicitly set it here if needed:
+        if (agent != null && agent.isOnNavMesh && !isInteracting) // Don't unstop if also interacting
+        {
+            // Restore previous state IF not interacting (interaction has priority on agent.isStopped)
+             agent.isStopped = wasAgentStoppedBeforeCutscene;
+        }
+        StartTaskLoop(); // Restart the task loop
+        Debug.Log($"[{name}] AI Resumed from cutscene.");
+    }
+}
+
+    public virtual void PerformCutsceneAction(string methodName)
+{
+    // Base implementation can be empty or log a warning
+    Debug.LogWarning($"[BaseNPC] PerformCutsceneAction called with '{methodName}' but not implemented in derived class {this.GetType().Name} or BaseNPC.");
+}
+
+
+
     public void OnClick()
     {
         // Ignore click if already interacting with this NPC
@@ -204,6 +290,7 @@ public class BaseNPC : MonoBehaviour, IClickable
         // Set this NPC as the new target
         PointAndClickMovement.currentTarget = this;
         InitiateInteraction();
+        
     }
 
     public virtual void ResetInteractionState()
@@ -283,7 +370,7 @@ public class BaseNPC : MonoBehaviour, IClickable
         interactionCoroutine = null; // Mark coroutine as finished
     }
 
-    private void StopNPCForInteraction()
+    public void StopNPCForInteraction()
     {
         // Debug.Log($"[{name}] Stopping NPC for interaction.");
         // Stop any ongoing task execution (movement, waiting, performing action)
@@ -352,6 +439,16 @@ public class BaseNPC : MonoBehaviour, IClickable
         // Debug.Log($"[{name}] Task Loop Started.");
         while (true)
         {
+            if (isPausedByCutscene)
+            {
+                yield return new WaitUntil(() => !isPausedByCutscene);
+                // When resuming, ensure agent state is reasonable
+                if (agent != null && agent.isOnNavMesh && !wasAgentStoppedBeforeCutscene)
+                {
+                    agent.isStopped = false;
+                }
+            }
+
             // If interacting, pause the loop until interaction is finished
             if (isInteracting)
             {
@@ -550,50 +647,88 @@ private IEnumerator ExecuteTaskAction(TaskObject task)     /// Coroutine that pl
     }
     public void UpdateVisibilityBasedOnPlayerFloor(FloorVisibilityManager.FloorLevel playerCurrentFloor)
     {
-        bool shouldBeVisible = (this.currentNpcFloorLevel == playerCurrentFloor);
+        bool shouldBeVisibleAndInteractable = (this.currentNpcFloorLevel == playerCurrentFloor);
 
-        // Debug.Log($"[{name}] On floor {currentNpcFloorLevel}. Player on {playerCurrentFloor}. Should be visible: {shouldBeVisible}");
+        string rendererStatusBefore = "N/A";
+        if (_npcRenderers != null && _npcRenderers.Length > 0 && _npcRenderers[0] != null)
+        {
+            rendererStatusBefore = _npcRenderers[0].enabled ? "ENABLED" : "DISABLED";
+        }
+        string interactionColliderStatusBefore = "N/A";
+        if (interactionCollider != null)
+        {
+            interactionColliderStatusBefore = interactionCollider.enabled ? "ENABLED" : "DISABLED";
+        }
+
+        Debug.Log($"[{npcName}-UpdateVisibility] NPC on floor {currentNpcFloorLevel}, Player on {playerCurrentFloor}. ShouldBeVisibleAndInteractable: {shouldBeVisibleAndInteractable}. Main Renderer was: {rendererStatusBefore}, InteractionCollider was: {interactionColliderStatusBefore}. Renderers found: {_npcRenderers?.Length ?? 0}");
 
         if (_npcRenderers != null)
         {
             foreach (Renderer rend in _npcRenderers)
             {
-                rend.enabled = shouldBeVisible;
+                if (rend != null) rend.enabled = shouldBeVisibleAndInteractable;
             }
         }
-
-        if (_npcColliders != null)
+        else
         {
-            foreach (Collider col in _npcColliders)
+            Debug.LogWarning($"[{npcName}-UpdateVisibility] _npcRenderers array is null. Cannot update visibility.");
+        }
+
+        // --- KEY CHANGE: Only toggle the designated interactionCollider ---
+        if (interactionCollider != null)
+        {
+            interactionCollider.enabled = shouldBeVisibleAndInteractable;
+        }
+        else
+        {
+            Debug.LogWarning($"[{npcName}-UpdateVisibility] 'interactionCollider' is not assigned. Cannot update interactability.", this);
+        }
+        // The "StairSensor" collider is NOT touched here and remains always enabled.
+
+        // Verification
+        if (_npcRenderers != null && _npcRenderers.Length > 0 && _npcRenderers[0] != null)
+        {
+            if (_npcRenderers[0].enabled != shouldBeVisibleAndInteractable)
             {
-                // Be careful if some colliders should always be active for physics reasons
-                // other than clicking (e.g. a trigger for NPC internal logic).
-                // For typical character controllers and click detection, this is usually fine.
-                col.enabled = shouldBeVisible;
+                Debug.LogError($"[{npcName}-UpdateVisibility-VERIFY_FAIL_RENDERER] Renderer '{_npcRenderers[0].gameObject.name}' state is {_npcRenderers[0].enabled}, but expected {shouldBeVisibleAndInteractable}!");
+            }
+        }
+        if (interactionCollider != null)
+        {
+            if (interactionCollider.enabled != shouldBeVisibleAndInteractable)
+            {
+                Debug.LogError($"[{npcName}-UpdateVisibility-VERIFY_FAIL_COLLIDER] InteractionCollider '{interactionCollider.name}' state is {interactionCollider.enabled}, but expected {shouldBeVisibleAndInteractable}!");
             }
         }
     }
 
-    /// <summary>
-    /// Call this method when game logic moves this NPC to a different floor.
-    /// For example, after a "Use Stairs" task is completed.
-    /// </summary>
-    /// <param name="newFloor">The new floor the NPC is now on.</param>
     public void NotifyNpcChangedFloor(FloorVisibilityManager.FloorLevel newNpcFloor)
     {
-        if (currentNpcFloorLevel == newNpcFloor) return; // No change
+        if (currentNpcFloorLevel == newNpcFloor)
+        {
+            Debug.LogWarning($"[{npcName}-NotifyNpcChangedFloor] Called with same floor ({newNpcFloor}). Skipping actual change, but re-evaluating visibility.");
+            // Still re-evaluate visibility as player might have moved or state is uncertain
+            if (FloorVisibilityManager.Instance != null)
+            {
+                UpdateVisibilityBasedOnPlayerFloor(FloorVisibilityManager.Instance.CurrentVisibleFloor);
+            }
+            return;
+        }
 
-        Debug.Log($"[{name}] changed floor from {currentNpcFloorLevel} to {newNpcFloor}.");
+        Debug.Log($"[{npcName}-NotifyNpcChangedFloor] NPC changing floor FROM {currentNpcFloorLevel} TO {newNpcFloor}.");
         currentNpcFloorLevel = newNpcFloor;
 
-        // Update visibility immediately based on the player's current floor
         if (FloorVisibilityManager.Instance != null)
         {
-            UpdateVisibilityBasedOnPlayerFloor(FloorVisibilityManager.Instance.CurrentVisibleFloor);
+            FloorVisibilityManager.FloorLevel playerFloor = FloorVisibilityManager.Instance.CurrentVisibleFloor;
+            Debug.Log($"[{npcName}-NotifyNpcChangedFloor] Player is currently on floor {playerFloor}. Updating NPC visibility accordingly.");
+            UpdateVisibilityBasedOnPlayerFloor(playerFloor);
         }
         else
         {
-            Debug.LogWarning($"[{name}] FloorVisibilityManager not found when trying to update visibility after NPC floor change.");
+            Debug.LogWarning($"[{npcName}-NotifyNpcChangedFloor] FloorVisibilityManager not found when trying to update visibility after NPC floor change. Visibility might be incorrect.");
+            // Fallback: if FVM is gone, maybe make self visible? Or invisible? Depends on desired behavior.
+            // For now, it will just retain its last visibility state if FVM is null.
         }
     }
 

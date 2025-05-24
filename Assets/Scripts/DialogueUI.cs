@@ -1,26 +1,30 @@
+// DialogueUI.cs
+
 using UnityEngine;
-using UnityEngine.UI;       
-using TMPro;                  
-using System.Collections;  
+using UnityEngine.UI;
+using TMPro;
+using System.Collections;
+using System; // For System.Action
 
 public class DialogueUI : MonoBehaviour
 {
     [Header("Core UI References")]
-  
-    public CanvasGroup dialogueSystemCanvasGroup; 
-    public TextMeshProUGUI speakerNameText;     
-    public TextMeshProUGUI dialogueText;        
-    public Image characterPortraitImage;      
-    [Header("Choice References")]
-    public Transform choicesContainer;            // Assign Choices_Container (with Horizontal Layout Group)
-    public Button choiceButtonPrefab;             // Assign your updated ChoiceButton Prefab (must have TMP child)
+    public CanvasGroup dialogueSystemCanvasGroup;
+    public TextMeshProUGUI speakerNameText;
+    public TextMeshProUGUI dialogueText;
+    public Image characterPortraitImage;
 
+    [Header("Choice References")]
+    public Transform choicesContainer;
+    public Button choiceButtonPrefab;
+
+    [Header("Special Action Buttons")] // New Header
+    [SerializeField] private Button finalCutsceneButton; // Assign this in the Inspector
 
     [Header("Animation/Fading")]
     public float fadeDuration = 0.3f;
     private Coroutine fadeCoroutine;
 
-    // Current references
     private DialogueManager dialogueManager;
 
     void Awake()
@@ -40,16 +44,25 @@ public class DialogueUI : MonoBehaviour
         // Validate prefab has TMP component
         if (choiceButtonPrefab == null || choiceButtonPrefab.GetComponentInChildren<TextMeshProUGUI>() == null)
         {
-             Debug.LogError("[DialogueUI] Choice Button Prefab is missing or does not have a TextMeshProUGUI child!");
+            Debug.LogError("[DialogueUI] Choice Button Prefab is missing or does not have a TextMeshProUGUI child!");
         }
 
-         // Validate other essential references
-         if (speakerNameText == null) Debug.LogError("[DialogueUI] SpeakerName_TMP reference not set!");
-         if (dialogueText == null) Debug.LogError("[DialogueUI] DialogueText_TMP reference not set!");
-         if (characterPortraitImage == null) Debug.LogError("[DialogueUI] CharacterPortrait_Image reference not set!");
-         if (choicesContainer == null) Debug.LogError("[DialogueUI] Choices_Container reference not set!");
-    }
+        // Validate other essential references
+        if (speakerNameText == null) Debug.LogError("[DialogueUI] SpeakerName_TMP reference not set!");
+        if (dialogueText == null) Debug.LogError("[DialogueUI] DialogueText_TMP reference not set!");
+        if (characterPortraitImage == null) Debug.LogError("[DialogueUI] CharacterPortrait_Image reference not set!");
+        if (choicesContainer == null) Debug.LogError("[DialogueUI] Choices_Container reference not set!");
 
+        // Validate and initialize Final Cutscene Button
+        if (finalCutsceneButton == null)
+        {
+            Debug.LogWarning("[DialogueUI] Final Cutscene Button reference not set in Inspector! This feature will be disabled.");
+        }
+        else
+        {
+            finalCutsceneButton.gameObject.SetActive(false); // Hide it by default
+        }
+    }
 
     public void ShowDialogue(DialogueManager manager, DialogueNode node, string speakerName, Sprite portraitSprite)
     {
@@ -58,14 +71,14 @@ public class DialogueUI : MonoBehaviour
         if (dialogueSystemCanvasGroup == null || node == null)
         {
             Debug.LogError("[DialogueUI] Cannot show dialogue - CanvasGroup or Node is null.");
-            return; // Safety check
+            return; 
         }
 
         Debug.Log($"[DialogueUI] Showing Node: {node.nodeID}");
 
         // --- Update Content ---
         speakerNameText.text = speakerName;
-        dialogueText.text = node.text; 
+        dialogueText.text = node.text;
 
         // Update Portrait
         if (characterPortraitImage != null)
@@ -73,12 +86,12 @@ public class DialogueUI : MonoBehaviour
             if (portraitSprite != null)
             {
                 characterPortraitImage.sprite = portraitSprite;
-                characterPortraitImage.enabled = true; // Show image
+                characterPortraitImage.enabled = true;
                 Debug.Log($"[DialogueUI] Set portrait for {speakerName}");
             }
             else
             {
-                characterPortraitImage.enabled = false; // Hide if no sprite provided
+                characterPortraitImage.enabled = false;
                 Debug.LogWarning($"[DialogueUI] No portrait sprite provided for {speakerName}");
             }
         }
@@ -89,20 +102,17 @@ public class DialogueUI : MonoBehaviour
         }
 
         Debug.Log($"[DialogueUI] Populating {node.choices.Length} choices.");
-        // Instantiate new choice buttons
-        if (node.choices != null) 
+        if (node.choices != null)
         {
             foreach (var choice in node.choices)
             {
-                 if (choice == null) 
-                 {
+                if (choice == null)
+                {
                     Debug.LogWarning($"[DialogueUI] Encountered a null choice in node {node.nodeID}");
                     continue;
-                 }
+                }
 
                 Button choiceButtonInstance = Instantiate(choiceButtonPrefab, choicesContainer);
-
-
                 TextMeshProUGUI buttonText = choiceButtonInstance.GetComponentInChildren<TextMeshProUGUI>();
                 if (buttonText != null)
                 {
@@ -110,14 +120,14 @@ public class DialogueUI : MonoBehaviour
                 }
                 else
                 {
-                     Debug.LogError($"[DialogueUI] Choice button instance created from prefab '{choiceButtonPrefab.name}' is missing TextMeshProUGUI child!", choiceButtonInstance);
-                     buttonText.text = "MISSING TEXT"; 
+                    Debug.LogError($"[DialogueUI] Choice button instance created from prefab '{choiceButtonPrefab.name}' is missing TextMeshProUGUI child!", choiceButtonInstance);
+                    buttonText.text = "MISSING TEXT";
                 }
 
                 bool isAvailable = dialogueManager.IsChoiceAvailable(choice);
                 choiceButtonInstance.interactable = isAvailable;
 
-                DialogueChoice currentChoice = choice; // Capture choice for the lambda
+                DialogueChoice currentChoice = choice;
                 choiceButtonInstance.onClick.AddListener(() =>
                 {
                     Debug.Log($"[DialogueUI] Choice clicked: {currentChoice.choiceText}");
@@ -127,14 +137,12 @@ public class DialogueUI : MonoBehaviour
         }
 
         StartCoroutine(RebuildChoiceLayoutAfterFrame());
-
         ShowPanel();
     }
 
     private IEnumerator RebuildChoiceLayoutAfterFrame()
     {
-        // Wait until the end of the current frame. 
-        yield return null; // Wait one frame
+        yield return null; 
 
         if (choicesContainer != null)
         {
@@ -147,15 +155,41 @@ public class DialogueUI : MonoBehaviour
     {
         Debug.Log("[DialogueUI] HideDialogue called.");
         if (dialogueSystemCanvasGroup == null) return;
-        HidePanel(); 
+        SetFinalCutsceneButtonVisibility(false, null); // Ensure it's hidden when dialogue UI hides
+        HidePanel();
     }
+
+    // --- New Method for Final Cutscene Button ---
+    public void SetFinalCutsceneButtonVisibility(bool isVisible, Action onClickCallback)
+    {
+        if (finalCutsceneButton == null) return; // Not set up
+
+        finalCutsceneButton.gameObject.SetActive(isVisible);
+        if (isVisible)
+        {
+            finalCutsceneButton.onClick.RemoveAllListeners(); // Clear previous listeners
+            if (onClickCallback != null)
+            {
+                finalCutsceneButton.onClick.AddListener(() => onClickCallback());
+            }
+            Debug.Log("[DialogueUI] Final Cutscene Button is now VISIBLE.");
+        }
+        else
+        {
+            finalCutsceneButton.onClick.RemoveAllListeners();
+            Debug.Log("[DialogueUI] Final Cutscene Button is now HIDDEN.");
+        }
+    }
+    // --- End New Method ---
+
+
     private void ShowPanel()
     {
         if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
         dialogueSystemCanvasGroup.interactable = true;
         dialogueSystemCanvasGroup.blocksRaycasts = true;
         fadeCoroutine = StartCoroutine(FadeCanvasGroup(dialogueSystemCanvasGroup, dialogueSystemCanvasGroup.alpha, 1f, fadeDuration));
-         Debug.Log("[DialogueUI] Starting fade IN.");
+        Debug.Log("[DialogueUI] Starting fade IN.");
     }
 
     private void HidePanel()
@@ -164,23 +198,22 @@ public class DialogueUI : MonoBehaviour
         dialogueSystemCanvasGroup.interactable = false;
         dialogueSystemCanvasGroup.blocksRaycasts = false;
         fadeCoroutine = StartCoroutine(FadeCanvasGroup(dialogueSystemCanvasGroup, dialogueSystemCanvasGroup.alpha, 0f, fadeDuration));
-         Debug.Log("[DialogueUI] Starting fade OUT.");
+        Debug.Log("[DialogueUI] Starting fade OUT.");
     }
 
     private IEnumerator FadeCanvasGroup(CanvasGroup cg, float startAlpha, float targetAlpha, float duration)
     {
         float time = 0f;
-        // Ensure duration is not zero to avoid division by zero
         if (duration <= 0) duration = 0.01f;
 
         while (time < duration)
         {
-            time += Time.unscaledDeltaTime; // Use unscaledDeltaTime for UI stability if Time.timeScale can change
+            time += Time.unscaledDeltaTime;
             cg.alpha = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
             yield return null;
         }
         cg.alpha = targetAlpha;
         fadeCoroutine = null;
-         Debug.Log($"[DialogueUI] Fade finished. Alpha: {cg.alpha}");
+        Debug.Log($"[DialogueUI] Fade finished. Alpha: {cg.alpha}");
     }
 }
