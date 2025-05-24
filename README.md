@@ -4,30 +4,9 @@
 ![The game](https://i.imgur.com/S9a6ONh.png)
 
 
-# Feature Status
-
-| Feature              | Started | Prototype made | All features implemented | Code looked over and approved by scrum master (Exipe) |
-| -------------------- | ------- | -------------- | ------------------------ | ----------------------------------------------------- |
-| NPCs                 | 🟢      | 🟢             | 🔴                       | 🔴                                                    |
-| Love target system   | 🟢      |  🟢            | 🔴                       | 🔴                                                    |
-| Inventory/items      | 🟢       | 🟢             | 🔴                       | 🔴                                                    |
-| Interactable objects | 🟢      | 🟢             | 🔴                       | 🔴                                                    |
-| Dialogue System      | 🟢      | 🟢             | 🔴                       | 🔴                                                    |
+# INDEV Version 0.1 Released
+First release is out!
 
 
-
-
-
-
-
-
-
-
-
-
-
-# Compile
-to compile press green play button
-
-to play dm on discord
+dm on discord
 (neonicpretty)
