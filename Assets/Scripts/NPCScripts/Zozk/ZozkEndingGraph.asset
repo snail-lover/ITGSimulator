@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcbff4ebcfbf5544bcb20250fece632, type: 3}
+  m_Name: ZozkEndingGraph
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::DialogueGraphSO
+  entryPointNodeGUID: 6c2f45ac-802f-4afd-9461-a2002eaf1a40
+  startingLove: 0
+  loveTiers: []
+  nodes:
+  - nodeGUID: 6c2f45ac-802f-4afd-9461-a2002eaf1a40
+    nodeID: ZozkEnding1
+    dialogueText: Wow, I can't believe we are doing this
+    position: {x: 787, y: 350}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 1bbff13b-d13c-46c2-ad50-10c8f4a01bbc
+      choiceText: Me neither
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 1
+  - nodeGUID: 853f23cf-ee5d-43cf-a83e-11b83f182b75
+    nodeID: Node_22fe
+    dialogueText: Great Idea
+    position: {x: 1948, y: 436}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 3707c5d6-b9f9-4b5d-bba2-de660f6e2d38
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 6e6ff897-509c-40cb-9410-9f056ca89c9b
+    nodeID: Node_8994
+    dialogueText: Where do you wanna go?
+    position: {x: 1346, y: 350}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 3fa768f9-8848-464c-9b7d-acd991a454f1
+      choiceText: The famous resturant "The chinese wall"
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 9343432e-5fb1-41c3-a0a6-b3229395f67d
+      choiceText: Lets go to the park
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 9a0d7ca7-2839-40dd-ac3a-ec7a97b0e956
+    nodeID: Node_5d99
+    dialogueText: Wanna know a secret?
+    position: {x: 2481, y: 436}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 7cc26a8c-de03-460b-a4dc-7d2c1cc9d500
+      choiceText: What is it?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 2bcfadec-279a-40dc-94c9-062af3c98fa2
+    nodeID: ZozkEnding2
+    dialogueText: 'I have a huge buttplug in me right now '
+    position: {x: 831, y: 1047}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: fe4e31c6-db70-44bf-a041-a36cb77adfc1
+      choiceText: '*Gulp*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 61bff101-f7d2-4b4e-9474-e9d68683e8bd
+    nodeID: Node_2a96
+    dialogueText: '*zozk leans in closer*'
+    position: {x: 3007, y: 436}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: c47ee616-4a62-4053-af4a-87569205d664
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  edges:
+  - outputNodeGUID: 6e6ff897-509c-40cb-9410-9f056ca89c9b
+    outputNodePortGUID: 3fa768f9-8848-464c-9b7d-acd991a454f1
+    inputNodeGUID: 853f23cf-ee5d-43cf-a83e-11b83f182b75
+  - outputNodeGUID: 6e6ff897-509c-40cb-9410-9f056ca89c9b
+    outputNodePortGUID: 9343432e-5fb1-41c3-a0a6-b3229395f67d
+    inputNodeGUID: 853f23cf-ee5d-43cf-a83e-11b83f182b75
+  - outputNodeGUID: 6c2f45ac-802f-4afd-9461-a2002eaf1a40
+    outputNodePortGUID: 1bbff13b-d13c-46c2-ad50-10c8f4a01bbc
+    inputNodeGUID: 6e6ff897-509c-40cb-9410-9f056ca89c9b
+  - outputNodeGUID: 853f23cf-ee5d-43cf-a83e-11b83f182b75
+    outputNodePortGUID: 3707c5d6-b9f9-4b5d-bba2-de660f6e2d38
+    inputNodeGUID: 9a0d7ca7-2839-40dd-ac3a-ec7a97b0e956
+  - outputNodeGUID: 9a0d7ca7-2839-40dd-ac3a-ec7a97b0e956
+    outputNodePortGUID: 7cc26a8c-de03-460b-a4dc-7d2c1cc9d500
+    inputNodeGUID: 61bff101-f7d2-4b4e-9474-e9d68683e8bd

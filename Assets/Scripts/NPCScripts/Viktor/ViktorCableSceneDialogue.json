@@ -1,0 +1,151 @@
+{
+    "startingLove": 0,
+    "loveTiers": [],
+    "startNodeID": "Node_eb8e",
+    "nodes": [
+        {
+            "nodeID": "Node_eb8e",
+            "text": "Oh god where is the cable",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_995b",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_995b",
+            "text": "I was just trying to impress Zozk",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_ff0f",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_ff0f",
+            "text": "And now I've lost his charger",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_39ec",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_39ec",
+            "text": "He's gonna be so sad",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_1bb7",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_1bb7",
+            "text": "Stupid! Stupid! Stupi!",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_7e37",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_7e37",
+            "text": "I need to find a way to fix this..",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        }
+    ]
+}

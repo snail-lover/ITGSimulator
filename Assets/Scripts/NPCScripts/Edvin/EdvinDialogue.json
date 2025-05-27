@@ -1,0 +1,75 @@
+{
+    "startingLove": 0,
+    "loveTiers": [],
+    "startNodeID": "Node_2c0a",
+    "nodes": [
+        {
+            "nodeID": "Node_2c0a",
+            "text": "Hello My Name is Edvin!",
+            "choices": [
+                {
+                    "choiceText": "Hello Edvin!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_8c7d",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                },
+                {
+                    "choiceText": "Didn't ask",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_8c7d",
+            "text": "You wanna go to lidl Later?",
+            "choices": [
+                {
+                    "choiceText": "Sure, when it's added to the game!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                },
+                {
+                    "choiceText": "I don't have any money",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        }
+    ]
+}

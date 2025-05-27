@@ -1,0 +1,79 @@
+{
+    "startingLove": 0,
+    "loveTiers": [],
+    "startNodeID": "Node_3850",
+    "nodes": [
+        {
+            "nodeID": "Node_3850",
+            "text": "Yo its me...Viktor!",
+            "choices": [
+                {
+                    "choiceText": "Hello Viktor!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_5f9f",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                },
+                {
+                    "choiceText": "*ignore*",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_5f9f",
+            "text": "Do you want to play ROTMG",
+            "choices": [
+                {
+                    "choiceText": "Yeah i'm on realmspy right now!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                },
+                {
+                    "choiceText": "Please Leave me alone",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": "ViktorFindsCableGone"
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        }
+    ]
+}

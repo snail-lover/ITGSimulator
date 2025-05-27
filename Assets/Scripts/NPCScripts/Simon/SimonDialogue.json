@@ -1,0 +1,98 @@
+{
+    "startingLove": 0,
+    "loveTiers": [],
+    "startNodeID": "Node_82e7",
+    "nodes": [
+        {
+            "nodeID": "Node_82e7",
+            "text": "Hello, my name is Simon!",
+            "choices": [
+                {
+                    "choiceText": "Hello Simon!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_b544",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                },
+                {
+                    "choiceText": "Goodbye SImon!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_b544",
+            "text": "The current beta-weighted alpha, despite a 12% Bollinger contraction, suggests a 73.5% probability of gamma squeeze.",
+            "choices": [
+                {
+                    "choiceText": "Excuse me?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_0b7a",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                },
+                {
+                    "choiceText": "*Leave",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_0b7a",
+            "text": "The Monte Carlo simulation of forward P/E ratios, adjusted for a 3.2 standard deviation in VIX futures, projects a 68% likelihood of mean reversion within two fiscal quarters.",
+            "choices": [
+                {
+                    "choiceText": "I'm scared",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        }
+    ]
+}

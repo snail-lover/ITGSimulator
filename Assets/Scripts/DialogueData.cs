@@ -16,7 +16,7 @@ public class DialogueData
 
     // All dialogue nodes
     public DialogueNode[] nodes;
-
+    
     // Runtime dictionary for quick node lookup (not serialized)
     [NonSerialized] public Dictionary<string, DialogueNode> nodeDictionary;
 }
@@ -61,6 +61,11 @@ public class DialogueChoice
 
     // If this choice needs a special item
     public ItemGate itemGate;
+
+    // Reference to a Cutscene ScriptableObject to play if this choice is selected
+    [Tooltip("If set, this cutscene (by name/path) will play. nextNodeID ignored.")]
+    public string triggerCutsceneName;
+
 }
 
 [Serializable]

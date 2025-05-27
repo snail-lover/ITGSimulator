@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcbff4ebcfbf5544bcb20250fece632, type: 3}
+  m_Name: ViktorCableSceneDialogue
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::DialogueGraphSO
+  entryPointNodeGUID: fa74d3a2-6a9d-42f9-8f0b-a28c1f21c1b6
+  startingLove: 0
+  loveTiers: []
+  nodes:
+  - nodeGUID: fa74d3a2-6a9d-42f9-8f0b-a28c1f21c1b6
+    nodeID: Node_eb8e
+    dialogueText: Oh god where is the cable
+    position: {x: 158, y: 216}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 3f43f900-bd40-4c9b-ab36-bde485a2ddc0
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 1
+  - nodeGUID: 8a857317-0474-4a80-aea6-54f07fd581ad
+    nodeID: Node_995b
+    dialogueText: I was just trying to impress Zozk
+    position: {x: 638, y: 176}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: c4aa25b8-56fa-4ba2-9ce2-59bd4e16c0e7
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 6cbcf214-9b1f-4b21-9e44-e89595099c6c
+    nodeID: Node_ff0f
+    dialogueText: And now I've lost his charger
+    position: {x: 1127, y: 341}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: ce897af4-f08e-4f98-91b0-16e9c34008e0
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 57504ac7-031c-4d3c-b49d-084849761ef0
+    nodeID: Node_39ec
+    dialogueText: He's gonna be so sad
+    position: {x: 1606, y: 402}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 7768075c-13f6-4349-8404-59be2d6a4c26
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 165c8a32-31bc-4a7f-b1e3-9c36f048a893
+    nodeID: Node_1bb7
+    dialogueText: Stupid! Stupid! Stupi!
+    position: {x: 2135, y: 402}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: b006c627-533f-4f7e-813d-2defaa34210b
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: d5a950f5-9a3a-494b-b6f0-0863a0a6fc5e
+    nodeID: Node_7e37
+    dialogueText: I need to find a way to fix this..
+    position: {x: 2730, y: 412}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: eb178a51-9438-46f6-b4d3-1a1b99dc0017
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  edges:
+  - outputNodeGUID: fa74d3a2-6a9d-42f9-8f0b-a28c1f21c1b6
+    outputNodePortGUID: 3f43f900-bd40-4c9b-ab36-bde485a2ddc0
+    inputNodeGUID: 8a857317-0474-4a80-aea6-54f07fd581ad
+  - outputNodeGUID: 8a857317-0474-4a80-aea6-54f07fd581ad
+    outputNodePortGUID: c4aa25b8-56fa-4ba2-9ce2-59bd4e16c0e7
+    inputNodeGUID: 6cbcf214-9b1f-4b21-9e44-e89595099c6c
+  - outputNodeGUID: 6cbcf214-9b1f-4b21-9e44-e89595099c6c
+    outputNodePortGUID: ce897af4-f08e-4f98-91b0-16e9c34008e0
+    inputNodeGUID: 57504ac7-031c-4d3c-b49d-084849761ef0
+  - outputNodeGUID: 57504ac7-031c-4d3c-b49d-084849761ef0
+    outputNodePortGUID: 7768075c-13f6-4349-8404-59be2d6a4c26
+    inputNodeGUID: 165c8a32-31bc-4a7f-b1e3-9c36f048a893
+  - outputNodeGUID: 165c8a32-31bc-4a7f-b1e3-9c36f048a893
+    outputNodePortGUID: b006c627-533f-4f7e-813d-2defaa34210b
+    inputNodeGUID: d5a950f5-9a3a-494b-b6f0-0863a0a6fc5e

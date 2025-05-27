@@ -1,0 +1,121 @@
+{
+    "startingLove": 0,
+    "loveTiers": [],
+    "startNodeID": "Ludwig0Love",
+    "nodes": [
+        {
+            "nodeID": "Ludwig0Love",
+            "text": "Hi my name is Ludwig!",
+            "choices": [
+                {
+                    "choiceText": "Hello Ludwig!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Ludwig0Love2",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                },
+                {
+                    "choiceText": "Goodbye Ludwig!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Ludwig0Love2",
+            "text": "Have you met zozk yet?",
+            "choices": [
+                {
+                    "choiceText": "Yeah i'm trying to fuck him",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_b62b",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                },
+                {
+                    "choiceText": "soosek?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_9dc9",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_b62b",
+            "text": "Well in that case, i heard there is something he likes in Javads classroom",
+            "choices": [
+                {
+                    "choiceText": "Thanks!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_9dc9",
+            "text": "Nevermind..",
+            "choices": [
+                {
+                    "choiceText": "ok",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        }
+    ]
+}

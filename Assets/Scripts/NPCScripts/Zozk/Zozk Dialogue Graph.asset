@@ -1,0 +1,3990 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcbff4ebcfbf5544bcb20250fece632, type: 3}
+  m_Name: Zozk Dialogue Graph
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::DialogueGraphSO
+  entryPointNodeGUID: 4056dd53-48bb-4f80-ab96-bd3945494384
+  startingLove: 0
+  loveTiers:
+  - minLove: 0
+    maxLove: 0
+    startNodeID: Node_991a
+  - minLove: 1
+    maxLove: 1
+    startNodeID: ZozkLove1
+  - minLove: 2
+    maxLove: 2
+    startNodeID: ZozkLove2
+  - minLove: 3
+    maxLove: 3
+    startNodeID: ZozkLove3
+  - minLove: 4
+    maxLove: 4
+    startNodeID: ZozkLove4
+  - minLove: 5
+    maxLove: 5
+    startNodeID: ZozkLove5
+  - minLove: 6
+    maxLove: 6
+    startNodeID: ZozkLove6
+  - minLove: 7
+    maxLove: 7
+    startNodeID: ZozkLove7
+  - minLove: 8
+    maxLove: 8
+    startNodeID: ZozkLove8
+  - minLove: 9
+    maxLove: 9
+    startNodeID: ZozkLove9
+  - minLove: 10
+    maxLove: 10
+    startNodeID: ZozkLove10
+  nodes:
+  - nodeGUID: 8595e74c-a7bd-4230-a093-4c1cdaf45bb8
+    nodeID: Node_22f7
+    dialogueText: haha...yeah i was just kidding...ehm...gotta go.
+    position: {x: 3124, y: -2351}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 11e5f5ca-ed36-4897-97b9-1d956e4a8a2b
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: cd252876-ecf3-4434-8a3a-bf212e485c6f
+    nodeID: Node_9d4a
+    dialogueText: uhm...
+    position: {x: 1535, y: -1421}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 2533d5a2-ce1b-4469-b81c-90c3ca72cf5d
+      choiceText: Sorry, i'm a little slow in the head. Hello Zozk!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: a6b1fb9d-eb47-43ad-b0fa-16a72592b438
+      choiceText: '*Keep staring*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: ea20d0a3-fd4c-479c-b766-d7137914365a
+    nodeID: Node_5f53
+    dialogueText: Oh! I haven't seen you around
+    position: {x: 2591, y: -1775}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 9a78d0c1-23a8-436b-9ca2-d4af07a25757
+      choiceText: Yeah i'm a new student.
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 9e8bdaf5-6261-440a-81f2-bfcf0349a7b2
+      choiceText: I've been watching you...
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 54665650-abf9-40db-a39a-3ad683a898d9
+    nodeID: Node_dd84
+    dialogueText: Oh! are you the new student?
+    position: {x: 2591, y: -2322}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 5f8888fc-486a-4b04-afcf-c1362b410dc7
+      choiceText: Yeah that's me!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: a7b9ff5a-0d3d-400c-95ca-65c334d0a8b2
+      choiceText: No, we've been in the same class for 2 years...
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 4056dd53-48bb-4f80-ab96-bd3945494384
+    nodeID: Node_991a
+    dialogueText: Hello, I'm Zozk!
+    position: {x: 1137, y: -1930}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: ba7ab81c-b522-4e02-b605-b2c0fd370d50
+      choiceText: Hello Zozk, nice to meet you!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 6617f97a-9dcd-4db4-ac38-b914fe44479c
+      choiceText: '*Stare*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 1
+  - nodeGUID: ee61f0ab-ab7d-4ec7-a6e7-8bb51054bdef
+    nodeID: Node_184c
+    dialogueText: '*Zozk walks away*'
+    position: {x: 1966, y: -1161}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 234824fe-7a11-4d72-9dfd-ae99c02f6884
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 2da4556f-255f-4d66-82a4-08c982347b27
+    nodeID: Node_df11
+    dialogueText: Oh! We'll see each other a lot then.
+    position: {x: 3133, y: -1930}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 56106146-3c7a-4ecd-871b-2e98b3f5ef97
+      choiceText: I hope so.
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: ffccf5da-936f-49df-83e4-aa5f41a15edf
+      choiceText: Looking forward to it.
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 57935949-dc54-4d7c-9386-dc15d808d01c
+    nodeID: Node_ef1b
+    dialogueText: What class are you in?
+    position: {x: 2045, y: -1930}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 50714da0-c3e4-429e-84a9-473f9ce64eb2
+      choiceText: We're in the same class, the technology program.
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: dad50e8a-3812-444e-a56e-483412da424a
+      choiceText: I'm studying the electrical program.
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: be81c5e2-9561-4e00-9e0d-09602e7654e0
+    nodeID: Node_7537
+    dialogueText: '*Zozk slowly walks away*'
+    position: {x: 2980, y: -1161}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: b2d53584-a20d-45a2-82fb-110c726ae81e
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: b6279fee-3def-4a6a-a408-0a56e963f8f2
+    nodeID: Node_0224
+    dialogueText: haha! wow...well thanks
+    position: {x: 1305, y: 89}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 468823d7-5591-40ea-9c91-2d723bdf5037
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 0019c0b2-c9a9-4681-be6b-dea46193f53d
+    nodeID: ZozkLove1
+    dialogueText: I told you we would see each other a lot
+    position: {x: 852, y: 454}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: dff71c32-4ff7-43ab-b7cc-ea58a3ae3e31
+      choiceText: I don't mind, you're not half bad to look at
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 5879fd3d-2dc2-451e-b255-b84e6485e5a9
+      choiceText: You were right!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: a6b76ab5-a603-49aa-b1b4-6decbc90ca60
+      choiceText: Gotta go!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 786d2d5b-a57a-4cb4-8968-9378f162ea95
+    nodeID: Node_0b58
+    dialogueText: So, what's been your favorite class so far?
+    position: {x: 1816, y: 425}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 7b6fc4e4-0437-458c-9995-d9a347957384
+      choiceText: Programming!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 129a96ed-c675-44b2-845e-775543508cf9
+      choiceText: Electrical installations!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 37bc14ea-71b3-44b4-86db-beb22871aac9
+      choiceText: Swedish!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 05590677-cb0e-452c-bf77-61af0a1f8b38
+    nodeID: Node_ee17
+    dialogueText: What kind of programming?
+    position: {x: 2280, y: 20}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: aeaff136-06ad-452c-846c-6733e4c10cad
+      choiceText: Web development!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: ce6afe51-7837-479e-8c1d-bc2a5c53c251
+      choiceText: C#!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 05b0c182-54e0-43d3-b1b7-abb8eb6cec8b
+    nodeID: Node_b6f7
+    dialogueText: Oh... I haven't had that class
+    position: {x: 2293, y: 574}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: dbd94f2d-1762-437a-98b5-09429a85fbc6
+      choiceText: Yeah it a class in the electrical program.
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: bff1cc9e-3dbb-4e88-8732-031e33ad58de
+    nodeID: Node_f550
+    dialogueText: oh okay!
+    position: {x: 2306, y: 981}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 57f946d0-4058-4b63-93e7-38c764b569f1
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: d8baeebc-d8e8-452c-bb1d-c56c7094d5e6
+    nodeID: Node_a342
+    dialogueText: That's my favorite!
+    position: {x: 3085, y: -558}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 07ca894f-a2a4-4336-85c2-4defce3ff61f
+      choiceText: I was only kidding, it sucks
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: c06bfe93-4ce2-4fe1-8b42-41f41ca9b173
+      choiceText: It Rocks!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 502bc9c1-dad7-4141-9050-62e8122395ab
+    nodeID: Node_473e
+    dialogueText: Oh...
+    position: {x: 3783, y: -393}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: f4816de1-5416-41d3-bfbd-5a4072854d80
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: fc78aa7a-41f6-46ef-9dff-b9ec6e554c9e
+    nodeID: Node_1c7c
+    dialogueText: oof that's the hard one
+    position: {x: 3042, y: 94}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 187fbcca-8918-4db6-b90e-19341e4a5253
+      choiceText: Yeah like my cock
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 151a5803-155b-44d5-8295-bb629b11edbc
+      choiceText: I think it's fun!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: e8ff3ff8-3052-4918-a3d7-5997fe7cec45
+    nodeID: Node_8c1a
+    dialogueText: Well it's gonna be fun to have classes together!
+    position: {x: 3996, y: 421}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 62504b3b-f739-4bc8-9ab6-7a501afd9e75
+      choiceText: We won't, i go the electrical program.
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: a1380a05-3a3f-4db5-9725-a967a472be7a
+      choiceText: Not really...
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: f51ff7d6-a6bb-41a7-8edd-da6313ff83d6
+      choiceText: Yeah! Maybe we can sit together
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 80c8a64b-2b95-4d0f-84ac-7e73c8a46f76
+    nodeID: Node_20b1
+    dialogueText: oh...
+    position: {x: 4562, y: 190}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 70df2641-cb8b-4e56-a6e0-f1c002883beb
+      choiceText: Yeah becuase school sucks
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 992d3607-3e0c-4b78-9e62-306f24223a67
+      choiceText: Just kidding!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: cc1acb68-5cbb-4dd0-87bc-b3978d641d5d
+    nodeID: Node_74e2
+    dialogueText: oh yeah right...
+    position: {x: 4598, y: -369}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 8dee0f08-9b4b-479e-bb9a-abf4ae01e82e
+      choiceText: But it will be fun to see you in the hall!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: e87ad8ec-aacb-470b-9f9c-aa7bf76bd7c8
+      choiceText: Yeah...Think before you speak.
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: fb535598-b540-425a-80e2-59a8f6881638
+    nodeID: Node_bdfe
+    dialogueText: Yeah it will!
+    position: {x: 5021, y: -624}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: d685c7b3-36e7-43aa-88a9-19554bbda7b9
+      choiceText: Continue
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 64b4c3d3-62c9-4162-97d3-e20858ee3ce2
+    nodeID: Node_fefb
+    dialogueText: ...Sorry
+    position: {x: 5021, y: -203}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: d4379d90-e928-4351-9097-ed99c140cc4a
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 62640b67-782f-4266-acf4-f1eb8e68fb5a
+    nodeID: Node_ca30
+    dialogueText: I see..
+    position: {x: 5021, y: 176}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 993de7dc-0d40-49c2-be32-7552c2ba92a2
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: a4601937-e6ef-42ce-bddb-f5c3d77cfd5b
+    nodeID: Node_130d
+    dialogueText: Of course!
+    position: {x: 4562, y: 776}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: d26a81ac-57cd-416d-9c2d-817cd9a13a27
+      choiceText: yay!
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: e845fda2-156e-48fb-bc62-fceb4d79e0a8
+      choiceText: Right on!
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 578a9a17-544c-4773-b336-6dacc2475e55
+    nodeID: Node_f698
+    dialogueText: Haha! well, see you in class!
+    position: {x: 5116, y: 622}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: fb6b9993-46b8-4e0e-b9a3-60dd5bd7715b
+      choiceText: Yeah! Maybe we can sit together
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 65a4aa7a-819f-46e6-a791-9908bec9512f
+      choiceText: Not if I see you first!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 0617ee5c-c1cd-46e4-86cc-0b301c5a17c6
+    nodeID: Node_bff9
+    dialogueText: Haha!
+    position: {x: 6087, y: 410}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 3c3c4c41-4722-4797-ac2a-71220c417918
+      choiceText: Continue
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 5f2d8dfe-a42c-46f1-82e1-3573818ff1c1
+    nodeID: Node_3e71
+    dialogueText: Haha! you're such a jokester!
+    position: {x: 5589, y: 667}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 2ae936d2-070c-4d68-b428-3d70a64f4177
+      choiceText: I'm da joker baby
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 62154e75-74f8-4e4e-997d-ed2646559471
+      choiceText: Haha sorry
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: d215fada-e6b8-4761-b24b-1d1fc56b4790
+    nodeID: Node_be80
+    dialogueText: Don't be sorry, It's fun!
+    position: {x: 6103, y: 834}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 3d37072c-5a9a-41fe-80d0-7815fac6b522
+      choiceText: Well i keep joking then!
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: e28fd397-eb86-4235-9e87-e406ac53f99f
+      choiceText: Alright then!
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: bb812121-df51-441c-a223-5b7ffba9158a
+    nodeID: ZozkLove2
+    dialogueText: '*Zozk looks a little sad*'
+    position: {x: 804, y: 2081}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: a8eaf220-29ee-49f3-9c93-47129ee4c459
+      choiceText: Hey, what's wrong?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: acb6d85c-f8ad-427d-9a77-cb58113c928a
+      choiceText: '*oof...walk away*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: de294f1b-23c2-48ce-9e52-3be4b5d9d436
+    nodeID: Node_7bdf
+    dialogueText: It's nothing...
+    position: {x: 1361, y: 2081}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 7f8f5514-b44e-497f-b1a7-7063d16a0897
+      choiceText: Oh, well in that case *walk away*
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 9248ab93-8694-4841-a5ad-bcb9cbeae5b3
+      choiceText: I can tell something is bothering you
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 43fb9d4d-8f23-42ef-ba87-328613a218e1
+    nodeID: Node_a7f6
+    dialogueText: Well...my charger is gone
+    position: {x: 1915, y: 2081}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: e3f582d3-e8c0-4c21-9547-fc999119b664
+      choiceText: Where did you see it last?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 9a1a703a-fefd-4c0c-b1c6-7f3dcc9314d9
+      choiceText: Did you lose it?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 479c7a2b-78be-4f62-8241-1b5b0ebb35f5
+    nodeID: Node_b803
+    dialogueText: wow...calm down
+    position: {x: 2918, y: 1553}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: f4f459cc-1d6f-4991-b0bb-cab199db59a5
+      choiceText: Sorry, please continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 2177eafe-7afe-48bc-b052-bdb83fd69729
+      choiceText: '*Storm off mad*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: b9761847-0486-4bae-8df5-40b16ed9bc09
+    nodeID: Node_86f0
+    dialogueText: He said he would transform it so it could take power over ethernet
+    position: {x: 3385, y: 2153}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 1821fce9-3512-4390-9dd3-8bd531eb407a
+      choiceText: Power over ethernet?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 301d6c91-3f84-4217-9e7f-4517322f1305
+      choiceText: Oh! well he's doing you a favor
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: ad3218b3-e9a3-4aff-a65c-23784d58670b
+    nodeID: Node_45b9
+    dialogueText: Well...
+    position: {x: 4003, y: 1625}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 1cd7a7bd-cdae-4f70-96ed-14b6450e1508
+      choiceText: Power over ethernet is actually very energy efficient
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 0c40937e-cee8-4e31-be44-3638bc52cc9e
+    nodeID: Node_fb60
+    dialogueText: ok...but i need it fo-
+    position: {x: 4550, y: 1625}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 5b1f375a-69e8-4606-a043-2f26f86c542b
+      choiceText: It allows both data and power to be delivered through a single
+        cable
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 5275eeab-532c-4bff-90b2-d6e27c271fc9
+    nodeID: Node_9290
+    dialogueText: fair, but...
+    position: {x: 5194, y: 1625}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 3ead343b-14b9-4095-aae6-924f3a346eea
+      choiceText: He'll deliver it, upgraded mind you, in a bit. Just wait
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: c522d70b-e513-405f-85cc-8a9ebed2b4de
+    nodeID: Node_b02e
+    dialogueText: ok...
+    position: {x: 5712, y: 1625}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: aea52ee7-2607-4e9f-b77e-cdc49219d36c
+      choiceText: yeah, be gratefull
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 527b47f0-1609-4041-b056-7caf7ea9766a
+    nodeID: Node_d599
+    dialogueText: He said it's much better. But I don't need it.
+    position: {x: 4132, y: 2162}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: fa3187e9-8459-47d1-84da-ddbf72c3d248
+      choiceText: That's between you and him
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: f031ab65-9a25-4654-b81d-11275ba74a8a
+      choiceText: Did he say when you would get it back?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 8ac8ff75-04f7-461c-805a-c9838ae94b58
+    nodeID: Node_8986
+    dialogueText: Would you please? But don't mention me, I don't want him to get
+      mad
+    position: {x: 5372, y: 2107}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: feb8ea3b-e3d3-4ff3-b478-cf7be87f2ee4
+      choiceText: Of course, I'll be back
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 4dd6a552-1be5-4e9f-a888-e4203847a39d
+    nodeID: Node_7f06
+    dialogueText: No, I keep asking but he just says he'll give it back soon. It
+      has been days
+    position: {x: 4711, y: 2089}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 9d6cc55c-2c6a-4cfd-a35b-c07839b01b2e
+      choiceText: I'll go and have a look
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 3946e5b8-ac77-4be2-87db-2640c2eb6241
+      choiceText: Have some patience, it's only been a few days
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 57aab69f-529c-4ad5-bd7f-bc6b26fd970a
+    nodeID: Node_1580
+    dialogueText: Actually... Viktor took it.
+    position: {x: 2508, y: 2140}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 671894e8-6cf9-435e-94a0-56e83810c4a8
+      choiceText: WHAT? THAT FUCKING BITCH I'LL KILL HIM
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 079f3e28-0f9e-4713-845c-896f6b3b8454
+      choiceText: Why did he do that?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 7a5e2bef-f213-48d0-bc6a-70a74e325333
+    nodeID: Node_02ff
+    dialogueText: okay then...
+    position: {x: 5464, y: 2590}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: c602a022-7738-4209-bc17-f6f4b9031389
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 1793c012-6220-4c6e-b710-56ddf01e560c
+    nodeID: ZozkLove3
+    dialogueText: Did you find my charger?
+    position: {x: 804, y: 3752}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 96671e35-ef59-4923-bfb4-d685abdc39b5
+      choiceText: Yes! Here it is
+      lovePointChange: 1
+      itemGate:
+        itemName: Charger
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: c9dc87cc-71e5-4537-b812-2ddd2903252e
+      choiceText: No, not yet
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: bd794120-093b-4a74-a9bd-4f6927f6358d
+      choiceText: Viktor conviced me, power over ethernet is better
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: e0d0c7b6-1b3c-4543-bb1a-971182d28ba2
+    nodeID: Node_394c
+    dialogueText: '*Sigh*'
+    position: {x: 1314, y: 4468}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 46cb5884-0ca6-44ab-82f8-8cb3cc2405cd
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: df56e213-e136-4d95-be6c-cc5d39de7bea
+    nodeID: Node_c96c
+    dialogueText: No worries
+    position: {x: 1352, y: 4050}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 8c923449-a815-4cf6-b428-3136d22a1108
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: a70e7edd-8613-41a3-8f6c-cea6395aa9a3
+    nodeID: Node_bcd7
+    dialogueText: Yay! How did you get ahold of it?
+    position: {x: 1358, y: 3418}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 4644c382-d995-4872-b525-3f6bd9dd76f6
+      choiceText: It was laying in Javads classroom
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 8c41e6dd-5ac3-4477-95c1-2babe1591182
+      choiceText: I had to fight viktor over it
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 85d9ea2d-bd08-4954-877e-7b6b7714ea90
+    nodeID: Node_35ea
+    dialogueText: Oh good, no confrontation, the best of both world
+    position: {x: 1906, y: 3242}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 26f539b5-1da0-4964-9981-291b01a3dae5
+      choiceText: Exactly
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: ea9809d0-6d9d-40fe-9c32-9e3b2dedf1fd
+      choiceText: Hannah Montana!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 42435be9-9536-46d5-bad9-d9dd2815f021
+    nodeID: Node_f6f8
+    dialogueText: OMG! Are you also a fan!
+    position: {x: 2422, y: 3242}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: b28def11-80a9-4d8d-980f-9536dc2d6345
+      choiceText: Hell yeah!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 1f7a0073-7517-4581-af95-bcab7c949412
+      choiceText: No i just know of it.
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 54473201-225c-4138-bfd7-bc62d75ad737
+    nodeID: Node_3f31
+    dialogueText: You get the best of both worlds! Chillin' out, take it slow, Then
+      you rock out the show!
+    position: {x: 2889, y: 3242}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 8f4cc7e4-c0c7-45f0-ba1d-d80d40e6a144
+      choiceText: You have a nice voice!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 11400000, guid: 64c38eee9cb63f748a03c26b5a97927d, type: 2}
+    - outputPortGUID: 7bc20fa1-cd79-44e0-b671-5233e127cfc1
+      choiceText: Wow look at you!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 11400000, guid: 64c38eee9cb63f748a03c26b5a97927d, type: 2}
+    isEntryPoint: 0
+  - nodeGUID: 410e926a-4679-4217-9466-4bbcae1e8429
+    nodeID: Node_22d6
+    dialogueText: Oh no! Are you alright?
+    position: {x: 2012, y: 3923}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 2d0a2e23-1980-4452-a4d6-07ef835404d6
+      choiceText: Just kidding, it was i Javads classroom
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 69e84edd-b03d-4448-9145-2c34043b2b81
+      choiceText: A little, but i'll be alright, you should see Viktor
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: d8cb0714-7bc9-40df-9263-d1e9a4da189b
+    nodeID: Node_f89c
+    dialogueText: oh..alright, well thanks anyway
+    position: {x: 3127, y: 3790}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 8e374142-e1a4-4310-8d40-521c56b72aa6
+      choiceText: No Problem
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 11400000, guid: 64c38eee9cb63f748a03c26b5a97927d, type: 2}
+    - outputPortGUID: f75690ea-fcd5-4da3-928f-4a30aab71b67
+      choiceText: You're welcome
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 11400000, guid: 64c38eee9cb63f748a03c26b5a97927d, type: 2}
+    isEntryPoint: 0
+  - nodeGUID: c1a6da49-55e1-4a66-b97a-a468220d655b
+    nodeID: Node_663b
+    dialogueText: Oh god, oh no. I hope he doesn't get mad
+    position: {x: 3127, y: 4364}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 6c0f5384-1bc7-4912-9168-92b128a2d931
+      choiceText: He won't remember i thing *Flex muscles*
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 11400000, guid: 64c38eee9cb63f748a03c26b5a97927d, type: 2}
+    isEntryPoint: 0
+  - nodeGUID: db1d6677-34dd-4d00-b93f-40905ee44e41
+    nodeID: ZozkLove4
+    dialogueText: My hero!
+    position: {x: 1131, y: 5533}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: d6272983-60a5-41b6-ae44-4a839bb8b43a
+      choiceText: Oh, stop it you!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 9b79a431-906e-43b8-9f9b-e6879752ed7d
+      choiceText: In the flesh!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 463c5bc0-b2ab-4560-a73f-943cf525c8d5
+      choiceText: Gotta go!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: cada0018-de47-4050-a2fd-f17e6599385a
+    nodeID: Node_df9e
+    dialogueText: Now that i have my charger i can finally continue working on my
+      website.
+    position: {x: 1875, y: 5546}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 545413e5-f2b5-4433-8ab0-51f57b1b7de5
+      choiceText: For class?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 985c2850-0af7-4f05-873e-52e95de4f404
+      choiceText: A personal website?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: e643b247-0b25-4471-b9dd-b93d79644dd8
+      choiceText: 'ok nerd '
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: b30b7cda-1598-44ed-85f9-5e85181b741d
+    nodeID: Node_0fe3
+    dialogueText: ...ok...I think i'm gonna focus on this website now
+    position: {x: 2438, y: 6187}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: de1f81fe-85cd-4ad4-ba39-cdb2908c0280
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 10d96a55-521c-4320-b80d-f9f5ea2f08d6
+    nodeID: Node_d41d
+    dialogueText: It's my own bussiness idea, it's gonna make me rich
+    position: {x: 2677, y: 5632}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: cbfa26ab-26fc-41c5-92b3-c693896e40d4
+      choiceText: What's it about?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 688c2c56-82b6-4d0c-8475-f7209797b38b
+      choiceText: ok, good luck with that
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 16a9e5d2-b688-417a-80a7-7123b198b74b
+    nodeID: Node_857e
+    dialogueText: Design your own beutifull website with squarespace
+    position: {x: 4359, y: 5126}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 3c7909ab-f55f-4ca2-a674-74227ec5cb6f
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 53447ca8-75cc-4ff3-9b35-880cb851a490
+    nodeID: Node_6303
+    dialogueText: With easy to use, drag and drop, templates, you'll have a website
+      up and running in 10 minutes
+    position: {x: 4885, y: 5126}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 7c9ef8f6-1c00-4b29-96b6-6d1d63c7263f
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 65d73639-ad32-4b1c-b35c-ef86e3a6ffb6
+    nodeID: Node_3b64
+    dialogueText: Sign up today with the code "ITGSIM" to get 10% of your next one
+      year plan on squarespace
+    position: {x: 5607, y: 5126}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: d57f3481-5446-4d30-aee5-5dd0887d57a0
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: f979092e-988f-4e64-b677-bc9cdcc2270e
+    nodeID: Node_d826
+    dialogueText: Now, back to the game
+    position: {x: 6361, y: 5126}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: a44b6a52-6763-4321-b573-fd171dee8f82
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 4902acb7-ea7a-4160-a9c5-a42c17d907f1
+    nodeID: Node_85e6
+    dialogueText: Yes! This portion of the game is sponsored by squarespace
+    position: {x: 3763, y: 5126}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 13cce992-971a-494f-bdd5-e91e3daf0491
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: fbbd9d81-ba7c-4bf6-9322-aed1d1895b50
+    nodeID: Node_cb6e
+    dialogueText: It's a website where you can make websites
+    position: {x: 3282, y: 5649}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 841052dc-8fe8-4e88-9752-92863ef54e6e
+      choiceText: Like squarespace?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 77ee8708-e5b0-42be-945e-e2ed0d1e7bf5
+      choiceText: Tell me more
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 1b9313ef-a39b-4a9f-9f7c-3844d4c6fcf1
+      choiceText: That sounds dumb
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 281aef8b-b7eb-4546-b779-b0ac865bb08d
+    nodeID: Node_c19b
+    dialogueText: Well have you ever heard of the gold rush?
+    position: {x: 3893, y: 5717}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 531c41f1-516a-40b6-b32a-87141de250c5
+      choiceText: The January 24, 1848 California gold rush?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: af9a8319-cd81-43bf-947e-d977389eba5a
+      choiceText: Yeah I've heard of it
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 31543fda-6eee-427d-b3d5-5bf897ec8763
+      choiceText: No, what's that?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 36c9d5a4-e788-48d6-8b65-a078e935d6b3
+    nodeID: Node_dd7b
+    dialogueText: The gold rush was a period of time when everyone tried to dig for
+      gold or something
+    position: {x: 4314, y: 6205}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: baa01992-d9b3-4814-9340-581137b213e0
+      choiceText: Okay.
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 7ae81081-3ea8-407a-82c0-00dd24406732
+      choiceText: What does this have to do with your website?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 8a68efcd-9bb2-4371-9205-44e7dd5637a6
+    nodeID: Node_4306
+    dialogueText: Well, the ones that made money in the gold rush was not the people
+      digging for gold, but the people who sold the shovels
+    position: {x: 5013, y: 5773}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: b54ed9ef-8679-4ac2-9cd8-700136f40553
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: fb1ae3c5-a231-45c9-89b8-29cf582bbdc0
+    nodeID: Node_586f
+    dialogueText: Yes exactly!
+    position: {x: 4469, y: 5598}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: db6f7cb6-eaf8-487a-b97e-ecb90849138c
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: cc4a9e73-9ab4-43f6-a666-1e01147a162a
+    nodeID: Node_b73e
+    dialogueText: The internet is the new gold, and everyone wants to be on it to
+      make money, so I'll provide them with the "shovels"
+    position: {x: 5919, y: 5773}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: b1525a5b-afcc-4cdc-b8a0-e320d37e5ae7
+      choiceText: Smart idea!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 8730a34a-8b4a-4332-afb2-7817314c58e1
+      choiceText: So how is it going?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: fae0d485-1130-4982-ab25-deb226563fd9
+    nodeID: Node_8c08
+    dialogueText: But i'm having a little bit of a problem.
+    position: {x: 6987, y: 5867}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: b8d7a69e-648d-48fd-9223-bf508a46e787
+      choiceText: What's the problem?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: e9190242-e0f1-49a3-ba63-5c3d86321d73
+      choiceText: I don't want to hear about your problems, bye
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: bb66ce91-01f4-47dc-b46e-4b8bc07e751a
+    nodeID: Node_3baf
+    dialogueText: I've desgined this beutifull landing page, but people can't see
+      it for some reason
+    position: {x: 7628, y: 5867}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: ea5c0c77-bd12-46f8-b3a8-a40656459525
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 6873cb32-b912-4037-a63d-b6c5eaba00db
+    nodeID: Node_d3e9
+    dialogueText: I've asked people to go to my website, but they say they can't
+      see anything and then they laugh at me
+    position: {x: 8333, y: 5867}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: e72b15c0-570c-4e40-8a6f-ecd285db8060
+      choiceText: Do you want me to help troubleshoot?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 58e6bcd2-e73a-4cc0-8300-7d3dd4db17b7
+      choiceText: I'm no good with the computer stuff, good luck with that, bye
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: caccf918-82ec-42e7-8377-0f874d069a35
+    nodeID: Node_c2e6
+    dialogueText: If you want, I'd appreciate it
+    position: {x: 9180, y: 5867}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 42004f1a-4ffd-4c11-9a84-2c3b4f12b985
+      choiceText: What's the adress of your website?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 1d6bc402-3135-4534-b41f-b21e394cb3da
+    nodeID: Node_1749
+    dialogueText: www.C:\Users\Zozk\Documents\Websites\CirclePlace\CirclePlace.txt.html.com
+    position: {x: 9740, y: 5596}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 44fc8615-b8cc-4879-9f30-2e72e32d5570
+      choiceText: I think I know what the problem is
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: efacb5cd-7cdf-47b4-be91-7f846d69a8d1
+      choiceText: Hm, That looks good, let me have a closer look
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 7df7418b-83c4-425e-a2b4-2e034cb403cf
+      choiceText: '*Laugh*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: e0d7830c-3f8a-4f64-ba33-4e44df454ac3
+    nodeID: Node_7a44
+    dialogueText: Find anything?
+    position: {x: 10786, y: 6181}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 225ff297-2bc9-4783-a0b2-c493fc821531
+      choiceText: Give me the adress again
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 5452826f-b762-42ff-ac73-c3273446a54c
+      choiceText: Let me take a look at your MySQL server
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 46a14307-7819-43d2-b496-2c94e1c50bcd
+      choiceText: Everything looks good, I can't see a problem
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 6836faed-5da4-4dca-a53b-ef33140eae30
+    nodeID: Node_a39c
+    dialogueText: Thanks for trying
+    position: {x: 11271, y: 6663}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 5f2ae756-06c2-42a4-b5e5-fc1ef1d8a695
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: fd09fd1b-9857-4f48-9b81-953062fb1b51
+    nodeID: Node_4f5d
+    dialogueText: 'no no, this is my first website, there is no sequel '
+    position: {x: 11261, y: 6271}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 97134027-20e8-4668-a141-ea814c15c784
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 0233aeec-54bc-41e5-931b-a499fa5f37f8
+    nodeID: Node_25f7
+    dialogueText: You're just like the others *Zozk walks away*
+    position: {x: 10242, y: 6474}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: d8988df4-55dd-4125-b46e-d3ea0ae05501
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: c0de5a0e-2c86-4f13-a556-c9f49323358e
+    nodeID: Node_0137
+    dialogueText: What is it?
+    position: {x: 10762, y: 5596}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 210f63f1-d30e-4955-a624-56ec9ff88d56
+      choiceText: You're dumb *Laugh*
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: eee5881e-2fc0-4d6e-b2d8-11323559bf23
+      choiceText: To host a website you need a hosting service and a domain name.
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: e16b8f1c-fa5a-44cd-995c-9276695a9258
+    nodeID: Node_7936
+    dialogueText: Hm, I think I heard Martin say something about that
+    position: {x: 11517, y: 5626}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 56101f99-34f6-4a68-91b5-6120d785a3dc
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: e5097635-0c54-4a0d-a200-acf48f7dc465
+    nodeID: Node_2266
+    dialogueText: I'll look into that, thanks for helping me
+    position: {x: 12249, y: 5626}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 1a087046-45bb-4d35-811f-3ceb976dae6d
+      choiceText: No worries
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 0d71563f-4041-41bd-ad88-f0d49f21cac1
+      choiceText: You're welcome
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 9d409270-988a-4cfa-a20f-ed0452df8e0f
+    nodeID: Node_af7d
+    dialogueText: I don't need luck
+    position: {x: 3119, y: 6354}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 9cc61fa4-47e2-41f6-aea9-eb27093fdaeb
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 9ea88bbf-f031-454b-a02a-b680d2e813b3
+    nodeID: Node_a6d9
+    dialogueText: '*Sigh* yeah... *zozk continues scraping of the sticker*'
+    position: {x: 3210, y: 7737}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 9245aa41-99a1-4928-86c4-b3ba83d7c40e
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: bfae09ee-a75f-4572-8ad8-70603aae98fd
+    nodeID: Node_1b6e
+    dialogueText: I don't know, but I have some guesses.
+    position: {x: 3357, y: 7243}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 0924ea44-7203-4bac-acf9-a99bc93e88d7
+      choiceText: What was on the sticker?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 50600c75-65f8-44a2-9982-f15ac13f5512
+    nodeID: Node_a852
+    dialogueText: Well, it was not actually me who put the sticker on my laptop
+    position: {x: 2682, y: 7243}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 446f2205-442e-4af7-9a4a-c1f076c1bada
+      choiceText: Who was it?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: b0bb3dd0-5aa5-4e28-888c-a50551531b10
+      choiceText: haha what an epic prank!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 314ab998-f05a-4b88-80f4-459dc223e825
+    nodeID: Node_ea7c
+    dialogueText: Oh nothing, i'm just trying to get this sticker of my laptop
+    position: {x: 1931, y: 7243}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: ba195fd1-0c2d-4f1c-8d25-ad99e30ff223
+      choiceText: Didn't like the desing anymore?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: a0606a59-1ebd-4c96-860c-82d82bce83a8
+      choiceText: Why are you removing it?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 385b6529-8c70-4a27-91ad-b4e566a73450
+    nodeID: ZozkLove5
+    dialogueText: '*You see Zozk scarping something of this laptop*'
+    position: {x: 1352, y: 7243}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: b1b855ea-b38c-40e5-8580-8ab9bf3cd189
+      choiceText: '*He looks busy, i should leave him alone*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 69bac2eb-536c-4940-a682-ea07d0440f2d
+      choiceText: Hey, what are you up to?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 2fba06f7-18c4-4176-9567-50316e4b66a6
+    nodeID: Node_65b2
+    dialogueText: It's a picture of my face and with the text "Zozk Time"
+    position: {x: 3947, y: 7243}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 68125ca0-ad0d-43d0-b48a-1cb29e51654e
+      choiceText: Why would someone make that?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 441f9e21-2cfa-47dd-83ea-7283d61cabe1
+      choiceText: I bet you looked cute on the picture
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 24c83fc7-e8bc-4504-bd33-c89546196283
+      choiceText: Well that sounds nice, maybe you should appreciate that someone
+        took the time to make that
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 9ee9d952-fdef-448a-8929-38f6c8094c1b
+    nodeID: Node_24bc
+    dialogueText: haha thanks
+    position: {x: 4604, y: 7527}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 90446a07-ea26-4c96-af42-5b38018acd22
+      choiceText: But why would someone make that?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 3373a2eb-9067-4196-97f1-cdf6a917ce67
+    nodeID: Node_7063
+    dialogueText: Some people like to put me in stuff they make...
+    position: {x: 5121, y: 7243}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 2cc70257-a4b5-4d41-b395-8b63f4946b86
+      choiceText: Seems like they like you!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 48664d36-3cc9-42c0-a272-e6ee7975afca
+      choiceText: Tell me more
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 27fc594c-2785-49c4-96d2-ef29956cf302
+    nodeID: Node_cc28
+    dialogueText: I don't know, sometime it feels like they do it just to laugh at
+      me
+    position: {x: 5731, y: 7243}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 24aa24d3-d584-4274-be89-ff1582d47cfc
+      choiceText: Oh, I bet they just like you
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 91fd2429-ba97-44df-a355-9f843ac99082
+      choiceText: That sounds rough
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: af7af86a-4ac4-48c4-be6c-90419427a7f9
+    nodeID: Node_eb35
+    dialogueText: Yeah maybe, it doesn't always feel like that tho
+    position: {x: 6366, y: 7023}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 1f059272-02e2-4ba2-9c41-43d8efd68bcc
+      choiceText: I get where you're coming from
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: b2261e95-244b-4578-92c4-ede55fa0f375
+      choiceText: Your feelings are wrong
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 7d047e2b-bf83-42fd-ad3b-0eb11e1d5bff
+    nodeID: Node_b8a3
+    dialogueText: alright then...
+    position: {x: 6950, y: 7023}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 20ca029b-6858-4328-8c3c-8c926382bbe0
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: edfeca52-f131-4234-8917-24c95125cb83
+    nodeID: Node_8988
+    dialogueText: Yeah, but at least they are not outright mean
+    position: {x: 6394, y: 7703}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: ce68c275-bea2-4782-80d0-0d333c0f3a1a
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: bdcf6f49-78f5-4fb6-940d-1ea096c0b8a2
+    nodeID: Node_551b
+    dialogueText: I heard they have more sticker tho, I wish they wouldn't put them
+      up
+    position: {x: 6933, y: 7637}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 22722fc9-1937-4686-a242-cafae586864a
+      choiceText: I can try and find the stickers
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 552cc2c8-3c5a-4142-a87a-dcb59c0ff9f1
+      choiceText: haha but it would be so funny
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 0713163f-8403-41d6-82b6-1af621702bcd
+    nodeID: Node_8ebc
+    dialogueText: You could try, but I have no idea where they are
+    position: {x: 7710, y: 7760}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: d92bac2a-9eca-4623-b0ee-418edb848901
+      choiceText: I'll figure it out don't worry!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 7592d73a-4c5b-4484-86a9-d3cd927fd0fd
+    nodeID: Node_fc6b
+    dialogueText: Thank you so much
+    position: {x: 8317, y: 7760}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: f97146ea-931a-49c3-a9e2-059bb3b48925
+      choiceText: continue
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 60505bc3-3fbf-496f-b308-5bb41b4e0f24
+    nodeID: ZozkLove6
+    dialogueText: Have you found the stickers
+    position: {x: 1387, y: 8927}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 4cb99dcc-fe0c-495b-aa3f-2f64a56e27e5
+      choiceText: Yes! here they are
+      lovePointChange: 0
+      itemGate:
+        itemName: ZozkTimeSticker
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 6e2ae141-c34a-48f2-858e-dbacc6c64077
+      choiceText: Not yet
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: df6e0c84-8807-46ef-bbdf-36351dd22f04
+    nodeID: Node_a7e2
+    dialogueText: No worries
+    position: {x: 1931, y: 9360}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 4359775b-47cb-4088-9756-9cbd084b9558
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: c75844c3-759a-499f-8aba-ef1861f6448f
+    nodeID: Node_8285
+    dialogueText: Thank you so much! You didn't get into any trouble did you?
+    position: {x: 1946, y: 8773}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 2ebdea4e-7eb2-4e70-8aa9-4ea1514e3526
+      choiceText: I killed a municipal politician for these
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 0847700a-316d-49a4-8b5c-90197862c288
+      choiceText: They were just laying there unsupervised
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: c587a46a-7818-462a-bdaa-aab8edac226a
+    nodeID: Node_7b11
+    dialogueText: haha, i'm gonna take that as a joke, thanks again!
+    position: {x: 2542, y: 8733}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 0252d934-29d2-4646-aea2-25e1dec767bf
+      choiceText: Continue
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 8e2c8fce-6176-475e-93a9-10bc7574e3ad
+    nodeID: Node_e285
+    dialogueText: We were running and things were coming at us, but you protected
+      me
+    position: {x: 4527, y: 10307}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 7b9fb38b-d2ca-42bd-8df6-40aa1c04419d
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 2c6f67e1-6e6b-46c6-84b5-0bba4f751747
+    nodeID: Node_fc97
+    dialogueText: 'Well there were problems i don''t really remember, and you were
+      there to save me '
+    position: {x: 3744, y: 10307}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: c8a97b28-bc25-48fa-9d1a-fbd839e1ab45
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: b57ba2e5-4420-45a2-97d6-ff65525e6cea
+    nodeID: Node_92ff
+    dialogueText: You know I had a dream about you
+    position: {x: 3095, y: 10307}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: e6c61a00-2610-46f2-9e1d-c38596c562cc
+      choiceText: What was the dream about?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: da7d28fd-9b91-497c-bd1d-8971369acad5
+      choiceText: Don't think about me when you sleep, fucking creep
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: a9a420e7-c41c-46d7-bb7b-4aceb69819c1
+    nodeID: Node_b2f4
+    dialogueText: haha...Just kidding...ehm...gotta go
+    position: {x: 3563, y: 10911}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 5885e7c7-6b51-4a67-886e-5e20906bb6fc
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: efe04ab1-fa45-4be7-9b9c-20dc8d29cb4d
+    nodeID: Node_41ed
+    dialogueText: You've been so kind to me
+    position: {x: 2334, y: 10307}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 18bae40b-8335-49be-b4e1-02c1482e3407
+      choiceText: I try
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 61ca8bd8-64ce-4a08-bd74-79fd75f75801
+      choiceText: Only because you make it easy.
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 3ed1d6fc-b237-4673-be4b-ed8c2072e036
+    nodeID: ZozkLove7
+    dialogueText: I'm really glad you are going to this scool
+    position: {x: 1614, y: 10307}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 6e3e2ce9-bf59-417d-9738-199b348470ed
+      choiceText: me too, because i got to meet you
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 9e15d027-67b2-4d37-aa51-b3e56e676312
+      choiceText: Thanks, But i don't have time to talk
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 55470d2d-3071-43f7-ac16-3c158d8e9835
+    nodeID: Node_4610
+    dialogueText: I looked down and my clothes were torn to shreds
+    position: {x: 5834, y: 10307}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 29ae024a-27ac-450a-bbe9-51cf10f2adf6
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 8d585f6e-7ebe-45bb-9c0d-146df618f992
+    nodeID: Node_03d9
+    dialogueText: With your kind eyes you started to undr-...ehm...I mean, then i
+      woke up
+    position: {x: 6401, y: 10307}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 3ed81585-b6b2-4b98-8924-1e0976e6a104
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 35f0577a-e73f-4217-8d32-91ac2d679e57
+    nodeID: Node_d553
+    dialogueText: We made it to a safe room and you locked the door behind us
+    position: {x: 5244, y: 10307}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: c01f6ed1-4c86-4b28-880a-5a31052dec2f
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: d5cf7653-af82-4b15-972d-897a68e28e01
+    nodeID: Node_a7d8
+    dialogueText: Really? what was it about?
+    position: {x: 7557, y: 10604}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: febf8f5e-039d-4e70-8085-aecb1e914acb
+      choiceText: You were a chassi, and I was an engine in a Volvo XC60
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 42595c02-f36a-4f64-86b5-36c25b3df945
+      choiceText: I was a butter churn and you were a farm boy
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 1471c369-70a6-49ce-8aa1-83d867d2a3cb
+      choiceText: I don't remember
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 232b9138-8174-4d67-90fd-4e43125b92d5
+    nodeID: Node_1fac
+    dialogueText: Dreams are crazy, are they not?
+    position: {x: 7049, y: 10307}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: ac417c28-1d36-4ef9-bd37-67ae8c62a217
+      choiceText: Well it sounded like a nice dream
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 69f625d0-d01b-45f8-8ce2-ee990a36ad97
+      choiceText: I have also dreamt of you
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: f7b68b3f-b725-48a4-8d32-e370af5358f9
+    nodeID: Node_2586
+    dialogueText: It was... *Zozk gets lost in thought for a second*
+    position: {x: 7557, y: 10174}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 8020c352-cb02-4c03-ab28-57b30dab9a1d
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 31fd6f40-8e6a-4429-9e9a-fe2be72a74e2
+    nodeID: Node_ff27
+    dialogueText: Typical, dreams tend to be forgotten
+    position: {x: 8056, y: 10969}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 97003abe-c993-4eb3-8aa4-bef2f718e542
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: b9de1df5-6abf-4639-a8a4-44092491cb06
+    nodeID: Node_4962
+    dialogueText: Haha! you have some crazy dream!
+    position: {x: 8056, y: 10520}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 3b56299c-ec3d-4a4e-8d9d-f74e466bfb62
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 70557f29-8415-4fae-aef6-469e4d461ddd
+    nodeID: Node_8b4b
+    dialogueText: 'Anyway, thanks for listening '
+    position: {x: 8665, y: 10289}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: be03c251-6692-4af7-a4fb-33c97f743ecc
+      choiceText: My pleasure
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: dd5e2b31-cb94-483a-8ca2-5bc1f0a49b81
+      choiceText: 'It was very interesting! '
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 0e2ab899-1838-4703-adc3-d6385281bd9d
+    nodeID: ZozkLove8
+    dialogueText: Dammit! *Zozk frantically presses buttons on his keyboard*
+    position: {x: 1827, y: 11935}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: a06bfdf9-1b0c-443a-a05c-d66cc4ba6a54
+      choiceText: '*He seems stressed. i should leave him alone*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 5cf89b69-1a29-48c9-a3df-1f3840a6a158
+      choiceText: What's wrong?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 5b177b41-e77d-41a6-98a9-dc42e5d46f69
+    nodeID: Node_29a5
+    dialogueText: Ugh! my computer is freezing all the time!
+    position: {x: 2586, y: 11924}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: e44abc94-84e4-4652-82a7-67f3bc5f5d27
+      choiceText: Let me take a look
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: f9e84179-efa3-40d1-b35d-9a5e79ae9127
+      choiceText: Warm it up HAHAHA!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: ce730512-79ad-4cf6-978a-8a1a22ab3da4
+    nodeID: Node_4bb6
+    dialogueText: heh....
+    position: {x: 3021, y: 12287}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 9c225710-dc0d-4f37-b8cc-1bf74f3f7fcf
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 26f0655d-40c4-4a2a-b5da-5ff1115bd8a4
+      choiceText: '*Leave*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: f67c9d98-ac2f-44a9-b24b-6eaf6c75b605
+    nodeID: Node_93f0
+    dialogueText: '*Zozk continues to press random buttons on his keyboard*'
+    position: {x: 3503, y: 12383}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 98ccf606-2b82-45c3-8527-5846e8aec95c
+      choiceText: Let me take a look
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: cab31311-9134-4df3-b150-ad5b937ae131
+    nodeID: Node_9be7
+    dialogueText: '*Zozk quickly turns his laptop away from you*'
+    position: {x: 3669, y: 11945}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 04e80e8a-547a-4f05-a1eb-ba67b2dadbeb
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 53628c9a-63c0-4c0a-940b-ab667ba3ca4f
+    nodeID: Node_a6b9
+    dialogueText: Well...ehm...It has frozen in a very unfortunate spot
+    position: {x: 4331, y: 12040}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: bcbc1c9b-3ef3-4060-ad26-55c52e87f3fe
+      choiceText: It's ok, i won't judge
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: c8dd893b-7935-4dee-8689-7b28a136038c
+      choiceText: Oh, I'll leave it to you then
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 0cf89c63-ad87-48dc-92fe-765d4bc54900
+    nodeID: Node_e20a
+    dialogueText: Do you promise?
+    position: {x: 4935, y: 12040}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: d7202650-bb1a-46bd-98db-5df1bb1e643d
+      choiceText: Yes
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: e8c92c6f-54e0-4970-b361-6a423e9f5992
+      choiceText: Yes (Gaslight)
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: fb4f03d4-5d80-48f3-817e-2264aa5df6e4
+    nodeID: Node_83eb
+    dialogueText: Okay then...
+    position: {x: 5482, y: 12117}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 47e0d01c-da19-448f-acfe-75f5add5a3c4
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 2ea4dfb0-eef3-4e38-93bd-07ec7c73e088
+    nodeID: Node_4a36
+    dialogueText: '*Zozk turns the computer and you see 14 Myfreecams.com tabs opened
+      simultaneously*'
+    position: {x: 6008, y: 12217}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 6ba3b2fc-9aed-41fa-b11b-84d198bf7d80
+      choiceText: '*try to ignore the tabs*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 42946463-35f5-4f9e-a6e9-a48f9bca3164
+      choiceText: Wow, you've been busy haha
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: c5673eeb-307e-4276-b03a-8ddf85aef1d8
+    nodeID: Node_a7d0
+    dialogueText: '*Zozk blushes*'
+    position: {x: 6747, y: 12469}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 8d80a489-0a97-4785-96a0-caca0cc0ed21
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: deb5ef63-b09d-4fbb-9852-ddc7350d18f4
+    nodeID: Node_7b8f
+    dialogueText: What should i do?
+    position: {x: 7202, y: 12217}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: b8b0439c-e215-4b3b-a9b7-4fecf9bede0a
+      choiceText: Did you do something special when it froze
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: da0be47d-414c-4aeb-9511-9f5ed5c1765b
+      choiceText: Nothing, your computer is broken
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 2b322fdf-e7d0-4062-9082-0c633528cfc7
+    nodeID: Node_1cbd
+    dialogueText: Well...I was clicking on banners that had some really enticing
+      offers
+    position: {x: 7740, y: 12217}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 9169010d-d417-4183-9042-a5ac2866a6e0
+      choiceText: Did you download anything?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 5a5e1ad6-0231-4e59-971a-6dc47ae7674b
+    nodeID: Node_d918
+    dialogueText: Maybe...
+    position: {x: 8406, y: 12217}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 2f9dfeb9-05d2-4e26-8965-163de86e6ddd
+      choiceText: let's try and restart the computer
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 5a4f58e1-917a-4f4b-8b67-09493e53ae09
+      choiceText: '*look down at his pants*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 21138de5-8245-4d82-89c6-5e899784c40b
+    nodeID: Node_c4c2
+    dialogueText: '*You both wait for the computer to restart*'
+    position: {x: 9044, y: 11991}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 5ef328bf-57b8-4c88-bd98-92ee3dc2fd38
+      choiceText: '*wait silently*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 697ca6f9-bf0b-42d6-a4c4-d57d1a523604
+      choiceText: You know, I also go to the same sites
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 5a1681e5-4752-4ed3-818b-8a655eda254e
+      choiceText: Nice weather today
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: a7dd210c-b9ac-4440-9634-91009a1bf0ec
+    nodeID: Node_66a2
+    dialogueText: yeah...
+    position: {x: 9841, y: 12553}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 4b9b8427-9f78-434c-8a86-a2b46bbb7ce7
+      choiceText: '*wait silently*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 526e2c1a-e770-427d-a575-91560df5e690
+      choiceText: You know, I also go to the same sites
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 0f68314b-668e-444d-9a14-3e7a986eb302
+    nodeID: Node_bcca
+    dialogueText: I-I don't normally go to these sites
+    position: {x: 9660, y: 11876}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 1a454a13-6b5c-463d-939f-80b94e593ae5
+      choiceText: It's ok if you do, It's...fun
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 76a11a76-9efa-4a83-a275-3d8f7a67f6e5
+      choiceText: yeah, no, right....
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 7a38680f-4388-4be6-861c-db49f9924863
+    nodeID: Node_4472
+    dialogueText: yeah...
+    position: {x: 10413, y: 12553}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 6a91f84c-2e63-4411-befa-2b7e1e0da7cc
+      choiceText: '*wait silently*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 5b316f69-91af-4e16-a7c2-82c670e01977
+    nodeID: Node_b492
+    dialogueText: Yeah but, who would want that?
+    position: {x: 10735, y: 12001}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 73b4a6d1-bab5-4fa8-ac61-034ab08a383a
+      choiceText: I would.
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: a00c9da2-8381-4c57-b083-35b213e7b422
+      choiceText: There is people who would want that
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 304a8c3a-a488-4197-894c-2829524342bd
+    nodeID: Node_f903
+    dialogueText: It's just not something I'm used to talk about
+    position: {x: 10181, y: 11767}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 2cac3b45-7abf-4c02-87fa-48e22959d48e
+      choiceText: I get that, but it could be nice to share with someone
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 7b052e56-c892-4d57-9403-dd686a3752b3
+    nodeID: Node_50c7
+    dialogueText: '*The computer boots up again*'
+    position: {x: 11542, y: 12472}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 527511cb-6d7a-4d9b-a8b4-ff169fac1989
+      choiceText: It works!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: a5f38a91-710a-4a2c-a83d-56b96a847cf1
+    nodeID: Node_5a75
+    dialogueText: It's not frozen anymore!
+    position: {x: 12087, y: 12472}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: c271377c-97b8-41c0-ab9a-154cc83831fd
+      choiceText: Let's unistall that thing
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 823aeba4-a845-4f40-9a78-a10765fb774a
+    nodeID: Node_19fd
+    dialogueText: '*you uninstall the thing Zozk downloaded*'
+    position: {x: 12632, y: 12472}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 5b443b22-8c88-4d4a-ac28-6f2969dce765
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: ceefbb2c-01a5-49b9-94a4-044dff9b2ebc
+    nodeID: Node_7f30
+    dialogueText: Thanks for the help, you come to my rescue yet again
+    position: {x: 13202, y: 12472}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 59a731ac-2b0a-4dff-ab23-843597869ffa
+      choiceText: No worries
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 8c9e8eb0-0a17-48de-b0bc-27abe51395d1
+      choiceText: You're welcome
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 36e3e7b9-32fd-40cc-bc0a-39d3f4a806f1
+    nodeID: ZozkLove9
+    dialogueText: '*zozk Is drying himself of with a towel*'
+    position: {x: 1791, y: 13016}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 8087236d-51a5-4e38-9a7d-fd9ef1a4e988
+      choiceText: I got something for you
+      lovePointChange: 0
+      itemGate:
+        itemName: SprayBottle
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 78a40604-78b1-44fd-9466-58f3613485bb
+      choiceText: '*leave*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 751d1317-fcf6-4ab9-82c0-32b901a51246
+      choiceText: What happened to you?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 67a06e52-53df-4900-82c3-659b1f4edd80
+    nodeID: ZozkLove10
+    dialogueText: You have helped me so much, and i've been thinking about you a
+      lot. Maybe we could go on a date?
+    position: {x: 1893, y: 14052}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 6c5c102c-cba4-4188-9f91-1d969855ee36
+      choiceText: Sure, but not right now.
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 1a6ccbb9-c3b3-4020-88fb-abded9307b92
+      choiceText: I just have some things to do first.
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 872be7b8-9159-475b-b818-8fba0ba5ec77
+    nodeID: Node_d9ae
+    dialogueText: Good, thank you again!
+    position: {x: 2557, y: 9159}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: bd15e1e5-b63e-4260-aaaf-23c552a18023
+      choiceText: Continue
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: b0ccc8e2-715a-40de-8bc5-ac703fc887c8
+    nodeID: Node_9a0d
+    dialogueText: '*Zozk blushes and smiles*'
+    position: {x: 2664, y: 10911}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 1054298c-c312-4b4d-9eaa-6c178a2320f5
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 5c470766-a25e-4a0e-8dc4-ce927c541714
+    nodeID: Node_92bf
+    dialogueText: Viktor has been running around spraying people with his spray bottle
+    position: {x: 2732, y: 13645}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 807cd70d-5c5d-4c16-b19a-90daf9ed758e
+      choiceText: Why does he do that?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: fbd29fd4-fd44-40a0-8d7e-7ffe86984744
+      choiceText: Haha! Epic prank!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: a9800b23-2171-4c8e-a4bd-c0c77c40511b
+    nodeID: Node_46b3
+    dialogueText: yeah...
+    position: {x: 3291, y: 13984}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: b8a057c4-5dee-45d2-bb1f-02c133977b64
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: e2f4f30a-f1b1-4380-ab09-3902a6bd78fc
+    nodeID: Node_0cc2
+    dialogueText: He thinks it's funny. I just wish someone would take that thing
+      away from him
+    position: {x: 3333, y: 13348}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 9286cfbb-649d-40f2-9764-42967661c999
+      choiceText: That is his private property you communist
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 9a2eddcf-6f8c-44a5-877b-6c075e53ee2d
+      choiceText: I'll see what i can do
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 19edf4eb-6910-4767-b639-317633b544f3
+    nodeID: Node_10d3
+    dialogueText: Thanks!
+    position: {x: 4084, y: 13653}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: de76cb48-f066-41e2-8e5d-88ea3172a097
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 420c71f0-c852-408e-af71-72da576267f2
+    nodeID: Node_0156
+    dialogueText: Omg thanks! now i just need to find a place to hide it
+    position: {x: 2461, y: 12976}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 77360377-ed9f-4b11-822b-c4239e85ec97
+      choiceText: Maybe in your ass haha!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 64f623bd-efcd-4881-9ee9-fddba68569b7
+      choiceText: Hide it in your locker!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: f6ef1d87-ea18-4750-a69c-240208866053
+    nodeID: Node_4ef6
+    dialogueText: Good idea!
+    position: {x: 2955, y: 13240}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: fc394219-a90b-4dde-ad68-f0adea6a8da8
+      choiceText: Continue
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 54be313b-7171-47a3-aadf-40ef9990b517
+    nodeID: Node_ebd7
+    dialogueText: haha! he'll never find it here
+    position: {x: 3414, y: 12903}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 5da13bc2-dc10-478c-ab44-58487b667193
+      choiceText: I will find it tho
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: df9616db-10c6-4170-b877-417ed73b377e
+    nodeID: Node_6429
+    dialogueText: oh you!
+    position: {x: 3985, y: 12976}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 6df41db1-9f9b-496d-9905-b308c13c96b5
+      choiceText: Continue
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 7c42d139-76b9-483d-8e9a-848c68901a54
+    nodeID: Node_d67f
+    dialogueText: Dammit!
+    position: {x: 7600, y: 12806}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: b30ad67f-fc6d-4ae7-bc1e-659cae49b5d5
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: de92b1fc-a2c5-4300-84fe-b272798df313
+    nodeID: Node_688e
+    dialogueText: '*You can''t tell if there is a diference from normal*'
+    position: {x: 8365, y: 12892}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 5cf92520-06f0-4063-9a5f-b532f7482da5
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 3915ec27-43a1-4127-bf52-8d04499c7b97
+    nodeID: Node_3d8c
+    dialogueText: yeah...a little hot.
+    position: {x: 9443, y: 12467}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: c8d81d8c-06fe-4134-ad8d-729c4173401d
+      choiceText: '*wait silently*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: fb196e40-d6c0-4b9c-afc3-f5929afe7fa5
+      choiceText: Yeah, but also a little chilly
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  edges:
+  - outputNodeGUID: 4056dd53-48bb-4f80-ab96-bd3945494384
+    outputNodePortGUID: 6617f97a-9dcd-4db4-ac38-b914fe44479c
+    inputNodeGUID: cd252876-ecf3-4434-8a3a-bf212e485c6f
+  - outputNodeGUID: cd252876-ecf3-4434-8a3a-bf212e485c6f
+    outputNodePortGUID: 2533d5a2-ce1b-4469-b81c-90c3ca72cf5d
+    inputNodeGUID: 57935949-dc54-4d7c-9386-dc15d808d01c
+  - outputNodeGUID: cd252876-ecf3-4434-8a3a-bf212e485c6f
+    outputNodePortGUID: a6b1fb9d-eb47-43ad-b0fa-16a72592b438
+    inputNodeGUID: ee61f0ab-ab7d-4ec7-a6e7-8bb51054bdef
+  - outputNodeGUID: 57935949-dc54-4d7c-9386-dc15d808d01c
+    outputNodePortGUID: 50714da0-c3e4-429e-84a9-473f9ce64eb2
+    inputNodeGUID: 54665650-abf9-40db-a39a-3ad683a898d9
+  - outputNodeGUID: 57935949-dc54-4d7c-9386-dc15d808d01c
+    outputNodePortGUID: dad50e8a-3812-444e-a56e-483412da424a
+    inputNodeGUID: ea20d0a3-fd4c-479c-b766-d7137914365a
+  - outputNodeGUID: ea20d0a3-fd4c-479c-b766-d7137914365a
+    outputNodePortGUID: 9e8bdaf5-6261-440a-81f2-bfcf0349a7b2
+    inputNodeGUID: be81c5e2-9561-4e00-9e0d-09602e7654e0
+  - outputNodeGUID: 4056dd53-48bb-4f80-ab96-bd3945494384
+    outputNodePortGUID: ba7ab81c-b522-4e02-b605-b2c0fd370d50
+    inputNodeGUID: 57935949-dc54-4d7c-9386-dc15d808d01c
+  - outputNodeGUID: 54665650-abf9-40db-a39a-3ad683a898d9
+    outputNodePortGUID: a7b9ff5a-0d3d-400c-95ca-65c334d0a8b2
+    inputNodeGUID: 8595e74c-a7bd-4230-a093-4c1cdaf45bb8
+  - outputNodeGUID: ea20d0a3-fd4c-479c-b766-d7137914365a
+    outputNodePortGUID: 9a78d0c1-23a8-436b-9ca2-d4af07a25757
+    inputNodeGUID: 2da4556f-255f-4d66-82a4-08c982347b27
+  - outputNodeGUID: 54665650-abf9-40db-a39a-3ad683a898d9
+    outputNodePortGUID: 5f8888fc-486a-4b04-afcf-c1362b410dc7
+    inputNodeGUID: 2da4556f-255f-4d66-82a4-08c982347b27
+  - outputNodeGUID: 0019c0b2-c9a9-4681-be6b-dea46193f53d
+    outputNodePortGUID: dff71c32-4ff7-43ab-b7cc-ea58a3ae3e31
+    inputNodeGUID: b6279fee-3def-4a6a-a408-0a56e963f8f2
+  - outputNodeGUID: 786d2d5b-a57a-4cb4-8968-9378f162ea95
+    outputNodePortGUID: 129a96ed-c675-44b2-845e-775543508cf9
+    inputNodeGUID: 05b0c182-54e0-43d3-b1b7-abb8eb6cec8b
+  - outputNodeGUID: 786d2d5b-a57a-4cb4-8968-9378f162ea95
+    outputNodePortGUID: 7b6fc4e4-0437-458c-9995-d9a347957384
+    inputNodeGUID: 05590677-cb0e-452c-bf77-61af0a1f8b38
+  - outputNodeGUID: d8baeebc-d8e8-452c-bb1d-c56c7094d5e6
+    outputNodePortGUID: 07ca894f-a2a4-4336-85c2-4defce3ff61f
+    inputNodeGUID: 502bc9c1-dad7-4141-9050-62e8122395ab
+  - outputNodeGUID: b6279fee-3def-4a6a-a408-0a56e963f8f2
+    outputNodePortGUID: 468823d7-5591-40ea-9c91-2d723bdf5037
+    inputNodeGUID: 786d2d5b-a57a-4cb4-8968-9378f162ea95
+  - outputNodeGUID: 0019c0b2-c9a9-4681-be6b-dea46193f53d
+    outputNodePortGUID: 5879fd3d-2dc2-451e-b255-b84e6485e5a9
+    inputNodeGUID: 786d2d5b-a57a-4cb4-8968-9378f162ea95
+  - outputNodeGUID: 05b0c182-54e0-43d3-b1b7-abb8eb6cec8b
+    outputNodePortGUID: dbd94f2d-1762-437a-98b5-09429a85fbc6
+    inputNodeGUID: e8ff3ff8-3052-4918-a3d7-5997fe7cec45
+  - outputNodeGUID: d8baeebc-d8e8-452c-bb1d-c56c7094d5e6
+    outputNodePortGUID: c06bfe93-4ce2-4fe1-8b42-41f41ca9b173
+    inputNodeGUID: e8ff3ff8-3052-4918-a3d7-5997fe7cec45
+  - outputNodeGUID: bff1cc9e-3dbb-4e88-8732-031e33ad58de
+    outputNodePortGUID: 57f946d0-4058-4b63-93e7-38c764b569f1
+    inputNodeGUID: e8ff3ff8-3052-4918-a3d7-5997fe7cec45
+  - outputNodeGUID: 786d2d5b-a57a-4cb4-8968-9378f162ea95
+    outputNodePortGUID: 37bc14ea-71b3-44b4-86db-beb22871aac9
+    inputNodeGUID: bff1cc9e-3dbb-4e88-8732-031e33ad58de
+  - outputNodeGUID: 05590677-cb0e-452c-bf77-61af0a1f8b38
+    outputNodePortGUID: aeaff136-06ad-452c-846c-6733e4c10cad
+    inputNodeGUID: d8baeebc-d8e8-452c-bb1d-c56c7094d5e6
+  - outputNodeGUID: 05590677-cb0e-452c-bf77-61af0a1f8b38
+    outputNodePortGUID: ce6afe51-7837-479e-8c1d-bc2a5c53c251
+    inputNodeGUID: fc78aa7a-41f6-46ef-9dff-b9ec6e554c9e
+  - outputNodeGUID: fc78aa7a-41f6-46ef-9dff-b9ec6e554c9e
+    outputNodePortGUID: 151a5803-155b-44d5-8295-bb629b11edbc
+    inputNodeGUID: e8ff3ff8-3052-4918-a3d7-5997fe7cec45
+  - outputNodeGUID: fc78aa7a-41f6-46ef-9dff-b9ec6e554c9e
+    outputNodePortGUID: 187fbcca-8918-4db6-b90e-19341e4a5253
+    inputNodeGUID: 502bc9c1-dad7-4141-9050-62e8122395ab
+  - outputNodeGUID: e8ff3ff8-3052-4918-a3d7-5997fe7cec45
+    outputNodePortGUID: f51ff7d6-a6bb-41a7-8edd-da6313ff83d6
+    inputNodeGUID: a4601937-e6ef-42ce-bddb-f5c3d77cfd5b
+  - outputNodeGUID: e8ff3ff8-3052-4918-a3d7-5997fe7cec45
+    outputNodePortGUID: a1380a05-3a3f-4db5-9725-a967a472be7a
+    inputNodeGUID: 80c8a64b-2b95-4d0f-84ac-7e73c8a46f76
+  - outputNodeGUID: e8ff3ff8-3052-4918-a3d7-5997fe7cec45
+    outputNodePortGUID: 62504b3b-f739-4bc8-9ab6-7a501afd9e75
+    inputNodeGUID: cc1acb68-5cbb-4dd0-87bc-b3978d641d5d
+  - outputNodeGUID: cc1acb68-5cbb-4dd0-87bc-b3978d641d5d
+    outputNodePortGUID: e87ad8ec-aacb-470b-9f9c-aa7bf76bd7c8
+    inputNodeGUID: 64b4c3d3-62c9-4162-97d3-e20858ee3ce2
+  - outputNodeGUID: cc1acb68-5cbb-4dd0-87bc-b3978d641d5d
+    outputNodePortGUID: 8dee0f08-9b4b-479e-bb9a-abf4ae01e82e
+    inputNodeGUID: fb535598-b540-425a-80e2-59a8f6881638
+  - outputNodeGUID: 80c8a64b-2b95-4d0f-84ac-7e73c8a46f76
+    outputNodePortGUID: 70df2641-cb8b-4e56-a6e0-f1c002883beb
+    inputNodeGUID: 62640b67-782f-4266-acf4-f1eb8e68fb5a
+  - outputNodeGUID: 80c8a64b-2b95-4d0f-84ac-7e73c8a46f76
+    outputNodePortGUID: 992d3607-3e0c-4b78-9e62-306f24223a67
+    inputNodeGUID: 578a9a17-544c-4773-b336-6dacc2475e55
+  - outputNodeGUID: 578a9a17-544c-4773-b336-6dacc2475e55
+    outputNodePortGUID: fb6b9993-46b8-4e0e-b9a3-60dd5bd7715b
+    inputNodeGUID: a4601937-e6ef-42ce-bddb-f5c3d77cfd5b
+  - outputNodeGUID: 578a9a17-544c-4773-b336-6dacc2475e55
+    outputNodePortGUID: 65a4aa7a-819f-46e6-a791-9908bec9512f
+    inputNodeGUID: 5f2d8dfe-a42c-46f1-82e1-3573818ff1c1
+  - outputNodeGUID: 5f2d8dfe-a42c-46f1-82e1-3573818ff1c1
+    outputNodePortGUID: 2ae936d2-070c-4d68-b428-3d70a64f4177
+    inputNodeGUID: 0617ee5c-c1cd-46e4-86cc-0b301c5a17c6
+  - outputNodeGUID: 5f2d8dfe-a42c-46f1-82e1-3573818ff1c1
+    outputNodePortGUID: 62154e75-74f8-4e4e-997d-ed2646559471
+    inputNodeGUID: d215fada-e6b8-4761-b24b-1d1fc56b4790
+  - outputNodeGUID: bb812121-df51-441c-a223-5b7ffba9158a
+    outputNodePortGUID: a8eaf220-29ee-49f3-9c93-47129ee4c459
+    inputNodeGUID: de294f1b-23c2-48ce-9e52-3be4b5d9d436
+  - outputNodeGUID: de294f1b-23c2-48ce-9e52-3be4b5d9d436
+    outputNodePortGUID: 9248ab93-8694-4841-a5ad-bcb9cbeae5b3
+    inputNodeGUID: 43fb9d4d-8f23-42ef-ba87-328613a218e1
+  - outputNodeGUID: 43fb9d4d-8f23-42ef-ba87-328613a218e1
+    outputNodePortGUID: e3f582d3-e8c0-4c21-9547-fc999119b664
+    inputNodeGUID: 57aab69f-529c-4ad5-bd7f-bc6b26fd970a
+  - outputNodeGUID: 43fb9d4d-8f23-42ef-ba87-328613a218e1
+    outputNodePortGUID: 9a1a703a-fefd-4c0c-b1c6-7f3dcc9314d9
+    inputNodeGUID: 57aab69f-529c-4ad5-bd7f-bc6b26fd970a
+  - outputNodeGUID: 57aab69f-529c-4ad5-bd7f-bc6b26fd970a
+    outputNodePortGUID: 671894e8-6cf9-435e-94a0-56e83810c4a8
+    inputNodeGUID: 479c7a2b-78be-4f62-8241-1b5b0ebb35f5
+  - outputNodeGUID: 57aab69f-529c-4ad5-bd7f-bc6b26fd970a
+    outputNodePortGUID: 079f3e28-0f9e-4713-845c-896f6b3b8454
+    inputNodeGUID: b9761847-0486-4bae-8df5-40b16ed9bc09
+  - outputNodeGUID: 479c7a2b-78be-4f62-8241-1b5b0ebb35f5
+    outputNodePortGUID: f4f459cc-1d6f-4991-b0bb-cab199db59a5
+    inputNodeGUID: b9761847-0486-4bae-8df5-40b16ed9bc09
+  - outputNodeGUID: b9761847-0486-4bae-8df5-40b16ed9bc09
+    outputNodePortGUID: 301d6c91-3f84-4217-9e7f-4517322f1305
+    inputNodeGUID: ad3218b3-e9a3-4aff-a65c-23784d58670b
+  - outputNodeGUID: ad3218b3-e9a3-4aff-a65c-23784d58670b
+    outputNodePortGUID: 1cd7a7bd-cdae-4f70-96ed-14b6450e1508
+    inputNodeGUID: 0c40937e-cee8-4e31-be44-3638bc52cc9e
+  - outputNodeGUID: 0c40937e-cee8-4e31-be44-3638bc52cc9e
+    outputNodePortGUID: 5b1f375a-69e8-4606-a043-2f26f86c542b
+    inputNodeGUID: 5275eeab-532c-4bff-90b2-d6e27c271fc9
+  - outputNodeGUID: 5275eeab-532c-4bff-90b2-d6e27c271fc9
+    outputNodePortGUID: 3ead343b-14b9-4095-aae6-924f3a346eea
+    inputNodeGUID: c522d70b-e513-405f-85cc-8a9ebed2b4de
+  - outputNodeGUID: b9761847-0486-4bae-8df5-40b16ed9bc09
+    outputNodePortGUID: 1821fce9-3512-4390-9dd3-8bd531eb407a
+    inputNodeGUID: 527b47f0-1609-4041-b056-7caf7ea9766a
+  - outputNodeGUID: 527b47f0-1609-4041-b056-7caf7ea9766a
+    outputNodePortGUID: f031ab65-9a25-4654-b81d-11275ba74a8a
+    inputNodeGUID: 4dd6a552-1be5-4e9f-a888-e4203847a39d
+  - outputNodeGUID: 4dd6a552-1be5-4e9f-a888-e4203847a39d
+    outputNodePortGUID: 9d6cc55c-2c6a-4cfd-a35b-c07839b01b2e
+    inputNodeGUID: 8ac8ff75-04f7-461c-805a-c9838ae94b58
+  - outputNodeGUID: 4dd6a552-1be5-4e9f-a888-e4203847a39d
+    outputNodePortGUID: 3946e5b8-ac77-4be2-87db-2640c2eb6241
+    inputNodeGUID: 7a5e2bef-f213-48d0-bc6a-70a74e325333
+  - outputNodeGUID: 527b47f0-1609-4041-b056-7caf7ea9766a
+    outputNodePortGUID: fa3187e9-8459-47d1-84da-ddbf72c3d248
+    inputNodeGUID: 7a5e2bef-f213-48d0-bc6a-70a74e325333
+  - outputNodeGUID: 1793c012-6220-4c6e-b710-56ddf01e560c
+    outputNodePortGUID: bd794120-093b-4a74-a9bd-4f6927f6358d
+    inputNodeGUID: e0d0c7b6-1b3c-4543-bb1a-971182d28ba2
+  - outputNodeGUID: 1793c012-6220-4c6e-b710-56ddf01e560c
+    outputNodePortGUID: c9dc87cc-71e5-4537-b812-2ddd2903252e
+    inputNodeGUID: df56e213-e136-4d95-be6c-cc5d39de7bea
+  - outputNodeGUID: 1793c012-6220-4c6e-b710-56ddf01e560c
+    outputNodePortGUID: 96671e35-ef59-4923-bfb4-d685abdc39b5
+    inputNodeGUID: a70e7edd-8613-41a3-8f6c-cea6395aa9a3
+  - outputNodeGUID: 85d9ea2d-bd08-4954-877e-7b6b7714ea90
+    outputNodePortGUID: ea9809d0-6d9d-40fe-9c32-9e3b2dedf1fd
+    inputNodeGUID: 42435be9-9536-46d5-bad9-d9dd2815f021
+  - outputNodeGUID: 42435be9-9536-46d5-bad9-d9dd2815f021
+    outputNodePortGUID: b28def11-80a9-4d8d-980f-9536dc2d6345
+    inputNodeGUID: 54473201-225c-4138-bfd7-bc62d75ad737
+  - outputNodeGUID: a70e7edd-8613-41a3-8f6c-cea6395aa9a3
+    outputNodePortGUID: 4644c382-d995-4872-b525-3f6bd9dd76f6
+    inputNodeGUID: 85d9ea2d-bd08-4954-877e-7b6b7714ea90
+  - outputNodeGUID: a70e7edd-8613-41a3-8f6c-cea6395aa9a3
+    outputNodePortGUID: 8c41e6dd-5ac3-4477-95c1-2babe1591182
+    inputNodeGUID: 410e926a-4679-4217-9466-4bbcae1e8429
+  - outputNodeGUID: 410e926a-4679-4217-9466-4bbcae1e8429
+    outputNodePortGUID: 2d0a2e23-1980-4452-a4d6-07ef835404d6
+    inputNodeGUID: 85d9ea2d-bd08-4954-877e-7b6b7714ea90
+  - outputNodeGUID: 410e926a-4679-4217-9466-4bbcae1e8429
+    outputNodePortGUID: 69e84edd-b03d-4448-9145-2c34043b2b81
+    inputNodeGUID: c1a6da49-55e1-4a66-b97a-a468220d655b
+  - outputNodeGUID: 42435be9-9536-46d5-bad9-d9dd2815f021
+    outputNodePortGUID: 1f7a0073-7517-4581-af95-bcab7c949412
+    inputNodeGUID: d8cb0714-7bc9-40df-9263-d1e9a4da189b
+  - outputNodeGUID: db1d6677-34dd-4d00-b93f-40905ee44e41
+    outputNodePortGUID: d6272983-60a5-41b6-ae44-4a839bb8b43a
+    inputNodeGUID: cada0018-de47-4050-a2fd-f17e6599385a
+  - outputNodeGUID: db1d6677-34dd-4d00-b93f-40905ee44e41
+    outputNodePortGUID: 9b79a431-906e-43b8-9f9b-e6879752ed7d
+    inputNodeGUID: cada0018-de47-4050-a2fd-f17e6599385a
+  - outputNodeGUID: cada0018-de47-4050-a2fd-f17e6599385a
+    outputNodePortGUID: e643b247-0b25-4471-b9dd-b93d79644dd8
+    inputNodeGUID: b30b7cda-1598-44ed-85f9-5e85181b741d
+  - outputNodeGUID: cada0018-de47-4050-a2fd-f17e6599385a
+    outputNodePortGUID: 985c2850-0af7-4f05-873e-52e95de4f404
+    inputNodeGUID: 10d96a55-521c-4320-b80d-f9f5ea2f08d6
+  - outputNodeGUID: cada0018-de47-4050-a2fd-f17e6599385a
+    outputNodePortGUID: 545413e5-f2b5-4433-8ab0-51f57b1b7de5
+    inputNodeGUID: 10d96a55-521c-4320-b80d-f9f5ea2f08d6
+  - outputNodeGUID: 10d96a55-521c-4320-b80d-f9f5ea2f08d6
+    outputNodePortGUID: 688c2c56-82b6-4d0c-8475-f7209797b38b
+    inputNodeGUID: 9d409270-988a-4cfa-a20f-ed0452df8e0f
+  - outputNodeGUID: 10d96a55-521c-4320-b80d-f9f5ea2f08d6
+    outputNodePortGUID: cbfa26ab-26fc-41c5-92b3-c693896e40d4
+    inputNodeGUID: fbbd9d81-ba7c-4bf6-9322-aed1d1895b50
+  - outputNodeGUID: 4902acb7-ea7a-4160-a9c5-a42c17d907f1
+    outputNodePortGUID: 13cce992-971a-494f-bdd5-e91e3daf0491
+    inputNodeGUID: 16a9e5d2-b688-417a-80a7-7123b198b74b
+  - outputNodeGUID: 16a9e5d2-b688-417a-80a7-7123b198b74b
+    outputNodePortGUID: 3c7909ab-f55f-4ca2-a674-74227ec5cb6f
+    inputNodeGUID: 53447ca8-75cc-4ff3-9b35-880cb851a490
+  - outputNodeGUID: 53447ca8-75cc-4ff3-9b35-880cb851a490
+    outputNodePortGUID: 7c9ef8f6-1c00-4b29-96b6-6d1d63c7263f
+    inputNodeGUID: 65d73639-ad32-4b1c-b35c-ef86e3a6ffb6
+  - outputNodeGUID: 65d73639-ad32-4b1c-b35c-ef86e3a6ffb6
+    outputNodePortGUID: d57f3481-5446-4d30-aee5-5dd0887d57a0
+    inputNodeGUID: f979092e-988f-4e64-b677-bc9cdcc2270e
+  - outputNodeGUID: f979092e-988f-4e64-b677-bc9cdcc2270e
+    outputNodePortGUID: a44b6a52-6763-4321-b573-fd171dee8f82
+    inputNodeGUID: fbbd9d81-ba7c-4bf6-9322-aed1d1895b50
+  - outputNodeGUID: fbbd9d81-ba7c-4bf6-9322-aed1d1895b50
+    outputNodePortGUID: 841052dc-8fe8-4e88-9752-92863ef54e6e
+    inputNodeGUID: 4902acb7-ea7a-4160-a9c5-a42c17d907f1
+  - outputNodeGUID: fbbd9d81-ba7c-4bf6-9322-aed1d1895b50
+    outputNodePortGUID: 1b9313ef-a39b-4a9f-9f7c-3844d4c6fcf1
+    inputNodeGUID: b30b7cda-1598-44ed-85f9-5e85181b741d
+  - outputNodeGUID: fbbd9d81-ba7c-4bf6-9322-aed1d1895b50
+    outputNodePortGUID: 77ee8708-e5b0-42be-945e-e2ed0d1e7bf5
+    inputNodeGUID: 281aef8b-b7eb-4546-b779-b0ac865bb08d
+  - outputNodeGUID: 281aef8b-b7eb-4546-b779-b0ac865bb08d
+    outputNodePortGUID: 31543fda-6eee-427d-b3d5-5bf897ec8763
+    inputNodeGUID: 36c9d5a4-e788-48d6-8b65-a078e935d6b3
+  - outputNodeGUID: 36c9d5a4-e788-48d6-8b65-a078e935d6b3
+    outputNodePortGUID: baa01992-d9b3-4814-9340-581137b213e0
+    inputNodeGUID: 8a68efcd-9bb2-4371-9205-44e7dd5637a6
+  - outputNodeGUID: 36c9d5a4-e788-48d6-8b65-a078e935d6b3
+    outputNodePortGUID: 7ae81081-3ea8-407a-82c0-00dd24406732
+    inputNodeGUID: 8a68efcd-9bb2-4371-9205-44e7dd5637a6
+  - outputNodeGUID: 281aef8b-b7eb-4546-b779-b0ac865bb08d
+    outputNodePortGUID: af9a8319-cd81-43bf-947e-d977389eba5a
+    inputNodeGUID: 8a68efcd-9bb2-4371-9205-44e7dd5637a6
+  - outputNodeGUID: 281aef8b-b7eb-4546-b779-b0ac865bb08d
+    outputNodePortGUID: 531c41f1-516a-40b6-b32a-87141de250c5
+    inputNodeGUID: fb1ae3c5-a231-45c9-89b8-29cf582bbdc0
+  - outputNodeGUID: fb1ae3c5-a231-45c9-89b8-29cf582bbdc0
+    outputNodePortGUID: db6f7cb6-eaf8-487a-b97e-ecb90849138c
+    inputNodeGUID: 8a68efcd-9bb2-4371-9205-44e7dd5637a6
+  - outputNodeGUID: 8a68efcd-9bb2-4371-9205-44e7dd5637a6
+    outputNodePortGUID: b54ed9ef-8679-4ac2-9cd8-700136f40553
+    inputNodeGUID: cc4a9e73-9ab4-43f6-a666-1e01147a162a
+  - outputNodeGUID: cc4a9e73-9ab4-43f6-a666-1e01147a162a
+    outputNodePortGUID: b1525a5b-afcc-4cdc-b8a0-e320d37e5ae7
+    inputNodeGUID: fae0d485-1130-4982-ab25-deb226563fd9
+  - outputNodeGUID: cc4a9e73-9ab4-43f6-a666-1e01147a162a
+    outputNodePortGUID: 8730a34a-8b4a-4332-afb2-7817314c58e1
+    inputNodeGUID: fae0d485-1130-4982-ab25-deb226563fd9
+  - outputNodeGUID: fae0d485-1130-4982-ab25-deb226563fd9
+    outputNodePortGUID: b8d7a69e-648d-48fd-9223-bf508a46e787
+    inputNodeGUID: bb66ce91-01f4-47dc-b46e-4b8bc07e751a
+  - outputNodeGUID: bb66ce91-01f4-47dc-b46e-4b8bc07e751a
+    outputNodePortGUID: ea5c0c77-bd12-46f8-b3a8-a40656459525
+    inputNodeGUID: 6873cb32-b912-4037-a63d-b6c5eaba00db
+  - outputNodeGUID: 6873cb32-b912-4037-a63d-b6c5eaba00db
+    outputNodePortGUID: e72b15c0-570c-4e40-8a6f-ecd285db8060
+    inputNodeGUID: caccf918-82ec-42e7-8377-0f874d069a35
+  - outputNodeGUID: caccf918-82ec-42e7-8377-0f874d069a35
+    outputNodePortGUID: 42004f1a-4ffd-4c11-9a84-2c3b4f12b985
+    inputNodeGUID: 1d6bc402-3135-4534-b41f-b21e394cb3da
+  - outputNodeGUID: 1d6bc402-3135-4534-b41f-b21e394cb3da
+    outputNodePortGUID: efacb5cd-7cdf-47b4-be91-7f846d69a8d1
+    inputNodeGUID: e0d7830c-3f8a-4f64-ba33-4e44df454ac3
+  - outputNodeGUID: e0d7830c-3f8a-4f64-ba33-4e44df454ac3
+    outputNodePortGUID: 46a14307-7819-43d2-b496-2c94e1c50bcd
+    inputNodeGUID: 6836faed-5da4-4dca-a53b-ef33140eae30
+  - outputNodeGUID: fd09fd1b-9857-4f48-9b81-953062fb1b51
+    outputNodePortGUID: 97134027-20e8-4668-a141-ea814c15c784
+    inputNodeGUID: e0d7830c-3f8a-4f64-ba33-4e44df454ac3
+  - outputNodeGUID: e0d7830c-3f8a-4f64-ba33-4e44df454ac3
+    outputNodePortGUID: 225ff297-2bc9-4783-a0b2-c493fc821531
+    inputNodeGUID: 1d6bc402-3135-4534-b41f-b21e394cb3da
+  - outputNodeGUID: e0d7830c-3f8a-4f64-ba33-4e44df454ac3
+    outputNodePortGUID: 5452826f-b762-42ff-ac73-c3273446a54c
+    inputNodeGUID: fd09fd1b-9857-4f48-9b81-953062fb1b51
+  - outputNodeGUID: 1d6bc402-3135-4534-b41f-b21e394cb3da
+    outputNodePortGUID: 7df7418b-83c4-425e-a2b4-2e034cb403cf
+    inputNodeGUID: 0233aeec-54bc-41e5-931b-a499fa5f37f8
+  - outputNodeGUID: 1d6bc402-3135-4534-b41f-b21e394cb3da
+    outputNodePortGUID: 44fc8615-b8cc-4879-9f30-2e72e32d5570
+    inputNodeGUID: c0de5a0e-2c86-4f13-a556-c9f49323358e
+  - outputNodeGUID: c0de5a0e-2c86-4f13-a556-c9f49323358e
+    outputNodePortGUID: 210f63f1-d30e-4955-a624-56ec9ff88d56
+    inputNodeGUID: 0233aeec-54bc-41e5-931b-a499fa5f37f8
+  - outputNodeGUID: c0de5a0e-2c86-4f13-a556-c9f49323358e
+    outputNodePortGUID: eee5881e-2fc0-4d6e-b2d8-11323559bf23
+    inputNodeGUID: e16b8f1c-fa5a-44cd-995c-9276695a9258
+  - outputNodeGUID: e16b8f1c-fa5a-44cd-995c-9276695a9258
+    outputNodePortGUID: 56101f99-34f6-4a68-91b5-6120d785a3dc
+    inputNodeGUID: e5097635-0c54-4a0d-a200-acf48f7dc465
+  - outputNodeGUID: 385b6529-8c70-4a27-91ad-b4e566a73450
+    outputNodePortGUID: 69bac2eb-536c-4940-a682-ea07d0440f2d
+    inputNodeGUID: 314ab998-f05a-4b88-80f4-459dc223e825
+  - outputNodeGUID: 314ab998-f05a-4b88-80f4-459dc223e825
+    outputNodePortGUID: ba195fd1-0c2d-4f1c-8d25-ad99e30ff223
+    inputNodeGUID: 50600c75-65f8-44a2-9982-f15ac13f5512
+  - outputNodeGUID: 314ab998-f05a-4b88-80f4-459dc223e825
+    outputNodePortGUID: a0606a59-1ebd-4c96-860c-82d82bce83a8
+    inputNodeGUID: 50600c75-65f8-44a2-9982-f15ac13f5512
+  - outputNodeGUID: 50600c75-65f8-44a2-9982-f15ac13f5512
+    outputNodePortGUID: b0bb3dd0-5aa5-4e28-888c-a50551531b10
+    inputNodeGUID: 9ea88bbf-f031-454b-a02a-b680d2e813b3
+  - outputNodeGUID: 50600c75-65f8-44a2-9982-f15ac13f5512
+    outputNodePortGUID: 446f2205-442e-4af7-9a4a-c1f076c1bada
+    inputNodeGUID: bfae09ee-a75f-4572-8ad8-70603aae98fd
+  - outputNodeGUID: bfae09ee-a75f-4572-8ad8-70603aae98fd
+    outputNodePortGUID: 0924ea44-7203-4bac-acf9-a99bc93e88d7
+    inputNodeGUID: 2fba06f7-18c4-4176-9567-50316e4b66a6
+  - outputNodeGUID: 2fba06f7-18c4-4176-9567-50316e4b66a6
+    outputNodePortGUID: 24c83fc7-e8bc-4504-bd33-c89546196283
+    inputNodeGUID: 9ea88bbf-f031-454b-a02a-b680d2e813b3
+  - outputNodeGUID: 2fba06f7-18c4-4176-9567-50316e4b66a6
+    outputNodePortGUID: 441f9e21-2cfa-47dd-83ea-7283d61cabe1
+    inputNodeGUID: 9ee9d952-fdef-448a-8929-38f6c8094c1b
+  - outputNodeGUID: 2fba06f7-18c4-4176-9567-50316e4b66a6
+    outputNodePortGUID: 68125ca0-ad0d-43d0-b48a-1cb29e51654e
+    inputNodeGUID: 3373a2eb-9067-4196-97f1-cdf6a917ce67
+  - outputNodeGUID: 9ee9d952-fdef-448a-8929-38f6c8094c1b
+    outputNodePortGUID: 90446a07-ea26-4c96-af42-5b38018acd22
+    inputNodeGUID: 3373a2eb-9067-4196-97f1-cdf6a917ce67
+  - outputNodeGUID: 3373a2eb-9067-4196-97f1-cdf6a917ce67
+    outputNodePortGUID: 2cc70257-a4b5-4d41-b395-8b63f4946b86
+    inputNodeGUID: 27fc594c-2785-49c4-96d2-ef29956cf302
+  - outputNodeGUID: 3373a2eb-9067-4196-97f1-cdf6a917ce67
+    outputNodePortGUID: 48664d36-3cc9-42c0-a272-e6ee7975afca
+    inputNodeGUID: 27fc594c-2785-49c4-96d2-ef29956cf302
+  - outputNodeGUID: 27fc594c-2785-49c4-96d2-ef29956cf302
+    outputNodePortGUID: 91fd2429-ba97-44df-a355-9f843ac99082
+    inputNodeGUID: edfeca52-f131-4234-8917-24c95125cb83
+  - outputNodeGUID: 27fc594c-2785-49c4-96d2-ef29956cf302
+    outputNodePortGUID: 24aa24d3-d584-4274-be89-ff1582d47cfc
+    inputNodeGUID: af7af86a-4ac4-48c4-be6c-90419427a7f9
+  - outputNodeGUID: af7af86a-4ac4-48c4-be6c-90419427a7f9
+    outputNodePortGUID: 1f059272-02e2-4ba2-9c41-43d8efd68bcc
+    inputNodeGUID: edfeca52-f131-4234-8917-24c95125cb83
+  - outputNodeGUID: af7af86a-4ac4-48c4-be6c-90419427a7f9
+    outputNodePortGUID: b2261e95-244b-4578-92c4-ede55fa0f375
+    inputNodeGUID: 7d047e2b-bf83-42fd-ad3b-0eb11e1d5bff
+  - outputNodeGUID: edfeca52-f131-4234-8917-24c95125cb83
+    outputNodePortGUID: ce68c275-bea2-4782-80d0-0d333c0f3a1a
+    inputNodeGUID: bdcf6f49-78f5-4fb6-940d-1ea096c0b8a2
+  - outputNodeGUID: bdcf6f49-78f5-4fb6-940d-1ea096c0b8a2
+    outputNodePortGUID: 552cc2c8-3c5a-4142-a87a-dcb59c0ff9f1
+    inputNodeGUID: 7d047e2b-bf83-42fd-ad3b-0eb11e1d5bff
+  - outputNodeGUID: bdcf6f49-78f5-4fb6-940d-1ea096c0b8a2
+    outputNodePortGUID: 22722fc9-1937-4686-a242-cafae586864a
+    inputNodeGUID: 0713163f-8403-41d6-82b6-1af621702bcd
+  - outputNodeGUID: 0713163f-8403-41d6-82b6-1af621702bcd
+    outputNodePortGUID: d92bac2a-9eca-4623-b0ee-418edb848901
+    inputNodeGUID: 7592d73a-4c5b-4484-86a9-d3cd927fd0fd
+  - outputNodeGUID: 60505bc3-3fbf-496f-b308-5bb41b4e0f24
+    outputNodePortGUID: 6e2ae141-c34a-48f2-858e-dbacc6c64077
+    inputNodeGUID: df6e0c84-8807-46ef-bbdf-36351dd22f04
+  - outputNodeGUID: 60505bc3-3fbf-496f-b308-5bb41b4e0f24
+    outputNodePortGUID: 4cb99dcc-fe0c-495b-aa3f-2f64a56e27e5
+    inputNodeGUID: c75844c3-759a-499f-8aba-ef1861f6448f
+  - outputNodeGUID: c75844c3-759a-499f-8aba-ef1861f6448f
+    outputNodePortGUID: 0847700a-316d-49a4-8b5c-90197862c288
+    inputNodeGUID: 872be7b8-9159-475b-b818-8fba0ba5ec77
+  - outputNodeGUID: c75844c3-759a-499f-8aba-ef1861f6448f
+    outputNodePortGUID: 2ebdea4e-7eb2-4e70-8aa9-4ea1514e3526
+    inputNodeGUID: c587a46a-7818-462a-bdaa-aab8edac226a
+  - outputNodeGUID: 3ed1d6fc-b237-4673-be4b-ed8c2072e036
+    outputNodePortGUID: 6e3e2ce9-bf59-417d-9738-199b348470ed
+    inputNodeGUID: efe04ab1-fa45-4be7-9b9c-20dc8d29cb4d
+  - outputNodeGUID: efe04ab1-fa45-4be7-9b9c-20dc8d29cb4d
+    outputNodePortGUID: 61ca8bd8-64ce-4a08-bd74-79fd75f75801
+    inputNodeGUID: b0ccc8e2-715a-40de-8bc5-ac703fc887c8
+  - outputNodeGUID: b57ba2e5-4420-45a2-97d6-ff65525e6cea
+    outputNodePortGUID: da7d28fd-9b91-497c-bd1d-8971369acad5
+    inputNodeGUID: a9a420e7-c41c-46d7-bb7b-4aceb69819c1
+  - outputNodeGUID: efe04ab1-fa45-4be7-9b9c-20dc8d29cb4d
+    outputNodePortGUID: 18bae40b-8335-49be-b4e1-02c1482e3407
+    inputNodeGUID: b57ba2e5-4420-45a2-97d6-ff65525e6cea
+  - outputNodeGUID: b57ba2e5-4420-45a2-97d6-ff65525e6cea
+    outputNodePortGUID: e6c61a00-2610-46f2-9e1d-c38596c562cc
+    inputNodeGUID: 2c6f67e1-6e6b-46c6-84b5-0bba4f751747
+  - outputNodeGUID: 2c6f67e1-6e6b-46c6-84b5-0bba4f751747
+    outputNodePortGUID: c8a97b28-bc25-48fa-9d1a-fbd839e1ab45
+    inputNodeGUID: 8e2c8fce-6176-475e-93a9-10bc7574e3ad
+  - outputNodeGUID: 8e2c8fce-6176-475e-93a9-10bc7574e3ad
+    outputNodePortGUID: 7b9fb38b-d2ca-42bd-8df6-40aa1c04419d
+    inputNodeGUID: 35f0577a-e73f-4217-8d32-91ac2d679e57
+  - outputNodeGUID: 35f0577a-e73f-4217-8d32-91ac2d679e57
+    outputNodePortGUID: c01f6ed1-4c86-4b28-880a-5a31052dec2f
+    inputNodeGUID: 55470d2d-3071-43f7-ac16-3c158d8e9835
+  - outputNodeGUID: 55470d2d-3071-43f7-ac16-3c158d8e9835
+    outputNodePortGUID: 29ae024a-27ac-450a-bbe9-51cf10f2adf6
+    inputNodeGUID: 8d585f6e-7ebe-45bb-9c0d-146df618f992
+  - outputNodeGUID: 8d585f6e-7ebe-45bb-9c0d-146df618f992
+    outputNodePortGUID: 3ed81585-b6b2-4b98-8924-1e0976e6a104
+    inputNodeGUID: 232b9138-8174-4d67-90fd-4e43125b92d5
+  - outputNodeGUID: 232b9138-8174-4d67-90fd-4e43125b92d5
+    outputNodePortGUID: 69f625d0-d01b-45f8-8ce2-ee990a36ad97
+    inputNodeGUID: d5cf7653-af82-4b15-972d-897a68e28e01
+  - outputNodeGUID: d5cf7653-af82-4b15-972d-897a68e28e01
+    outputNodePortGUID: febf8f5e-039d-4e70-8085-aecb1e914acb
+    inputNodeGUID: b9de1df5-6abf-4639-a8a4-44092491cb06
+  - outputNodeGUID: d5cf7653-af82-4b15-972d-897a68e28e01
+    outputNodePortGUID: 42595c02-f36a-4f64-86b5-36c25b3df945
+    inputNodeGUID: b9de1df5-6abf-4639-a8a4-44092491cb06
+  - outputNodeGUID: d5cf7653-af82-4b15-972d-897a68e28e01
+    outputNodePortGUID: 1471c369-70a6-49ce-8aa1-83d867d2a3cb
+    inputNodeGUID: 31fd6f40-8e6a-4429-9e9a-fe2be72a74e2
+  - outputNodeGUID: 232b9138-8174-4d67-90fd-4e43125b92d5
+    outputNodePortGUID: ac417c28-1d36-4ef9-bd37-67ae8c62a217
+    inputNodeGUID: f7b68b3f-b725-48a4-8d32-e370af5358f9
+  - outputNodeGUID: f7b68b3f-b725-48a4-8d32-e370af5358f9
+    outputNodePortGUID: 8020c352-cb02-4c03-ab28-57b30dab9a1d
+    inputNodeGUID: 70557f29-8415-4fae-aef6-469e4d461ddd
+  - outputNodeGUID: b9de1df5-6abf-4639-a8a4-44092491cb06
+    outputNodePortGUID: 3b56299c-ec3d-4a4e-8d9d-f74e466bfb62
+    inputNodeGUID: 70557f29-8415-4fae-aef6-469e4d461ddd
+  - outputNodeGUID: 31fd6f40-8e6a-4429-9e9a-fe2be72a74e2
+    outputNodePortGUID: 97003abe-c993-4eb3-8aa4-bef2f718e542
+    inputNodeGUID: 70557f29-8415-4fae-aef6-469e4d461ddd
+  - outputNodeGUID: 0e2ab899-1838-4703-adc3-d6385281bd9d
+    outputNodePortGUID: 5cf89b69-1a29-48c9-a3df-1f3840a6a158
+    inputNodeGUID: 5b177b41-e77d-41a6-98a9-dc42e5d46f69
+  - outputNodeGUID: ce730512-79ad-4cf6-978a-8a1a22ab3da4
+    outputNodePortGUID: 9c225710-dc0d-4f37-b8cc-1bf74f3f7fcf
+    inputNodeGUID: f67c9d98-ac2f-44a9-b24b-6eaf6c75b605
+  - outputNodeGUID: f67c9d98-ac2f-44a9-b24b-6eaf6c75b605
+    outputNodePortGUID: 98ccf606-2b82-45c3-8527-5846e8aec95c
+    inputNodeGUID: cab31311-9134-4df3-b150-ad5b937ae131
+  - outputNodeGUID: 5b177b41-e77d-41a6-98a9-dc42e5d46f69
+    outputNodePortGUID: e44abc94-84e4-4652-82a7-67f3bc5f5d27
+    inputNodeGUID: cab31311-9134-4df3-b150-ad5b937ae131
+  - outputNodeGUID: cab31311-9134-4df3-b150-ad5b937ae131
+    outputNodePortGUID: 04e80e8a-547a-4f05-a1eb-ba67b2dadbeb
+    inputNodeGUID: 53628c9a-63c0-4c0a-940b-ab667ba3ca4f
+  - outputNodeGUID: 53628c9a-63c0-4c0a-940b-ab667ba3ca4f
+    outputNodePortGUID: bcbc1c9b-3ef3-4060-ad26-55c52e87f3fe
+    inputNodeGUID: 0cf89c63-ad87-48dc-92fe-765d4bc54900
+  - outputNodeGUID: 0cf89c63-ad87-48dc-92fe-765d4bc54900
+    outputNodePortGUID: d7202650-bb1a-46bd-98db-5df1bb1e643d
+    inputNodeGUID: fb4f03d4-5d80-48f3-817e-2264aa5df6e4
+  - outputNodeGUID: 0cf89c63-ad87-48dc-92fe-765d4bc54900
+    outputNodePortGUID: e8c92c6f-54e0-4970-b361-6a423e9f5992
+    inputNodeGUID: fb4f03d4-5d80-48f3-817e-2264aa5df6e4
+  - outputNodeGUID: 2ea4dfb0-eef3-4e38-93bd-07ec7c73e088
+    outputNodePortGUID: 42946463-35f5-4f9e-a6e9-a48f9bca3164
+    inputNodeGUID: c5673eeb-307e-4276-b03a-8ddf85aef1d8
+  - outputNodeGUID: fb4f03d4-5d80-48f3-817e-2264aa5df6e4
+    outputNodePortGUID: 47e0d01c-da19-448f-acfe-75f5add5a3c4
+    inputNodeGUID: 2ea4dfb0-eef3-4e38-93bd-07ec7c73e088
+  - outputNodeGUID: c5673eeb-307e-4276-b03a-8ddf85aef1d8
+    outputNodePortGUID: 8d80a489-0a97-4785-96a0-caca0cc0ed21
+    inputNodeGUID: deb5ef63-b09d-4fbb-9852-ddc7350d18f4
+  - outputNodeGUID: 2ea4dfb0-eef3-4e38-93bd-07ec7c73e088
+    outputNodePortGUID: 6ba3b2fc-9aed-41fa-b11b-84d198bf7d80
+    inputNodeGUID: deb5ef63-b09d-4fbb-9852-ddc7350d18f4
+  - outputNodeGUID: deb5ef63-b09d-4fbb-9852-ddc7350d18f4
+    outputNodePortGUID: da0be47d-414c-4aeb-9511-9f5ed5c1765b
+    inputNodeGUID: 7c42d139-76b9-483d-8e9a-848c68901a54
+  - outputNodeGUID: deb5ef63-b09d-4fbb-9852-ddc7350d18f4
+    outputNodePortGUID: b8b0439c-e215-4b3b-a9b7-4fecf9bede0a
+    inputNodeGUID: 2b322fdf-e7d0-4062-9082-0c633528cfc7
+  - outputNodeGUID: 2b322fdf-e7d0-4062-9082-0c633528cfc7
+    outputNodePortGUID: 9169010d-d417-4183-9042-a5ac2866a6e0
+    inputNodeGUID: 5a5e1ad6-0231-4e59-971a-6dc47ae7674b
+  - outputNodeGUID: de92b1fc-a2c5-4300-84fe-b272798df313
+    outputNodePortGUID: 5cf92520-06f0-4063-9a5f-b532f7482da5
+    inputNodeGUID: 5a5e1ad6-0231-4e59-971a-6dc47ae7674b
+  - outputNodeGUID: 3915ec27-43a1-4127-bf52-8d04499c7b97
+    outputNodePortGUID: fb196e40-d6c0-4b9c-afc3-f5929afe7fa5
+    inputNodeGUID: a7dd210c-b9ac-4440-9634-91009a1bf0ec
+  - outputNodeGUID: 21138de5-8245-4d82-89c6-5e899784c40b
+    outputNodePortGUID: 5a1681e5-4752-4ed3-818b-8a655eda254e
+    inputNodeGUID: 3915ec27-43a1-4127-bf52-8d04499c7b97
+  - outputNodeGUID: 21138de5-8245-4d82-89c6-5e899784c40b
+    outputNodePortGUID: 697ca6f9-bf0b-42d6-a4c4-d57d1a523604
+    inputNodeGUID: 0f68314b-668e-444d-9a14-3e7a986eb302
+  - outputNodeGUID: 0f68314b-668e-444d-9a14-3e7a986eb302
+    outputNodePortGUID: 76a11a76-9efa-4a83-a275-3d8f7a67f6e5
+    inputNodeGUID: 7a38680f-4388-4be6-861c-db49f9924863
+  - outputNodeGUID: a7dd210c-b9ac-4440-9634-91009a1bf0ec
+    outputNodePortGUID: 526e2c1a-e770-427d-a575-91560df5e690
+    inputNodeGUID: 0f68314b-668e-444d-9a14-3e7a986eb302
+  - outputNodeGUID: 0f68314b-668e-444d-9a14-3e7a986eb302
+    outputNodePortGUID: 1a454a13-6b5c-463d-939f-80b94e593ae5
+    inputNodeGUID: 304a8c3a-a488-4197-894c-2829524342bd
+  - outputNodeGUID: 5a5e1ad6-0231-4e59-971a-6dc47ae7674b
+    outputNodePortGUID: 2f9dfeb9-05d2-4e26-8965-163de86e6ddd
+    inputNodeGUID: 21138de5-8245-4d82-89c6-5e899784c40b
+  - outputNodeGUID: 5b316f69-91af-4e16-a7c2-82c670e01977
+    outputNodePortGUID: 73b4a6d1-bab5-4fa8-ac61-034ab08a383a
+    inputNodeGUID: 7b052e56-c892-4d57-9403-dd686a3752b3
+  - outputNodeGUID: 5b316f69-91af-4e16-a7c2-82c670e01977
+    outputNodePortGUID: a00c9da2-8381-4c57-b083-35b213e7b422
+    inputNodeGUID: 7b052e56-c892-4d57-9403-dd686a3752b3
+  - outputNodeGUID: 7a38680f-4388-4be6-861c-db49f9924863
+    outputNodePortGUID: 6a91f84c-2e63-4411-befa-2b7e1e0da7cc
+    inputNodeGUID: 7b052e56-c892-4d57-9403-dd686a3752b3
+  - outputNodeGUID: a7dd210c-b9ac-4440-9634-91009a1bf0ec
+    outputNodePortGUID: 4b9b8427-9f78-434c-8a86-a2b46bbb7ce7
+    inputNodeGUID: 7b052e56-c892-4d57-9403-dd686a3752b3
+  - outputNodeGUID: 304a8c3a-a488-4197-894c-2829524342bd
+    outputNodePortGUID: 2cac3b45-7abf-4c02-87fa-48e22959d48e
+    inputNodeGUID: 5b316f69-91af-4e16-a7c2-82c670e01977
+  - outputNodeGUID: 3915ec27-43a1-4127-bf52-8d04499c7b97
+    outputNodePortGUID: c8d81d8c-06fe-4134-ad8d-729c4173401d
+    inputNodeGUID: 7b052e56-c892-4d57-9403-dd686a3752b3
+  - outputNodeGUID: 7b052e56-c892-4d57-9403-dd686a3752b3
+    outputNodePortGUID: 527511cb-6d7a-4d9b-a8b4-ff169fac1989
+    inputNodeGUID: a5f38a91-710a-4a2c-a83d-56b96a847cf1
+  - outputNodeGUID: a5f38a91-710a-4a2c-a83d-56b96a847cf1
+    outputNodePortGUID: c271377c-97b8-41c0-ab9a-154cc83831fd
+    inputNodeGUID: 823aeba4-a845-4f40-9a78-a10765fb774a
+  - outputNodeGUID: 823aeba4-a845-4f40-9a78-a10765fb774a
+    outputNodePortGUID: 5b443b22-8c88-4d4a-ac28-6f2969dce765
+    inputNodeGUID: ceefbb2c-01a5-49b9-94a4-044dff9b2ebc
+  - outputNodeGUID: 36e3e7b9-32fd-40cc-bc0a-39d3f4a806f1
+    outputNodePortGUID: 751d1317-fcf6-4ab9-82c0-32b901a51246
+    inputNodeGUID: 5c470766-a25e-4a0e-8dc4-ce927c541714
+  - outputNodeGUID: 5c470766-a25e-4a0e-8dc4-ce927c541714
+    outputNodePortGUID: fbd29fd4-fd44-40a0-8d7e-7ffe86984744
+    inputNodeGUID: a9800b23-2171-4c8e-a4bd-c0c77c40511b
+  - outputNodeGUID: 5c470766-a25e-4a0e-8dc4-ce927c541714
+    outputNodePortGUID: 807cd70d-5c5d-4c16-b19a-90daf9ed758e
+    inputNodeGUID: e2f4f30a-f1b1-4380-ab09-3902a6bd78fc
+  - outputNodeGUID: e2f4f30a-f1b1-4380-ab09-3902a6bd78fc
+    outputNodePortGUID: 9286cfbb-649d-40f2-9764-42967661c999
+    inputNodeGUID: a9800b23-2171-4c8e-a4bd-c0c77c40511b
+  - outputNodeGUID: e2f4f30a-f1b1-4380-ab09-3902a6bd78fc
+    outputNodePortGUID: 9a2eddcf-6f8c-44a5-877b-6c075e53ee2d
+    inputNodeGUID: 19edf4eb-6910-4767-b639-317633b544f3
+  - outputNodeGUID: b0ccc8e2-715a-40de-8bc5-ac703fc887c8
+    outputNodePortGUID: 1054298c-c312-4b4d-9eaa-6c178a2320f5
+    inputNodeGUID: b57ba2e5-4420-45a2-97d6-ff65525e6cea
+  - outputNodeGUID: 5a5e1ad6-0231-4e59-971a-6dc47ae7674b
+    outputNodePortGUID: 5a4f58e1-917a-4f4b-8b67-09493e53ae09
+    inputNodeGUID: de92b1fc-a2c5-4300-84fe-b272798df313
+  - outputNodeGUID: 36e3e7b9-32fd-40cc-bc0a-39d3f4a806f1
+    outputNodePortGUID: 8087236d-51a5-4e38-9a7d-fd9ef1a4e988
+    inputNodeGUID: 420c71f0-c852-408e-af71-72da576267f2
+  - outputNodeGUID: 420c71f0-c852-408e-af71-72da576267f2
+    outputNodePortGUID: 77360377-ed9f-4b11-822b-c4239e85ec97
+    inputNodeGUID: 54be313b-7171-47a3-aadf-40ef9990b517
+  - outputNodeGUID: 420c71f0-c852-408e-af71-72da576267f2
+    outputNodePortGUID: 64f623bd-efcd-4881-9ee9-fddba68569b7
+    inputNodeGUID: f6ef1d87-ea18-4750-a69c-240208866053
+  - outputNodeGUID: 54be313b-7171-47a3-aadf-40ef9990b517
+    outputNodePortGUID: 5da13bc2-dc10-478c-ab44-58487b667193
+    inputNodeGUID: df9616db-10c6-4170-b877-417ed73b377e
+  - outputNodeGUID: 21138de5-8245-4d82-89c6-5e899784c40b
+    outputNodePortGUID: 5ef328bf-57b8-4c88-bd98-92ee3dc2fd38
+    inputNodeGUID: 7b052e56-c892-4d57-9403-dd686a3752b3

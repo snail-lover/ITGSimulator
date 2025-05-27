@@ -1,0 +1,192 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caddbd5778f86e74fb0ea9f048be8b61, type: 3}
+  m_Name: ZozkEnding_Cutscene
+  m_EditorClassIdentifier: Assembly-CSharp::Cutscene
+  actions:
+  - actionName: Move Camera
+    type: 6
+    targetNPCIdentifier: 
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: 
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 0
+    cameraIdentifier: Main Camera
+    cameraTargetMarkerName: CameraStartingPointZozkCutscene
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 1}
+    cameraMoveDuration: 1
+    cameraWaitForMoveCompletion: 1
+    sceneNameToLoad: 
+    duration: 0
+    stringParameter: 
+    dialogueFile: {fileID: 0}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 0
+  - actionName: MovePlayer
+    type: 2
+    targetNPCIdentifier: Temp Character
+    targetIsPlayer: 1
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: PlayerStartingPoint
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 1
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 1}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    duration: 0
+    stringParameter: 
+    dialogueFile: {fileID: 0}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: MoveZozk
+    type: 2
+    targetNPCIdentifier: Zozk
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: ZozkStartingPoint
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 1
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 1}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    duration: 0
+    stringParameter: zozk_end_1
+    dialogueFile: {fileID: 4900000, guid: 8bc8b35725cd3d14cbf2825a26a9e473, type: 3}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: Dialogue
+    type: 4
+    targetNPCIdentifier: Zozk
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: 
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 0
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 1}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    duration: 0
+    stringParameter: ZozkEnding1
+    dialogueFile: {fileID: 4900000, guid: 8bc8b35725cd3d14cbf2825a26a9e473, type: 3}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: Move Camera 2
+    type: 6
+    targetNPCIdentifier: 
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: 
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 0
+    cameraIdentifier: Main Camera
+    cameraTargetMarkerName: CameraSecondPointZozkCutscene
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 1}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    duration: 0
+    stringParameter: 
+    dialogueFile: {fileID: 0}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: MoveZozk
+    type: 2
+    targetNPCIdentifier: Zozk
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: ZozkSecondPoint
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 1
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 1}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    duration: 0
+    stringParameter: 
+    dialogueFile: {fileID: 4900000, guid: 8bc8b35725cd3d14cbf2825a26a9e473, type: 3}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: Dialogue
+    type: 4
+    targetNPCIdentifier: Zozk
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: 
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 0
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 1}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    duration: 0
+    stringParameter: ZozkEnding2
+    dialogueFile: {fileID: 4900000, guid: 8bc8b35725cd3d14cbf2825a26a9e473, type: 3}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: MainMenue
+    type: 9
+    targetNPCIdentifier: Zozk
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: 
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 0
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 1}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: MainMenu
+    duration: 0
+    stringParameter: ZozkEnding2
+    dialogueFile: {fileID: 4900000, guid: 8bc8b35725cd3d14cbf2825a26a9e473, type: 3}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  involvedNPCsOverrideIdentifiers: []

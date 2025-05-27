@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcbff4ebcfbf5544bcb20250fece632, type: 3}
+  m_Name: Edvin Dialogue Graph
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::DialogueGraphSO
+  entryPointNodeGUID: e55d5320-aeac-4afb-a173-c99ac38702cf
+  startingLove: 0
+  loveTiers: []
+  nodes:
+  - nodeGUID: e55d5320-aeac-4afb-a173-c99ac38702cf
+    nodeID: Node_2c0a
+    dialogueText: Hello My Name is Edvin!
+    position: {x: 269, y: 381}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: a33cab6f-d482-415d-8c3f-ae19c1e104ba
+      choiceText: Hello Edvin!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+    - outputPortGUID: 6ed72cfb-6fff-47bd-99cb-decb81c6159f
+      choiceText: Didn't ask
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+    isEntryPoint: 1
+  - nodeGUID: 0a7e0c25-e180-4439-8739-25893ad67b35
+    nodeID: Node_8c7d
+    dialogueText: You wanna go to lidl Later?
+    position: {x: 747, y: 381}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: c8957d42-d1b6-4555-bdc5-bf6cd945d89d
+      choiceText: Sure, when it's added to the game!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+    - outputPortGUID: 5d3c97b5-c4d7-4144-b213-2fc330ad81eb
+      choiceText: I don't have any money
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+    isEntryPoint: 0
+  edges:
+  - outputNodeGUID: e55d5320-aeac-4afb-a173-c99ac38702cf
+    outputNodePortGUID: a33cab6f-d482-415d-8c3f-ae19c1e104ba
+    inputNodeGUID: 0a7e0c25-e180-4439-8739-25893ad67b35

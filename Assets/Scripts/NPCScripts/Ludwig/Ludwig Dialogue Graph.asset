@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcbff4ebcfbf5544bcb20250fece632, type: 3}
+  m_Name: Ludwig Dialogue Graph
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::DialogueGraphSO
+  entryPointNodeGUID: 8dddd606-bc54-4b0e-a16b-d71e585f4706
+  startingLove: 0
+  loveTiers: []
+  nodes:
+  - nodeGUID: 8dddd606-bc54-4b0e-a16b-d71e585f4706
+    nodeID: Ludwig0Love
+    dialogueText: Hi my name is Ludwig!
+    position: {x: 375, y: 205}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 84b08529-e4c4-4858-a88f-38e6d9aa5783
+      choiceText: Hello Ludwig!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+    - outputPortGUID: 333ec58a-56bc-4f48-997f-6260f0ee6ce1
+      choiceText: Goodbye Ludwig!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+    isEntryPoint: 1
+  - nodeGUID: 8be0e5f9-5368-4e26-bee8-af4eaa014814
+    nodeID: Ludwig0Love2
+    dialogueText: Have you met zozk yet?
+    position: {x: 799, y: 205}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 63e9e197-62c1-4ed1-8ce9-fcbde6a11f5b
+      choiceText: Yeah i'm trying to fuck him
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+    - outputPortGUID: 25e7d9eb-e00f-400e-a638-a2de2500a876
+      choiceText: soosek?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+    isEntryPoint: 0
+  - nodeGUID: dcaa24de-2675-4acd-9071-449e709236c1
+    nodeID: Node_b62b
+    dialogueText: Well in that case, i heard there is something he likes in Javads
+      classroom
+    position: {x: 1297, y: 11}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 2cea7caa-3548-4c04-b510-9d9478133a34
+      choiceText: Thanks!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+    isEntryPoint: 0
+  - nodeGUID: d4ceb180-8d14-4004-b70a-dc66fd1a09a2
+    nodeID: Node_9dc9
+    dialogueText: Nevermind..
+    position: {x: 1415, y: 541}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 6ac13d71-bd44-435d-a515-ac80a51be41f
+      choiceText: ok
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+    isEntryPoint: 0
+  edges:
+  - outputNodeGUID: 8be0e5f9-5368-4e26-bee8-af4eaa014814
+    outputNodePortGUID: 63e9e197-62c1-4ed1-8ce9-fcbde6a11f5b
+    inputNodeGUID: dcaa24de-2675-4acd-9071-449e709236c1
+  - outputNodeGUID: 8be0e5f9-5368-4e26-bee8-af4eaa014814
+    outputNodePortGUID: 25e7d9eb-e00f-400e-a638-a2de2500a876
+    inputNodeGUID: d4ceb180-8d14-4004-b70a-dc66fd1a09a2
+  - outputNodeGUID: 8dddd606-bc54-4b0e-a16b-d71e585f4706
+    outputNodePortGUID: 84b08529-e4c4-4858-a88f-38e6d9aa5783
+    inputNodeGUID: 8be0e5f9-5368-4e26-bee8-af4eaa014814

@@ -1,45 +1,163 @@
 {
-    "startingLove": 10,
-    "loveTiers": [
-      {
-        "minLove": 10,
-        "maxLove": 10,
-        "startNodeID": "zozk_end_1"
-      },
-            {
-        "minLove": 10,
-        "maxLove": 10,
-        "startNodeID": "zozk_end_2"
-      },
-      {
-        "minLove": 10,
-        "maxLove": 10,
-        "startNodeID": "zozk_end_3"
-      }
-    ],
+    "startingLove": 0,
+    "loveTiers": [],
+    "startNodeID": "ZozkEnding1",
     "nodes": [
         {
-          "nodeID": "zozk_end_1",
-            "text": "Wow, i can't believe you made it to the final cutscene with me.",
-          "choices": [
-        { 
-          "choiceText": "yeah i'm a progamer", "lovePointChange": 0, "nextNodeID": "zozk_end_2" }
-        ]
-          },
-          {
-           "nodeID": "zozk_end_2",
-            "text": "here is where there is gonna be an awesome sex scene, but it's not implemented yet.",
-             "choices": [
-             { "choiceText": "Continue...", "lovePointChange": 0, "nextNodeID": "CUTSCENE_SEGMENT_END" }
-                         ]      
-          },
-                  {
-          "nodeID": "zozk_end_3",
-            "text": "This is an added ending node to test the system.",
-          "choices": [
-        { 
-          "choiceText": "epic, go to main menue", "lovePointChange": 0, "nextNodeID": "CUTSCENE_SEGMENT_END" }
-        ]
-          }
+            "nodeID": "ZozkEnding1",
+            "text": "Wow, I can't believe we are doing this",
+            "choices": [
+                {
+                    "choiceText": "Me neither",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_8994",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_22fe",
+            "text": "Great Idea",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_5d99",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_8994",
+            "text": "Where do you wanna go?",
+            "choices": [
+                {
+                    "choiceText": "The famous resturant \"The chinese wall\"",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_22fe",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                },
+                {
+                    "choiceText": "Lets go to the park",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_22fe",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_5d99",
+            "text": "Wanna know a secret?",
+            "choices": [
+                {
+                    "choiceText": "What is it?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_2a96",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "ZozkEnding2",
+            "text": "I have a huge buttplug in me right now ",
+            "choices": [
+                {
+                    "choiceText": "*Gulp*",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_2a96",
+            "text": "*zozk leans in closer*",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        }
     ]
-  }
+}

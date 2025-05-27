@@ -37,9 +37,6 @@ public class PointAndClickMovement : MonoBehaviour
         {
             HandleMovementInput();
         }
-
-        // Hover effects can update even if movement is locked
-        HandleHoverEffects();
     }
 
     private void HandleMovementInput()
@@ -129,60 +126,4 @@ public class PointAndClickMovement : MonoBehaviour
         UnlockMovement();
     }
 
-    private void HandleHoverEffects()
-    {
-        if (mainCamera == null) return;
-
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-        int interactableLayerMask = LayerMask.GetMask("Interactable");
-        // Fallback if "Interactable" layer doesn't exist, use the clickable layers mask
-        if (interactableLayerMask == 0 || interactableLayerMask != (interactableLayerMask | (1 << gameObject.layer))) /// Check if layer exists/is valid
-        { 
-             interactableLayerMask = ~0; // Raycast against everything if no specific layer
-        }
-
-
-        if (Physics.Raycast(ray, out RaycastHit hoverHit, Mathf.Infinity, interactableLayerMask))
-        {
-            // Need to get component here because the mask might be broad now
-            IClickable interactable = hoverHit.collider.GetComponent<IClickable>();
-            if (interactable != null)
-            {
-                // Show hover on the new interactable
-                interactable.WhenHovered();
-
-                // If we hovered onto a *different* interactable than the last frame
-                // And the lastHovered is still a valid object
-                if (lastHovered != null && !(lastHovered as UnityEngine.Object == null) && interactable != lastHovered)
-                {
-                    lastHovered.HideHover(); // Hide hover on the old one
-                }
-                 else if (lastHovered != null && (lastHovered as UnityEngine.Object == null))
-                 {
-                     // If lastHovered was destroyed, just clear the reference
-                     lastHovered = null;
-                 }
-                lastHovered = interactable; // Update the last hovered
-            }
-            else
-            {
-                // Hit something but it wasn't an IClickable. Hide hover if one was active.
-                if (lastHovered != null && !(lastHovered as UnityEngine.Object == null))
-                {
-                    lastHovered.HideHover();
-                }
-                lastHovered = null; // Clear reference
-            }
-        }
-        else
-        {
-            // Raycast didn't hit anything. Hide hover if one was active.
-            if (lastHovered != null && !(lastHovered as UnityEngine.Object == null))
-            {
-                lastHovered.HideHover();
-            }
-            lastHovered = null; // Clear reference
-        }
-    }
 }

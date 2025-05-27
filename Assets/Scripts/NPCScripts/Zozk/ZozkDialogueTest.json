@@ -1,0 +1,37 @@
+{
+    "startingLove": 0,
+    "loveTiers": [
+        {
+            "minLove": 0,
+            "maxLove": 0,
+            "startNodeID": "Node_991a"
+        }
+    ],
+    "startNodeID": "Node_991a",
+    "nodes": [
+        {
+            "nodeID": "Node_991a",
+            "text": "Hello",
+            "choices": [
+                {
+                    "choiceText": "Start Cutscene",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": "ZozkEnding_Cutscene"
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        }
+    ]
+}

@@ -234,6 +234,57 @@ public class DialogueManager : MonoBehaviour
             ApplyLovePointChange(choice.lovePointChange, choice);
             UpdateFinalCutsceneButtonState(); 
         }
+        if (!string.IsNullOrEmpty(choice.triggerCutsceneName))
+        {
+            Debug.Log($"[DialogueManager] Choice '{choice.choiceText}' triggers cutscene by name: {choice.triggerCutsceneName}");
+            Cutscene cutsceneToPlay = Resources.Load<Cutscene>($"Cutscenes/{choice.triggerCutsceneName}");
+            if (cutsceneToPlay == null)
+            {
+                Debug.LogError($"[DialogueManager] Failed to load Cutscene '{choice.triggerCutsceneName}' from Resources. Make sure it exists and the path is correct.");
+                if (!isInCutsceneDialogueMode) EndDialogue();
+                return;
+            }
+
+
+
+            if (CutsceneManager.Instance != null)
+            {
+                // Store current NPC as it might be the instigator or involved.
+                // The CutsceneManager will handle pausing/resuming based on its own logic.
+                BaseNPC instigatorNPC = currentNPC;
+
+                // End the current dialogue UI *before* starting the cutscene.
+                // The cutscene might want to use the DialogueManager immediately.
+                if (isInCutsceneDialogueMode)
+                {
+                    // If this choice in a cutscene dialogue triggers another cutscene,
+                    // end the current segment properly.
+                    Action callback = currentCutsceneSegmentCompletionCallback;
+                    if (dialogueUI != null) dialogueUI.HideDialogue();
+                    CleanUpCutsceneDialogueState();
+                    // Note: The callback here might be tricky if the new cutscene
+                    // needs to happen *before* this segment is considered fully "complete".
+                    // For now, we assume the segment completes, then the new cutscene plays.
+                    callback?.Invoke();
+                }
+                else
+                {
+                    // For normal dialogue, prepare for handoff similar to OnFinalCutsceneButtonClick
+                    PrepareForCutsceneHandoff(); // Hides UI, clears some state
+                }
+
+                CutsceneManager.Instance.StartCutscene(cutsceneToPlay, instigatorNPC);
+            }
+            else
+            {
+                Debug.LogError($"[DialogueManager] CutsceneManager.Instance is null. Cannot trigger cutscene by name: '{choice.triggerCutsceneName}'. (Loaded cutscene object was: {(cutsceneToPlay != null ? cutsceneToPlay.name : "null/not loaded")})");
+                // Fallback: proceed with nextNodeID if cutscene manager is missing? Or just end?
+                // For now, let's assume if a cutscene is set, it's crucial.
+                // If not in cutscene mode, maybe EndDialogue() is appropriate.
+                if (!isInCutsceneDialogueMode) EndDialogue();
+            }
+            return; // Do not proceed to nextNodeID logic if a cutscene is triggered
+        }
 
         bool isEndOfCutsceneSegment = string.IsNullOrEmpty(choice.nextNodeID) || choice.nextNodeID == "CUTSCENE_SEGMENT_END";
 
@@ -381,9 +432,27 @@ public class DialogueManager : MonoBehaviour
     public bool IsChoiceAvailable(DialogueChoice choice)
     {
         if (choice == null) return false;
-        if (choice.itemGate == null || string.IsNullOrEmpty(choice.itemGate.itemName)) return true; // No item gate
-        if (Inventory.Instance == null) { Debug.LogError("[DialogueManager] Inventory instance is null! Cannot check item gate."); return false; }
-        return Inventory.Instance.HasItem(choice.itemGate.itemName);
+        // Check 1: No item gate at all OR itemName is empty/null
+        if (choice.itemGate == null || string.IsNullOrEmpty(choice.itemGate.itemName)) return true;
+
+        // Check 2: Inventory instance exists
+        if (Inventory.Instance == null)
+        {
+            Debug.LogError("[DialogueManager] Inventory instance is null! Cannot check item gate.");
+            return false; // Cannot make choice if inventory system is broken
+        }
+
+        // Check 3: The actual item check
+        bool hasItem = Inventory.Instance.HasItem(choice.itemGate.itemName);
+        if (!hasItem)
+        {
+            Debug.Log($"[DialogueManager] Choice '{choice.choiceText}' gated by item '{choice.itemGate.itemName}', which player does NOT have.");
+        }
+        else
+        {
+            Debug.Log($"[DialogueManager] Choice '{choice.choiceText}' gated by item '{choice.itemGate.itemName}', which player HAS.");
+        }
+        return hasItem;
     }
 
     public BaseNPC GetCurrentNPC() => currentNPC;

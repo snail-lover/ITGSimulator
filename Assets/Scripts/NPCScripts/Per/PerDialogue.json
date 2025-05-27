@@ -1,0 +1,121 @@
+{
+    "startingLove": 0,
+    "loveTiers": [],
+    "startNodeID": "Node_3d73",
+    "nodes": [
+        {
+            "nodeID": "Node_3d73",
+            "text": "Are you studying Swedish?",
+            "choices": [
+                {
+                    "choiceText": "sorry not right now",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_8bde",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                },
+                {
+                    "choiceText": "*Run away*",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_8bde",
+            "text": "I hope you are coming prepared to the lecture later",
+            "choices": [
+                {
+                    "choiceText": "I'll try",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_f863",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                },
+                {
+                    "choiceText": "I hate swedish",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_4137",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_4137",
+            "text": "oh :(",
+            "choices": [
+                {
+                    "choiceText": "I just owned you so hard",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_f863",
+            "text": "Trying is all i ask for",
+            "choices": [
+                {
+                    "choiceText": "*blush*",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        }
+    ]
+}

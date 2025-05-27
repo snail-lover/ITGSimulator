@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcbff4ebcfbf5544bcb20250fece632, type: 3}
+  m_Name: Viktor Dialogue Graph
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::DialogueGraphSO
+  entryPointNodeGUID: 22018f47-3f63-4c07-b511-05a9df3f5022
+  startingLove: 0
+  loveTiers: []
+  nodes:
+  - nodeGUID: 22018f47-3f63-4c07-b511-05a9df3f5022
+    nodeID: Node_3850
+    dialogueText: Yo its me...Viktor!
+    position: {x: 241, y: 232}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: db0291a0-3f81-413c-b1b2-c9ec81ca54ee
+      choiceText: Hello Viktor!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: b1c5096a-4b3f-4349-999e-60c34c12c213
+      choiceText: '*ignore*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 1
+  - nodeGUID: bde677fd-9780-4419-8488-dec2776bb663
+    nodeID: Node_5f9f
+    dialogueText: Do you want to play ROTMG
+    position: {x: 785, y: 200}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: cfbfd8b2-ba9d-4029-b2ba-f2e85a721f83
+      choiceText: Yeah i'm on realmspy right now!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 08e817c4-d184-4ee8-bcd0-ff6048686de4
+      choiceText: Please Leave me alone
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 11400000, guid: 64c38eee9cb63f748a03c26b5a97927d, type: 2}
+    isEntryPoint: 0
+  edges:
+  - outputNodeGUID: 22018f47-3f63-4c07-b511-05a9df3f5022
+    outputNodePortGUID: db0291a0-3f81-413c-b1b2-c9ec81ca54ee
+    inputNodeGUID: bde677fd-9780-4419-8488-dec2776bb663
