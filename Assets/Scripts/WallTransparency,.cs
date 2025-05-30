@@ -6,34 +6,36 @@ using UnityEngine.Rendering; // Required for BlendMode enum
 
 public class WallTransparency : MonoBehaviour
 {
-    [Tooltip("How long the fade in/out animation should take.")]
-    public float fadeDuration = 0.0f;
+    [Tooltip("How long the fade in/out animation should take for the overall wall material.")]
+    public float fadeDuration = 0.25f;
 
-    [Tooltip("The target alpha value when the wall is faded out (e.g., 0.3 for 30% visible).")]
-    public float targetAlpha = 0.0f;
+    [Tooltip("The target alpha value for the wall material (around the hole) when faded (e.g., 0.3 for 30% visible). The hole itself will be more transparent via shader.")]
+    public float targetAlpha = 0.3f;
+
+    [Header("Partial Fade Settings")]
+    [Tooltip("Radius of the transparent 'hole' in world units.")]
+    public float partialFadeRadius = 1.5f;
+    [Tooltip("Softness of the hole's edge. 0 = hard edge, 1 = very soft edge (fades out over the entire radius).")]
+    [Range(0.01f, 1.0f)]
+    public float partialFadeSoftness = 0.5f;
+    public float holeOpenCloseDuration = 0.2f; // Duration for hole to grow/shrink
+    private float currentShaderOcclusionRadius = 0f;
+    private Coroutine holeAnimationCoroutine;
 
     [Header("URP Shader Property Names (Default for Lit/Unlit)")]
-    [Tooltip("Shader property for main color and alpha.")]
     public string colorPropertyName = "_BaseColor";
-    [Tooltip("Shader property to switch between Opaque (0) and Transparent (1).")]
     public string surfaceTypePropertyName = "_Surface";
-    [Tooltip("Shader property for blend mode when transparent (0=Alpha, 1=Premultiply, 2=Additive, 3=Multiply).")]
     public string blendModePropertyName = "_Blend";
-    // These are less likely to change for standard alpha blend but can be exposed if needed
-    // public string srcBlendPropertyName = "_SrcBlend";
-    // public string dstBlendPropertyName = "_DstBlend";
-    // public string zWritePropertyName = "_ZWrite";
-
 
     private Renderer wallRenderer;
     private Material materialInstance;
     private Color baseMaterialRGB;
-    private float originalMaterialAlpha; // Alpha when fully "visible" (could be 1.0)
+    private float originalMaterialAlpha;
 
-    private Coroutine fadeCoroutine;
-    private bool isCurrentlyOpaque = true;
+    private Coroutine transitionCoroutine;
+    private bool isCurrentlyFadedOut = false; // Tracks if partial fade is active
 
-    // Shader Property IDs for efficiency
+    // Shader Property IDs
     private int _propIdColor;
     private int _propIdSurfaceType;
     private int _propIdBlendMode;
@@ -41,6 +43,11 @@ public class WallTransparency : MonoBehaviour
     private int _propIdDstBlend;
     private int _propIdZWrite;
 
+    // Shader Property IDs for Partial Fade
+    private static readonly int PropIdOcclusionPoint = Shader.PropertyToID("_OcclusionPoint");
+    private static readonly int PropIdOcclusionRadius = Shader.PropertyToID("_OcclusionRadius");
+    private static readonly int PropIdOcclusionSoftness = Shader.PropertyToID("_OcclusionSoftness");
+    private static readonly int PropIdOcclusionActive = Shader.PropertyToID("_OcclusionActive");
 
     void Awake()
     {
@@ -54,129 +61,153 @@ public class WallTransparency : MonoBehaviour
 
         if (wallRenderer.sharedMaterial == null)
         {
-            Debug.LogError($"WallTransparency on '{gameObject.name}' requires a Material to be assigned.", this);
+            Debug.LogError($"WallTransparency on '{gameObject.name}' requires a Material to be assigned. Ensure it's a material using your custom partial fade shader.", this);
             enabled = false;
             return;
         }
 
-        // Create a unique instance of the material
         materialInstance = new Material(wallRenderer.sharedMaterial);
         wallRenderer.material = materialInstance;
 
-        // Cache shader property IDs
         _propIdColor = Shader.PropertyToID(colorPropertyName);
         _propIdSurfaceType = Shader.PropertyToID(surfaceTypePropertyName);
         _propIdBlendMode = Shader.PropertyToID(blendModePropertyName);
-        _propIdSrcBlend = Shader.PropertyToID("_SrcBlend"); // Standard URP property
-        _propIdDstBlend = Shader.PropertyToID("_DstBlend"); // Standard URP property
-        _propIdZWrite = Shader.PropertyToID("_ZWrite");     // Standard URP property
+        _propIdSrcBlend = Shader.PropertyToID("_SrcBlend");
+        _propIdDstBlend = Shader.PropertyToID("_DstBlend");
+        _propIdZWrite = Shader.PropertyToID("_ZWrite");
 
         if (materialInstance.HasProperty(_propIdColor))
         {
             Color initialColor = materialInstance.GetColor(_propIdColor);
             baseMaterialRGB = new Color(initialColor.r, initialColor.g, initialColor.b, 1f);
-            originalMaterialAlpha = initialColor.a; // This should be 1.0 if starting fully opaque
+            originalMaterialAlpha = initialColor.a;
         }
         else
         {
             Debug.LogError($"Material on '{gameObject.name}' (Shader: {materialInstance.shader.name}) " +
-                           $"does not have the shader property '{colorPropertyName}'. Fading will not work.", this);
+                           $"does not have the color property '{colorPropertyName}'. Fading will not work.", this);
             enabled = false;
             return;
         }
 
-        // Ensure it starts in Opaque mode
+        // Check if shader has the required partial fade properties
+        if (!materialInstance.HasProperty(PropIdOcclusionPoint) ||
+            !materialInstance.HasProperty(PropIdOcclusionRadius) ||
+            !materialInstance.HasProperty(PropIdOcclusionSoftness) ||
+            !materialInstance.HasProperty(PropIdOcclusionActive))
+        {
+            Debug.LogError($"Material on '{gameObject.name}' (Shader: {materialInstance.shader.name}) " +
+                           $"is missing one or more required partial fade shader properties (_OcclusionPoint, _OcclusionRadius, _OcclusionSoftness, _OcclusionActive). " +
+                           "Ensure you're using a compatible custom shader.", this);
+            // It might still work for basic alpha, but partial fade won't. Consider `enabled = false;`
+        }
+
         SetMaterialToOpaque();
+        materialInstance.SetFloat(PropIdOcclusionActive, 0f); // Ensure partial fade is off initially
     }
 
     private void SetMaterialToOpaque()
     {
-        if (!materialInstance.HasProperty(_propIdSurfaceType))
-        {
-            Debug.LogWarning($"Material on {gameObject.name} does not have URP SurfaceType property ('{surfaceTypePropertyName}'). Cannot switch to Opaque.", this);
-            return;
-        }
+        if (!materialInstance.HasProperty(_propIdSurfaceType)) return;
         materialInstance.SetFloat(_propIdSurfaceType, 0f); // 0 for Opaque
-        materialInstance.SetInt(_propIdSrcBlend, (int)BlendMode.One);
-        materialInstance.SetInt(_propIdDstBlend, (int)BlendMode.Zero);
-        materialInstance.SetInt(_propIdZWrite, 1); // Enable ZWrite
-        // For URP, render queue is often managed by the SurfaceType. If explicit control is needed:
-        // materialInstance.renderQueue = (int)RenderQueue.Geometry;
-
-        // Set alpha to original (fully visible)
+        materialInstance.SetInt(_propIdSrcBlend, (int)UnityEngine.Rendering.BlendMode.One);
+        materialInstance.SetInt(_propIdDstBlend, (int)UnityEngine.Rendering.BlendMode.Zero);
+        materialInstance.SetInt(_propIdZWrite, 1);
         SetMaterialAlpha(originalMaterialAlpha);
-        isCurrentlyOpaque = true;
-        // Debug.Log($"{gameObject.name} set to Opaque mode.");
     }
 
     private void SetMaterialToTransparentFade()
     {
-        if (!materialInstance.HasProperty(_propIdSurfaceType) || !materialInstance.HasProperty(_propIdBlendMode))
-        {
-            Debug.LogWarning($"Material on {gameObject.name} does not have URP SurfaceType ('{surfaceTypePropertyName}') or BlendMode ('{blendModePropertyName}') property. Cannot switch to Transparent.", this);
-            return;
-        }
-        materialInstance.SetFloat(_propIdSurfaceType, 1f); // 1 for Transparent
-        materialInstance.SetFloat(_propIdBlendMode, 0f);   // 0 for Alpha Blend
-        materialInstance.SetInt(_propIdSrcBlend, (int)BlendMode.SrcAlpha);
-        materialInstance.SetInt(_propIdDstBlend, (int)BlendMode.OneMinusSrcAlpha);
-        materialInstance.SetInt(_propIdZWrite, 0); // Disable ZWrite for standard alpha blend
-        // For URP, render queue is often managed by the SurfaceType. If explicit control is needed:
-        // materialInstance.renderQueue = (int)RenderQueue.Transparent;
-
-        // Alpha will be set by the fade coroutine, ensure it starts from original alpha
-        SetMaterialAlpha(originalMaterialAlpha);
-        isCurrentlyOpaque = false;
-        // Debug.Log($"{gameObject.name} set to Transparent mode for fading.");
+        if (!materialInstance.HasProperty(_propIdSurfaceType) || !materialInstance.HasProperty(_propIdBlendMode)) return;
+        materialInstance.SetFloat(_propIdSurfaceType, 1f); // Transparent
+        materialInstance.SetFloat(_propIdBlendMode, 1f);   // <<<<< 1 for Premultiply
+        materialInstance.SetInt(_propIdSrcBlend, (int)UnityEngine.Rendering.BlendMode.One); // <<<<< Source Blend for Premultiply
+        materialInstance.SetInt(_propIdDstBlend, (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha); // Standard
+        materialInstance.SetInt(_propIdZWrite, 0); // Still disable ZWrite for transparency
     }
 
-
-    public void FadeOut()
+    public void ActivatePartialFade(Vector3 occlusionWorldPoint)
     {
-        if (fadeCoroutine != null)
-        {
-            StopCoroutine(fadeCoroutine);
-        }
+        if (transitionCoroutine != null) StopCoroutine(transitionCoroutine);
+        if (holeAnimationCoroutine != null) StopCoroutine(holeAnimationCoroutine);
 
-        // If it's currently opaque, switch to transparent mode first
-        if (isCurrentlyOpaque)
+        if (!isCurrentlyFadedOut)
         {
             SetMaterialToTransparentFade();
+            transitionCoroutine = StartCoroutine(AnimateMaterialAlphaTo(targetAlpha));
         }
-        // else it's already transparent (e.g. mid-fade-in, or was already faded out)
+        isCurrentlyFadedOut = true;
 
-        fadeCoroutine = StartCoroutine(FadeAlphaTo(targetAlpha));
+        materialInstance.SetVector(PropIdOcclusionPoint, occlusionWorldPoint);
+        materialInstance.SetFloat(PropIdOcclusionSoftness, partialFadeSoftness);
+        materialInstance.SetFloat(PropIdOcclusionActive, 1f);
+
+        holeAnimationCoroutine = StartCoroutine(AnimateHoleRadiusTo(partialFadeRadius));
     }
 
-    public void FadeIn()
+    public void DeactivatePartialFade()
     {
-        if (fadeCoroutine != null)
-        {
-            StopCoroutine(fadeCoroutine);
-        }
+        if (transitionCoroutine != null) StopCoroutine(transitionCoroutine);
+        if (holeAnimationCoroutine != null) StopCoroutine(holeAnimationCoroutine);
 
-        // If it was opaque (shouldn't happen if FadeIn is called correctly after a FadeOut),
-        // still switch to transparent to animate alpha, then switch back to opaque on completion.
-        if (isCurrentlyOpaque)
-        {
-             SetMaterialToTransparentFade(); // Prepare for alpha animation
-        }
-
-        fadeCoroutine = StartCoroutine(FadeAlphaTo(originalMaterialAlpha, () => {
-            SetMaterialToOpaque(); // Switch back to Opaque mode once fully visible
+        holeAnimationCoroutine = StartCoroutine(AnimateHoleRadiusTo(0f, () => {
+            // Optional: actions after hole is fully closed
         }));
-    }
 
-    private IEnumerator FadeAlphaTo(float newTargetAlpha, System.Action onComplete = null)
+        transitionCoroutine = StartCoroutine(AnimateMaterialAlphaTo(originalMaterialAlpha, () => {
+            if (currentShaderOcclusionRadius <= 0.01f)
+            {
+                materialInstance.SetFloat(PropIdOcclusionActive, 0f);
+                SetMaterialToOpaque();
+                isCurrentlyFadedOut = false;
+            }
+        }));
+    }   
+
+    private IEnumerator AnimateHoleRadiusTo(float targetRadius, System.Action onComplete = null)
     {
-        if (materialInstance == null || !materialInstance.HasProperty(_propIdColor))
+        float startRadius = currentShaderOcclusionRadius;
+        float time = 0f;
+
+        if (holeOpenCloseDuration <= 0f)
         {
-            Debug.LogWarning($"Cannot fade '{gameObject.name}', material instance or color property '{colorPropertyName}' is missing.", this);
+            materialInstance.SetFloat(PropIdOcclusionRadius, targetRadius);
+            currentShaderOcclusionRadius = targetRadius;
+            onComplete?.Invoke();
             yield break;
         }
 
+        while (time < holeOpenCloseDuration)
+        {
+            time += Time.deltaTime;
+            float normalizedTime = Mathf.Clamp01(time / holeOpenCloseDuration);
+            float interpolatedRadius = Mathf.Lerp(startRadius, targetRadius, normalizedTime);
+
+            materialInstance.SetFloat(PropIdOcclusionRadius, interpolatedRadius);
+            currentShaderOcclusionRadius = interpolatedRadius;
+            yield return null;
+        }
+
+        materialInstance.SetFloat(PropIdOcclusionRadius, targetRadius);
+        currentShaderOcclusionRadius = targetRadius;
+        holeAnimationCoroutine = null;
+        onComplete?.Invoke();
+    }
+
+    private IEnumerator AnimateMaterialAlphaTo(float newTargetAlpha, System.Action onComplete = null)
+    {
+        if (!materialInstance.HasProperty(_propIdColor)) yield break;
+
         float currentAlpha = materialInstance.GetColor(_propIdColor).a;
         float time = 0f;
+
+        if (fadeDuration <= 0f)
+        {
+            SetMaterialAlpha(newTargetAlpha);
+            transitionCoroutine = null;
+            onComplete?.Invoke();
+            yield break;
+        }
 
         while (time < fadeDuration)
         {
@@ -188,7 +219,7 @@ public class WallTransparency : MonoBehaviour
         }
 
         SetMaterialAlpha(newTargetAlpha);
-        fadeCoroutine = null;
+        transitionCoroutine = null;
         onComplete?.Invoke();
     }
 
