@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI; // For legacy UI Text
-using TMPro; // For TextMeshPro, if you use it
+using UnityEngine.UI; 
+using TMPro; 
 
 public class ShowHoverText : MonoBehaviour, IHoverable
 {
@@ -15,8 +15,8 @@ public class ShowHoverText : MonoBehaviour, IHoverable
 
     private GameObject currentHoverTextInstance;
     private RectTransform hoverTextRect;
-    private Text legacyTextComponent; // For Unity UI Text
-    private TextMeshProUGUI tmProTextComponent; // For TextMeshPro
+    private Text legacyTextComponent; 
+    private TextMeshProUGUI tmProTextComponent; 
 
     private Canvas mainCanvas; // Cache the canvas
 

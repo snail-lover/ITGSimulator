@@ -1,10 +1,8 @@
-// DialogueUI.cs
-
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
-using System; // For System.Action
+using System; 
 
 public class DialogueUI : MonoBehaviour
 {
@@ -18,7 +16,7 @@ public class DialogueUI : MonoBehaviour
     public Transform choicesContainer;
     public Button choiceButtonPrefab;
 
-    [Header("Special Action Buttons")] // New Header
+    [Header("Special Action Buttons")] 
     [SerializeField] private Button finalCutsceneButton; // Assign this in the Inspector
 
     [Header("Animation/Fading")]
@@ -76,7 +74,7 @@ public class DialogueUI : MonoBehaviour
 
         Debug.Log($"[DialogueUI] Showing Node: {node.nodeID}");
 
-        // --- Update Content ---
+
         speakerNameText.text = speakerName;
         dialogueText.text = node.text;
 
@@ -159,7 +157,6 @@ public class DialogueUI : MonoBehaviour
         HidePanel();
     }
 
-    // --- New Method for Final Cutscene Button ---
     public void SetFinalCutsceneButtonVisibility(bool isVisible, Action onClickCallback)
     {
         if (finalCutsceneButton == null) return; // Not set up
@@ -180,7 +177,6 @@ public class DialogueUI : MonoBehaviour
             Debug.Log("[DialogueUI] Final Cutscene Button is now HIDDEN.");
         }
     }
-    // --- End New Method ---
 
 
     private void ShowPanel()

@@ -1,20 +1,16 @@
 using UnityEngine;
-using UnityEngine.UI; // Keep for Button (if you add a close button)
-using TMPro;          // Use TextMeshPro
+using UnityEngine.UI; 
+using TMPro;          
 
-public class NPCStatPage : MonoBehaviour // Make sure this script is on NPC_Stats_Panel
+public class NPCStatPage : MonoBehaviour 
 {
-    // REMOVED: The button triggering this is now handled by DialogueManager
-    // public Button statsButton;
 
-    // Assign these in the Inspector:
     [Header("UI References")]
     [Tooltip("The TextMeshPro component used to display the stats.")]
     public TextMeshProUGUI statsText; // Assign Stats_Text_Display
     [Tooltip("The root panel GameObject.")]
     public GameObject statsPanel; // Assign NPC_Stats_Panel itself
 
-    // Optional Close Button Reference (Assign if you created one)
     [Header("Optional")]
     public Button closeButton;
 
@@ -34,13 +30,13 @@ public class NPCStatPage : MonoBehaviour // Make sure this script is on NPC_Stat
         {
             Debug.LogError("[NPCStatPage] Stats Text (TextMeshProUGUI) reference not set in Inspector!", this.gameObject);
         }
-        if (statsPanel == null) // Should be set above, but double-check
+        if (statsPanel == null) 
         {
              Debug.LogError("[NPCStatPage] Stats Panel reference could not be determined!", this.gameObject);
         }
 
 
-        // Add listener for optional close button
+        // Add listener for close button
         if (closeButton != null)
         {
             closeButton.onClick.AddListener(HideStatsPanel);
@@ -51,7 +47,7 @@ public class NPCStatPage : MonoBehaviour // Make sure this script is on NPC_Stat
             statsPanel.SetActive(false);
     }
 
-    // Called by DialogueManager to pre-load or refresh stats
+ 
     public void LoadStats()
     {
         if (statsText == null)
@@ -104,7 +100,6 @@ public class NPCStatPage : MonoBehaviour // Make sure this script is on NPC_Stat
         }
     }
 
-    // Public method called by DialogueManager during EndDialogue OR optional Close Button
     public void HideStatsPanel()
     {
         if (statsPanel != null)

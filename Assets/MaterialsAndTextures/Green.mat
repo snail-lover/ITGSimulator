@@ -27,7 +27,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Metallic: 1
+    - _Metallic: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _WorkflowMode: 1

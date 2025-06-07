@@ -1,5 +1,3 @@
-// --- START OF FILE CameraFollow.cs ---
-
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -108,7 +106,6 @@ public class CameraFollow : MonoBehaviour
                                                       // desiredRadius = Mathf.Clamp(desiredRadius, minHoleRadius, maxHoleRadius);
 
                     // Or, simpler: a fixed radius for now, and animate it in WallTransparency
-                    wall.ActivatePartialFade(hit.point); // Keep current call, animation is in WallTransparency
                     wallsHitThisFrame.Add(wall);
                 }
             }
@@ -129,7 +126,6 @@ public class CameraFollow : MonoBehaviour
             if (wallToStopFading != null)
             {
                 // Tell the wall to deactivate its fade zone
-                wallToStopFading.DeactivatePartialFade();
             }
         }
 
@@ -143,4 +139,3 @@ public class CameraFollow : MonoBehaviour
         Debug.Log($"[CameraFollow] Manual Control set to: {manual}");
     }
 }
-// --- END OF FILE CameraFollow.cs ---

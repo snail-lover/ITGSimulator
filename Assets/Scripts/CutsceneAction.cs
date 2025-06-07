@@ -1,6 +1,5 @@
-// CutsceneAction.cs
 using UnityEngine;
-using System.Collections.Generic; // If you plan to use lists for parameters later
+using System.Collections.Generic; 
 
 public enum CutsceneActionType
 {
