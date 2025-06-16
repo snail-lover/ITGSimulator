@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb313d9c006a38b43a441c7319a27fc3, type: 3}
+  m_Name: LudwigComputerProfile
+  m_EditorClassIdentifier: Assembly-CSharp::ComputerProfile
+  ownerName: Ludwig
+  profilePicture: {fileID: 21300000, guid: 425da1a09509da142bdf895e96990350, type: 3}
+  backgroundImage: {fileID: 21300000, guid: 7fc8438d4473f5048ade79d438870a67, type: 3}
+  requiresPassword: 1
+  password: lidl
+  systemInfoText: 
+  notes:
+  - title: Lidl
+    content: ooooooh...i want to go to lidl
+  - title: bonestretch
+    content: mmmmhi want ttthee bone sttterreeettch!!!!
+  imageGallery:
+  - {fileID: 21300000, guid: c002d62c025ceff458cbab46776f00a5, type: 3}
+  - {fileID: 21300000, guid: 8daf4ebe3b1bcba4ab4f23cedb47d9ef, type: 3}

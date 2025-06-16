@@ -1,182 +1,240 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
-// using UnityEngine.UI; // No longer needed for hover text directly
 
-public class BaseItem : MonoBehaviour, IClickable // No longer needs IHoverable here
+public class BaseItem : MonoBehaviour, IClickable
 {
     public CreateInventoryItem item;
     public float pickupRange = 2f;
-    private Transform player;
+    private Transform playerTransform; // Renamed for clarity
     private NavMeshAgent playerAgent;
-    private static BaseItem currentTarget = null; // Track current item target
+    // REMOVE THIS: private static BaseItem currentTarget = null; // Static target can cause issues with multiple items
     private Coroutine pickupCoroutine;
-    // Removed: private GameObject currentHoverText;
-    // Removed: public GameObject hoverTextPrefab; 
-    // Removed: private RectTransform hoverTextRect;
 
     private void Start()
     {
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
-            player = playerObject.transform;
+            playerTransform = playerObject.transform;
             playerAgent = playerObject.GetComponent<NavMeshAgent>();
         }
         else
         {
-            Debug.LogError("Player object not found! BaseItem cannot initialize.", gameObject);
+            Debug.LogError($"[{name}] Player object not found! BaseItem cannot initialize.", gameObject);
         }
     }
 
     public void OnClick()
     {
-        // Check if another IClickable (which might be a BaseItem or something else)
-        // is currently being interacted with by PointAndClickMovement.
-        if (PointAndClickMovement.currentTarget != null && PointAndClickMovement.currentTarget != this)
+        Debug.Log($"[{name}] OnClick received. PointAndClickMovement.currentTarget is {((MonoBehaviour)PointAndClickMovement.currentTarget)?.name}. Is this item already being approached (pickupCoroutine not null)? {pickupCoroutine != null}");
+
+        if (playerTransform == null || playerAgent == null)
         {
-            // Attempt to reset the other target's interaction state if it's an IClickable
-            // This part assumes PointAndClickMovement.currentTarget is always IClickable
-            IClickable previousPncTarget = PointAndClickMovement.currentTarget as IClickable;
-            if (previousPncTarget != null)
-            {
-                previousPncTarget.ResetInteractionState();
-            }
+            Debug.LogError($"[{name}] Player/Agent not found, cannot process item click.");
+            return;
         }
 
-        PointAndClickMovement.currentTarget = this; // Set this item as the PointAndClickMovement target
-        OnItemClicked();
+        // If this item is already the current target of PointAndClickMovement AND
+        // its pickupCoroutine is already running (meaning we're already approaching it)
+        if (PointAndClickMovement.currentTarget == this && pickupCoroutine != null)
+        {
+            Debug.Log($"[{name}] Re-clicked while already approaching this item. Ensuring approach continues.");
+            // The existing coroutine is already running and checking PointAndClickMovement.currentTarget.
+            // No need to restart it or reset destination.
+            // PointAndClickMovement.LockPlayerApproach(this) would have already been called.
+            return; // Do nothing further, let the existing coroutine handle it.
+        }
+
+        // If we reach here, it's either a fresh click, or a re-click when not already in an active approach coroutine for THIS item.
+        // PointAndClickMovement has already set itself to this item as currentTarget.
+
+        float distance = Vector3.Distance(playerTransform.position, transform.position);
+
+        if (distance <= pickupRange)
+        {
+            Debug.Log($"[{name}] Player already in range. Picking up immediately.");
+            AttemptPickup(); // This will also handle UnlockPlayerApproach
+        }
+        else
+        {
+            Debug.Log($"[{name}] Player out of range. Moving player to item.");
+            MovePlayerToItem(); // This starts the coroutine and locks approach
+        }
     }
 
     private void MovePlayerToItem()
     {
-        if (playerAgent == null) return;
+        if (playerAgent == null || !PointAndClickMovement.Instance) return;
 
         if (pickupCoroutine != null)
+        {
             StopCoroutine(pickupCoroutine);
+            pickupCoroutine = null;
+        }
 
-        playerAgent.SetDestination(transform.position);
-        pickupCoroutine = StartCoroutine(CheckIfArrived());
+        StartCoroutine(MovePlayerToItemCoroutine());
     }
 
-    public void ResetInteractionState()
+    private IEnumerator MovePlayerToItemCoroutine()
     {
-        // 'this == null' check is usually for safety in editor or after destruction, 
-        // but if the object is truly null, this method wouldn't be called.
-        // However, it doesn't hurt.
+        // Stop any current path and wait a frame to let the agent reset
+        if (playerAgent.hasPath)
+        {
+            playerAgent.ResetPath();
+            yield return null; // Wait one frame
+        }
+
+        // Use PointAndClickMovement to set destination so visuals work
+        PointAndClickMovement.Instance.SetPlayerDestination(transform.position, true /*isProgrammaticCall*/);
+        PointAndClickMovement.Instance.LockPlayerApproach(this);
+
+        pickupCoroutine = StartCoroutine(CheckDistanceAndPickupCoroutine());
+    }
+
+    public void ResetInteractionState() // Called by PointAndClickMovement if player clicks elsewhere
+    {
+        Debug.Log($"[{name}] ResetInteractionState called.");
         if (this == null || !gameObject.activeInHierarchy) return;
 
         if (pickupCoroutine != null)
         {
             StopCoroutine(pickupCoroutine);
             pickupCoroutine = null;
+            Debug.Log($"[{name}] Stopped pickup coroutine.");
         }
 
-        // Only reset currentTarget if *this* item was the one being targeted for pickup.
-        // This prevents one item's ResetInteractionState call from nullifying another item's active pickup.
-        if (currentTarget == this)
+        // If this item was the one causing the player to approach, unlock the approach
+        if (PointAndClickMovement.currentTarget == this) // Check against the global target
         {
-            currentTarget = null;
-        }
-    }
-
-    public void OnItemClicked()
-    {
-        // If another BaseItem is already being targeted for pickup, cancel its pickup.
-        if (currentTarget != null && currentTarget != this)
-        {
-            currentTarget.CancelPickup();
-        }
-
-        currentTarget = this; // This item is now the one actively being pursued for pickup.
-        if (player == null) return;
-
-        float distance = Vector3.Distance(player.position, transform.position);
-
-        if (distance <= pickupRange)
-        {
-            Pickup();
-        }
-        else
-        {
-            MovePlayerToItem();
+            PointAndClickMovement.Instance?.UnlockPlayerApproach();
+            // PointAndClickMovement will null its currentTarget when ground/new interactable is clicked.
         }
     }
 
-    public void Pickup()
+    // Renamed from Pickup to avoid confusion with the public Pickup() that might be called elsewhere
+    private void AttemptPickup()
     {
-        if (currentTarget == this && Inventory.Instance != null) // Check if still the current target for pickup
+        // We only attempt pickup if this item is still the global target,
+        // ensuring that if the player clicked away, we don't pick it up.
+        if (PointAndClickMovement.currentTarget == this && Inventory.Instance != null)
         {
+            Debug.Log($"[{name}] Attempting to add item to inventory.");
             Inventory.Instance.AddItem(item);
-            currentTarget = null; // Clear the pickup target
 
-            // If this item was also the PointAndClickMovement's general target, clear that too.
-            if (PointAndClickMovement.currentTarget == this)
-            {
-                PointAndClickMovement.currentTarget = null;
-            }
+            PointAndClickMovement.Instance?.UnlockPlayerApproach(); // Unlock approach as interaction is complete
+            PointAndClickMovement.currentTarget = null; // Clear global target
+
+            // It's good practice to notify PointAndClickMovement that its movement was effectively "completed" or "cancelled"
+            // so visuals can clear if they haven't already due to arrival.
+            PointAndClickMovement.Instance?.StopPlayerMovementAndNotify();
+
 
             Destroy(gameObject);
         }
+        else if (Inventory.Instance == null)
+        {
+            Debug.LogError($"[{name}] Inventory.Instance is null. Cannot pick up item.");
+        }
+        else
+        {
+            Debug.LogWarning($"[{name}] Pickup attempt aborted. Not current target or target changed. Current PnC Target: {((MonoBehaviour)PointAndClickMovement.currentTarget)?.name}");
+        }
     }
 
-    private IEnumerator CheckIfArrived()
+    private IEnumerator CheckDistanceAndPickupCoroutine()
     {
-        if (playerAgent == null) yield break;
-
-        // Wait while path is being calculated OR (distance is too far AND this item is still the PointAndClickMovement's target)
-        // The PointAndClickMovement.currentTarget check ensures that if the player clicks elsewhere, this coroutine stops trying to pickup.
-        while (playerAgent.pathPending ||
-              (playerAgent.remainingDistance > playerAgent.stoppingDistance + 0.1f && // Use stoppingDistance for more accuracy
-               playerAgent.remainingDistance > pickupRange && // Also ensure it's within custom pickupRange
-               (PointAndClickMovement.currentTarget == this || currentTarget == this) // Check both possible target states
-              ))
+        if (playerTransform == null || playerAgent == null)
         {
-            // If the player has no path or has arrived but is not close enough
-            if (!playerAgent.pathPending && playerAgent.remainingDistance <= playerAgent.stoppingDistance + 0.1f &&
-                playerAgent.remainingDistance > pickupRange &&
-                (PointAndClickMovement.currentTarget == this || currentTarget == this))
+            Debug.LogError($"[{name}] Player agent or transform is null in CheckDistanceAndPickupCoroutine.");
+            if (PointAndClickMovement.currentTarget == this) ResetInteractionState();
+            yield break;
+        }
+
+        Debug.Log($"[{name}] Starting CheckDistanceAndPickupCoroutine for target: {name}. Destination set to: {playerAgent.destination}");
+
+        // We expect SetPlayerDestination to have been called immediately before this coroutine starts.
+        // Give the agent one frame to process that.
+        yield return null;
+
+        // After one frame, let's see the state.
+        Debug.Log($"[{name}] After 1 frame yield: PathPending={playerAgent.pathPending}, HasPath={playerAgent.hasPath}, IsStopped={playerAgent.isStopped}, Velocity={playerAgent.velocity.magnitude}, RemainingDistance={playerAgent.remainingDistance}, Destination={playerAgent.destination}");
+
+        if (!playerAgent.pathPending && !playerAgent.hasPath)
+        {
+            // If, after one frame, it's neither pending nor has a path, something is fundamentally wrong with reaching the destination.
+            NavMeshPath testPath = new NavMeshPath();
+            bool pathFound = NavMesh.CalculatePath(playerAgent.transform.position, transform.position, NavMesh.AllAreas, testPath);
+            Debug.LogError($"[{name}] CRITICAL: No path and not pending after initial yield. NavMesh.CalculatePath to {transform.position} found: {pathFound}, Status: {testPath.status}. Cancelling pickup.");
+            ResetInteractionState();
+            yield break;
+        }
+
+        // --- Main Approach Loop ---
+        float stuckTimer = 0f;
+        const float maxStuckTimeWhilePathing = 3.0f;
+        const float maxStuckTimeNoPathAfterInitial = 1.5f;
+
+        while (PointAndClickMovement.currentTarget == this &&
+               Vector3.Distance(playerTransform.position, transform.position) > pickupRange)
+        {
+            if (playerAgent.pathPending)
             {
-                // Player is at NavMesh destination but not close enough to pick up.
-                // This might happen if item is slightly off-mesh or pickupRange is very small.
-                // Optionally, add logic here (e.g., try to move closer, or just fail)
-                // For now, we'll let it break and attempt pickup if PointAndClickMovement.currentTarget is still this.
-                break;
+                stuckTimer = 0f;
+            }
+            else if (playerAgent.hasPath)
+            {
+                if (playerAgent.velocity.sqrMagnitude > 0.01f)
+                {
+                    stuckTimer = 0f;
+                }
+                else
+                {
+                    stuckTimer += Time.deltaTime;
+                    if (stuckTimer > maxStuckTimeWhilePathing)
+                    {
+                        Debug.LogWarning($"[{name}] Player agent seems stuck (has path, no velocity). Cancelling approach.");
+                        ResetInteractionState();
+                        yield break;
+                    }
+                }
+            }
+            else // No path and not pending
+            {
+                stuckTimer += Time.deltaTime;
+                Debug.LogWarning($"[{name}] Coroutine: Path lost during approach. Stuck timer: {stuckTimer}");
+                if (stuckTimer > maxStuckTimeNoPathAfterInitial)
+                {
+                    Debug.LogWarning($"[{name}] Player agent has lost path. Cancelling.");
+                    ResetInteractionState();
+                    yield break;
+                }
             }
             yield return null;
         }
 
-        // Only pickup if still the current PointAndClickMovement target OR the specific BaseItem pickup target
-        if ((PointAndClickMovement.currentTarget == this || currentTarget == this) &&
-            Vector3.Distance(player.position, transform.position) <= pickupRange)
+        // Final pickup logic
+        if (PointAndClickMovement.currentTarget == this &&
+            Vector3.Distance(playerTransform.position, transform.position) <= pickupRange)
         {
-            Pickup();
+            Debug.Log($"[{name}] Player arrived in pickup range. Attempting pickup.");
+            if (playerAgent.isOnNavMesh)
+            {
+                PointAndClickMovement.Instance?.StopPlayerMovementAndNotify();
+            }
+            AttemptPickup();
         }
-        else if (currentTarget == this) // If it was the specific pickup target but player moved away or clicked something else
+        else if (PointAndClickMovement.currentTarget == this)
         {
-            // Optionally, reset currentTarget if the player moved away/didn't reach
-            // This prevents an item from remaining "targeted" if the player gives up.
-            // However, PointAndClickMovement.currentTarget will handle the broader interaction cancellation.
-            // For now, let Pickup() handle its own `currentTarget == this` check.
+            Debug.LogWarning($"[{name}] Coroutine ended, still target, but NOT in pickup range. Distance: {Vector3.Distance(playerTransform.position, transform.position)}. This indicates an issue with stuck detection or range. Resetting.");
+            ResetInteractionState();
+        }
+        else
+        {
+            Debug.Log($"[{name}] Pickup coroutine ended because target changed. PnC Target: {((MonoBehaviour)PointAndClickMovement.currentTarget)?.name}");
+            // ResetInteractionState for this item should have been called by PointAndClickMovement when the target changed.
         }
         pickupCoroutine = null;
     }
 
-    public void CancelPickup()
-    {
-        // This method is called by another BaseItem to tell *this* item to stop its pickup process.
-        if (pickupCoroutine != null)
-        {
-            StopCoroutine(pickupCoroutine);
-            pickupCoroutine = null;
-        }
-        if (currentTarget == this) // If this item was indeed the one actively being picked up
-        {
-            currentTarget = null;
-        }
-    }
-
-    // --- REMOVED HOVER METHODS ---
-    // public void WhenHovered() { ... }
-    // public void HideHover() { ... }
 }

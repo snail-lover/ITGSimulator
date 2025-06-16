@@ -18,14 +18,14 @@ MonoBehaviour:
   nodes:
   - nodeGUID: 22018f47-3f63-4c07-b511-05a9df3f5022
     nodeID: Node_3850
-    dialogueText: Yo its me...Viktor!
+    dialogueText: What's your password?
     position: {x: 241, y: 232}
     itemGate:
       itemName: 
       requiredItem: {fileID: 0}
     choices:
     - outputPortGUID: db0291a0-3f81-413c-b1b2-c9ec81ca54ee
-      choiceText: Hello Viktor!
+      choiceText: I'm not gonna give it to you
       lovePointChange: 0
       itemGate:
         itemName: 
@@ -43,14 +43,14 @@ MonoBehaviour:
     isEntryPoint: 1
   - nodeGUID: bde677fd-9780-4419-8488-dec2776bb663
     nodeID: Node_5f9f
-    dialogueText: Do you want to play ROTMG
-    position: {x: 785, y: 200}
+    dialogueText: Woaw, you're like super smart
+    position: {x: 785, y: 199}
     itemGate:
       itemName: 
       requiredItem: {fileID: 0}
     choices:
     - outputPortGUID: cfbfd8b2-ba9d-4029-b2ba-f2e85a721f83
-      choiceText: Yeah i'm on realmspy right now!
+      choiceText: What do you mean?
       lovePointChange: 0
       itemGate:
         itemName: 
@@ -58,15 +58,76 @@ MonoBehaviour:
       overrideNextNodeID: 
       triggerCutscene: {fileID: 0}
     - outputPortGUID: 08e817c4-d184-4ee8-bcd0-ff6048686de4
-      choiceText: Please Leave me alone
+      choiceText: Thanks (Leave)
       lovePointChange: 0
       itemGate:
         itemName: 
         requiredItem: {fileID: 0}
       overrideNextNodeID: 
-      triggerCutscene: {fileID: 11400000, guid: 64c38eee9cb63f748a03c26b5a97927d, type: 2}
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 2c3a5237-338b-41e5-b084-25d55f5c730e
+    nodeID: Node_6988
+    dialogueText: You saw through my mental trap, every one else have given me their
+      passwords?
+    position: {x: 1328, y: 254}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 77f7bdcd-bfb4-45e8-88ff-c9aeceb5cdbd
+      choiceText: Really?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 616a48f6-47d4-4573-97c7-d6c614989562
+    nodeID: Node_b529
+    dialogueText: Yeah I have stored them all on my computer
+    position: {x: 2094, y: 254}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 3d3c4f30-5e06-4bd5-9573-48d757fdab0a
+      choiceText: Well, what is your password?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 3376bbf2-1c8f-43a5-a946-241d1f8f336c
+    nodeID: Node_3518
+    dialogueText: I don't have one, that way I don't risk giving it out to someone
+    position: {x: 2711, y: 284}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: a1327d89-63c7-4b65-9031-e95c49f24418
+      choiceText: Smart
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
     isEntryPoint: 0
   edges:
   - outputNodeGUID: 22018f47-3f63-4c07-b511-05a9df3f5022
     outputNodePortGUID: db0291a0-3f81-413c-b1b2-c9ec81ca54ee
     inputNodeGUID: bde677fd-9780-4419-8488-dec2776bb663
+  - outputNodeGUID: bde677fd-9780-4419-8488-dec2776bb663
+    outputNodePortGUID: cfbfd8b2-ba9d-4029-b2ba-f2e85a721f83
+    inputNodeGUID: 2c3a5237-338b-41e5-b084-25d55f5c730e
+  - outputNodeGUID: 2c3a5237-338b-41e5-b084-25d55f5c730e
+    outputNodePortGUID: 77f7bdcd-bfb4-45e8-88ff-c9aeceb5cdbd
+    inputNodeGUID: 616a48f6-47d4-4573-97c7-d6c614989562
+  - outputNodeGUID: 616a48f6-47d4-4573-97c7-d6c614989562
+    outputNodePortGUID: 3d3c4f30-5e06-4bd5-9573-48d757fdab0a
+    inputNodeGUID: 3376bbf2-1c8f-43a5-a946-241d1f8f336c

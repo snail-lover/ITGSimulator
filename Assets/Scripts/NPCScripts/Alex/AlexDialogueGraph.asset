@@ -1,0 +1,259 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcbff4ebcfbf5544bcb20250fece632, type: 3}
+  m_Name: AlexDialogueGraph
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::DialogueGraphSO
+  entryPointNodeGUID: b82088dc-fd2b-4669-8ee4-89ef559fedb6
+  startingLove: 0
+  loveTiers: []
+  nodes:
+  - nodeGUID: b82088dc-fd2b-4669-8ee4-89ef559fedb6
+    nodeID: Node_b7a8
+    dialogueText: HI!
+    position: {x: 310, y: 209}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 256a205e-3079-4ec9-9dea-0f79fb42fadc
+      choiceText: Hello!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 4ead5d03-d8e9-47cd-ae3f-520bc59668a7
+      choiceText: Goodbye
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 1
+  - nodeGUID: 1f504253-679f-4868-b96c-0f61f2396725
+    nodeID: Node_4d92
+    dialogueText: Who are you hoping wins the 2016 presidential election?
+    position: {x: 801, y: 146}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: e1d80dd2-c437-4320-b8dc-63e33080529e
+      choiceText: Trump
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: f6c0f589-9b22-4226-b921-6cc055b5fe80
+      choiceText: Kamala
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 5b46491f-6f88-44fb-a2ca-f336faadd3ec
+      choiceText: Jeb Bush
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: cd37e177-225f-4722-8c4a-55590dd043c2
+    nodeID: Node_36d4
+    dialogueText: Hell yeah!
+    position: {x: 1470, y: -300}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 87cdc32c-9762-47e4-abc0-2f96dfcffdf9
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 2d67dba6-cabf-4044-812e-6ca9c61d13fc
+    nodeID: Node_c757
+    dialogueText: It's on the wall right as you come up the stairs to the first floor
+    position: {x: 2649, y: -271}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 2df51f44-9112-40bc-a8a1-96bd780f333b
+      choiceText: Ok, i'll go have a look
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 26618992-fd91-4ec3-bae8-7ae616778491
+    nodeID: Node_76cb
+    dialogueText: Cuck
+    position: {x: 1470, y: 208}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: b0bae726-30e2-4834-8c31-bf4ed8feb7f1
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: a3af7b6a-4c5c-42f2-a7bc-9c258b63f21f
+    nodeID: Node_71cc
+    dialogueText: Crooked Hillary will never win. Trump Train baby!
+    position: {x: 2043, y: 255}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: b1afead9-d7ed-45af-a090-8ff85c760f63
+      choiceText: Hillary will be the first woman president!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: ed5fe963-0a4a-43c4-af7f-9c7cced49169
+      choiceText: You convinced me
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: cbbed0c5-ba00-43be-85f8-d9e300578096
+    nodeID: Node_2766
+    dialogueText: Go check out my poster, I think you'll like it
+    position: {x: 2186, y: -353}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 1b1a05d7-a1a2-402f-adb9-fd4561b0465b
+      choiceText: Where is it?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: a97511f0-686f-42b7-bed8-67840ee81675
+      choiceText: Ok (leave)
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 4e8c864f-0fdc-4a73-a66f-3c291cb0b33a
+    nodeID: Node_fdb7
+    dialogueText: Whatever you say cucklord
+    position: {x: 2649, y: 276}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: f33a3ac2-e040-4e21-9bf2-3ff621ffb5a0
+      choiceText: Leave
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 18f115e8-1fef-4473-b4cd-01a2e47f434f
+    nodeID: Node_8c43
+    dialogueText: A big fat mess
+    position: {x: 2043, y: 899}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 279a773f-de54-43ba-959a-66d59d07d634
+      choiceText: Leave
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 26ba97e0-b529-46db-b0ed-7edd52fee27b
+    nodeID: Node_26c4
+    dialogueText: Jeb is a mess
+    position: {x: 1457, y: 709}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: f70c8040-aea8-4f23-961e-378a68bfbd5d
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  edges:
+  - outputNodeGUID: b82088dc-fd2b-4669-8ee4-89ef559fedb6
+    outputNodePortGUID: 256a205e-3079-4ec9-9dea-0f79fb42fadc
+    inputNodeGUID: 1f504253-679f-4868-b96c-0f61f2396725
+  - outputNodeGUID: 1f504253-679f-4868-b96c-0f61f2396725
+    outputNodePortGUID: e1d80dd2-c437-4320-b8dc-63e33080529e
+    inputNodeGUID: cd37e177-225f-4722-8c4a-55590dd043c2
+  - outputNodeGUID: 1f504253-679f-4868-b96c-0f61f2396725
+    outputNodePortGUID: f6c0f589-9b22-4226-b921-6cc055b5fe80
+    inputNodeGUID: 26618992-fd91-4ec3-bae8-7ae616778491
+  - outputNodeGUID: 1f504253-679f-4868-b96c-0f61f2396725
+    outputNodePortGUID: 5b46491f-6f88-44fb-a2ca-f336faadd3ec
+    inputNodeGUID: 26ba97e0-b529-46db-b0ed-7edd52fee27b
+  - outputNodeGUID: cd37e177-225f-4722-8c4a-55590dd043c2
+    outputNodePortGUID: 87cdc32c-9762-47e4-abc0-2f96dfcffdf9
+    inputNodeGUID: cbbed0c5-ba00-43be-85f8-d9e300578096
+  - outputNodeGUID: cbbed0c5-ba00-43be-85f8-d9e300578096
+    outputNodePortGUID: 1b1a05d7-a1a2-402f-adb9-fd4561b0465b
+    inputNodeGUID: 2d67dba6-cabf-4044-812e-6ca9c61d13fc
+  - outputNodeGUID: 26618992-fd91-4ec3-bae8-7ae616778491
+    outputNodePortGUID: b0bae726-30e2-4834-8c31-bf4ed8feb7f1
+    inputNodeGUID: a3af7b6a-4c5c-42f2-a7bc-9c258b63f21f
+  - outputNodeGUID: a3af7b6a-4c5c-42f2-a7bc-9c258b63f21f
+    outputNodePortGUID: ed5fe963-0a4a-43c4-af7f-9c7cced49169
+    inputNodeGUID: cbbed0c5-ba00-43be-85f8-d9e300578096
+  - outputNodeGUID: a3af7b6a-4c5c-42f2-a7bc-9c258b63f21f
+    outputNodePortGUID: b1afead9-d7ed-45af-a090-8ff85c760f63
+    inputNodeGUID: 4e8c864f-0fdc-4a73-a66f-3c291cb0b33a
+  - outputNodeGUID: 26ba97e0-b529-46db-b0ed-7edd52fee27b
+    outputNodePortGUID: f70c8040-aea8-4f23-961e-378a68bfbd5d
+    inputNodeGUID: 18f115e8-1fef-4473-b4cd-01a2e47f434f

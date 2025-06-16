@@ -5,9 +5,14 @@ public class FloorVisibilityManager : MonoBehaviour
 {
     public static FloorVisibilityManager Instance { get; private set; }
 
+    [Header("Floor Parents")]
     public GameObject lowerFloorParent;
     public GameObject firstFloorParent;
     public GameObject secondFloorParent;
+
+    [Header("Configuration")]
+    [Tooltip("The floor that should be visible when the scene starts.")]
+    public FloorLevel startingFloor = FloorLevel.Lower; // <<< CHANGE: Added public field for Inspector
 
     public enum FloorLevel
     {
@@ -16,7 +21,8 @@ public class FloorVisibilityManager : MonoBehaviour
         Second = 2
     }
 
-    private FloorLevel _currentVisibleFloor = FloorLevel.Lower;
+    // <<< CHANGE: Removed inline initialization. It will now be set in Awake.
+    private FloorLevel _currentVisibleFloor;
     public FloorLevel CurrentVisibleFloor => _currentVisibleFloor; // Public getter
 
     // Optional Caching (can be uncommented and used if preferred)
@@ -39,11 +45,15 @@ public class FloorVisibilityManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        // <<< CHANGE: Set the initial floor based on the inspector value.
+        _currentVisibleFloor = startingFloor;
     }
 
     void Start()
     {
         // CacheFloorComponents(); // If using caching
+        // This will now use the value set in Awake from the inspector
         UpdateFloorVisibility(_currentVisibleFloor, true); // Initial setup
     }
 

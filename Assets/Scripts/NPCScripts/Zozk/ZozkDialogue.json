@@ -1572,114 +1572,6 @@
             }
         },
         {
-            "nodeID": "Node_35ea",
-            "text": "Oh good, no confrontation, the best of both world",
-            "choices": [
-                {
-                    "choiceText": "Exactly",
-                    "lovePointChange": 0,
-                    "nextNodeID": "",
-                    "itemGate": {
-                        "itemName": "",
-                        "requiredItem": {
-                            "instanceID": 0
-                        }
-                    },
-                    "triggerCutsceneName": ""
-                },
-                {
-                    "choiceText": "Hannah Montana!",
-                    "lovePointChange": 0,
-                    "nextNodeID": "Node_f6f8",
-                    "itemGate": {
-                        "itemName": "",
-                        "requiredItem": {
-                            "instanceID": 0
-                        }
-                    },
-                    "triggerCutsceneName": ""
-                }
-            ],
-            "itemGate": {
-                "itemName": "",
-                "requiredItem": {
-                    "instanceID": 0
-                }
-            }
-        },
-        {
-            "nodeID": "Node_f6f8",
-            "text": "OMG! Are you also a fan!",
-            "choices": [
-                {
-                    "choiceText": "Hell yeah!",
-                    "lovePointChange": 0,
-                    "nextNodeID": "Node_3f31",
-                    "itemGate": {
-                        "itemName": "",
-                        "requiredItem": {
-                            "instanceID": 0
-                        }
-                    },
-                    "triggerCutsceneName": ""
-                },
-                {
-                    "choiceText": "No i just know of it.",
-                    "lovePointChange": 0,
-                    "nextNodeID": "Node_f89c",
-                    "itemGate": {
-                        "itemName": "",
-                        "requiredItem": {
-                            "instanceID": 0
-                        }
-                    },
-                    "triggerCutsceneName": ""
-                }
-            ],
-            "itemGate": {
-                "itemName": "",
-                "requiredItem": {
-                    "instanceID": 0
-                }
-            }
-        },
-        {
-            "nodeID": "Node_3f31",
-            "text": "You get the best of both worlds! Chillin' out, take it slow, Then you rock out the show!",
-            "choices": [
-                {
-                    "choiceText": "You have a nice voice!",
-                    "lovePointChange": 0,
-                    "nextNodeID": "",
-                    "itemGate": {
-                        "itemName": "",
-                        "requiredItem": {
-                            "instanceID": 0
-                        }
-                    },
-                    "triggerCutsceneName": "ViktorFindsCableGone"
-                },
-                {
-                    "choiceText": "Wow look at you!",
-                    "lovePointChange": 0,
-                    "nextNodeID": "",
-                    "itemGate": {
-                        "itemName": "",
-                        "requiredItem": {
-                            "instanceID": 0
-                        }
-                    },
-                    "triggerCutsceneName": "ViktorFindsCableGone"
-                }
-            ],
-            "itemGate": {
-                "itemName": "",
-                "requiredItem": {
-                    "instanceID": 0
-                }
-            }
-        },
-        {
             "nodeID": "Node_22d6",
             "text": "Oh no! Are you alright?",
             "choices": [
@@ -4855,6 +4747,114 @@
                     "choiceText": "Yeah, but also a little chilly",
                     "lovePointChange": 0,
                     "nextNodeID": "Node_66a2",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_3f31",
+            "text": "You get the best of both worlds! Chillin' out, take it slow, Then you rock out the show!",
+            "choices": [
+                {
+                    "choiceText": "You have a nice voice!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": "ViktorFindsCableGone"
+                },
+                {
+                    "choiceText": "Wow look at you!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": "ViktorFindsCableGone"
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_35ea",
+            "text": "Oh good, no confrontation, the best of both world",
+            "choices": [
+                {
+                    "choiceText": "Exactly",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": "ViktorFindsCableGone"
+                },
+                {
+                    "choiceText": "Hannah Montana!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_f6f8",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_f6f8",
+            "text": "OMG! Are you also a fan!",
+            "choices": [
+                {
+                    "choiceText": "Hell yeah!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_3f31",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                },
+                {
+                    "choiceText": "No i just know of it.",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_f89c",
                     "itemGate": {
                         "itemName": "",
                         "requiredItem": {

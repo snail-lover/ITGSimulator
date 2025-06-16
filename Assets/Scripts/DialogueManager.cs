@@ -22,6 +22,10 @@ public class DialogueManager : MonoBehaviour
 
     private const int FINAL_CUTSCENE_LOVE_THRESHOLD = 10;
 
+    private bool isDialogueActive = false; // Add this flag
+
+    public bool IsDialogueUIVisible => isDialogueActive; // Public property to check
+
     private void Awake()
     {
         if (Instance == null) { Instance = this; } else { Destroy(gameObject); return; }
@@ -93,6 +97,7 @@ public class DialogueManager : MonoBehaviour
         Sprite portrait = currentNPC.npcImage;
 
         dialogueUI.ShowDialogue(this, currentNode, speakerName, portrait);
+        isDialogueActive = true; // Set flag
 
         SetupStatsButton(); 
         UpdateFinalCutsceneButtonState();
@@ -104,11 +109,13 @@ public class DialogueManager : MonoBehaviour
         } else {
              Debug.LogWarning("[DialogueManager] NPCStatPage reference is missing.");
         }
-        Debug.Log($"[DialogueManager] StartDialogue for {npc.npcName} completed successfully.");
+        Debug.Log($"[DialogueManager] StartDialogue for {npc.npcName} completed successfully. isDialogueActive = {isDialogueActive}");
     }
 
     public void EndDialogue()
     {
+        isDialogueActive = false; // Clear flag
+        Debug.Log($"[DialogueManager] Ending Dialogue. isDialogueActive set to {isDialogueActive}.");
         // If in cutscene mode, this should not be the primary way to end dialogue.
         // CutsceneManager should manage its dialogue segments.
         if (isInCutsceneDialogueMode)
@@ -119,14 +126,9 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        // Proceed with normal EndDialogue logic
-        if (currentNPC == null && currentNode == null && !isInCutsceneDialogueMode) 
-        { 
-             // If not in cutscene mode and no NPC/Node, ensure player is unlocked if they were locked
-            UnlockPlayerMovement(); 
-            return; 
-        }
-        Debug.Log($"[DialogueManager] Ending Dialogue with {(currentNPC != null ? currentNPC.npcName : "Unknown")}.");
+        BaseNPC npcThatWasInDialogue = currentNPC; // Store NPC before nulling it for normal dialogue
+        Debug.Log($"[DialogueManager] Ending Dialogue with {(npcThatWasInDialogue != null ? npcThatWasInDialogue.npcName : "No one (or already ended)")}.");
+
 
         if (dialogueUI != null)
         {
@@ -144,9 +146,20 @@ public class DialogueManager : MonoBehaviour
 
         if (currentNPC != null)
         {
-            currentNPC.ResumeNPC(); // This should allow NPC to resume its tasks
         }
         UnlockPlayerMovement(); // Unlock player movement
+
+        if (npcThatWasInDialogue != null)
+        {
+            Debug.Log($"[DialogueManager] Notifying {npcThatWasInDialogue.npcName} that dialogue has ended.");
+            npcThatWasInDialogue.NpcDialogueEnded(); // NPC will handle its state transition
+        }
+        
+        if (PointAndClickMovement.currentTarget == npcThatWasInDialogue)
+        {
+            Debug.Log($"[DialogueManager] Clearing PointAndClickMovement.currentTarget ({((MonoBehaviour)PointAndClickMovement.currentTarget).name}) as dialogue has ended.");
+            PointAndClickMovement.currentTarget = null;
+        }
 
         // Clear state for normal dialogue
         currentNPC = null;
@@ -161,18 +174,18 @@ public class DialogueManager : MonoBehaviour
         if (dialogueFile == null) { Debug.LogError("[DialogueManager] StartDialogueSegment: DialogueFile is null."); onSegmentComplete?.Invoke(); return; }
         if (string.IsNullOrEmpty(startNodeId)) { Debug.LogError("[DialogueManager] StartDialogueSegment: startNodeId is null or empty."); onSegmentComplete?.Invoke(); return; }
 
-        Debug.Log($"[DialogueManager] Starting Cutscene Dialogue Segment for {npc.npcName}, Node: {startNodeId}");
-
-        isInCutsceneDialogueMode = true; // Set mode first
-        currentNPC = npc; // The NPC speaking in the cutscene
+        Debug.Log($"[DM.StartDialogueSegment] Setting DM.currentNPC to {npc.name}");
+        Debug.Log($"[DialogueManager] Starting Cutscene Dialogue Segment for {npc.npcName}, Node: {startNodeId}. DM.currentNPC will be set to this NPC.");
+        isInCutsceneDialogueMode = true;
+        currentNPC = npc; // THIS IS CRITICAL. currentNPC is now the NPC from the cutscene action.
         currentCutsceneSegmentCompletionCallback = onSegmentComplete;
 
         try
         {
             currentData = JsonUtility.FromJson<DialogueData>(dialogueFile.text);
             if (currentData == null) throw new System.Exception("Parsed dialogue data is null.");
-            
-            currentData.nodeDictionary = new Dictionary<string, DialogueNode>(); 
+
+            currentData.nodeDictionary = new Dictionary<string, DialogueNode>();
             if (currentData.nodes != null)
             {
                 foreach (var node in currentData.nodes)
@@ -185,16 +198,18 @@ public class DialogueManager : MonoBehaviour
                             Debug.LogWarning($"[DialogueManager] Duplicate nodeID '{node.nodeID}' in cutscene dialogue {dialogueFile.name}.");
                     }
                 }
-            } else {
-                 Debug.LogError($"[DialogueManager] 'nodes' array is null in cutscene dialogue {dialogueFile.name}.");
-                 throw new System.Exception("'nodes' array is null.");
+            }
+            else
+            {
+                Debug.LogError($"[DialogueManager] 'nodes' array is null in cutscene dialogue {dialogueFile.name}.");
+                throw new System.Exception("'nodes' array is null.");
             }
         }
         catch (System.Exception e)
         {
             Debug.LogError($"[DialogueManager] Error parsing cutscene dialogue {dialogueFile.name}: {e.Message}");
-            CleanUpCutsceneDialogueState(); // Clean up if parsing fails
-            onSegmentComplete?.Invoke(); // Notify failure
+            CleanUpCutsceneDialogueState();
+            onSegmentComplete?.Invoke();
             return;
         }
 
@@ -206,16 +221,18 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        if (dialogueUI == null) 
-        { 
+        if (dialogueUI == null)
+        {
             Debug.LogError("[DialogueManager] DialogueUI is null in StartDialogueSegment.");
-            CleanUpCutsceneDialogueState(); 
-            onSegmentComplete?.Invoke(); 
-            return; 
+            CleanUpCutsceneDialogueState();
+            onSegmentComplete?.Invoke();
+            return;
         }
 
+        // This ShowDialogue will use the currentNPC (the cutscene NPC)
         dialogueUI.ShowDialogue(this, currentNode, currentNPC.npcName, currentNPC.npcImage);
-        dialogueUI.SetFinalCutsceneButtonVisibility(false, null); // Ensure final cutscene button is hidden
+        isDialogueActive = true; // Set flag (cutscene dialogue also makes map unavailable)
+        dialogueUI.SetFinalCutsceneButtonVisibility(false, null);
     }
 
     public void HandleChoiceSelected(DialogueChoice choice)
@@ -227,6 +244,9 @@ public class DialogueManager : MonoBehaviour
             else { EndDialogue(); }
             return; 
         }
+
+        BaseNPC npcThatSpokeThisLine = currentNPC; // Capture who was speaking for this specific choice processing
+
         Debug.Log($"[DialogueManager] Choice selected: '{choice.choiceText}' -> Next Node: '{choice.nextNodeID}'");
 
         if (!isInCutsceneDialogueMode) // Only apply love changes in normal dialogue
@@ -245,42 +265,51 @@ public class DialogueManager : MonoBehaviour
                 return;
             }
 
-
-
             if (CutsceneManager.Instance != null)
             {
-                // Store current NPC as it might be the instigator or involved.
-                // The CutsceneManager will handle pausing/resuming based on its own logic.
-                BaseNPC instigatorNPC = currentNPC;
+                BaseNPC instigatorNPC = currentNPC; // Store the NPC that was in dialogue
 
-                // End the current dialogue UI *before* starting the cutscene.
-                // The cutscene might want to use the DialogueManager immediately.
                 if (isInCutsceneDialogueMode)
                 {
-                    // If this choice in a cutscene dialogue triggers another cutscene,
-                    // end the current segment properly.
+                    // Logic for cutscene dialogue triggering another cutscene
                     Action callback = currentCutsceneSegmentCompletionCallback;
+                    BaseNPC npcFromCutsceneSeg = currentNPC; // Store before cleanup
                     if (dialogueUI != null) dialogueUI.HideDialogue();
                     CleanUpCutsceneDialogueState();
-                    // Note: The callback here might be tricky if the new cutscene
-                    // needs to happen *before* this segment is considered fully "complete".
-                    // For now, we assume the segment completes, then the new cutscene plays.
+
+                    if (npcFromCutsceneSeg != null) // Notify this NPC its segment ended
+                    {
+                        npcFromCutsceneSeg.NpcDialogueEnded();
+                    }
                     callback?.Invoke();
                 }
-                else
+                else // Normal dialogue triggering a cutscene
                 {
-                    // For normal dialogue, prepare for handoff similar to OnFinalCutsceneButtonClick
-                    PrepareForCutsceneHandoff(); // Hides UI, clears some state
+                    Debug.Log($"[DialogueManager] Normal dialogue with {instigatorNPC?.name} is ending to trigger cutscene {choice.triggerCutsceneName}.");
+                    PrepareForCutsceneHandoff(); // Hides UI
+
+                    // --- ADD THIS CRUCIAL STEP ---
+                    if (instigatorNPC != null)
+                    {
+                        // Tell the NPC that its *normal* dialogue session is over.
+                        // This will transition it from InDialogue to Idle.
+                        instigatorNPC.NpcDialogueEnded();
+                        // Also, ensure PointAndClickMovement.currentTarget is cleared for this NPC
+                        if (PointAndClickMovement.currentTarget == instigatorNPC)
+                        {
+                            PointAndClickMovement.currentTarget = null;
+                        }
+                    }
+                    // --- END ADD ---
                 }
 
+                // Now currentNPC in DialogueManager might be null if it was cleared by NpcDialogueEnded's chain.
+                // But instigatorNPC holds the reference for the cutscene.
                 CutsceneManager.Instance.StartCutscene(cutsceneToPlay, instigatorNPC);
             }
             else
             {
                 Debug.LogError($"[DialogueManager] CutsceneManager.Instance is null. Cannot trigger cutscene by name: '{choice.triggerCutsceneName}'. (Loaded cutscene object was: {(cutsceneToPlay != null ? cutsceneToPlay.name : "null/not loaded")})");
-                // Fallback: proceed with nextNodeID if cutscene manager is missing? Or just end?
-                // For now, let's assume if a cutscene is set, it's crucial.
-                // If not in cutscene mode, maybe EndDialogue() is appropriate.
                 if (!isInCutsceneDialogueMode) EndDialogue();
             }
             return; // Do not proceed to nextNodeID logic if a cutscene is triggered
@@ -290,54 +319,70 @@ public class DialogueManager : MonoBehaviour
 
         if (isInCutsceneDialogueMode && isEndOfCutsceneSegment)
         {
-            Debug.Log($"[DialogueManager] Cutscene dialogue segment ended by choice '{choice.choiceText}'.");
+            Debug.Log($"[DialogueManager] Cutscene dialogue segment ended by choice for {npcThatSpokeThisLine?.name}.");
             Action callback = currentCutsceneSegmentCompletionCallback;
-            if (dialogueUI != null) dialogueUI.HideDialogue(); 
-            CleanUpCutsceneDialogueState(); 
-            callback?.Invoke(); 
-            return; 
+
+            if (dialogueUI != null) dialogueUI.HideDialogue();
+            CleanUpCutsceneDialogueState();
+
+            if (npcThatSpokeThisLine != null)
+            {
+                Debug.Log($"[DialogueManager] Notifying {npcThatSpokeThisLine.name} that its cutscene dialogue segment has ended (natural end).");
+                npcThatSpokeThisLine.NpcDialogueEnded();
+            }
+            callback?.Invoke();
+            return;
         }
 
         if (string.IsNullOrEmpty(choice.nextNodeID) || !currentData.nodeDictionary.TryGetValue(choice.nextNodeID, out DialogueNode nextNode) || nextNode == null)
         {
-            Debug.Log($"[DialogueManager] Next node ID ('{choice.nextNodeID ?? "null"}') invalid or missing for current node '{currentNode?.nodeID}'.");
-            if (isInCutsceneDialogueMode) 
+            Debug.Log($"[DialogueManager] Next node ID invalid for {npcThatSpokeThisLine?.name}.");
+            if (isInCutsceneDialogueMode)
             {
                 Action callback = currentCutsceneSegmentCompletionCallback;
                 if (dialogueUI != null) dialogueUI.HideDialogue();
-                CleanUpCutsceneDialogueState();
+                CleanUpCutsceneDialogueState(); 
+
+                if (npcThatSpokeThisLine != null)
+                {
+                    Debug.Log($"[DialogueManager] Notifying {npcThatSpokeThisLine.name} (due to invalid next node) that its cutscene dialogue segment has ended.");
+                    npcThatSpokeThisLine.NpcDialogueEnded();
+                }
                 callback?.Invoke();
             }
             else
             {
-                EndDialogue(); 
+                EndDialogue();
             }
+            return; // Return after handling this case
+        }
+
+        currentNode = nextNode;
+        if (dialogueUI != null)
+        {
+            dialogueUI.ShowDialogue(this, currentNode, npcThatSpokeThisLine.npcName, npcThatSpokeThisLine.npcImage);
         }
         else
         {
-            currentNode = nextNode;
-            if (dialogueUI != null)
-            {
-                dialogueUI.ShowDialogue(this, currentNode, currentNPC.npcName, currentNPC.npcImage);
-            }
-            else
-            {
-                Debug.LogError("[DialogueManager] DialogueUI reference missing, cannot show next node.");
-                if (isInCutsceneDialogueMode) { ForceEndCutsceneDialogue(); currentCutsceneSegmentCompletionCallback?.Invoke(); } 
-                else { EndDialogue(); }
-            }
+            Debug.LogError("[DialogueManager] DialogueUI reference missing, cannot show next node.");
+            if (isInCutsceneDialogueMode) { ForceEndCutsceneDialogue(); currentCutsceneSegmentCompletionCallback?.Invoke(); } 
+            else { EndDialogue(); }
         }
     }
 
     private void CleanUpCutsceneDialogueState()
     {
-        // currentNPC is managed by CutsceneManager during cutscenes, so don't null it here.
-        // currentData was specific to the segment, so it's fine to null.
-        currentData = null; 
+        // It's important that DialogueManager.currentNPC is nulled here if it was holding
+        // the NPC specifically for a cutscene segment, to prevent confusion with any
+        // ongoing normal dialogue (though that shouldn't happen).
+        Debug.Log($"[DialogueManager] Cleaning up cutscene dialogue state. DM.currentNPC was: {currentNPC?.name}");
+        currentNPC = null; // Null out DM's reference to the cutscene segment's NPC
+        currentData = null;
         currentNode = null;
         isInCutsceneDialogueMode = false;
         currentCutsceneSegmentCompletionCallback = null;
-        Debug.Log("[DialogueManager] Cleaned up cutscene dialogue state.");
+        isDialogueActive = false; // Reset flag
+        // Debug.Log("[DialogueManager] Cleaned up cutscene dialogue state. DM.currentNPC is now null.");
     }
 
     public bool IsDialogueActiveForCutscene()
@@ -347,12 +392,19 @@ public class DialogueManager : MonoBehaviour
 
     public void ForceEndCutsceneDialogue()
     {
-        if (isInCutsceneDialogueMode)
+        if (isInCutsceneDialogueMode) // Only act if we were truly in this mode
         {
-            Debug.Log("[DialogueManager] Forcefully ending cutscene dialogue segment.");
+            Debug.Log($"[DialogueManager] Forcefully ending cutscene dialogue segment for {currentNPC?.name}.");
+            BaseNPC npcFromCutsceneSegment = currentNPC; // Capture before cleanup
+
             if (dialogueUI != null) dialogueUI.HideDialogue();
-            CleanUpCutsceneDialogueState();
-            // Don't invoke callback here as this is a force stop from outside
+            CleanUpCutsceneDialogueState(); // This nulls DM.currentNPC
+
+            if (npcFromCutsceneSegment != null)
+            {
+                Debug.Log($"[DialogueManager] Notifying {npcFromCutsceneSegment.name} (due to force end) that its cutscene dialogue segment has ended.");
+                npcFromCutsceneSegment.NpcDialogueEnded();
+            }
         }
     }
 
@@ -508,9 +560,9 @@ public class DialogueManager : MonoBehaviour
     // This method seems unused based on current logic flow, consider removing if not needed.
     // private bool RequiresItemToProceed(int currentLove) { return (currentLove == 3 || currentLove == 6 || currentLove == 9); }
 
-    private void LockPlayerMovement() { if (playerMovement != null) playerMovement.LockMovement(); else Debug.LogWarning("[DialogueManager] PlayerMovement script not found on Lock."); }
+    private void LockPlayerMovement() { if (playerMovement != null) playerMovement.HardLockPlayerMovement(); else Debug.LogWarning("[DialogueManager] PlayerMovement script not found on Lock."); }
 
-    private void UnlockPlayerMovement() { if (playerMovement != null) playerMovement.UnlockMovement(); else Debug.LogWarning("[DialogueManager] PlayerMovement script not found on Unlock."); }
+    private void UnlockPlayerMovement() { if (playerMovement != null) playerMovement.HardUnlockPlayerMovement(); else Debug.LogWarning("[DialogueManager] PlayerMovement script not found on Unlock."); }
 
     private void CleanupFailedDialogueStart()
     {
@@ -523,6 +575,7 @@ public class DialogueManager : MonoBehaviour
         currentNode = null;
         isInCutsceneDialogueMode = false; // Should not be true here, but reset just in case
         currentCutsceneSegmentCompletionCallback = null;
+        isDialogueActive = false; // Reset flag
 
         if (dialogueUI != null) dialogueUI.HideDialogue();
         if (npcStatPage != null) npcStatPage.HideStatsPanel();

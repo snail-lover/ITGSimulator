@@ -6,12 +6,12 @@ using UnityEngine.UI; // Keep if you still use UI elements linked here
 
 public class BaseNPC : MonoBehaviour, IClickable
 {
-    // Static list to keep track of all active NPCs for collision management
+    // --- Fields & Properties (unchanged) ---
     private static List<BaseNPC> _allActiveNpcs = new List<BaseNPC>();
+    public static List<BaseNPC> AllActiveNpcs => _allActiveNpcs; // Public getter for all active NPCs
 
     [Header("Interaction Settings")]
     public float interactRange = 2.0f;
-    private bool isInteracting = false;
 
     [Header("Task Management")]
     public List<TaskObject> taskPool;
@@ -44,13 +44,13 @@ public class BaseNPC : MonoBehaviour, IClickable
     public Sprite npcImage;
 
     [Header("Cutscene Settings")]
-    [SerializeField] protected Cutscene finalLoveCutsceneAsset; // Assign your "win" cutscene here for NPCs that have one
-    private bool isPausedByCutscene = false;
-    private bool wasAgentStoppedBeforeCutscene; // To restore agent's previous 'isStopped' state
+    [SerializeField] protected Cutscene finalLoveCutsceneAsset;
+    private bool wasAgentStoppedBeforeCutscene;
+
+
 
     public NavMeshAgent Agent => agent;
     public Animator NpcAnimator => npcAnimator;
-    public bool IsPausedByCutscene => isPausedByCutscene;
 
     // Cached References
     private DialogueData dialogueData;
@@ -60,26 +60,48 @@ public class BaseNPC : MonoBehaviour, IClickable
 
     [Header("Floor Management")]
     [Tooltip("The current floor this NPC is on. Needs to be updated by game logic when NPC changes floors (e.g., via tasks).")]
-    public FloorVisibilityManager.FloorLevel currentNpcFloorLevel = FloorVisibilityManager.FloorLevel.Lower; // Default or set in Inspector
+    public FloorVisibilityManager.FloorLevel currentNpcFloorLevel = FloorVisibilityManager.FloorLevel.Lower;
     [Tooltip("Assign the main collider used for player interaction and general NPC presence. This will also be used for NPC-NPC collision ignoring.")]
-    public Collider interactionCollider; // Assign this in the Inspector
+    public Collider interactionCollider;
 
     private Renderer[] _npcRenderers;
+
+    // --- State Machine ---
+    public enum NpcState
+    {
+        None,
+        Idle,
+        MovingToTask,
+        PerformingTaskAction,
+        WaitingAfterTask,
+        PlayerApproaching,
+        InDialogue,
+        PausedByCutscene
+    }
+
+    [Header("State Machine Debug")]
+    [SerializeField] private NpcState _currentState = NpcState.None;
+    public NpcState CurrentNpcState => _currentState;
+    private NpcState _previousState;
+
+
+
+    // =========================================================================
+    // 1. Unity Lifecycle Methods
+    // =========================================================================
 
     protected virtual void Awake()
     {
         CachePlayerReferences();
-        InitializeNPC(); // NavMeshAgent 'agent' is initialized here
+        InitializeNPC();
         LoadDialogueData();
-        InitializeLove(); // Needs dialogueData loaded first
+        InitializeLove();
 
         _npcRenderers = GetComponentsInChildren<Renderer>(true);
 
-        // --- NPC-NPC Collision Avoidance Setup ---
-        SetupNpcCollisionProperties();    // Configure NavMeshAgent for no inter-NPC avoidance
-        ApplyNpcNpcCollisionIgnores();    // Iterate existing NPCs and ignore their colliders
-        _allActiveNpcs.Add(this);         // Add this NPC to the global list for future NPCs
-        // --- End NPC-NPC Collision Avoidance Setup ---
+        SetupNpcCollisionProperties();
+        ApplyNpcNpcCollisionIgnores();
+        _allActiveNpcs.Add(this);
 
         if (interactionCollider == null)
         {
@@ -90,86 +112,50 @@ public class BaseNPC : MonoBehaviour, IClickable
             Debug.Log($"[{npcName}-Awake] Interaction Collider: {interactionCollider.name}. Initial floor: {currentNpcFloorLevel}");
         }
         Debug.Log($"[{npcName}-Awake] Cached {_npcRenderers.Length} renderers. Initial floor: {currentNpcFloorLevel}");
-
-        // Initial visibility check if FloorVisibilityManager is ready
-        // This will be handled by FloorVisibilityManager.Start() -> NotifyAllNpcsOfFloorChange
-    }
-
-    protected virtual void OnDestroy()
-    {
-        _allActiveNpcs.Remove(this);
-        // Physics.IgnoreCollision states are automatically reset by Unity when a collider is destroyed.
-    }
-
-    private void SetupNpcCollisionProperties()
-    {
-        if (agent != null)
-        {
-            // This tells the NavMeshAgent to not perform pathfinding avoidance for other agents.
-            // They will still avoid NavMesh obstacles, but not other NavMeshAgents.
-            agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
-            // Debug.Log($"[{npcName}] Set NavMeshAgent.obstacleAvoidanceType to NoObstacleAvoidance.");
-        }
-        else
-        {
-            Debug.LogWarning($"[{npcName}] NavMeshAgent component is null in SetupNpcCollisionProperties. Cannot set obstacleAvoidanceType.", this);
-        }
-    }
-
-    private void ApplyNpcNpcCollisionIgnores()
-    {
-        if (this.interactionCollider == null)
-        {
-            // Warning already logged in Awake if interactionCollider is null.
-            // This function won't be effective without it.
-            return;
-        }
-
-        // Iterate through all NPCs already initialized and ignore collisions with them.
-        // Physics.IgnoreCollision is symmetrical (if A ignores B, B ignores A).
-        foreach (BaseNPC otherNpc in _allActiveNpcs)
-        {
-            // No need to check 'otherNpc == this' as 'this' is not yet in _allActiveNpcs
-            // when this method is called from Awake.
-
-            if (otherNpc.interactionCollider != null)
-            {
-                Physics.IgnoreCollision(this.interactionCollider, otherNpc.interactionCollider, true);
-                // Debug.Log($"[{this.npcName}] Ignoring collision with [{otherNpc.npcName}].");
-            }
-        }
     }
 
     private void Start()
     {
-        // It's good practice to ensure FVM is up before NPCs heavily rely on it in Start.
-        // However, FVM's Start() should call NotifyAllNpcsOfFloorChange, covering NPCs present at scene load.
         if (FloorVisibilityManager.Instance == null)
         {
             Debug.LogWarning($"[{npcName}-Start] FloorVisibilityManager.Instance is null. Initial visibility might be incorrect until FVM initializes and notifies.");
         }
-        // If NPC is instantiated at runtime *after* FVM.Start(), it needs to set its own visibility:
-        else if (!FloorVisibilityManager.Instance.isActiveAndEnabled) // A check to see if FVM is likely done with its Start
+        else if (!FloorVisibilityManager.Instance.isActiveAndEnabled)
         {
             Debug.LogWarning($"[{npcName}-Start] FloorVisibilityManager.Instance found, but might not have run its Start() yet. Deferring explicit visibility update slightly or relying on FVM's initial broadcast.");
         }
         else
         {
-            // If FVM is ready, ensure this NPC's visibility is correct based on current player floor.
-            // This is especially for NPCs spawned after initial FVM broadcast.
-            // Debug.Log($"[{npcName}-Start] FVM Instance found. Explicitly updating visibility.");
-            // UpdateVisibilityBasedOnPlayerFloor(FloorVisibilityManager.Instance.CurrentVisibleFloor);
-            // Let's rely on FVM's initial broadcast for scene-loaded NPCs.
-            // For runtime spawned NPCs, the above line is more critical.
+            // See comment in original code
         }
 
-        StartTaskLoop();
+        TransitionToState(NpcState.Idle);
     }
 
     private void Update()
     {
-        UpdateAnimation(); // Update walking animation based on agent velocity
+        UpdateStateBehavior();
+        UpdateAnimation();
     }
+
+    protected virtual void OnDestroy()
+    {
+        _allActiveNpcs.Remove(this);
+        if (taskExecutionCoroutine != null) // This is the NpcTaskLoopCoroutine handle
+        {
+            StopCoroutine(taskExecutionCoroutine);
+            taskExecutionCoroutine = null;
+        }
+        if (interactionCoroutine != null) // This is the PlayerApproachCoroutine handle
+        {
+            StopCoroutine(interactionCoroutine);
+            interactionCoroutine = null;
+        }
+    }
+
+    // =========================================================================
+    // 2. Initialization & Caching
+    // =========================================================================
 
     private void CachePlayerReferences()
     {
@@ -210,16 +196,6 @@ public class BaseNPC : MonoBehaviour, IClickable
         }
     }
 
-    private void StartTaskLoop()
-    {
-        // Start the main loop ONLY if not already running
-        if (agent != null && taskPool != null && taskPool.Count > 0 && !isInteracting && taskExecutionCoroutine == null)
-        {
-            // Debug.Log($"[{name}] Starting Task Loop.");
-            taskExecutionCoroutine = StartCoroutine(TaskLoop());
-        }
-    }
-
     private void LoadDialogueData()
     {
         if (dialogueFile == null)
@@ -236,17 +212,16 @@ public class BaseNPC : MonoBehaviour, IClickable
         catch (System.Exception e)
         {
             Debug.LogError($"[{gameObject.name}] Error parsing Dialogue JSON for {dialogueFile.name}: {e.Message}\n{e.StackTrace}");
-            dialogueData = null; // Ensure it's null on error
+            dialogueData = null;
         }
     }
 
     private void ValidateDialogueData()
     {
-        // Basic validation already done implicitly by checking dialogueData != null after parse
         if (dialogueData.nodes == null)
         {
             Debug.LogError($"[{gameObject.name}] Invalid dialogue data in {dialogueFile.name}. 'nodes' array is missing or null.");
-            dialogueData = null; // Invalidate data
+            dialogueData = null;
             return;
         }
 
@@ -271,6 +246,465 @@ public class BaseNPC : MonoBehaviour, IClickable
         }
     }
 
+    // =========================================================================
+    // 3. State Machine (Core, Enter/Exit, State-specific, Coroutines)
+    // =========================================================================
+
+    // --- Core ---
+    private void TransitionToState(NpcState newState)
+    {
+        if (_currentState == newState && newState != NpcState.PlayerApproaching)
+        {
+            Debug.LogWarning($"[{npcName}] Tried to transition to the same state: {newState}.");
+            if (newState == NpcState.PlayerApproaching) HandleEnterPlayerApproachingState();
+            return;
+        }
+        //Debug.Log($"[{npcName}] Transitioning: {_currentState} -> {newState}");
+        _previousState = _currentState;
+        OnExitState(_currentState);
+        _currentState = newState;
+        OnEnterState(_currentState);
+    }
+
+    private void OnEnterState(NpcState state)
+    {
+        switch (state)
+        {
+            case NpcState.Idle:
+                HandleEnterIdleState();
+                break;
+            case NpcState.MovingToTask:
+                HandleEnterMovingToTaskState();
+                break;
+            case NpcState.PerformingTaskAction:
+                HandleEnterPerformingTaskActionState();
+                break;
+            case NpcState.WaitingAfterTask:
+                HandleEnterWaitingAfterTaskState();
+                break;
+            case NpcState.PlayerApproaching:
+                HandleEnterPlayerApproachingState();
+                break;
+            case NpcState.InDialogue:
+                HandleEnterInDialogueState();
+                break;
+            case NpcState.PausedByCutscene:
+                HandleEnterPausedByCutsceneState();
+                break;
+        }
+    }
+
+    private void OnExitState(NpcState state)
+    {
+        switch (state)
+        {
+            case NpcState.MovingToTask:
+                if (_currentState != NpcState.PerformingTaskAction)
+                {
+                    if (agent != null && agent.isOnNavMesh) agent.ResetPath();
+                }
+                break;
+            case NpcState.PerformingTaskAction:
+                if (currentTask != null && npcAnimator != null && !string.IsNullOrEmpty(currentTask.animationBoolName))
+                {
+                    npcAnimator.SetBool(currentTask.animationBoolName, false);
+                }
+                break;
+            case NpcState.PlayerApproaching:
+                if (interactionCoroutine != null)
+                {
+                    StopCoroutine(interactionCoroutine);
+                    interactionCoroutine = null;
+                }
+                PointAndClickMovement.Instance?.LockPlayerApproach(this); // NEW: Use the "soft unlock"
+                if (_currentState != NpcState.InDialogue)
+                {
+                    PointAndClickMovement.Instance?.LockPlayerApproach(this);
+                }
+                break;
+            case NpcState.InDialogue:
+                PointAndClickMovement.Instance?.LockPlayerApproach(this);
+                break;
+            case NpcState.PausedByCutscene:
+                if (agent != null && agent.isOnNavMesh && _currentState != NpcState.None)
+                {
+                    agent.isStopped = wasAgentStoppedBeforeCutscene;
+                }
+                break;
+        }
+    }
+
+    private void UpdateStateBehavior()
+    {
+        switch (_currentState)
+        {
+            case NpcState.MovingToTask:
+                if (agent != null && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    TransitionToState(NpcState.PerformingTaskAction);
+                }
+                break;
+        }
+    }
+
+    // --- State-specific Enter Logic ---
+    private void HandleEnterIdleState()
+    {
+        currentTask = null;
+        if (agent != null && agent.isOnNavMesh) agent.isStopped = true;
+        StartNpcTaskLoopIfNeeded();
+    }
+
+    private void HandleEnterMovingToTaskState()
+    {
+        if (currentTask == null || agent == null || !agent.isOnNavMesh)
+        {
+            Debug.LogWarning($"[{npcName}] Cannot enter MovingToTask: Invalid task or agent. Reverting to Idle.");
+            TransitionToState(NpcState.Idle);
+            return;
+        }
+        agent.SetDestination(currentTask.GetTargetPosition());
+        agent.isStopped = false;
+    }
+
+    private void HandleEnterPerformingTaskActionState()
+    {
+        if (currentTask == null || agent == null)
+        {
+            Debug.LogWarning($"[{npcName}] Cannot enter PerformingTaskAction: Invalid task or agent. Reverting to Idle.");
+            TransitionToState(NpcState.Idle);
+            return;
+        }
+        if (agent.isOnNavMesh)
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+            agent.velocity = Vector3.zero;
+        }
+        StartCoroutine(ExecuteTaskActionCoroutine(currentTask));
+    }
+
+    private void HandleEnterWaitingAfterTaskState()
+    {
+        currentTask = null;
+        StartCoroutine(TaskCompletionDelayCoroutine());
+    }
+
+    private void HandleEnterPlayerApproachingState()
+    {
+        Debug.Log($"[{npcName}] Entering PlayerApproaching state.");
+        StopNpcTaskLoopAndMovement(); // Stop NPC's own tasks
+        currentTask = null;
+
+        // 1. Notify PointAndClickMovement that we are starting an approach
+        PointAndClickMovement.Instance?.LockPlayerApproach(this); // NEW: Use the "soft lock"
+
+        // 2. Command the player to move to this NPC
+        if (playerTransform != null && PointAndClickMovement.Instance != null)
+        {
+            PointAndClickMovement.Instance.SetPlayerDestination(transform.position, true /*isProgrammaticCall*/);
+            Debug.Log($"[{npcName}] Instructing player to move to my position: {transform.position}");
+        }
+        else
+        {
+            Debug.LogError($"[{npcName}] Cannot command player to move: PlayerTransform or PointAndClickMovement instance is null.");
+            TransitionToState(NpcState.Idle); // Abort approach if we can't move player
+            return;
+        }
+
+        // 3. Start the coroutine to monitor arrival
+        if (interactionCoroutine != null) StopCoroutine(interactionCoroutine);
+        interactionCoroutine = StartCoroutine(PlayerApproachCoroutine());
+    }
+
+    private void HandleEnterInDialogueState()
+    {
+        Debug.Log($"[{name}] HandleEnterInDialogueState. My _currentState is now InDialogue. DialogueManager.currentNPC is {DialogueManager.Instance?.GetCurrentNPC()?.name}");
+        DialogueManager.Instance.StartDialogue(this);
+    }
+
+    private void HandleEnterPausedByCutsceneState()
+    {
+        Debug.Log($"[{npcName}] Entering PausedByCutscene state.");
+        StopNpcTaskLoopAndMovement();
+        if (interactionCoroutine != null)
+        {
+            StopCoroutine(interactionCoroutine);
+            interactionCoroutine = null;
+            PointAndClickMovement.Instance?.LockPlayerApproach(this);
+        }
+        if (agent != null && agent.isOnNavMesh)
+        {
+            wasAgentStoppedBeforeCutscene = agent.isStopped;
+            agent.isStopped = true;
+        }
+    }
+
+    // --- State Coroutines ---
+    private IEnumerator ExecuteTaskActionCoroutine(TaskObject task)
+    {
+        if (task == null) yield break;
+        Quaternion targetRotation = task.GetTargetRotation();
+        float turnTimer = 0f;
+        Quaternion startRotation = transform.rotation;
+        while (turnTimer < 1f && Quaternion.Angle(transform.rotation, targetRotation) > 1f)
+        {
+            if (_currentState != NpcState.PerformingTaskAction) yield break;
+            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, turnTimer * rotationSpeed);
+            turnTimer += Time.deltaTime;
+            yield return null;
+        }
+        if (_currentState == NpcState.PerformingTaskAction) transform.rotation = targetRotation;
+
+        bool animationSet = false;
+        if (npcAnimator != null && !string.IsNullOrEmpty(task.animationBoolName))
+        {
+            npcAnimator.SetBool(task.animationBoolName, true);
+            animationSet = true;
+        }
+
+        yield return new WaitForSeconds(task.duration);
+
+        if (animationSet && npcAnimator != null)
+        {
+            npcAnimator.SetBool(task.animationBoolName, false);
+        }
+
+        if (_currentState == NpcState.PerformingTaskAction)
+        {
+            TransitionToState(NpcState.WaitingAfterTask);
+        }
+    }
+
+    private IEnumerator TaskCompletionDelayCoroutine()
+    {
+        yield return new WaitForSeconds(taskCompletionDelay);
+        if (_currentState == NpcState.WaitingAfterTask)
+        {
+            TransitionToState(NpcState.Idle);
+        }
+    }
+
+    private IEnumerator PlayerApproachCoroutine()
+    {
+        if (playerTransform == null || playerAgent == null)
+        {
+            Debug.LogError($"[{npcName}] Player references missing. Cannot execute PlayerApproachCoroutine.");
+            if (_currentState == NpcState.PlayerApproaching) TransitionToState(NpcState.Idle);
+            yield break;
+        }
+
+        Debug.Log($"[{npcName}] PlayerApproachCoroutine started for {name}. Player should be moving towards me.");
+
+        // Give the NavMeshAgent a brief moment to process the SetDestination command
+        // from PointAndClickMovement and start path calculation.
+        // Waiting for end of frame can often be enough.
+        yield return new WaitForEndOfFrame();
+        // You could even do yield return null; twice if WaitForEndOfFrame isn't enough on its own.
+
+        bool canInteract = false;
+        float stuckTimer = 0f; // Add a timer to detect if player is truly stuck
+        const float maxStuckTime = 3.0f; // Max time to wait if player agent isn't moving
+
+        while (_currentState == NpcState.PlayerApproaching && PointAndClickMovement.currentTarget == this)
+        {
+            float distance = Vector3.Distance(playerTransform.position, transform.position);
+            if (distance <= interactRange)
+            {
+                Debug.Log($"[{npcName}] Player in range. Distance: {distance}");
+                canInteract = true;
+                break;
+            }
+
+            // Check if player agent is actively moving or still calculating path
+            if (playerAgent.pathPending || (playerAgent.hasPath && playerAgent.velocity.sqrMagnitude > 0.01f))
+            {
+                // Player is moving or path is calculating - GOOD
+                stuckTimer = 0f; // Reset stuck timer
+                                 // Debug.Log($"[{npcName}] Player agent is moving or path pending. Velocity: {playerAgent.velocity.magnitude}, PathPending: {playerAgent.pathPending}, HasPath: {playerAgent.hasPath}, RemainingDist: {playerAgent.remainingDistance}");
+            }
+            // Check if player has a path but isn't moving (might have arrived at an intermediate point or is blocked)
+            // Only consider it "stopped prematurely" if it has a path but no velocity AND is not yet in range.
+            else if (playerAgent.hasPath && playerAgent.velocity.sqrMagnitude < 0.01f && playerAgent.remainingDistance > agent.stoppingDistance)
+            {
+                stuckTimer += Time.deltaTime;
+                // Debug.LogWarning($"[{npcName}] Player agent has path but is not moving. Velocity: {playerAgent.velocity.magnitude}, RemainingDist: {playerAgent.remainingDistance}. Stuck timer: {stuckTimer}");
+                if (stuckTimer > maxStuckTime)
+                {
+                    Debug.LogWarning($"[{npcName}] Player agent seems stuck or destination unreachable for too long. Cancelling approach.");
+                    canInteract = false;
+                    break;
+                }
+            }
+            // Check if player has NO path and is NOT moving (could be SetDestination failed or player clicked away very fast)
+            // Only consider it "stopped prematurely" if it has a path but no velocity AND is not yet in range.
+            else if (!playerAgent.hasPath && playerAgent.velocity.sqrMagnitude < 0.01f)
+            {
+                // This case is tricky. If SetDestination truly failed, we should abort.
+                // If it's just the initial frames, we might have already yielded.
+                // Let's add a small delay for this specific case to be sure it's not a transient state.
+                // However, the initial yield return new WaitForEndOfFrame(); should help a lot.
+                stuckTimer += Time.deltaTime; // Also use stuck timer here
+                Debug.LogWarning($"[{npcName}] Player agent has NO path and is NOT moving. Velocity: {playerAgent.velocity.magnitude}. Stuck timer: {stuckTimer}");
+                if (stuckTimer > maxStuckTime / 2f) // Shorter timeout for no path at all
+                {
+                    Debug.LogWarning($"[{npcName}] Player agent has no path and isn't moving. Destination likely invalid or un Treachable. Cancelling approach.");
+                    canInteract = false;
+                    break;
+                }
+            }
+            else
+            {
+                // Default case, likely still moving or just arrived at stopping distance but not interactRange
+                stuckTimer = 0f;
+            }
+
+            yield return null;
+        }
+
+        if (_currentState == NpcState.PlayerApproaching)
+        {
+            if (canInteract && PointAndClickMovement.currentTarget == this)
+            {
+                Debug.Log($"[{npcName}] Player arrived and conditions met for dialogue.");
+                if (playerAgent.isOnNavMesh)
+                {
+                    playerAgent.ResetPath();
+                    playerAgent.velocity = Vector3.zero;
+                }
+                TransitionToState(NpcState.InDialogue);
+            }
+            else
+            {
+                Debug.LogWarning($"[{npcName}] PlayerApproachCoroutine ended. Conditions not met for dialogue. Reverting to Idle.");
+                TransitionToState(NpcState.Idle);
+            }
+        }
+        interactionCoroutine = null;
+    }
+
+    // =========================================================================
+    // 4. Task Management
+    // =========================================================================
+
+    private void AssignNextTask()
+    {
+        if (taskPool == null || taskPool.Count == 0)
+        {
+            currentTask = null;
+            return;
+        }
+        currentTask = GetRandomTask();
+    }
+
+    private TaskObject GetRandomTask()
+    {
+        if (taskPool == null || taskPool.Count == 0) return null;
+        return taskPool[Random.Range(0, taskPool.Count)];
+    }
+
+    private void StartNpcTaskLoopIfNeeded()
+    {
+        if (taskExecutionCoroutine == null && taskPool != null && taskPool.Count > 0)
+        {
+            taskExecutionCoroutine = StartCoroutine(NpcTaskLoopCoroutine());
+        }
+    }
+
+    private void StopNpcTaskLoopAndMovement()
+    {
+        if (taskExecutionCoroutine != null)
+        {
+            StopCoroutine(taskExecutionCoroutine);
+            taskExecutionCoroutine = null;
+        }
+        if (agent != null && agent.isOnNavMesh)
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+        }
+        if (currentTask != null && npcAnimator != null && !string.IsNullOrEmpty(currentTask.animationBoolName))
+        {
+            npcAnimator.SetBool(currentTask.animationBoolName, false);
+        }
+        currentTask = null;
+    }
+
+    private IEnumerator NpcTaskLoopCoroutine()
+    {
+        while (true)
+        {
+            if (_currentState == NpcState.Idle)
+            {
+                AssignNextTask();
+                if (currentTask != null)
+                {
+                    TransitionToState(NpcState.MovingToTask);
+                }
+                else
+                {
+                    yield return new WaitForSeconds(taskCompletionDelay);
+                }
+            }
+            yield return null;
+        }
+    }
+
+    // =========================================================================
+    // 5. Interaction & Cutscene
+    // =========================================================================
+
+    public virtual void OnClick()
+    {
+        Debug.Log($"[{npcName}-{_currentState}] OnClick received.");
+
+        switch (_currentState)
+        {
+            case NpcState.Idle:
+            case NpcState.MovingToTask:
+            case NpcState.PerformingTaskAction:
+            case NpcState.WaitingAfterTask:
+                PointAndClickMovement.currentTarget = this;
+                TransitionToState(NpcState.PlayerApproaching);
+                break;
+
+            case NpcState.PlayerApproaching:
+                Debug.Log($"[{npcName}-{_currentState}] Re-clicked. Player already approaching. Restarting approach logic.");
+                HandleEnterPlayerApproachingState();
+                break;
+
+            case NpcState.InDialogue:
+                Debug.Log($"[{npcName}-{_currentState}] Clicked while in dialogue. Ignoring click on NPC model.");
+                break;
+
+            case NpcState.PausedByCutscene:
+                Debug.Log($"[{npcName}-{_currentState}] Clicked while paused by cutscene. Ignoring.");
+                break;
+
+            default:
+                Debug.LogWarning($"[{npcName}-{_currentState}] OnClick in unhandled state.");
+                break;
+        }
+    }
+
+    public virtual void ResetInteractionState()
+    {
+        Debug.Log($"[{npcName}-{_currentState}] ResetInteractionState called.");
+
+        switch (_currentState)
+        {
+            case NpcState.PlayerApproaching:
+            case NpcState.InDialogue:
+                TransitionToState(NpcState.Idle);
+                break;
+        }
+
+        if (PointAndClickMovement.currentTarget == this)
+        {
+            PointAndClickMovement.currentTarget = null;
+        }
+    }
+
     public virtual void TriggerFinalCutscene()
     {
         if (finalLoveCutsceneAsset != null)
@@ -281,396 +715,17 @@ public class BaseNPC : MonoBehaviour, IClickable
         else
         {
             Debug.LogWarning($"[{npcName}] No final love cutscene asset assigned.");
-            // Optionally, add fallback logic here if needed
-        }
-    }
-
-    public virtual void PauseAIForCutscene(bool pause)
-    {
-        if (pause)
-        {
-            isPausedByCutscene = true;
-            if (taskExecutionCoroutine != null)
-            {
-                StopCoroutine(taskExecutionCoroutine);
-                taskExecutionCoroutine = null; // Important to allow restart later
-            }
-            if (agent != null && agent.isOnNavMesh)
-            {
-                wasAgentStoppedBeforeCutscene = agent.isStopped; // Store current state
-                agent.isStopped = true; // Stop movement for cutscene control
-                                        // agent.ResetPath(); // Optional: clear path if cutscene will move it
-            }
-            Debug.Log($"[{name}] AI Paused for cutscene.");
-        }
-        else // Resume
-        {
-            isPausedByCutscene = false;
-            // Agent's 'isStopped' will be handled by TaskLoop resumption or interaction logic.
-            // Or explicitly set it here if needed:
-            if (agent != null && agent.isOnNavMesh && !isInteracting) // Don't unstop if also interacting
-            {
-                // Restore previous state IF not interacting (interaction has priority on agent.isStopped)
-                agent.isStopped = wasAgentStoppedBeforeCutscene;
-            }
-            StartTaskLoop(); // Restart the task loop
-            Debug.Log($"[{name}] AI Resumed from cutscene.");
         }
     }
 
     public virtual void PerformCutsceneAction(string methodName)
     {
-        // Base implementation can be empty or log a warning
         Debug.LogWarning($"[BaseNPC] PerformCutsceneAction called with '{methodName}' but not implemented in derived class {this.GetType().Name} or BaseNPC.");
     }
 
-
-
-    public void OnClick()
-    {
-        // Ignore click if already interacting with this NPC
-        if (isInteracting)
-        {
-            // Debug.Log($"[{name}] Already interacting, ignoring click.");
-            return;
-        }
-
-        // If player was interacting with someone else, reset that target
-        if (PointAndClickMovement.currentTarget != null && PointAndClickMovement.currentTarget != this)
-        {
-            PointAndClickMovement.currentTarget.ResetInteractionState();
-        }
-
-        // Set this NPC as the new target
-        PointAndClickMovement.currentTarget = this;
-        InitiateInteraction();
-
-    }
-
-    public virtual void ResetInteractionState()
-    {
-        isInteracting = false;
-
-        // Stop player movement towards this NPC if it was happening
-        if (interactionCoroutine != null)
-        {
-            StopCoroutine(interactionCoroutine);
-            interactionCoroutine = null;
-        }
-
-        // If dialogue was active with this NPC, end it
-        if (DialogueManager.Instance != null && DialogueManager.Instance.GetCurrentNPC() == this)
-        {
-            DialogueManager.Instance.EndDialogue(); // Dialogue Manager should call ResumeNPC
-        }
-        else
-        {
-            // If dialogue wasn't active (e.g., player clicked away before reaching NPC), just resume NPC
-            ResumeNPC();
-        }
-    }
-
-    public virtual void WhenHovered() { /* Implement visual feedback if needed */ }
-    public virtual void HideHover() { /* Implement visual feedback if needed */ }
-
-    private void InitiateInteraction()
-    {
-        if (playerTransform == null || playerAgent == null)
-        {
-            Debug.LogError($"[{name}] Player/Agent not found. Cannot initiate interaction.");
-            ResetInteractionState(); // Ensure clean state
-            return;
-        }
-
-        // Debug.Log($"[{name}] Initiating interaction.");
-        isInteracting = true;
-        StopNPCForInteraction(); // Stop tasks and movement
-
-        // Start moving the player towards the NPC
-        if (interactionCoroutine != null) StopCoroutine(interactionCoroutine);
-        interactionCoroutine = StartCoroutine(MovePlayerAndStartDialogue());
-    }
-
-    private IEnumerator MovePlayerAndStartDialogue()
-    {
-        // While this NPC is the target and player is too far away
-        while (PointAndClickMovement.currentTarget == this && playerAgent != null &&
-               Vector3.Distance(playerTransform.position, transform.position) > interactRange)
-        {
-            // Continuously set destination if path isn't being calculated
-            if (!playerAgent.pathPending)
-            {
-                playerAgent.SetDestination(transform.position);
-            }
-            yield return null; // Wait for the next frame
-        }
-
-        // Check if we are still the target and close enough when the loop ends
-        if (playerAgent != null && PointAndClickMovement.currentTarget == this &&
-            Vector3.Distance(playerTransform.position, transform.position) <= interactRange)
-        {
-            // Debug.Log($"[{name}] Player arrived. Starting dialogue.");
-            playerAgent.ResetPath(); // Stop the player agent
-            playerAgent.velocity = Vector3.zero; // Ensure player stops moving immediately
-            StartDialogueInternal();
-        }
-        else
-        {
-            // Player clicked away or something went wrong
-            // Debug.Log($"[{name}] Interaction cancelled before dialogue started (Player moved away or target changed).");
-            ResetInteractionState(); // This will call ResumeNPC
-        }
-
-        interactionCoroutine = null; // Mark coroutine as finished
-    }
-
-    public void StopNPCForInteraction()
-    {
-        // Debug.Log($"[{name}] Stopping NPC for interaction.");
-        // Stop any ongoing task execution (movement, waiting, performing action)
-        if (taskExecutionCoroutine != null)
-        {
-            StopCoroutine(taskExecutionCoroutine);
-            taskExecutionCoroutine = null;
-        }
-
-        // Stop the NavMeshAgent
-        if (agent != null && agent.isOnNavMesh)
-        {
-            agent.isStopped = true;
-            agent.ResetPath(); // Clear any existing path
-            agent.velocity = Vector3.zero; // Stop immediately
-        }
-
-        // Ensure walking animation stops
-        if (npcAnimator != null && !string.IsNullOrEmpty(walkingParameterName))
-        {
-            npcAnimator.SetBool(walkingParameterName, false);
-        }
-
-        currentTask = null; // No longer pursuing the current task
-    }
-
-    private void StartDialogueInternal()
-    {
-        if (DialogueManager.Instance != null && dialogueData != null && dialogueData.nodeDictionary != null)
-        {
-            DialogueManager.Instance.StartDialogue(this);
-
-        }
-        else
-        {
-            Debug.LogError($"[{name}] Cannot start dialogue. DialogueManager or DialogueData is invalid.");
-            // If dialogue fails to start, we should resume the NPC's routine
-            ResumeNPC();
-        }
-    }
-
-
-    // Called by DialogueManager when dialogue ends OR if interaction is cancelled prematurely
-    public void ResumeNPC()
-    {
-        // Only resume if we were previously interacting
-        if (isInteracting)
-        {
-            // Debug.Log($"[{name}] Resuming NPC routine.");
-            isInteracting = false; // Ensure flag is reset
-        }
-
-        // Allow agent to move again if it exists and is on the mesh
-        // (unless paused by cutscene - AI pause for cutscene handles agent.isStopped)
-        if (agent != null && agent.isOnNavMesh && !isPausedByCutscene)
-        {
-            agent.isStopped = false;
-        }
-
-        // Restart the task loop IF it's not already running
-        StartTaskLoop();
-    }
-
-
-    private IEnumerator TaskLoop()   /// Main loop deciding when to find and start the next task.
-    {
-        // Debug.Log($"[{name}] Task Loop Started.");
-        while (true)
-        {
-            if (isPausedByCutscene)
-            {
-                yield return new WaitUntil(() => !isPausedByCutscene);
-                // When resuming, ensure agent state is reasonable (ResumeNPC or PauseAIForCutscene(false) should handle this)
-            }
-
-            // If interacting, pause the loop until interaction is finished
-            if (isInteracting)
-            {
-                // Debug.Log($"[{name}] Task Loop paused due to interaction.");
-                yield return new WaitUntil(() => !isInteracting);
-                // Debug.Log($"[{name}] Task Loop resumed after interaction.");
-            }
-
-            // --- Find and Execute Next Task ---
-            if (currentTask == null && !isInteracting && !isPausedByCutscene) // Ensure we don't have a task and aren't interacting/paused
-            {
-                AssignNextTask(); // Find a task and set currentTask
-
-                if (currentTask != null)
-                {
-                    // Start the combined Move + Perform coroutine
-                    // Debug.Log($"[{name}] Starting execution for task: {currentTask.taskName}");
-                    yield return StartCoroutine(MoveAndPerformTask(currentTask)); // Wait for this task to fully complete
-                    // Debug.Log($"[{name}] Finished execution for task: {currentTask.taskName}");
-                    currentTask = null; // Mark task as done *after* MoveAndPerformTask finishes
-
-                    // Wait for the specified delay before picking the next task
-                    if (!isInteracting && !isPausedByCutscene) // Check again in case interaction/cutscene started
-                    {
-                        // Debug.Log($"[{name}] Waiting for task delay: {taskCompletionDelay} seconds.");
-                        yield return new WaitForSeconds(taskCompletionDelay);
-                    }
-                }
-                else
-                {
-                    // No tasks available or failed to assign, wait a bit before trying again
-                    // Debug.Log($"[{name}] No task assigned. Waiting before retry.");
-                    if (!isInteracting && !isPausedByCutscene)
-                        yield return new WaitForSeconds(taskCompletionDelay);
-                }
-            }
-            else
-            {
-                // If already have a task or are interacting/paused, just yield to wait for next frame
-                yield return null;
-            }
-        }
-    }
-
-
-    private void AssignNextTask()
-    {
-        if (isInteracting || isPausedByCutscene || taskPool == null || taskPool.Count == 0)
-        {
-            currentTask = null; // Ensure no task is assigned
-            return;
-        }
-        currentTask = GetRandomTask();
-        // Debug.Log($"[{name}] Assigned Task: {(currentTask != null ? currentTask.taskName : "None")}");
-    }
-
-    private TaskObject GetRandomTask()
-    {
-        if (taskPool == null || taskPool.Count == 0) return null;
-        // Add logic here if you want tasks weighted or prevent repeating the same task immediately
-        return taskPool[Random.Range(0, taskPool.Count)];
-    }
-
-    private IEnumerator MoveAndPerformTask(TaskObject task)     /// Coroutine to handle moving to the task location and then executing the task action.
-    {
-        if (task == null || agent == null || !agent.isOnNavMesh || isInteracting || isPausedByCutscene)
-        {
-            // Debug.LogWarning($"[{name}] Cannot move to task {task?.taskName}. Invalid state or task.");
-            yield break; // Exit if conditions aren't met
-        }
-
-        Vector3 destination = task.GetTargetPosition();
-        agent.SetDestination(destination);
-        agent.isStopped = false; // Make sure agent is moving
-
-        // Debug.Log($"[{name}] Moving to task: {task.taskName} at {destination}");
-
-        // --- Wait for Arrival ---
-        while (!isInteracting && !isPausedByCutscene && agent.pathPending)
-        {
-            yield return null;
-        }
-
-        while (!isInteracting && !isPausedByCutscene && agent.remainingDistance > agent.stoppingDistance)
-        {
-            yield return null;
-        }
-
-        // --- Arrived or Interrupted ---
-        if (isInteracting || isPausedByCutscene)
-        {
-            // Debug.Log($"[{name}] Interaction or cutscene started while moving to task {task.taskName}. Aborting task execution.");
-            yield break;
-        }
-
-        // --- Execute Task Action ---
-        if (agent.remainingDistance <= agent.stoppingDistance)
-        {
-            // Debug.Log($"[{name}] Arrived at task: {task.taskName}. Performing action.");
-            agent.isStopped = true;
-            agent.velocity = Vector3.zero;
-
-            Quaternion targetRotation = task.GetTargetRotation();
-            if (task.specificTargetPoint != null)
-            {
-                targetRotation = task.specificTargetPoint.rotation;
-            }
-            else
-            {
-                targetRotation = task.transform.rotation;
-            }
-
-            float startTime = Time.time;
-            Quaternion startRotation = transform.rotation;
-            while (Time.time < startTime + 1.0f && Quaternion.Angle(transform.rotation, targetRotation) > 1.0f)
-            {
-                if (isInteracting || isPausedByCutscene) yield break;
-                transform.rotation = Quaternion.Lerp(startRotation, targetRotation, (Time.time - startTime) * rotationSpeed);
-                yield return null;
-            }
-            if (!isInteracting && !isPausedByCutscene) transform.rotation = targetRotation;
-
-            yield return StartCoroutine(ExecuteTaskAction(task));
-        }
-        else
-        {
-            // Debug.LogWarning($"[{name}] Did not reach destination for task {task.taskName}. Remaining distance: {agent.remainingDistance}");
-        }
-
-        if (!isInteracting && !isPausedByCutscene && agent != null && agent.isOnNavMesh)
-        {
-            agent.isStopped = false;
-        }
-    }
-
-    private IEnumerator ExecuteTaskAction(TaskObject task)     /// Coroutine that plays the task animation and waits for its duration.
-    {
-        if (isInteracting || isPausedByCutscene) yield break;
-
-        bool animationSet = false;
-        if (npcAnimator != null && !string.IsNullOrEmpty(task.animationBoolName))
-        {
-            npcAnimator.SetBool(task.animationBoolName, true);
-            animationSet = true;
-        }
-
-        float timer = 0f;
-        while (timer < task.duration)
-        {
-            if (isInteracting || isPausedByCutscene)
-            {
-                yield break;
-            }
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
-        if (animationSet)
-        {
-            npcAnimator.SetBool(task.animationBoolName, false);
-        }
-    }
-
-    private void UpdateAnimation()
-    {
-        if (npcAnimator != null && agent != null && agent.isOnNavMesh && !string.IsNullOrEmpty(walkingParameterName))
-        {
-            bool isWalking = agent.velocity.magnitude > 0.1f && !agent.isStopped;
-            npcAnimator.SetBool(walkingParameterName, isWalking);
-        }
-    }
+    // =========================================================================
+    // 6. Floor/Visibility Management
+    // =========================================================================
 
     public void UpdateVisibilityBasedOnPlayerFloor(FloorVisibilityManager.FloorLevel playerCurrentFloor)
     {
@@ -687,7 +742,7 @@ public class BaseNPC : MonoBehaviour, IClickable
             interactionColliderStatusBefore = interactionCollider.enabled ? "ENABLED" : "DISABLED";
         }
 
-        Debug.Log($"[{npcName}-UpdateVisibility] NPC on floor {currentNpcFloorLevel}, Player on {playerCurrentFloor}. ShouldBeVisibleAndInteractable: {shouldBeVisibleAndInteractable}. Main Renderer was: {rendererStatusBefore}, InteractionCollider was: {interactionColliderStatusBefore}. Renderers found: {_npcRenderers?.Length ?? 0}");
+        //Debug.Log($"[{npcName}-UpdateVisibility] NPC on floor {currentNpcFloorLevel}, Player on {playerCurrentFloor}. ShouldBeVisibleAndInteractable: {shouldBeVisibleAndInteractable}. Main Renderer was: {rendererStatusBefore}, InteractionCollider was: {interactionColliderStatusBefore}. Renderers found: {_npcRenderers?.Length ?? 0}");
 
         if (_npcRenderers != null)
         {
@@ -738,13 +793,13 @@ public class BaseNPC : MonoBehaviour, IClickable
             return;
         }
 
-        Debug.Log($"[{npcName}-NotifyNpcChangedFloor] NPC changing floor FROM {currentNpcFloorLevel} TO {newNpcFloor}.");
+        //Debug.Log($"[{npcName}-NotifyNpcChangedFloor] NPC changing floor FROM {currentNpcFloorLevel} TO {newNpcFloor}.");
         currentNpcFloorLevel = newNpcFloor;
 
         if (FloorVisibilityManager.Instance != null)
         {
             FloorVisibilityManager.FloorLevel playerFloor = FloorVisibilityManager.Instance.CurrentVisibleFloor;
-            Debug.Log($"[{npcName}-NotifyNpcChangedFloor] Player is currently on floor {playerFloor}. Updating NPC visibility accordingly.");
+            //Debug.Log($"[{npcName}-NotifyNpcChangedFloor] Player is currently on floor {playerFloor}. Updating NPC visibility accordingly.");
             UpdateVisibilityBasedOnPlayerFloor(playerFloor);
         }
         else
@@ -753,11 +808,111 @@ public class BaseNPC : MonoBehaviour, IClickable
         }
     }
 
+    // --- NPC-NPC Collision ---
+    private void SetupNpcCollisionProperties()
+    {
+        if (agent != null)
+        {
+            agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+        }
+        else
+        {
+            Debug.LogWarning($"[{npcName}] NavMeshAgent component is null in SetupNpcCollisionProperties. Cannot set obstacleAvoidanceType.", this);
+        }
+    }
 
-    // --- Utility ---
+    private void ApplyNpcNpcCollisionIgnores()
+    {
+        if (this.interactionCollider == null)
+        {
+            return;
+        }
+
+        foreach (BaseNPC otherNpc in _allActiveNpcs)
+        {
+            if (otherNpc.interactionCollider != null)
+            {
+                Physics.IgnoreCollision(this.interactionCollider, otherNpc.interactionCollider, true);
+            }
+        }
+    }
+
+    // =========================================================================
+    // 7. Utility & Public Methods
+    // =========================================================================
+
+    private void UpdateAnimation()
+    {
+        if (npcAnimator != null && agent != null && agent.isOnNavMesh && !string.IsNullOrEmpty(walkingParameterName))
+        {
+            bool isWalking = agent.velocity.magnitude > 0.1f && !agent.isStopped;
+            npcAnimator.SetBool(walkingParameterName, isWalking);
+        }
+    }
+
     public DialogueData GetDialogueData() => dialogueData;
+
     public virtual string GetStats()
     {
         return $"Name: {npcName}\nAge: {npcAge}\nGender: {npcGender}\nBlood Type: {npcBloodType}\nZodiac Sign: {npcZodiacSign}\nCock Length: {npcCockLength}\nLikes: {npcLikes}\nDislikes: {npcDislikes}\nCurrent Love: {currentLove}";
     }
+
+    public void NpcDialogueEnded()
+    {
+        Debug.Log($"[{name}] NpcDialogueEnded called. Current state: {_currentState}");
+        if (_currentState == NpcState.InDialogue)
+        {
+            TransitionToState(NpcState.Idle);
+            Debug.Log($"[{name}] NpcDialogueEnded: Transitioned from InDialogue to Idle. New state: {_currentState}");
+        }
+        else
+        {
+            Debug.LogWarning($"[{name}] NpcDialogueEnded called, but was not in InDialogue state. Current state: {_currentState}");
+        }
+    }
+
+    public virtual void PauseAIForCutscene(bool pause)
+    {
+        if (!pause)
+        {
+            Debug.Log($"[CutsceneManager->PauseAIForCutscene(false)] {npcName}: _currentState before call: {_currentState}");
+        }
+        Debug.Log($"[{npcName}-{_currentState}] PauseAIForCutscene({pause}) called.");
+        if (pause)
+        {
+            if (_currentState == NpcState.PlayerApproaching || _currentState == NpcState.InDialogue)
+            {
+                Debug.LogWarning($"[{npcName}] Was in {_currentState} when PauseAIForCutscene(true) was called. Transitioning to Idle first.");
+                ResetInteractionState(); // This calls TransitionToState(NpcState.Idle)
+            }
+            TransitionToState(NpcState.PausedByCutscene);
+        }
+        else // Resume from cutscene
+        {
+            if (_currentState == NpcState.PausedByCutscene)
+            {
+                NpcState stateToResumeTo = _previousState;
+                if (stateToResumeTo == NpcState.PausedByCutscene ||
+                    stateToResumeTo == NpcState.None ||
+                    stateToResumeTo == NpcState.PlayerApproaching ||
+                    stateToResumeTo == NpcState.InDialogue)
+                {
+                    stateToResumeTo = NpcState.Idle; // Default to Idle
+                }
+                Debug.Log($"[{npcName}] Resuming from PausedByCutscene. Previous logical state: {_previousState}. Resuming to: {stateToResumeTo}.");
+                TransitionToState(stateToResumeTo);
+            }
+            else
+            {
+                Debug.LogWarning($"[{npcName}] PauseAIForCutscene(false) called, but NPC was not in PausedByCutscene state. Current: {_currentState}. No transition performed by this call.");
+            }
+        }
+    }
+
+    // =========================================================================
+    // 8. Interface & Hover Methods
+    // =========================================================================
+
+    public virtual void WhenHovered() { /* Implement visual feedback if needed */ }
+    public virtual void HideHover() { /* Implement visual feedback if needed */ }
 }

@@ -5,10 +5,10 @@
     "nodes": [
         {
             "nodeID": "Node_3850",
-            "text": "Yo its me...Viktor!",
+            "text": "What's your password?",
             "choices": [
                 {
-                    "choiceText": "Hello Viktor!",
+                    "choiceText": "I'm not gonna give it to you",
                     "lovePointChange": 0,
                     "nextNodeID": "Node_5f9f",
                     "itemGate": {
@@ -41,12 +41,12 @@
         },
         {
             "nodeID": "Node_5f9f",
-            "text": "Do you want to play ROTMG",
+            "text": "Woaw, you're like super smart",
             "choices": [
                 {
-                    "choiceText": "Yeah i'm on realmspy right now!",
+                    "choiceText": "What do you mean?",
                     "lovePointChange": 0,
-                    "nextNodeID": "",
+                    "nextNodeID": "Node_6988",
                     "itemGate": {
                         "itemName": "",
                         "requiredItem": {
@@ -56,7 +56,7 @@
                     "triggerCutsceneName": ""
                 },
                 {
-                    "choiceText": "Please Leave me alone",
+                    "choiceText": "Thanks (Leave)",
                     "lovePointChange": 0,
                     "nextNodeID": "",
                     "itemGate": {
@@ -65,7 +65,79 @@
                             "instanceID": 0
                         }
                     },
-                    "triggerCutsceneName": "ViktorFindsCableGone"
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_6988",
+            "text": "You saw through my mental trap, every one else have given me their passwords?",
+            "choices": [
+                {
+                    "choiceText": "Really?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_b529",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_b529",
+            "text": "Yeah I have stored them all on my computer",
+            "choices": [
+                {
+                    "choiceText": "Well, what is your password?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_3518",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_3518",
+            "text": "I don't have one, that way I don't risk giving it out to someone",
+            "choices": [
+                {
+                    "choiceText": "Smart",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
                 }
             ],
             "itemGate": {

@@ -4,22 +4,23 @@
     "startNodeID": "Ludwig0Love",
     "nodes": [
         {
-            "nodeID": "Ludwig0Love",
-            "text": "Hi my name is Ludwig!",
+            "nodeID": "Ludwig0Love2",
+            "text": "Viktor is going around collecting peoples passwords and then stores them on his computer",
             "choices": [
                 {
-                    "choiceText": "Hello Ludwig!",
+                    "choiceText": "How is he able to do that?",
                     "lovePointChange": 0,
-                    "nextNodeID": "Ludwig0Love2",
+                    "nextNodeID": "Node_b62b",
                     "itemGate": {
                         "itemName": "",
                         "requiredItem": {
                             "instanceID": 0
                         }
-                    }
+                    },
+                    "triggerCutsceneName": ""
                 },
                 {
-                    "choiceText": "Goodbye Ludwig!",
+                    "choiceText": "Well, he won't get mine (leave)",
                     "lovePointChange": 0,
                     "nextNodeID": "",
                     "itemGate": {
@@ -27,7 +28,8 @@
                         "requiredItem": {
                             "instanceID": 0
                         }
-                    }
+                    },
+                    "triggerCutsceneName": ""
                 }
             ],
             "itemGate": {
@@ -38,30 +40,32 @@
             }
         },
         {
-            "nodeID": "Ludwig0Love2",
-            "text": "Have you met zozk yet?",
+            "nodeID": "Ludwig0Love",
+            "text": "Have you gotten your password stolen?",
             "choices": [
                 {
-                    "choiceText": "Yeah i'm trying to fuck him",
+                    "choiceText": "I don't think so",
                     "lovePointChange": 0,
-                    "nextNodeID": "Node_b62b",
+                    "nextNodeID": "Ludwig0Love2",
                     "itemGate": {
                         "itemName": "",
                         "requiredItem": {
                             "instanceID": 0
                         }
-                    }
+                    },
+                    "triggerCutsceneName": ""
                 },
                 {
-                    "choiceText": "soosek?",
+                    "choiceText": "Goodbye",
                     "lovePointChange": 0,
-                    "nextNodeID": "Node_9dc9",
+                    "nextNodeID": "",
                     "itemGate": {
                         "itemName": "",
                         "requiredItem": {
                             "instanceID": 0
                         }
-                    }
+                    },
+                    "triggerCutsceneName": ""
                 }
             ],
             "itemGate": {
@@ -73,18 +77,19 @@
         },
         {
             "nodeID": "Node_b62b",
-            "text": "Well in that case, i heard there is something he likes in Javads classroom",
+            "text": "Viktor is very good at social engineering",
             "choices": [
                 {
-                    "choiceText": "Thanks!",
+                    "choiceText": "What trick does he use?",
                     "lovePointChange": 0,
-                    "nextNodeID": "",
+                    "nextNodeID": "Node_8968",
                     "itemGate": {
                         "itemName": "",
                         "requiredItem": {
                             "instanceID": 0
                         }
-                    }
+                    },
+                    "triggerCutsceneName": ""
                 }
             ],
             "itemGate": {
@@ -95,11 +100,59 @@
             }
         },
         {
-            "nodeID": "Node_9dc9",
-            "text": "Nevermind..",
+            "nodeID": "Node_8968",
+            "text": "Well, first he asked me what my password was",
             "choices": [
                 {
-                    "choiceText": "ok",
+                    "choiceText": "And what did you say?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_bfbb",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_bfbb",
+            "text": "Then i said my password is lidl",
+            "choices": [
+                {
+                    "choiceText": "...",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_e18e",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_e18e",
+            "text": "wait...",
+            "choices": [
+                {
+                    "choiceText": "leave",
                     "lovePointChange": 0,
                     "nextNodeID": "",
                     "itemGate": {
@@ -107,7 +160,8 @@
                         "requiredItem": {
                             "instanceID": 0
                         }
-                    }
+                    },
+                    "triggerCutsceneName": ""
                 }
             ],
             "itemGate": {

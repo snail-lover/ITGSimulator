@@ -1107,82 +1107,6 @@ MonoBehaviour:
       overrideNextNodeID: 
       triggerCutscene: {fileID: 0}
     isEntryPoint: 0
-  - nodeGUID: 85d9ea2d-bd08-4954-877e-7b6b7714ea90
-    nodeID: Node_35ea
-    dialogueText: Oh good, no confrontation, the best of both world
-    position: {x: 1906, y: 3242}
-    itemGate:
-      itemName: 
-      requiredItem: {fileID: 0}
-    choices:
-    - outputPortGUID: 26f539b5-1da0-4964-9981-291b01a3dae5
-      choiceText: Exactly
-      lovePointChange: 0
-      itemGate:
-        itemName: 
-        requiredItem: {fileID: 0}
-      overrideNextNodeID: 
-      triggerCutscene: {fileID: 0}
-    - outputPortGUID: ea9809d0-6d9d-40fe-9c32-9e3b2dedf1fd
-      choiceText: Hannah Montana!
-      lovePointChange: 0
-      itemGate:
-        itemName: 
-        requiredItem: {fileID: 0}
-      overrideNextNodeID: 
-      triggerCutscene: {fileID: 0}
-    isEntryPoint: 0
-  - nodeGUID: 42435be9-9536-46d5-bad9-d9dd2815f021
-    nodeID: Node_f6f8
-    dialogueText: OMG! Are you also a fan!
-    position: {x: 2422, y: 3242}
-    itemGate:
-      itemName: 
-      requiredItem: {fileID: 0}
-    choices:
-    - outputPortGUID: b28def11-80a9-4d8d-980f-9536dc2d6345
-      choiceText: Hell yeah!
-      lovePointChange: 0
-      itemGate:
-        itemName: 
-        requiredItem: {fileID: 0}
-      overrideNextNodeID: 
-      triggerCutscene: {fileID: 0}
-    - outputPortGUID: 1f7a0073-7517-4581-af95-bcab7c949412
-      choiceText: No i just know of it.
-      lovePointChange: 0
-      itemGate:
-        itemName: 
-        requiredItem: {fileID: 0}
-      overrideNextNodeID: 
-      triggerCutscene: {fileID: 0}
-    isEntryPoint: 0
-  - nodeGUID: 54473201-225c-4138-bfd7-bc62d75ad737
-    nodeID: Node_3f31
-    dialogueText: You get the best of both worlds! Chillin' out, take it slow, Then
-      you rock out the show!
-    position: {x: 2889, y: 3242}
-    itemGate:
-      itemName: 
-      requiredItem: {fileID: 0}
-    choices:
-    - outputPortGUID: 8f4cc7e4-c0c7-45f0-ba1d-d80d40e6a144
-      choiceText: You have a nice voice!
-      lovePointChange: 0
-      itemGate:
-        itemName: 
-        requiredItem: {fileID: 0}
-      overrideNextNodeID: 
-      triggerCutscene: {fileID: 11400000, guid: 64c38eee9cb63f748a03c26b5a97927d, type: 2}
-    - outputPortGUID: 7bc20fa1-cd79-44e0-b671-5233e127cfc1
-      choiceText: Wow look at you!
-      lovePointChange: 0
-      itemGate:
-        itemName: 
-        requiredItem: {fileID: 0}
-      overrideNextNodeID: 
-      triggerCutscene: {fileID: 11400000, guid: 64c38eee9cb63f748a03c26b5a97927d, type: 2}
-    isEntryPoint: 0
   - nodeGUID: 410e926a-4679-4217-9466-4bbcae1e8429
     nodeID: Node_22d6
     dialogueText: Oh no! Are you alright?
@@ -3425,6 +3349,82 @@ MonoBehaviour:
       triggerCutscene: {fileID: 0}
     - outputPortGUID: fb196e40-d6c0-4b9c-afc3-f5929afe7fa5
       choiceText: Yeah, but also a little chilly
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 54473201-225c-4138-bfd7-bc62d75ad737
+    nodeID: Node_3f31
+    dialogueText: You get the best of both worlds! Chillin' out, take it slow, Then
+      you rock out the show!
+    position: {x: 3073, y: 3139}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 8f4cc7e4-c0c7-45f0-ba1d-d80d40e6a144
+      choiceText: You have a nice voice!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 11400000, guid: 64c38eee9cb63f748a03c26b5a97927d, type: 2}
+    - outputPortGUID: 7bc20fa1-cd79-44e0-b671-5233e127cfc1
+      choiceText: Wow look at you!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 11400000, guid: 64c38eee9cb63f748a03c26b5a97927d, type: 2}
+    isEntryPoint: 0
+  - nodeGUID: 85d9ea2d-bd08-4954-877e-7b6b7714ea90
+    nodeID: Node_35ea
+    dialogueText: Oh good, no confrontation, the best of both world
+    position: {x: 1949, y: 3168}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: 26f539b5-1da0-4964-9981-291b01a3dae5
+      choiceText: Exactly
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 11400000, guid: 64c38eee9cb63f748a03c26b5a97927d, type: 2}
+    - outputPortGUID: ea9809d0-6d9d-40fe-9c32-9e3b2dedf1fd
+      choiceText: Hannah Montana!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    isEntryPoint: 0
+  - nodeGUID: 42435be9-9536-46d5-bad9-d9dd2815f021
+    nodeID: Node_f6f8
+    dialogueText: OMG! Are you also a fan!
+    position: {x: 2499, y: 3350}
+    itemGate:
+      itemName: 
+      requiredItem: {fileID: 0}
+    choices:
+    - outputPortGUID: b28def11-80a9-4d8d-980f-9536dc2d6345
+      choiceText: Hell yeah!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItem: {fileID: 0}
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+    - outputPortGUID: 1f7a0073-7517-4581-af95-bcab7c949412
+      choiceText: No i just know of it.
       lovePointChange: 0
       itemGate:
         itemName: 

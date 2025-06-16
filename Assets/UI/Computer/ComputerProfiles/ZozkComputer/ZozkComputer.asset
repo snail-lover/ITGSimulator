@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb313d9c006a38b43a441c7319a27fc3, type: 3}
+  m_Name: ZozkComputer
+  m_EditorClassIdentifier: Assembly-CSharp::ComputerProfile
+  ownerName: Zozk
+  profilePicture: {fileID: 21300000, guid: de68dcd6621dda540ad99e69f31cbe28, type: 3}
+  backgroundImage: {fileID: 21300000, guid: 139db1c74d767064289d1db93fe8cb04, type: 3}
+  requiresPassword: 1
+  password: lundby12
+  systemInfoText: This is zozks computer
+  notes:
+  - title: My name is Zozk
+    content: Hello my name is Zozk
+  - title: Per
+    content: 'I think per is trying to flirt with me...
+
+
+      ok...that''s not
+      true, but I can dream'
+  imageGallery:
+  - {fileID: 21300000, guid: b260320ae66f4764ea43c4c792570dda, type: 3}
+  - {fileID: 21300000, guid: 1069611852a49384b97984f8017101bd, type: 3}

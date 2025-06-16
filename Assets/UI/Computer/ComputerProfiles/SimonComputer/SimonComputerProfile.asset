@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb313d9c006a38b43a441c7319a27fc3, type: 3}
+  m_Name: SimonComputerProfile
+  m_EditorClassIdentifier: Assembly-CSharp::ComputerProfile
+  ownerName: Simon
+  profilePicture: {fileID: 21300000, guid: 657df934cb09ae047a9d7b50ae8fee05, type: 3}
+  backgroundImage: {fileID: 21300000, guid: 1da0fe54e59f04c49aad2a8d62b47b0f, type: 3}
+  requiresPassword: 1
+  password: himym
+  systemInfoText: 
+  notes:
+  - title: Himym character ranking
+    content: '1.Marshal
+
+      2.Barney
+
+      3.ted
+
+      4.Robin
+
+      153. Lilly'
+  - title: Cock
+    content: 8===D
+  imageGallery:
+  - {fileID: 21300000, guid: 577a31efdca05124e8ffafcfd2462ce6, type: 3}
+  - {fileID: 21300000, guid: afde54e9aded387478173d7f071800a1, type: 3}

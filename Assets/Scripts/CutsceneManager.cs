@@ -99,7 +99,7 @@ public class CutsceneManager : MonoBehaviour
             Debug.Log("[CutsceneManager] Disabled CameraFollow script for cutscene.");
         }
 
-        if (playerMovement != null) playerMovement.LockMovement();
+        if (playerMovement != null) playerMovement.HardLockPlayerMovement();
         else Debug.LogWarning("[CutsceneManager] PlayerMovement script not found; cannot lock player movement.");
 
 
@@ -537,7 +537,7 @@ public class CutsceneManager : MonoBehaviour
                             // If not, it will be destroyed with the current scene.
                             // Make sure player movement is unlocked IF the new scene expects it unlocked by default.
                             // However, usually, the new scene's setup would handle player state.
-                            if (playerMovement != null) playerMovement.UnlockMovement();
+                            if (playerMovement != null) playerMovement.HardLockPlayerMovement();
 
 
                             // Resume NPCs in the *current* scene before unloading, just in case something goes wrong
@@ -548,7 +548,7 @@ public class CutsceneManager : MonoBehaviour
                                 if (npc != null) npc.PauseAIForCutscene(false);
                             }
                             activelyManagedNPCs.Clear();
-                            if (playerCharacter != null && playerCharacter.IsPausedByCutscene)
+                            if (playerCharacter != null)
                             {
                                 playerCharacter.PauseAIForCutscene(false);
                             }
@@ -603,7 +603,7 @@ public class CutsceneManager : MonoBehaviour
         isPlayingCutscene = false;
 
 
-        if (playerMovement != null) playerMovement.UnlockMovement();
+        if (playerMovement != null) playerMovement.HardUnlockPlayerMovement();
         else Debug.LogWarning("[CutsceneManager] PlayerMovement script not found; cannot unlock player movement.");
 
         // Resume NPCs
@@ -614,7 +614,7 @@ public class CutsceneManager : MonoBehaviour
         activelyManagedNPCs.Clear();
 
         // If player character was paused explicitly and is a BaseNPC
-        if (playerCharacter != null && playerCharacter.IsPausedByCutscene)
+        if (playerCharacter != null)
         {
             playerCharacter.PauseAIForCutscene(false);
         }

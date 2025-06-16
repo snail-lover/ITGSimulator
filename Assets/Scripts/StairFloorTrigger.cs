@@ -68,7 +68,7 @@ public class StairFloorTrigger : MonoBehaviour
                 FloorVisibilityManager.FloorLevel npcNewFloor = (FloorVisibilityManager.FloorLevel)destinationFloorIndex;
                 Rigidbody npcRb = other.attachedRigidbody; // Get the Rigidbody associated with the collider that entered
 
-                Debug.LogWarning($"NPC_TRIGGER_ENTER: NPC '{npc.npcName}' (Collider: {other.name}, Tag: {other.tag}, Layer: {LayerMask.LayerToName(other.gameObject.layer)}, HasRigidbodyOnCollidingObject: {npcRb != null}) entered stair trigger '{gameObject.name}'. Attempting to move to floor {npcNewFloor} (Index: {destinationFloorIndex}). NPC's current reported floor: {npc.currentNpcFloorLevel}");
+                //Debug.LogWarning($"NPC_TRIGGER_ENTER: NPC '{npc.npcName}' (Collider: {other.name}, Tag: {other.tag}, Layer: {LayerMask.LayerToName(other.gameObject.layer)}, HasRigidbodyOnCollidingObject: {npcRb != null}) entered stair trigger '{gameObject.name}'. Attempting to move to floor {npcNewFloor} (Index: {destinationFloorIndex}). NPC's current reported floor: {npc.currentNpcFloorLevel}");
 
                 if (npc.currentNpcFloorLevel != npcNewFloor)
                 {
@@ -76,7 +76,7 @@ public class StairFloorTrigger : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log($"NPC_TRIGGER_INFO: NPC '{npc.npcName}' re-entered stair trigger for their current floor {npcNewFloor}. No change to NPC's internal floor level needed.");
+                    //Debug.Log($"NPC_TRIGGER_INFO: NPC '{npc.npcName}' re-entered stair trigger for their current floor {npcNewFloor}. No change to NPC's internal floor level needed.");
                     if (FloorVisibilityManager.Instance != null)
                     {
                         npc.UpdateVisibilityBasedOnPlayerFloor(FloorVisibilityManager.Instance.CurrentVisibleFloor);

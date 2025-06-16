@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb313d9c006a38b43a441c7319a27fc3, type: 3}
+  m_Name: ViktorComputer
+  m_EditorClassIdentifier: Assembly-CSharp::ComputerProfile
+  ownerName: Viktor
+  profilePicture: {fileID: 21300000, guid: 63d6eebe77cb2d549a4ac443dfd4a9cf, type: 3}
+  backgroundImage: {fileID: 21300000, guid: 11eb3eccebbdffd4dad4a6c8621e6952, type: 3}
+  requiresPassword: 0
+  password: 
+  systemInfoText: This is viktors computer
+  notes:
+  - title: Passwords
+    content: 'Zozk Password: lundby12
+
+      Alex Password: donttreadonme
+
+      Simon
+      Password: himym
+
+      Ludwig Password: lidl'
+  - title: note
+    content: funny thing, i need two notes. If i don't have more than two notes,
+      the notes fuck up somehow lol
+  imageGallery:
+  - {fileID: 21300000, guid: 87c5077353acb7a4ba5ad7c175af928b, type: 3}
+  - {fileID: 21300000, guid: 1e67b73c4942e8048bf6345c64d78b4b, type: 3}

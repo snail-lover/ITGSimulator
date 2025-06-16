@@ -5,10 +5,10 @@
     "nodes": [
         {
             "nodeID": "Node_82e7",
-            "text": "Hello, my name is Simon!",
+            "text": "Hi there",
             "choices": [
                 {
-                    "choiceText": "Hello Simon!",
+                    "choiceText": "Hi",
                     "lovePointChange": 0,
                     "nextNodeID": "Node_b544",
                     "itemGate": {
@@ -16,10 +16,11 @@
                         "requiredItem": {
                             "instanceID": 0
                         }
-                    }
+                    },
+                    "triggerCutsceneName": ""
                 },
                 {
-                    "choiceText": "Goodbye SImon!",
+                    "choiceText": "Goodbye",
                     "lovePointChange": 0,
                     "nextNodeID": "",
                     "itemGate": {
@@ -27,7 +28,8 @@
                         "requiredItem": {
                             "instanceID": 0
                         }
-                    }
+                    },
+                    "triggerCutsceneName": ""
                 }
             ],
             "itemGate": {
@@ -39,10 +41,10 @@
         },
         {
             "nodeID": "Node_b544",
-            "text": "The current beta-weighted alpha, despite a 12% Bollinger contraction, suggests a 73.5% probability of gamma squeeze.",
+            "text": "Do you know when we start tomorrow?",
             "choices": [
                 {
-                    "choiceText": "Excuse me?",
+                    "choiceText": "9:15 i think",
                     "lovePointChange": 0,
                     "nextNodeID": "Node_0b7a",
                     "itemGate": {
@@ -50,10 +52,11 @@
                         "requiredItem": {
                             "instanceID": 0
                         }
-                    }
+                    },
+                    "triggerCutsceneName": ""
                 },
                 {
-                    "choiceText": "*Leave",
+                    "choiceText": "I don't (leave)",
                     "lovePointChange": 0,
                     "nextNodeID": "",
                     "itemGate": {
@@ -61,7 +64,8 @@
                         "requiredItem": {
                             "instanceID": 0
                         }
-                    }
+                    },
+                    "triggerCutsceneName": ""
                 }
             ],
             "itemGate": {
@@ -73,10 +77,22 @@
         },
         {
             "nodeID": "Node_0b7a",
-            "text": "The Monte Carlo simulation of forward P/E ratios, adjusted for a 3.2 standard deviation in VIX futures, projects a 68% likelihood of mean reversion within two fiscal quarters.",
+            "text": "*Simon start doing math in his head*",
             "choices": [
                 {
-                    "choiceText": "I'm scared",
+                    "choiceText": "What are you thinking about?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_eea9",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                },
+                {
+                    "choiceText": "...*leave*",
                     "lovePointChange": 0,
                     "nextNodeID": "",
                     "itemGate": {
@@ -84,7 +100,116 @@
                         "requiredItem": {
                             "instanceID": 0
                         }
-                    }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_eea9",
+            "text": "Well, today is the...hm...and this week i was not...hm...and last week...",
+            "choices": [
+                {
+                    "choiceText": "*Wait for him to finish thinking*",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_c002",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_c002",
+            "text": "ok nice, i can skip the first two lessons",
+            "choices": [
+                {
+                    "choiceText": "You're gonna skip math and physics?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_3c1e",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_3c1e",
+            "text": "*Simon lights up*",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_82f9",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItem": {
+                    "instanceID": 0
+                }
+            }
+        },
+        {
+            "nodeID": "Node_82f9",
+            "text": "Oh my God! Those are the best ones to skip! I didn't know we had those tomorrow",
+            "choices": [
+                {
+                    "choiceText": "Happy for you!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
+                },
+                {
+                    "choiceText": "Good luck with that",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItem": {
+                            "instanceID": 0
+                        }
+                    },
+                    "triggerCutsceneName": ""
                 }
             ],
             "itemGate": {
