@@ -1,33 +1,60 @@
-// In an "Editor" folder or subfolder
-using UnityEngine;
-using System.Collections.Generic; // <--- ENSURE THIS IS PRESENT (it was in your snippet)
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Dialogue Graph", menuName = "Dialogue/Dialogue Graph")]
 public class DialogueGraphSO : ScriptableObject
 {
-    [Header("Graph Metadata")]
-    public string entryPointNodeGUID;
-    public int startingLove;
-    public List<LoveTier> loveTiers = new List<LoveTier>();
+    [Header("Greeting")]
+    [Tooltip("The Node ID of the single node that should be displayed as a greeting before any topics are shown. This node should have no choices connected to it.")]
+    public string greetingNodeID;
+
+    [Header("Dialogue Entry Points")]
+    [Tooltip("Define all possible conversation starters here.")]
+    public List<EntryPointSaveData> entryPoints = new List<EntryPointSaveData>();
 
     [Header("Graph Nodes & Connections")]
     public List<DialogueNodeSaveData> nodes = new List<DialogueNodeSaveData>();
     public List<EdgeSaveData> edges = new List<EdgeSaveData>();
 
+
+    [Serializable]
+    public class EntryPointSaveData
+    {
+        public string entryText = "New Topic";
+        public DialogueEntryPointType entryType = DialogueEntryPointType.General;
+
+        [Tooltip("The Node ID of the node this topic should lead to. Must match a Node ID in the graph.")]
+        public string startNodeID;
+
+        public List<WorldStateCondition> worldStateConditions = new List<WorldStateCondition>();
+
+        [Tooltip("If set, this topic will only appear if the player has the item with this ID.")]
+        public string requiredItemID;
+    }
+
     public DialogueData ToRuntimeData()
     {
         var runtimeData = new DialogueData
         {
-            startingLove = this.startingLove,
-            loveTiers = this.loveTiers.ToArray(),
-            // nodes array will be populated below
+            greetingNodeID = this.greetingNodeID,
+            // Convert the list of EntryPointSaveData to DialogueEntryPoint
+            entryPoints = this.entryPoints.Select(savedPoint => new DialogueEntryPoint
+            {
+                entryText = savedPoint.entryText,
+                entryType = savedPoint.entryType,
+                startNodeID = savedPoint.startNodeID,
+                // Create a new list to ensure it's a deep copy
+                worldStateConditions = new List<WorldStateCondition>(savedPoint.worldStateConditions),
+                requiredItemID = savedPoint.requiredItemID
+            }).ToList(),
         };
 
         var nodeGuidToDialogueNode = new Dictionary<string, DialogueNode>();
-        var tempRuntimeNodes = new List<DialogueNode>(); // Use a list first
+        var tempRuntimeNodes = new List<DialogueNode>();
 
-        // First pass: create all DialogueNode instances and map GUIDs to them
+        // First pass: create all DialogueNode instances
         foreach (DialogueNodeSaveData savedNode in this.nodes)
         {
             if (savedNode == null) continue;
@@ -36,28 +63,28 @@ public class DialogueGraphSO : ScriptableObject
             {
                 nodeID = savedNode.nodeID,
                 text = savedNode.dialogueText,
-                // Deep copy itemGate if it's a class and can be null
-                itemGate = savedNode.itemGate != null ? new ItemGate { itemName = savedNode.itemGate.itemName, requiredItem = savedNode.itemGate.requiredItem } : null,
-                choices = new DialogueChoice[savedNode.choices.Count] // Initialize choices array
+                itemGate = savedNode.itemGate != null ? new ItemGate
+                {
+                    itemName = savedNode.itemGate.itemName,
+                    requiredItemID = savedNode.itemGate.requiredItemID // Use the string ID
+                    // Note: removeItemOnSelect is not on the node gate, only on choices
+                } : null,
+
+                worldStateConditions = new List<WorldStateCondition>(savedNode.worldStateConditions),
+                choices = new DialogueChoice[savedNode.choices.Count]
             };
             tempRuntimeNodes.Add(runtimeNode);
-            if (!string.IsNullOrEmpty(savedNode.nodeGUID)) // Ensure GUID is valid
+            if (!string.IsNullOrEmpty(savedNode.nodeGUID))
             {
                 nodeGuidToDialogueNode[savedNode.nodeGUID] = runtimeNode;
             }
-
-            if (savedNode.nodeGUID == this.entryPointNodeGUID)
-            {
-                runtimeData.startNodeID = savedNode.nodeID;
-            }
         }
-        runtimeData.nodes = tempRuntimeNodes.ToArray(); // Assign to the final array
+        runtimeData.nodes = tempRuntimeNodes.ToArray();
 
-        // Second pass: Link choices using the nodeID
+        // Second pass: Link choices
         foreach (DialogueNodeSaveData savedNode in this.nodes)
         {
             if (savedNode == null || !nodeGuidToDialogueNode.ContainsKey(savedNode.nodeGUID)) continue;
-
             DialogueNode sourceRuntimeNode = nodeGuidToDialogueNode[savedNode.nodeGUID];
             for (int i = 0; i < savedNode.choices.Count; i++)
             {
@@ -65,15 +92,13 @@ public class DialogueGraphSO : ScriptableObject
                 if (savedChoice == null) continue;
 
                 string targetNodeGUID = FindTargetNodeGUIDForPort(savedChoice.outputPortGUID);
-                string nextNodeIDForChoice = null;
+                string nextNodeIDForChoice = !string.IsNullOrEmpty(savedChoice.overrideNextNodeID)
+                    ? savedChoice.overrideNextNodeID
+                    : null;
 
-                if (!string.IsNullOrEmpty(targetNodeGUID) && nodeGuidToDialogueNode.TryGetValue(targetNodeGUID, out DialogueNode targetRuntimeNode))
+                if (string.IsNullOrEmpty(nextNodeIDForChoice) && !string.IsNullOrEmpty(targetNodeGUID) && nodeGuidToDialogueNode.TryGetValue(targetNodeGUID, out DialogueNode targetRuntimeNode))
                 {
                     nextNodeIDForChoice = targetRuntimeNode.nodeID;
-                }
-                else if (!string.IsNullOrEmpty(savedChoice.overrideNextNodeID))
-                {
-                    nextNodeIDForChoice = savedChoice.overrideNextNodeID;
                 }
 
                 sourceRuntimeNode.choices[i] = new DialogueChoice
@@ -81,9 +106,21 @@ public class DialogueGraphSO : ScriptableObject
                     choiceText = savedChoice.choiceText,
                     lovePointChange = savedChoice.lovePointChange,
                     nextNodeID = nextNodeIDForChoice,
-                    // Deep copy itemGate
-                    itemGate = savedChoice.itemGate != null ? new ItemGate { itemName = savedChoice.itemGate.itemName, requiredItem = savedChoice.itemGate.requiredItem } : null,
-                    triggerCutsceneName = (savedChoice.triggerCutscene != null) ? savedChoice.triggerCutscene.name : null
+
+                    itemGate = savedChoice.itemGate != null ? new ItemGate
+                    {
+                        itemName = savedChoice.itemGate.itemName,
+                        requiredItemID = savedChoice.itemGate.requiredItemID, // Use the string ID
+                        removeItemOnSelect = savedChoice.itemGate.removeItemOnSelect
+                    } : null,
+
+                    triggerCutsceneName = (savedChoice.triggerCutscene != null) ? savedChoice.triggerCutscene.name : null,
+                    stateChangesOnSelect = new List<WorldStateChange>(savedChoice.stateChangesOnSelect ?? new List<WorldStateChange>()),
+                    worldStateConditions = new List<WorldStateCondition>(savedChoice.worldStateConditions),
+
+                    // --- CHANGE: COPY TAG DATA TO RUNTIME ---
+                    requiredTag = savedChoice.requiredTag,
+                    itemToGiveID = savedChoice.itemToGiveID
                 };
             }
         }
@@ -109,12 +146,13 @@ public class DialogueNodeSaveData
 {
     public string nodeGUID;
     public string nodeID;
-    [TextArea(3, 5)] // Make text area a bit more manageable in inspector
+    [TextArea(3, 5)]
     public string dialogueText;
     public Vector2 position;
     public ItemGate itemGate;
     public List<ChoiceSaveData> choices = new List<ChoiceSaveData>();
     public bool isEntryPoint = false;
+    public List<WorldStateCondition> worldStateConditions = new List<WorldStateCondition>();
 
 }
 
@@ -126,7 +164,11 @@ public class ChoiceSaveData
     public int lovePointChange;
     public ItemGate itemGate;
     public string overrideNextNodeID;
-    public Cutscene triggerCutscene; // Reference to the Cutscene SO
+    public Cutscene triggerCutscene;
+    public List<WorldStateChange> stateChangesOnSelect = new List<WorldStateChange>();
+    public List<WorldStateCondition> worldStateConditions = new List<WorldStateCondition>();
+    public ItemTag requiredTag = ItemTag.None;
+    public string itemToGiveID;
 }
 
 [Serializable]
@@ -136,3 +178,4 @@ public class EdgeSaveData
     public string outputNodePortGUID;
     public string inputNodeGUID;
 }
+

@@ -1,0 +1,1112 @@
+{
+    "greetingNodeID": "GREETING_NODE",
+    "entryPoints": [
+        {
+            "entryText": "I heard appivo is comming to ITG",
+            "entryType": 2,
+            "startNodeID": "E_APPIVO_INTRO",
+            "worldStateConditions": [
+                {
+                    "conditionKey": "PLAYER_KNOWS_APPIVO",
+                    "requiredValue": true
+                },
+                {
+                    "conditionKey": "PLAYER_DIDNT_ASK_FOR_LUDWIGS_CAMERA",
+                    "requiredValue": false
+                },
+                {
+                    "conditionKey": "LUDWIG_GAVE_PLAYER_CAMERA",
+                    "requiredValue": false
+                }
+            ],
+            "requiredItemID": ""
+        },
+        {
+            "entryText": "About that favor...",
+            "entryType": 0,
+            "startNodeID": "ASK_LUDWIG_CAMERA",
+            "worldStateConditions": [
+                {
+                    "conditionKey": "PLAYER_DIDNT_ASK_FOR_LUDWIGS_CAMERA",
+                    "requiredValue": true
+                },
+                {
+                    "conditionKey": "LUDWIG_GAVE_PLAYER_CAMERA",
+                    "requiredValue": false
+                }
+            ],
+            "requiredItemID": ""
+        },
+        {
+            "entryText": "What do you like?",
+            "entryType": 3,
+            "startNodeID": "E_WHAT_DO_YOU_LIKE",
+            "worldStateConditions": [],
+            "requiredItemID": ""
+        },
+        {
+            "entryText": "Do you know what's in the school cafeteria today?",
+            "entryType": 3,
+            "startNodeID": "E_PIZZA_P_LIDL",
+            "worldStateConditions": [],
+            "requiredItemID": ""
+        },
+        {
+            "entryText": "Are there any bullies at this school?",
+            "entryType": 3,
+            "startNodeID": "E_BULLY",
+            "worldStateConditions": [],
+            "requiredItemID": ""
+        },
+        {
+            "entryText": "I found your charger",
+            "entryType": 0,
+            "startNodeID": "E_GIVECHARGER",
+            "worldStateConditions": [
+                {
+                    "conditionKey": "PLAYER_KNOWS_LUDWIG_CHARGER_MISSING",
+                    "requiredValue": true
+                },
+                {
+                    "conditionKey": "LUDWIG_GAVE_PLAYER_CAMERA",
+                    "requiredValue": false
+                },
+                {
+                    "conditionKey": "PLAYER_DIDNT_ASK_FOR_LUDWIGS_CAMERA",
+                    "requiredValue": false
+                }
+            ],
+            "requiredItemID": "001"
+        }
+    ],
+    "nodes": [
+        {
+            "nodeID": "GREETING_NODE",
+            "text": "Hello!",
+            "choices": [],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_a853",
+            "text": "We're supposed to build something with their app making tool, but it's not going so great",
+            "choices": [
+                {
+                    "choiceText": "Do you have any ideas?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_c5ba",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_APPIVO_INTRO",
+            "text": "I know, I'm a little stressed about it",
+            "choices": [
+                {
+                    "choiceText": "why?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_a853",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_5f2d",
+            "text": "Per has a deep hatred for communication services",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_9195",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_9195",
+            "text": "Anyway, I can't work on it because Viktor stole my charger!",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_4b0c",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_d397",
+            "text": "It is, but I can'twork on it because Viktor stole my charger",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_4b0c",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_4b0c",
+            "text": "I'll just have to wait for him to give it back, but the deadline for the project is pretty soon.",
+            "choices": [
+                {
+                    "choiceText": "I can go look for it",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_abd6",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                },
+                {
+                    "choiceText": "That sucks, I hope he gives it back soon",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_223b",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                },
+                {
+                    "choiceText": "I have a charger here",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_a3a9",
+                    "itemGate": {
+                        "itemName": "Charger",
+                        "requiredItemID": "001",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "PLAYER_GIVES_LUDWIG_CHARGER",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "ASK_LUDWIG_CAMERA",
+            "text": "Yes! What do you need",
+            "choices": [
+                {
+                    "choiceText": "I need to borrow your camera",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_72a0",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_223b",
+            "text": "me too",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "PLAYER_KNOWS_LUDWIG_CHARGER_MISSING",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_abd6",
+            "text": "Thanks, but I don't think Viktor is going to let it go",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "PLAYER_KNOWS_LUDWIG_CHARGER_MISSING",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_c5ba",
+            "text": "I was working on a camera that you put on top of your laptop, and if it detects Per behind you, it closes Discord automatically\n",
+            "choices": [
+                {
+                    "choiceText": "That sounds like a great Idea!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_d397",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                },
+                {
+                    "choiceText": "Why would you need that?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_5f2d",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_WHAT_DO_YOU_LIKE",
+            "text": "Anime and OSRS, Do you like any of those things?",
+            "choices": [
+                {
+                    "choiceText": "I like Anime",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_c044",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                },
+                {
+                    "choiceText": "I like OSRS",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_c044",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                },
+                {
+                    "choiceText": "I like both",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_fa12",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                },
+                {
+                    "choiceText": "I like neither",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_a271",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_a271",
+            "text": "So what do you like?",
+            "choices": [
+                {
+                    "choiceText": "*you tell Ludwig about all of the things you like*",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_720c",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_fa12",
+            "text": "*Ludwig start drooling*",
+            "choices": [
+                {
+                    "choiceText": "yeah it's pretty awesome",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_c044",
+            "text": "Nice! We have something in common then.",
+            "choices": [
+                {
+                    "choiceText": "We do!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_720c",
+            "text": "Wow! that/those thing(s) or activit(ies)y sound really interesting",
+            "choices": [
+                {
+                    "choiceText": "yes!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_PIZZA_P_LIDL",
+            "text": "*Ludwig claps his hands once and holds them tight*",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_8dd3",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_8dd3",
+            "text": "*He clenches his jaw and does a sort grimace, showing his perfect teeth* ",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_14f0",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_14f0",
+            "text": "*He takes a sharp, chilling breath through his teeth*",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_1af9",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_1af9",
+            "text": "There is pizza at Lidl",
+            "choices": [
+                {
+                    "choiceText": "oh",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_BULLY",
+            "text": "Not that I know of...",
+            "choices": [
+                {
+                    "choiceText": "That's pretty cool",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_c28a",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_c28a",
+            "text": "They would not dare to get close to me",
+            "choices": [
+                {
+                    "choiceText": "no?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_a943",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_a943",
+            "text": "*Ludwig stare of in the distance*",
+            "choices": [
+                {
+                    "choiceText": "hello?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_f478",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                },
+                {
+                    "choiceText": "*Wait for him to respond*",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_2a00",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_f478",
+            "text": "Let's just say...they would...sink...pretty fast",
+            "choices": [
+                {
+                    "choiceText": "What does that mean?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_d63f",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_2a00",
+            "text": "*Ludwig keeps stareing*",
+            "choices": [
+                {
+                    "choiceText": "ehm..",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_f478",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                },
+                {
+                    "choiceText": "*Keep waiting*",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_a943",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_d63f",
+            "text": "no... I'm....I'm not that person anymore",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_GIVECHARGER",
+            "text": "Really?! Wow thanks, I owe you a favor!",
+            "choices": [
+                {
+                    "choiceText": "Could i borrow your camera?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_2e40",
+                    "itemGate": {
+                        "itemName": "Charger",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": true
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                },
+                {
+                    "choiceText": "You're welcome",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "Charger",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": true
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "PLAYER_DIDNT_ASK_FOR_LUDWIGS_CAMERA",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_2e40",
+            "text": "Sure, but I need it back tomorrow",
+            "choices": [
+                {
+                    "choiceText": "Thanks!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "Charger",
+                        "requiredItemID": "001",
+                        "removeItemOnSelect": true
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "LUDWIG_GAVE_PLAYER_CAMERA",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGiveID": "002"
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_72a0",
+            "text": "Sure! But I need it back tomorrow",
+            "choices": [
+                {
+                    "choiceText": "Thanks!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "Charger",
+                        "requiredItemID": "001",
+                        "removeItemOnSelect": true
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "LUDWIG_GAVE_PLAYER_CAMERA",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGiveID": "002"
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_a3a9",
+            "text": "Really?! Wow thanks, I owe you a favor!",
+            "choices": [
+                {
+                    "choiceText": "Could i borrow your camera?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_2e40",
+                    "itemGate": {
+                        "itemName": "Charger",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                },
+                {
+                    "choiceText": "You're welcome",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "Charger",
+                        "requiredItemID": "001",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "PLAYER_DIDNT_ASK_FOR_LUDWIGS_CAMERA",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGiveID": ""
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        }
+    ]
+}

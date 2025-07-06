@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd93f7ec26ac6548a11430eeeede781, type: 3}
+  m_Name: Simon_Config
+  m_EditorClassIdentifier: Assembly-CSharp::NpcConfig
+  npcName: Simon
+  npcImage: {fileID: 0}
+  dialogueFile: {fileID: 4900000, guid: cb27bc947cd83bc438ff9767570fb3ad, type: 3}
+  npcAge: 1
+  npcGender: 2
+  npcBloodType: 3
+  npcZodiacSign: 4
+  npcCockLength: 5
+  npcLikes: 6
+  npcDislikes: 7
+  taskIDPool:
+  - LockerTask
+  finalLoveCutsceneAsset: {fileID: 0}
+  initialLove: 0
+  interactRange: 2
+  rotationSpeed: 5
+  walkingParameterName: IsWalking
+  taskCompletionDelay: 2

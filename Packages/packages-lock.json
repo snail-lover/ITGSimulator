@@ -7,6 +7,37 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.2d.common": {
+      "version": "11.0.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.2d.sprite": "1.0.0",
+        "com.unity.mathematics": "1.1.0",
+        "com.unity.modules.uielements": "1.0.0",
+        "com.unity.modules.animation": "1.0.0",
+        "com.unity.burst": "1.8.4"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.2d.enhancers": {
+      "version": "1.0.0-pre.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.2d.common": "11.0.0",
+        "com.unity.ai.generators": "1.0.0-pre.3",
+        "com.unity.settings-manager": "2.0.1",
+        "com.unity.modules.uielements": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.2d.sprite": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
     "com.unity.ai.assistant": {
       "version": "1.0.0-pre.5",
       "depth": 0,
@@ -264,14 +295,14 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.collections": "2.4.2",
-        "com.unity.burst": "1.7.2"
+        "com.unity.burst": "1.7.2",
+        "com.unity.collections": "2.4.2"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.settings-manager": {
       "version": "2.1.0",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"

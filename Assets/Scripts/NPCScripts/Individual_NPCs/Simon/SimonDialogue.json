@@ -1,0 +1,756 @@
+{
+    "greetingNodeID": "GREETING_NODE",
+    "entryPoints": [
+        {
+            "entryText": "Do you know where i can get a camera?",
+            "entryType": 3,
+            "startNodeID": "E_LUDWIG_APPIVO",
+            "worldStateConditions": [
+                {
+                    "conditionKey": "PLAYER_KNOWS_NEED_CAMERA",
+                    "requiredValue": true
+                },
+                {
+                    "conditionKey": "LUDWIG_GAVE_PLAYER_CAMERA",
+                    "requiredValue": false
+                }
+            ],
+            "requiredItem": {
+                "instanceID": 0
+            }
+        },
+        {
+            "entryText": "What's up?",
+            "entryType": 3,
+            "startNodeID": "E_TROLL",
+            "worldStateConditions": [],
+            "requiredItem": {
+                "instanceID": 0
+            }
+        },
+        {
+            "entryText": "How's it going?",
+            "entryType": 3,
+            "startNodeID": "E_WINDOW_LINUX",
+            "worldStateConditions": [],
+            "requiredItem": {
+                "instanceID": 0
+            }
+        },
+        {
+            "entryText": "Excuse me?",
+            "entryType": 3,
+            "startNodeID": "E_PHONE",
+            "worldStateConditions": [],
+            "requiredItem": {
+                "instanceID": 0
+            }
+        }
+    ],
+    "nodes": [
+        {
+            "nodeID": "GREETING_NODE",
+            "text": "Greetings!",
+            "choices": [],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_235f",
+            "text": "Sorry I thought you were someone else",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_964a",
+            "text": "IF YOU WANNA GET IN TO THAT BOYS HOLE",
+            "choices": [
+                {
+                    "choiceText": "I don't have any money",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_235f",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_TROLL",
+            "text": "YOU GOTTA PAY THE TROLL TOLL",
+            "choices": [
+                {
+                    "choiceText": "What?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_964a",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_0734",
+            "text": "Good choice, God bless America",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_ec4f",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_e605",
+            "text": "Linux is not even on the stock market!",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_ec4f",
+            "text": "Some people here use Linux, but like...what stock value goes up when you use that project?",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_2f03",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_2f03",
+            "text": "The answer is none",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_WINDOW_LINUX",
+            "text": "Do you use Windows or Linux?",
+            "choices": [
+                {
+                    "choiceText": "Windows",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_0734",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "Linux",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_e605",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_PHONE",
+            "text": "*Simon looks down at his phone*",
+            "choices": [
+                {
+                    "choiceText": "Ehm..",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_40fe",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_40fe",
+            "text": "*Simon keeps scrolling the news*",
+            "choices": [
+                {
+                    "choiceText": "Hello?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_3e27",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_3e27",
+            "text": "Yeah....Yeah... *Simon keeps reading the news*",
+            "choices": [
+                {
+                    "choiceText": "What are you up to?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_927f",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_927f",
+            "text": "*Simon looks up*",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_c161",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_c161",
+            "text": "I'm just reading the news",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_715b",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_715b",
+            "text": "It was this article about this huge thing, there was a big ev-....",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_5987",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_5987",
+            "text": "*Simon gets a notification*",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_a4c3",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_a4c3",
+            "text": "*Simon looks back at his phone*",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_b911",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_b911",
+            "text": "One sec...",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_LUDWIG_APPIVO",
+            "text": "i Think Ludwig is working on a camera for his appivo project",
+            "choices": [
+                {
+                    "choiceText": "ok thanks!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "appivo?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_9c35",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_9c35",
+            "text": "some programming company that is comming to the school, but they are not even publicly traded so who cares",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "PLAYER_KNOWS_APPIVO",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        }
+    ]
+}

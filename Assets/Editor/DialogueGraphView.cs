@@ -4,31 +4,43 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEditor.UIElements;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class DialogueGraphView : GraphView
 {
-    public readonly Vector2 DefaultNodeSize = new Vector2(275, 350);
-    private DialogueGraphEditorWindow _editorWindow;
+    public readonly Vector2 DefaultNodeSize = new Vector2(300, 400);
+    private readonly DialogueGraphEditorWindow _editorWindow;
     private DialogueSearchWindow _searchWindow;
-    private List<ISelectable> _lastSelection = new List<ISelectable>(); // To track changes
+   
+    private List<ISelectable> _lastSelection = new List<ISelectable>();
+
+    // A static reference to the item database to avoid finding it repeatedly.
+    private static ItemDatabase _itemDatabaseInstance;
 
     public DialogueGraphView(DialogueGraphEditorWindow editorWindow)
     {
         _editorWindow = editorWindow;
 
+        // Ensure the ItemDatabase is ready for use by the editor.
+        EnsureItemDatabase();
         var styleSheet = Resources.Load<StyleSheet>("DialogueGraphStyle");
-        if (styleSheet != null) styleSheets.Add(styleSheet);
-        else Debug.LogWarning("[DialogueGraphView] DialogueGraphStyle.uss not found in Resources.");
-
+        if (styleSheet != null)
+        {
+            styleSheets.Add(styleSheet);
+        }
+        else
+        {
+            Debug.LogWarning("[DialogueGraphView] DialogueGraphStyle.uss not found in a 'Resources' folder. The graph will use default styling.");
+        }
+        styleSheets.Add(Resources.Load<StyleSheet>("DialogueGraphStyle"));
         SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
 
         this.AddManipulator(new ContentDragger());
-        this.AddManipulator(new SelectionDragger()); // This manipulator handles selection logic
+        this.AddManipulator(new SelectionDragger());
         this.AddManipulator(new RectangleSelector());
-        this.AddManipulator(new FreehandSelector());
 
         var grid = new GridBackground();
         Insert(0, grid);
@@ -36,49 +48,41 @@ public class DialogueGraphView : GraphView
 
         AddSearchWindow();
 
-        // graphViewChanged is a good place to react to many things, including elements being removed
-        // which might affect selection.
-        this.graphViewChanged += OnGraphViewChanged;
 
-        // Register a callback for MouseUpEvent. This is a common point to check selection.
-        this.RegisterCallback<MouseUpEvent>(OnGraphMouseUp);
-
-        this.RegisterCallback<KeyDownEvent>(OnGraphViewKeyDown);
+        graphViewChanged += OnGraphViewChanged;
+        RegisterCallback<MouseUpEvent>(OnGraphMouseUp);
+        RegisterCallback<KeyDownEvent>(OnGraphViewKeyDown);
     }
 
+    // --- FIX: Restore the OnGraphViewChanged callback ---
+    // This is needed to detect when a selection is deleted.
+    private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
+    {
+        // When elements are removed (e.g., via the Delete key), the selection might change.
+        if (graphViewChange.elementsToRemove != null && graphViewChange.elementsToRemove.Any())
+        {
+            // We use schedule.Execute to run this check after the GraphView has finished processing the removal.
+            schedule.Execute(CheckAndUpdateSelection).StartingIn(0);
+        }
+        return graphViewChange;
+    }
+
+    // --- FIX: Restore the OnGraphMouseUp callback ---
+    // This is needed to detect when a user clicks to change selection.
     private void OnGraphMouseUp(MouseUpEvent evt)
     {
-        // After a mouse up, the selection might have changed due to clicks.
-        // Check if the actual selection content has changed.
         CheckAndUpdateSelection();
     }
 
+    // --- FIX: Restore the selection checking logic ---
     private void CheckAndUpdateSelection()
     {
-        // Compare current selection with the last known selection
-        // This is a simple check; more complex scenarios might need deeper comparison.
-        bool selectionHasChanged = false;
-        if (this.selection.Count != _lastSelection.Count)
+        // If the content of the selection list has changed, update the inspector.
+        if (!selection.SequenceEqual(_lastSelection))
         {
-            selectionHasChanged = true;
-        }
-        else
-        {
-            for (int i = 0; i < this.selection.Count; i++)
-            {
-                if (this.selection[i] != _lastSelection[i])
-                {
-                    selectionHasChanged = true;
-                    break;
-                }
-            }
-        }
+            _lastSelection = new List<ISelectable>(selection); // Update our tracker
 
-        if (selectionHasChanged)
-        {
-            _lastSelection = new List<ISelectable>(this.selection); // Update last selection
-
-            var selectedNodeView = this.selection.OfType<DialogueNodeView>().FirstOrDefault();
+            var selectedNodeView = selection.OfType<DialogueNodeView>().FirstOrDefault();
             if (_editorWindow != null)
             {
                 if (selectedNodeView != null)
@@ -98,33 +102,12 @@ public class DialogueGraphView : GraphView
     }
 
 
-    private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
-    {
-        // Elements being removed can affect selection
-        if (graphViewChange.elementsToRemove != null && graphViewChange.elementsToRemove.Any())
-        {
-            // After elements are removed, the selection list (this.selection) will be updated by the GraphView.
-            // We can then check it.
-            // Using schedule.ExecuteNextFrame ensures this runs after GraphView has fully processed the removal.
-            schedule.Execute(() => CheckAndUpdateSelection()).StartingIn(0);
-        }
-
-        // Other changes (like edges created) don't typically alter node selection directly,
-        // but it's not harmful to check.
-        // However, to avoid too frequent checks, you might be more specific.
-
-        return graphViewChange;
-    }
-
     private void OnGraphViewKeyDown(KeyDownEvent evt)
     {
         if (evt.keyCode == KeyCode.Delete || evt.keyCode == KeyCode.Backspace)
         {
-            if (this.selection.Any())
-            {
-                DeleteSelection(); // This will trigger OnGraphViewChanged
-                evt.StopPropagation();
-            }
+            // Use the GraphView's built-in method to delete selected elements.
+            DeleteSelection();
         }
     }
 
@@ -137,32 +120,155 @@ public class DialogueGraphView : GraphView
 
     public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
     {
-        return ports.ToList().Where(endPort =>
+        return ports.Where(endPort =>
             endPort.direction != startPort.direction &&
             endPort.node != startPort.node &&
             endPort.portType == startPort.portType
         ).ToList();
     }
 
+    // This helper class is used for the ListView to correctly handle callbacks.
+    private class ItemData
+    {
+        public Action removeAction;
+        public EventCallback<ChangeEvent<string>> keyChangeCallback;
+        public EventCallback<ChangeEvent<bool>> valueChangeCallback;
+    }
+
+    private VisualElement CreateConditionsUI(List<WorldStateCondition> conditions)
+    {
+        var container = new Foldout { text = "World State Conditions" };
+        var conditionList = new ListView(conditions, 20,
+            makeItem: () =>
+            {
+                var row = new VisualElement { style = { flexDirection = FlexDirection.Row, alignItems = Align.Center } };
+                var keyField = new TextField { style = { flexGrow = 1 } };
+                var valueToggle = new Toggle("Must be TRUE:");
+                var removeButton = new Button { text = "X" };
+                row.Add(keyField);
+                row.Add(valueToggle);
+                row.Add(removeButton);
+                row.userData = new ItemData();
+                return row;
+            },
+            bindItem: (element, i) =>
+            {
+                var keyField = element.Q<TextField>();
+                var valueToggle = element.Q<Toggle>();
+                var removeButton = element.Q<Button>();
+                var itemData = element.userData as ItemData;
+
+                if (itemData.removeAction != null)
+                {
+                    removeButton.clicked -= itemData.removeAction;
+                    keyField.UnregisterValueChangedCallback(itemData.keyChangeCallback);
+                    valueToggle.UnregisterValueChangedCallback(itemData.valueChangeCallback);
+                }
+
+                keyField.value = conditions[i].conditionKey;
+                valueToggle.value = conditions[i].requiredValue;
+
+                itemData.removeAction = () => { conditions.RemoveAt(i); ((ListView)element.parent).RefreshItems(); };
+                itemData.keyChangeCallback = evt => conditions[i].conditionKey = evt.newValue;
+                itemData.valueChangeCallback = evt => conditions[i].requiredValue = evt.newValue;
+
+                removeButton.clicked += itemData.removeAction;
+                keyField.RegisterValueChangedCallback(itemData.keyChangeCallback);
+                valueToggle.RegisterValueChangedCallback(itemData.valueChangeCallback);
+            });
+
+        conditionList.headerTitle = "Conditions";
+        conditionList.showAddRemoveFooter = true;
+        conditionList.reorderable = true;
+        var addButton = conditionList.Q<Button>("add-button");
+        if (addButton != null)
+        {
+            addButton.clicked += () =>
+            {
+                conditions.Add(new WorldStateCondition());
+                conditionList.RefreshItems();
+            };
+        }
+
+        container.Add(conditionList);
+        return container;
+    }
+
+    private VisualElement CreateStateChangesUI(List<WorldStateChange> stateChanges)
+    {
+        var container = new Foldout() { text = "State Changes on Select" };
+        var stateChangeList = new ListView(stateChanges, 20,
+            makeItem: () =>
+            {
+                var row = new VisualElement() { style = { flexDirection = FlexDirection.Row, alignItems = Align.Center } };
+                var keyField = new TextField("State Key:") { style = { flexGrow = 1 } };
+                var valueToggle = new Toggle("Set to TRUE:");
+                var removeButton = new Button { text = "X" };
+                row.Add(keyField);
+                row.Add(valueToggle);
+                row.Add(removeButton);
+                row.userData = new ItemData();
+                return row;
+            },
+            bindItem: (element, i) =>
+            {
+                var keyField = element.Q<TextField>();
+                var valueToggle = element.Q<Toggle>();
+                var removeButton = element.Q<Button>();
+                var itemData = element.userData as ItemData;
+
+                if (itemData.removeAction != null)
+                {
+                    removeButton.clicked -= itemData.removeAction;
+                    keyField.UnregisterValueChangedCallback(itemData.keyChangeCallback);
+                    valueToggle.UnregisterValueChangedCallback(itemData.valueChangeCallback);
+                }
+
+                keyField.value = stateChanges[i].stateKey;
+                valueToggle.value = stateChanges[i].stateValue;
+
+                itemData.removeAction = () => { stateChanges.RemoveAt(i); ((ListView)element.parent).RefreshItems(); };
+                itemData.keyChangeCallback = evt => stateChanges[i].stateKey = evt.newValue;
+                itemData.valueChangeCallback = evt => stateChanges[i].stateValue = evt.newValue;
+
+                removeButton.clicked += itemData.removeAction;
+                keyField.RegisterValueChangedCallback(itemData.keyChangeCallback);
+                valueToggle.RegisterValueChangedCallback(itemData.valueChangeCallback);
+            });
+
+        stateChangeList.headerTitle = "State Changes";
+        stateChangeList.showAddRemoveFooter = true;
+        stateChangeList.reorderable = true;
+        var addButton = stateChangeList.Q<Button>("add-button");
+        if (addButton != null)
+        {
+            addButton.clicked += () => {
+                stateChanges.Add(new WorldStateChange());
+                stateChangeList.RefreshItems();
+            };
+        }
+
+        container.Add(stateChangeList);
+        return container;
+    }
+
+
     public DialogueNodeView CreateDialogueNode(DialogueNodeSaveData nodeData, Vector2 position)
     {
-        bool isNewNode = nodeData == null;
-        if (isNewNode)
+        // This logic handles both creating a new node and loading an existing one.
+        if (nodeData == null)
         {
             nodeData = new DialogueNodeSaveData
             {
                 nodeGUID = Guid.NewGuid().ToString(),
                 position = position,
                 nodeID = $"Node_{Guid.NewGuid().ToString().Substring(0, 4)}",
-                choices = new List<ChoiceSaveData>(),
-                itemGate = new ItemGate()
             };
         }
-        else
-        {
-            if (nodeData.choices == null) nodeData.choices = new List<ChoiceSaveData>();
-            if (nodeData.itemGate == null) nodeData.itemGate = new ItemGate();
-        }
+        // Ensure lists are initialized to avoid null reference errors
+        nodeData.choices ??= new List<ChoiceSaveData>();
+        nodeData.itemGate ??= new ItemGate();
+        nodeData.worldStateConditions ??= new List<WorldStateCondition>();
 
         var nodeView = new DialogueNodeView(nodeData);
         nodeView.SetPosition(new Rect(position, DefaultNodeSize));
@@ -183,14 +289,31 @@ public class DialogueGraphView : GraphView
         dialogueTextField.RegisterValueChangedCallback(evt => nodeData.dialogueText = evt.newValue);
         nodeView.mainContainer.Add(dialogueTextField);
 
+        // --- NODE ITEM GATE REFACTOR ---
         var nodeItemGateFoldout = new Foldout() { text = "Node Item Gate" };
-        var nodeItemNameField = new TextField("Item Name:") { value = nodeData.itemGate.itemName };
+        var nodeItemNameField = new TextField("Item Name (Display):") { value = nodeData.itemGate.itemName };
         nodeItemNameField.RegisterValueChangedCallback(evt => nodeData.itemGate.itemName = evt.newValue);
-        var nodeItemObjectField = new ObjectField("Required Item (Prefab):") { objectType = typeof(GameObject), value = nodeData.itemGate.requiredItem };
-        nodeItemObjectField.RegisterValueChangedCallback(evt => nodeData.itemGate.requiredItem = evt.newValue as GameObject);
+
+        // Find the full item object from its saved ID to display in the UI.
+        CreateInventoryItem initialItem = GetItemFromID(nodeData.itemGate.requiredItemID);
+
+        var nodeItemObjectField = new ObjectField("Required Item (SO):")
+        {
+            objectType = typeof(CreateInventoryItem),
+            value = initialItem
+        };
+        nodeItemObjectField.RegisterValueChangedCallback(evt => {
+            var selectedItem = evt.newValue as CreateInventoryItem;
+            // When an item is selected, save its ID. If cleared, save null.
+            nodeData.itemGate.requiredItemID = selectedItem?.id;
+            if (selectedItem != null) nodeItemNameField.value = selectedItem.itemName;
+        });
+
         nodeItemGateFoldout.Add(nodeItemNameField);
         nodeItemGateFoldout.Add(nodeItemObjectField);
         nodeView.mainContainer.Add(nodeItemGateFoldout);
+
+        nodeView.mainContainer.Add(CreateConditionsUI(nodeData.worldStateConditions));
 
         var addChoiceButton = new Button(() => AddChoicePort(nodeView, null, true)) { text = "Add Choice" };
         nodeView.titleButtonContainer.Add(addChoiceButton);
@@ -199,14 +322,6 @@ public class DialogueGraphView : GraphView
         {
             AddChoicePort(nodeView, choiceSaveData, false);
         }
-
-        var entryPointToggle = new Toggle("Is Main Entry Point") { value = nodeData.isEntryPoint };
-        entryPointToggle.RegisterValueChangedCallback(evt => {
-            nodeData.isEntryPoint = evt.newValue;
-            if (evt.newValue) MarkAsEntryPoint(nodeView);
-        });
-        entryPointToggle.tooltip = "Is this the starting node for the entire dialogue tree?";
-        nodeView.mainContainer.Add(entryPointToggle);
 
         nodeView.RefreshExpandedState();
         nodeView.RefreshPorts();
@@ -222,32 +337,23 @@ public class DialogueGraphView : GraphView
             {
                 outputPortGUID = Guid.NewGuid().ToString(),
                 choiceText = "New Choice",
-                itemGate = new ItemGate()
             };
             nodeView.NodeData.choices.Add(choiceData);
         }
-        else if (choiceData == null)
-        {
-            Debug.LogError("[DialogueGraphView] AddChoicePort error: choiceData is null and not creating new.");
-            return null;
-        }
-        else
-        {
-            if (choiceData.itemGate == null) choiceData.itemGate = new ItemGate();
-        }
+
+        // Initialize sub-objects if they are null (important for loading old data)
+        choiceData.itemGate ??= new ItemGate();
+        choiceData.worldStateConditions ??= new List<WorldStateCondition>();
+        choiceData.stateChangesOnSelect ??= new List<WorldStateChange>();
 
         var outputPort = nodeView.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
         outputPort.portName = "";
-        if (string.IsNullOrEmpty(choiceData.outputPortGUID)) choiceData.outputPortGUID = Guid.NewGuid().ToString();
         outputPort.userData = choiceData.outputPortGUID;
 
         var choiceRowContainer = new VisualElement { style = { flexDirection = FlexDirection.Row, alignItems = Align.Center, marginBottom = 2 } };
-
         var choiceTextField = new TextField { value = choiceData.choiceText, style = { flexGrow = 1, marginRight = 5 } };
         choiceTextField.RegisterValueChangedCallback(evt => choiceData.choiceText = evt.newValue);
-
         var deleteChoiceButton = new Button(() => RemoveChoicePort(nodeView, choiceData, choiceRowContainer, outputPort)) { text = "X" };
-
         choiceRowContainer.Add(choiceTextField);
         choiceRowContainer.Add(deleteChoiceButton);
         choiceRowContainer.Add(outputPort);
@@ -259,32 +365,62 @@ public class DialogueGraphView : GraphView
         lovePointsField.RegisterValueChangedCallback(evt => choiceData.lovePointChange = evt.newValue);
         detailsContainer.Add(lovePointsField);
 
+        // --- CHOICE ITEM GATE REFACTOR ---
         var choiceItemGateFoldout = new Foldout { text = "Choice Item Gate" };
         var choiceItemNameField = new TextField("Item Name:") { value = choiceData.itemGate.itemName };
         choiceItemNameField.RegisterValueChangedCallback(evt => choiceData.itemGate.itemName = evt.newValue);
-        var choiceItemObjectField = new ObjectField("Required Item:") { objectType = typeof(GameObject), value = choiceData.itemGate.requiredItem };
-        choiceItemObjectField.RegisterValueChangedCallback(evt => choiceData.itemGate.requiredItem = evt.newValue as GameObject);
+
+        CreateInventoryItem initialChoiceItem = GetItemFromID(choiceData.itemGate.requiredItemID);
+
+        var choiceItemObjectField = new ObjectField("Required Item (SO):")
+        {
+            objectType = typeof(CreateInventoryItem),
+            value = initialChoiceItem
+        };
+        choiceItemObjectField.RegisterValueChangedCallback(evt => {
+            var selectedItem = evt.newValue as CreateInventoryItem;
+            choiceData.itemGate.requiredItemID = selectedItem?.id;
+            if (selectedItem != null) choiceItemNameField.value = selectedItem.itemName;
+        });
+
+        var removeItemToggle = new Toggle("Remove on Select:") { value = choiceData.itemGate.removeItemOnSelect };
+        removeItemToggle.RegisterValueChangedCallback(evt => choiceData.itemGate.removeItemOnSelect = evt.newValue);
+
         choiceItemGateFoldout.Add(choiceItemNameField);
         choiceItemGateFoldout.Add(choiceItemObjectField);
+        choiceItemGateFoldout.Add(removeItemToggle);
         detailsContainer.Add(choiceItemGateFoldout);
 
-        var choiceOverrideNextNodeIdField = new TextField("Override Next Node ID:") { value = choiceData.overrideNextNodeID };
-        choiceOverrideNextNodeIdField.tooltip = "Use for 'END' or special targets not connectable in graph.";
-        choiceOverrideNextNodeIdField.RegisterValueChangedCallback(evt => choiceData.overrideNextNodeID = evt.newValue);
-        detailsContainer.Add(choiceOverrideNextNodeIdField);
+        var overrideNextNodeIdField = new TextField("Override Next Node ID:") { value = choiceData.overrideNextNodeID };
+        overrideNextNodeIdField.RegisterValueChangedCallback(evt => choiceData.overrideNextNodeID = evt.newValue);
+        detailsContainer.Add(overrideNextNodeIdField);
+
+        detailsContainer.Add(CreateConditionsUI(choiceData.worldStateConditions));
+        detailsContainer.Add(CreateStateChangesUI(choiceData.stateChangesOnSelect));
 
         var cutsceneObjectField = new ObjectField("Trigger Cutscene:")
         {
-            objectType = typeof(Cutscene), // Specify the type of asset
+            objectType = typeof(Cutscene),
             value = choiceData.triggerCutscene,
-            allowSceneObjects = false // We only want Project assets (ScriptableObjects)
+            allowSceneObjects = false
         };
-        cutsceneObjectField.RegisterValueChangedCallback(evt =>
-        {
-            choiceData.triggerCutscene = evt.newValue as Cutscene;
-        });
-        cutsceneObjectField.tooltip = "If a Cutscene is assigned here, it will play when this choice is selected. 'Next Node ID' will be ignored.";
+        cutsceneObjectField.RegisterValueChangedCallback(evt => choiceData.triggerCutscene = evt.newValue as Cutscene);
         detailsContainer.Add(cutsceneObjectField);
+
+        // --- ITEM TO GIVE REFACTOR ---
+        CreateInventoryItem initialItemToGive = GetItemFromID(choiceData.itemToGiveID);
+        var itemToGiveField = new ObjectField("Item to Give:")
+        {
+            objectType = typeof(CreateInventoryItem),
+            value = initialItemToGive,
+            allowSceneObjects = false
+        };
+        itemToGiveField.RegisterValueChangedCallback(evt =>
+        {
+            var selectedItem = evt.newValue as CreateInventoryItem;
+            choiceData.itemToGiveID = selectedItem?.id;
+        });
+        detailsContainer.Add(itemToGiveField);
 
         nodeView.outputContainer.Add(choiceRowContainer);
         nodeView.outputContainer.Add(detailsContainer);
@@ -294,34 +430,10 @@ public class DialogueGraphView : GraphView
         return outputPort;
     }
 
-    private void MarkAsEntryPoint(DialogueNodeView newEntryPointView)
-    {
-        foreach (var node in this.nodes.OfType<DialogueNodeView>())
-        {
-            if (node.NodeData.isEntryPoint && node != newEntryPointView)
-            {
-                node.NodeData.isEntryPoint = false;
-                var oldEntryPointToggle = node.mainContainer.Query<Toggle>().ToList()
-                    .FirstOrDefault(t => t.label == "Is Main Entry Point");
-                if (oldEntryPointToggle != null)
-                {
-                    oldEntryPointToggle.SetValueWithoutNotify(false);
-                }
-            }
-        }
-    }
-
     private void RemoveChoicePort(DialogueNodeView nodeView, ChoiceSaveData choiceDataToRemove, VisualElement choiceRowContainer, Port portToRemove)
     {
-        if (portToRemove != null)
-        {
-            var edgesToDelete = this.edges.ToList().Where(x => x.output == portToRemove).ToList();
-            foreach (var edge in edgesToDelete)
-            {
-                edge.input?.Disconnect(edge);
-                RemoveElement(edge);
-            }
-        }
+        var edgesToDelete = edges.ToList().Where(x => x.output == portToRemove).ToList();
+        DeleteElements(edgesToDelete);
 
         nodeView.NodeData.choices.Remove(choiceDataToRemove);
         nodeView.outputContainer.Remove(choiceRowContainer);
@@ -331,10 +443,6 @@ public class DialogueGraphView : GraphView
         {
             nodeView.outputContainer.Remove(detailsToRemove);
         }
-        else
-        {
-            Debug.LogWarning($"[DialogueGraphView] Could not find details container 'ChoiceDetails_{choiceDataToRemove.outputPortGUID}'.");
-        }
 
         nodeView.RefreshPorts();
         nodeView.RefreshExpandedState();
@@ -342,101 +450,117 @@ public class DialogueGraphView : GraphView
 
     public void SaveGraphToSO(DialogueGraphSO graphSO)
     {
-        if (graphSO == null)
-        {
-            Debug.LogError("[DialogueGraphView] SaveGraphToSO: graphSO is null.");
-            return;
-        }
+        if (graphSO == null) return;
 
+        // Clear old data
         graphSO.nodes.Clear();
         graphSO.edges.Clear();
-        graphSO.entryPointNodeGUID = null;
 
-        foreach (DialogueNodeView nodeView in this.nodes.OfType<DialogueNodeView>())
+        // Save nodes
+        foreach (var nodeView in nodes.OfType<DialogueNodeView>())
         {
-            (nodeView.GetEditableScriptableObject() as DialogueNodeEditorDataWrapper)?.ApplyChangesToOriginal();
             nodeView.NodeData.position = nodeView.GetPosition().position;
             graphSO.nodes.Add(nodeView.NodeData);
-
-            if (nodeView.NodeData.isEntryPoint)
-            {
-                if (graphSO.entryPointNodeGUID != null)
-                {
-                    Debug.LogWarning($"[DialogueGraphView] Multiple entry points designated. Using last one: {nodeView.NodeData.nodeID}");
-                }
-                graphSO.entryPointNodeGUID = nodeView.NodeData.nodeGUID;
-            }
         }
 
-        foreach (Edge edge in this.edges.ToList())
+        // Save edges
+        foreach (var edge in edges)
         {
             var outputNodeView = edge.output?.node as DialogueNodeView;
             var inputNodeView = edge.input?.node as DialogueNodeView;
 
-            if (outputNodeView != null && inputNodeView != null && edge.output != null)
+            if (outputNodeView == null || inputNodeView == null) continue;
+
+            graphSO.edges.Add(new EdgeSaveData
             {
-                graphSO.edges.Add(new EdgeSaveData
-                {
-                    outputNodeGUID = outputNodeView.NodeData.nodeGUID,
-                    outputNodePortGUID = edge.output.userData as string,
-                    inputNodeGUID = inputNodeView.NodeData.nodeGUID
-                });
-            }
+                outputNodeGUID = outputNodeView.NodeData.nodeGUID,
+                outputNodePortGUID = edge.output.userData as string,
+                inputNodeGUID = inputNodeView.NodeData.nodeGUID
+            });
         }
+
         EditorUtility.SetDirty(graphSO);
+        AssetDatabase.SaveAssets();
     }
 
     public void LoadGraphFromSO(DialogueGraphSO graphSO)
     {
-        if (graphSO == null)
-        {
-            Debug.LogError("[DialogueGraphView] LoadGraphFromSO: graphSO is null.");
-            return;
-        }
+        if (graphSO == null) return;
 
-        DeleteElements(this.graphElements.ToList());
-        _lastSelection.Clear(); // Clear last selection when loading new graph
+        // Clear existing graph elements
+        DeleteElements(graphElements);
 
         var nodeViewCache = new Dictionary<string, DialogueNodeView>();
 
-        if (graphSO.nodes == null) graphSO.nodes = new List<DialogueNodeSaveData>();
+        // First pass: create all node views from saved data
         foreach (DialogueNodeSaveData nodeData in graphSO.nodes)
         {
-            if (nodeData == null) continue;
             var nodeView = CreateDialogueNode(nodeData, nodeData.position);
-            if (!string.IsNullOrEmpty(nodeData.nodeGUID))
-            {
-                nodeViewCache[nodeData.nodeGUID] = nodeView;
-            }
+            nodeViewCache[nodeData.nodeGUID] = nodeView;
         }
 
-        if (graphSO.edges == null) graphSO.edges = new List<EdgeSaveData>();
+        // Second pass: connect the nodes with edges
         foreach (EdgeSaveData edgeData in graphSO.edges)
         {
-            if (edgeData == null) continue;
-            if (nodeViewCache.TryGetValue(edgeData.outputNodeGUID, out DialogueNodeView outputNodeView) &&
-                nodeViewCache.TryGetValue(edgeData.inputNodeGUID, out DialogueNodeView inputNodeView))
+            if (!nodeViewCache.TryGetValue(edgeData.outputNodeGUID, out var outputNodeView) ||
+                !nodeViewCache.TryGetValue(edgeData.inputNodeGUID, out var inputNodeView))
             {
-                Port outputPort = outputNodeView.outputContainer.Query<Port>().ToList()
-                                    .FirstOrDefault(p => p.userData as string == edgeData.outputNodePortGUID);
-                Port inputPort = inputNodeView.inputContainer.Q<Port>();
+                continue;
+            }
 
-                if (outputPort != null && inputPort != null)
-                {
-                    Edge edge = outputPort.ConnectTo(inputPort);
-                    AddElement(edge);
-                }
-                else
-                {
-                    Debug.LogWarning($"[Load] Edge connect fail: Port not found. OutputPortGUID: {edgeData.outputNodePortGUID} on Node {edgeData.outputNodeGUID}, InputNode: {edgeData.inputNodeGUID}");
-                }
+            Port outputPort = outputNodeView.outputContainer.Query<Port>().ToList()
+                .FirstOrDefault(p => p.userData as string == edgeData.outputNodePortGUID);
+            Port inputPort = inputNodeView.inputContainer.Q<Port>();
+
+            if (outputPort != null && inputPort != null)
+            {
+                var edge = outputPort.ConnectTo(inputPort);
+                AddElement(edge);
+            }
+        }
+    }
+
+    #region Helper Methods
+
+    /// <summary>
+    /// Ensures the ItemDatabase is loaded and available for the editor.
+    /// </summary>
+    private static void EnsureItemDatabase()
+    {
+        if (_itemDatabaseInstance != null) return;
+
+        _itemDatabaseInstance = UnityEngine.Object.FindObjectOfType<ItemDatabase>();
+        if (_itemDatabaseInstance == null)
+        {
+            // As a fallback, try to find a prefab in a "Resources/Editor" folder.
+            // This is a common pattern for editor-only assets.
+            var prefab = Resources.Load<ItemDatabase>("Editor/ItemDatabasePrefab");
+            if (prefab != null)
+            {
+                _itemDatabaseInstance = UnityEngine.Object.Instantiate(prefab);
+                _itemDatabaseInstance.name = "EditorOnly_ItemDatabase_Instance";
             }
             else
             {
-                Debug.LogWarning($"[Load] Edge fail: Node GUID not found. Output: '{edgeData.outputNodeGUID}', Input: '{edgeData.inputNodeGUID}'.");
+                Debug.LogError("[DialogueGraphView] Could not find an ItemDatabase instance in the scene or as a prefab in 'Resources/Editor'. Item fields will not work correctly.");
+                return;
             }
         }
-        // After loading, update the inspector to show graph properties or nothing if no nodes are auto-selected.
-        CheckAndUpdateSelection();
+        // Force the database to initialize its internal dictionary.
+        _itemDatabaseInstance.InitializeDatabase();
     }
+
+    /// <summary>
+    /// A safe helper method to get an item from the database using its ID.
+    /// </summary>
+    private CreateInventoryItem GetItemFromID(string itemID)
+    {
+        if (string.IsNullOrEmpty(itemID) || _itemDatabaseInstance == null)
+        {
+            return null;
+        }
+        return _itemDatabaseInstance.GetItemByID(itemID);
+    }
+
+    #endregion
 }

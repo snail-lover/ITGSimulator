@@ -1,0 +1,365 @@
+{
+    "greetingNodeID": "GREETING_NODE",
+    "entryPoints": [
+        {
+            "entryText": "Quest1",
+            "entryType": 0,
+            "startNodeID": "QUEST_DIALOGUE_1",
+            "worldStateConditions": [
+                {
+                    "conditionKey": "VIEWED_POSTER",
+                    "requiredValue": true
+                },
+                {
+                    "conditionKey": "PLAYER_KNOWS_APPIVO",
+                    "requiredValue": false
+                }
+            ]
+        },
+        {
+            "entryText": "Quest2",
+            "entryType": 0,
+            "startNodeID": "QUEST_DIALOGUE_2",
+            "worldStateConditions": []
+        },
+        {
+            "entryText": "Test Item",
+            "entryType": 3,
+            "startNodeID": "SIMON_GENERAL_3",
+            "worldStateConditions": []
+        },
+        {
+            "entryText": "CONTEXT",
+            "entryType": 2,
+            "startNodeID": "SIMON_CONTEXT_1",
+            "worldStateConditions": []
+        }
+    ],
+    "nodes": [
+        {
+            "nodeID": "SIMON_GENERAL_1",
+            "text": "",
+            "choices": [
+                {
+                    "choiceText": "Quit",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "SIMON_GENERAL_2",
+            "text": "",
+            "choices": [
+                {
+                    "choiceText": "Quit",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "SIMON_GENERAL_3",
+            "text": "Hi This is simon General 3",
+            "choices": [
+                {
+                    "choiceText": "You don't have the Item",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "You have the item",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "Charger",
+                        "requiredItemSO": {
+                            "instanceID": 57052
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "QUEST_DIALOGUE_2",
+            "text": "This is a quest dialogue 2",
+            "choices": [
+                {
+                    "choiceText": "QUEST DIALOGUE_2",
+                    "lovePointChange": 1,
+                    "nextNodeID": "Node_2afd",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_2afd",
+            "text": "That's cool, the system works",
+            "choices": [
+                {
+                    "choiceText": "SIMON_TEST = TRUE",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "SIMON_TEST",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "SIMON_CONTEXT_1",
+            "text": "You have the charger",
+            "choices": [
+                {
+                    "choiceText": "Remove the charger",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 57052
+                        },
+                        "removeItemOnSelect": true
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "GREETING_NODE",
+            "text": "This is the start?",
+            "choices": [],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "QUEST_DIALOGUE_1",
+            "text": "This is a quest dialogue 1",
+            "choices": [
+                {
+                    "choiceText": "LÅNG LÅNG  LÅNG LÅNG  LÅNG LÅNG  LÅNG LÅNG  LÅNG LÅNG  LÅNG LÅNG  LÅNG LÅNG  LÅNG LÅNG  LÅNG LÅNG  LÅNG LÅNG  LÅNG LÅNG  LÅNG LÅNG  LÅNG LÅNG  LÅNG LÅNG  ",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 56538
+                    }
+                },
+                {
+                    "choiceText": "Organic",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 32,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": " click poster + PLAYER_KNOWS_APPIVO false",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [
+                        {
+                            "conditionKey": "VIEWED_POSTER",
+                            "requiredValue": true
+                        },
+                        {
+                            "conditionKey": "PLAYER_KNOWS_APPIVO",
+                            "requiredValue": false
+                        }
+                    ],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        }
+    ]
+}

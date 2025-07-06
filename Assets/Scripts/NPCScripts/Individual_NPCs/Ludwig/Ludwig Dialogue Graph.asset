@@ -1,0 +1,1009 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcbff4ebcfbf5544bcb20250fece632, type: 3}
+  m_Name: Ludwig Dialogue Graph
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::DialogueGraphSO
+  greetingNodeID: GREETING_NODE
+  entryPoints:
+  - entryText: I heard appivo is comming to ITG
+    entryType: 2
+    startNodeID: E_APPIVO_INTRO
+    worldStateConditions:
+    - conditionKey: PLAYER_KNOWS_APPIVO
+      requiredValue: 1
+    - conditionKey: PLAYER_DIDNT_ASK_FOR_LUDWIGS_CAMERA
+      requiredValue: 0
+    - conditionKey: LUDWIG_GAVE_PLAYER_CAMERA
+      requiredValue: 0
+    requiredItemID: 
+  - entryText: About that favor...
+    entryType: 0
+    startNodeID: ASK_LUDWIG_CAMERA
+    worldStateConditions:
+    - conditionKey: PLAYER_DIDNT_ASK_FOR_LUDWIGS_CAMERA
+      requiredValue: 1
+    - conditionKey: LUDWIG_GAVE_PLAYER_CAMERA
+      requiredValue: 0
+    requiredItemID: 
+  - entryText: What do you like?
+    entryType: 3
+    startNodeID: E_WHAT_DO_YOU_LIKE
+    worldStateConditions: []
+    requiredItemID: 
+  - entryText: Do you know what's in the school cafeteria today?
+    entryType: 3
+    startNodeID: E_PIZZA_P_LIDL
+    worldStateConditions: []
+    requiredItemID: 
+  - entryText: Are there any bullies at this school?
+    entryType: 3
+    startNodeID: E_BULLY
+    worldStateConditions: []
+    requiredItemID: 
+  - entryText: I found your charger
+    entryType: 0
+    startNodeID: E_GIVECHARGER
+    worldStateConditions:
+    - conditionKey: PLAYER_KNOWS_LUDWIG_CHARGER_MISSING
+      requiredValue: 1
+    - conditionKey: LUDWIG_GAVE_PLAYER_CAMERA
+      requiredValue: 0
+    - conditionKey: PLAYER_DIDNT_ASK_FOR_LUDWIGS_CAMERA
+      requiredValue: 0
+    requiredItemID: 001
+  nodes:
+  - nodeGUID: 6864fc2b-b8cb-4306-9136-c46b84b4c7cd
+    nodeID: GREETING_NODE
+    dialogueText: Hello!
+    position: {x: -535, y: -51}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices: []
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: a3fb36db-4b41-45bf-abcd-27d5e1c45c5d
+    nodeID: Node_a853
+    dialogueText: We're supposed to build something with their app making tool, but
+      it's not going so great
+    position: {x: 577, y: 493}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 3b741a30-a41b-40a5-b0af-0045e3dce59c
+      choiceText: Do you have any ideas?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 00f1ea49-f7a2-4cb4-85af-49647ab81e2f
+    nodeID: E_APPIVO_INTRO
+    dialogueText: I know, I'm a little stressed about it
+    position: {x: -92, y: 493}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: f09364a0-f2b3-4222-91aa-d304a68060fb
+      choiceText: why?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: a50502cb-6e33-4704-a239-f868e3e35c0f
+    nodeID: Node_5f2d
+    dialogueText: Per has a deep hatred for communication services
+    position: {x: 2366, y: 801}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 38610613-5a37-4d76-88ee-b9501b116e56
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 7f2a0fd6-96f3-4b16-a534-0a8e33c49c86
+    nodeID: Node_9195
+    dialogueText: Anyway, I can't work on it because Viktor stole my charger!
+    position: {x: 2901, y: 863}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 3a7bcd3f-f4f1-48e5-900c-e73e572a7cfc
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect:
+      - stateKey: 
+        stateValue: 1
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: a9b8098c-d7ea-4115-9949-10a9ea6d353f
+    nodeID: Node_d397
+    dialogueText: It is, but I can'twork on it because Viktor stole my charger
+    position: {x: 2901, y: 197}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 2d829087-efcc-4a64-ac12-cecdf34e7352
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect:
+      - stateKey: 
+        stateValue: 1
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: d7c1c958-6468-48e6-a1ca-4985d21116c7
+    nodeID: Node_4b0c
+    dialogueText: I'll just have to wait for him to give it back, but the deadline
+      for the project is pretty soon.
+    position: {x: 3748, y: 371}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 3001514b-0c91-4b52-bf59-6d0e33dbe5bc
+      choiceText: I can go look for it
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    - outputPortGUID: 4b613243-ba1d-44e0-a70e-c5f6612c6241
+      choiceText: That sucks, I hope he gives it back soon
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    - outputPortGUID: 2efd3251-3c3a-4223-8094-8be24f30e118
+      choiceText: I have a charger here
+      lovePointChange: 0
+      itemGate:
+        itemName: Charger
+        requiredItemID: 001
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect:
+      - stateKey: PLAYER_GIVES_LUDWIG_CHARGER
+        stateValue: 1
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 140a46a4-395d-4923-a6d8-8e3811d32bad
+    nodeID: ASK_LUDWIG_CAMERA
+    dialogueText: Yes! What do you need
+    position: {x: 45, y: -482}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: f6710f63-403b-4b64-ad44-25f96f789611
+      choiceText: I need to borrow your camera
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: a7ec5a6a-2e4b-4f2f-940a-49f9f53b372c
+    nodeID: Node_223b
+    dialogueText: me too
+    position: {x: 4809, y: 601}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 50fb562e-9377-46ea-a71c-2f46d6910789
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect:
+      - stateKey: PLAYER_KNOWS_LUDWIG_CHARGER_MISSING
+        stateValue: 1
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 8569b904-a112-4ff3-8d8c-82d310d4886b
+    nodeID: Node_abd6
+    dialogueText: Thanks, but I don't think Viktor is going to let it go
+    position: {x: 4650, y: -111}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: fa5f26a4-e50a-445c-b85e-325d6455cdf3
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect:
+      - stateKey: PLAYER_KNOWS_LUDWIG_CHARGER_MISSING
+        stateValue: 1
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: f1b798aa-f065-4780-b063-46fd17e5129e
+    nodeID: Node_c5ba
+    dialogueText: 'I was working on a camera that you put on top of your laptop,
+      and if it detects Per behind you, it closes Discord automatically
+
+'
+    position: {x: 1415, y: 512}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 31a5f701-01e2-45d0-9ce8-62796ae24e1f
+      choiceText: That sounds like a great Idea!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    - outputPortGUID: 97bb7614-bd9e-4965-911c-7e62b0c427bd
+      choiceText: Why would you need that?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 30c3eb5c-c25a-49c2-b474-8ad8f183eb62
+    nodeID: E_WHAT_DO_YOU_LIKE
+    dialogueText: Anime and OSRS, Do you like any of those things?
+    position: {x: -259, y: 2351}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 7e63608c-7a1b-432c-8ef1-4bcb9a5e0f60
+      choiceText: I like Anime
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    - outputPortGUID: 6db383ff-3e0e-4faa-9253-69dcbc6db003
+      choiceText: I like OSRS
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    - outputPortGUID: 69463640-d00c-4055-bdc6-ba6a6cc0cfe3
+      choiceText: I like both
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    - outputPortGUID: 95ada6c7-1a42-4363-a8f7-3371b9c93436
+      choiceText: I like neither
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: fba0259a-a49f-4240-96a2-d511455f0c4f
+    nodeID: Node_a271
+    dialogueText: So what do you like?
+    position: {x: 358, y: 3402}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: d5402325-682a-4403-a8a8-135c5d1e2e11
+      choiceText: '*you tell Ludwig about all of the things you like*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: b079f251-f36f-4b91-a029-7de212673c0c
+    nodeID: Node_fa12
+    dialogueText: '*Ludwig start drooling*'
+    position: {x: 358, y: 2794}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 3eef1604-fe16-4dd9-99b1-03b8b4e54e12
+      choiceText: yeah it's pretty awesome
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 6dc79560-fd29-429e-b0f1-4021923db0f3
+    nodeID: Node_c044
+    dialogueText: Nice! We have something in common then.
+    position: {x: 499, y: 2142}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: b155c6c6-93a7-4f15-b0c2-4f614816f16c
+      choiceText: We do!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 434e65b5-2732-4f33-ad63-291697a69fc3
+    nodeID: Node_720c
+    dialogueText: Wow! that/those thing(s) or activit(ies)y sound really interesting
+    position: {x: 960, y: 3540}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 206499ea-6baf-40e8-8ee5-1cdbe1f62299
+      choiceText: yes!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 82755674-0d2e-4a67-a458-abd034df22d9
+    nodeID: E_PIZZA_P_LIDL
+    dialogueText: '*Ludwig claps his hands once and holds them tight*'
+    position: {x: -72, y: 4434}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 61a8c50c-7109-4dc8-bea7-a99e60b8dea0
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 4471e0bf-1e4a-452b-847d-9ed6afdf9090
+    nodeID: Node_8dd3
+    dialogueText: '*He clenches his jaw and does a sort grimace, showing his perfect
+      teeth* '
+    position: {x: 538, y: 4463}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 45649642-620a-4eef-9346-cc76acf3eda5
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 697b1e72-bfdf-4a67-8ad6-870464b1cfc6
+    nodeID: Node_14f0
+    dialogueText: '*He takes a sharp, chilling breath through his teeth*'
+    position: {x: 1254, y: 4463}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: c8bc9bfa-1684-4035-a322-9dd44cb146fe
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 8ed84fa3-404d-4bf2-b4bc-d5c78d778457
+    nodeID: Node_1af9
+    dialogueText: There is pizza at Lidl
+    position: {x: 1882, y: 4512}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 7566469c-f03a-4fc6-92f9-90c1665cba51
+      choiceText: oh
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: faab5237-1017-442f-ae83-b020604487ba
+    nodeID: E_BULLY
+    dialogueText: Not that I know of...
+    position: {x: -83, y: 5285}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 6604a9b0-d990-4856-82e8-019f209810ea
+      choiceText: That's pretty cool
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 5551d8df-ede6-405a-b900-93344023adc6
+    nodeID: Node_c28a
+    dialogueText: They would not dare to get close to me
+    position: {x: 451, y: 5305}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: ccce4699-cec1-4f77-8eae-bfbd06a038c9
+      choiceText: no?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 10e8a81b-8e79-4dd1-9939-b36f2c45b15f
+    nodeID: Node_a943
+    dialogueText: '*Ludwig stare of in the distance*'
+    position: {x: 1025, y: 5331}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 648e710b-c029-4814-99e1-48e189e2f734
+      choiceText: hello?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    - outputPortGUID: 04e23976-1430-4ef6-aa1a-a7029a217e68
+      choiceText: '*Wait for him to respond*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 9382618a-c225-4301-a4f4-df91fec87c6e
+    nodeID: Node_f478
+    dialogueText: Let's just say...they would...sink...pretty fast
+    position: {x: 2214, y: 5331}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 6987aaae-7df7-4c6d-aaf7-11abca9d69db
+      choiceText: What does that mean?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 3fcd3785-a464-4e52-bab7-f7f0c753551d
+    nodeID: Node_2a00
+    dialogueText: '*Ludwig keeps stareing*'
+    position: {x: 1547, y: 5657}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: aa2e64b5-dcf8-47b8-9c23-c269fbe3643e
+      choiceText: ehm..
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    - outputPortGUID: a5016bb9-5f60-47ba-b37c-a2a376065a06
+      choiceText: '*Keep waiting*'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 3d9efc50-7691-4cb7-b33b-c0465309bc5f
+    nodeID: Node_d63f
+    dialogueText: no... I'm....I'm not that person anymore
+    position: {x: 2855, y: 5472}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 734cbbea-d328-488d-abf2-6cc29b60d13c
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: dab4da3d-ad66-42bb-8833-77d31d8b5cd8
+    nodeID: E_GIVECHARGER
+    dialogueText: Really?! Wow thanks, I owe you a favor!
+    position: {x: 4776, y: 2376}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 99cfa60b-a10e-4d8f-a638-9a8f4d6dbef7
+      choiceText: Could i borrow your camera?
+      lovePointChange: 0
+      itemGate:
+        itemName: Charger
+        requiredItemID: 
+        removeItemOnSelect: 1
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    - outputPortGUID: cd4d773b-2c06-4a37-987b-b6a2c0c68b79
+      choiceText: You're welcome
+      lovePointChange: 0
+      itemGate:
+        itemName: Charger
+        requiredItemID: 
+        removeItemOnSelect: 1
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect:
+      - stateKey: PLAYER_DIDNT_ASK_FOR_LUDWIGS_CAMERA
+        stateValue: 1
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 63e3b2f3-cbaa-49b9-aab2-1a8e0063738e
+    nodeID: Node_2e40
+    dialogueText: Sure, but I need it back tomorrow
+    position: {x: 6467, y: 1266}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: fe561cc7-7d0a-4a28-971c-fd833283f782
+      choiceText: Thanks!
+      lovePointChange: 0
+      itemGate:
+        itemName: Charger
+        requiredItemID: 001
+        removeItemOnSelect: 1
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect:
+      - stateKey: LUDWIG_GAVE_PLAYER_CAMERA
+        stateValue: 1
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 002
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 29aad0a4-db24-4805-a826-8e3fcd338120
+    nodeID: Node_72a0
+    dialogueText: Sure! But I need it back tomorrow
+    position: {x: 779, y: -503}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 7a37e0cd-edc9-4aea-ad4f-307dcf34ae3b
+      choiceText: Thanks!
+      lovePointChange: 0
+      itemGate:
+        itemName: Charger
+        requiredItemID: 001
+        removeItemOnSelect: 1
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect:
+      - stateKey: LUDWIG_GAVE_PLAYER_CAMERA
+        stateValue: 1
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 002
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: cc42593d-d4db-4f45-a659-61213caee5c2
+    nodeID: Node_a3a9
+    dialogueText: Really?! Wow thanks, I owe you a favor!
+    position: {x: 4775, y: 1372}
+    itemGate:
+      itemName: 
+      requiredItemID: 
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: d915b7b0-664d-4e1d-b96f-3418006f1b97
+      choiceText: Could i borrow your camera?
+      lovePointChange: 0
+      itemGate:
+        itemName: Charger
+        requiredItemID: 
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    - outputPortGUID: 170ec36e-babd-41ad-ad24-624f11bbdcc5
+      choiceText: You're welcome
+      lovePointChange: 0
+      itemGate:
+        itemName: Charger
+        requiredItemID: 001
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect:
+      - stateKey: PLAYER_DIDNT_ASK_FOR_LUDWIGS_CAMERA
+        stateValue: 1
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGiveID: 
+    isEntryPoint: 0
+    worldStateConditions: []
+  edges:
+  - outputNodeGUID: 00f1ea49-f7a2-4cb4-85af-49647ab81e2f
+    outputNodePortGUID: f09364a0-f2b3-4222-91aa-d304a68060fb
+    inputNodeGUID: a3fb36db-4b41-45bf-abcd-27d5e1c45c5d
+  - outputNodeGUID: a3fb36db-4b41-45bf-abcd-27d5e1c45c5d
+    outputNodePortGUID: 3b741a30-a41b-40a5-b0af-0045e3dce59c
+    inputNodeGUID: f1b798aa-f065-4780-b063-46fd17e5129e
+  - outputNodeGUID: f1b798aa-f065-4780-b063-46fd17e5129e
+    outputNodePortGUID: 97bb7614-bd9e-4965-911c-7e62b0c427bd
+    inputNodeGUID: a50502cb-6e33-4704-a239-f868e3e35c0f
+  - outputNodeGUID: a50502cb-6e33-4704-a239-f868e3e35c0f
+    outputNodePortGUID: 38610613-5a37-4d76-88ee-b9501b116e56
+    inputNodeGUID: 7f2a0fd6-96f3-4b16-a534-0a8e33c49c86
+  - outputNodeGUID: f1b798aa-f065-4780-b063-46fd17e5129e
+    outputNodePortGUID: 31a5f701-01e2-45d0-9ce8-62796ae24e1f
+    inputNodeGUID: a9b8098c-d7ea-4115-9949-10a9ea6d353f
+  - outputNodeGUID: 7f2a0fd6-96f3-4b16-a534-0a8e33c49c86
+    outputNodePortGUID: 3a7bcd3f-f4f1-48e5-900c-e73e572a7cfc
+    inputNodeGUID: d7c1c958-6468-48e6-a1ca-4985d21116c7
+  - outputNodeGUID: a9b8098c-d7ea-4115-9949-10a9ea6d353f
+    outputNodePortGUID: 2d829087-efcc-4a64-ac12-cecdf34e7352
+    inputNodeGUID: d7c1c958-6468-48e6-a1ca-4985d21116c7
+  - outputNodeGUID: d7c1c958-6468-48e6-a1ca-4985d21116c7
+    outputNodePortGUID: 4b613243-ba1d-44e0-a70e-c5f6612c6241
+    inputNodeGUID: a7ec5a6a-2e4b-4f2f-940a-49f9f53b372c
+  - outputNodeGUID: d7c1c958-6468-48e6-a1ca-4985d21116c7
+    outputNodePortGUID: 2efd3251-3c3a-4223-8094-8be24f30e118
+    inputNodeGUID: cc42593d-d4db-4f45-a659-61213caee5c2
+  - outputNodeGUID: d7c1c958-6468-48e6-a1ca-4985d21116c7
+    outputNodePortGUID: 3001514b-0c91-4b52-bf59-6d0e33dbe5bc
+    inputNodeGUID: 8569b904-a112-4ff3-8d8c-82d310d4886b
+  - outputNodeGUID: cc42593d-d4db-4f45-a659-61213caee5c2
+    outputNodePortGUID: d915b7b0-664d-4e1d-b96f-3418006f1b97
+    inputNodeGUID: 63e3b2f3-cbaa-49b9-aab2-1a8e0063738e
+  - outputNodeGUID: 140a46a4-395d-4923-a6d8-8e3811d32bad
+    outputNodePortGUID: f6710f63-403b-4b64-ad44-25f96f789611
+    inputNodeGUID: 29aad0a4-db24-4805-a826-8e3fcd338120
+  - outputNodeGUID: 30c3eb5c-c25a-49c2-b474-8ad8f183eb62
+    outputNodePortGUID: 95ada6c7-1a42-4363-a8f7-3371b9c93436
+    inputNodeGUID: fba0259a-a49f-4240-96a2-d511455f0c4f
+  - outputNodeGUID: fba0259a-a49f-4240-96a2-d511455f0c4f
+    outputNodePortGUID: d5402325-682a-4403-a8a8-135c5d1e2e11
+    inputNodeGUID: 434e65b5-2732-4f33-ad63-291697a69fc3
+  - outputNodeGUID: 30c3eb5c-c25a-49c2-b474-8ad8f183eb62
+    outputNodePortGUID: 69463640-d00c-4055-bdc6-ba6a6cc0cfe3
+    inputNodeGUID: b079f251-f36f-4b91-a029-7de212673c0c
+  - outputNodeGUID: 30c3eb5c-c25a-49c2-b474-8ad8f183eb62
+    outputNodePortGUID: 6db383ff-3e0e-4faa-9253-69dcbc6db003
+    inputNodeGUID: 6dc79560-fd29-429e-b0f1-4021923db0f3
+  - outputNodeGUID: 30c3eb5c-c25a-49c2-b474-8ad8f183eb62
+    outputNodePortGUID: 7e63608c-7a1b-432c-8ef1-4bcb9a5e0f60
+    inputNodeGUID: 6dc79560-fd29-429e-b0f1-4021923db0f3
+  - outputNodeGUID: 82755674-0d2e-4a67-a458-abd034df22d9
+    outputNodePortGUID: 61a8c50c-7109-4dc8-bea7-a99e60b8dea0
+    inputNodeGUID: 4471e0bf-1e4a-452b-847d-9ed6afdf9090
+  - outputNodeGUID: 4471e0bf-1e4a-452b-847d-9ed6afdf9090
+    outputNodePortGUID: 45649642-620a-4eef-9346-cc76acf3eda5
+    inputNodeGUID: 697b1e72-bfdf-4a67-8ad6-870464b1cfc6
+  - outputNodeGUID: 697b1e72-bfdf-4a67-8ad6-870464b1cfc6
+    outputNodePortGUID: c8bc9bfa-1684-4035-a322-9dd44cb146fe
+    inputNodeGUID: 8ed84fa3-404d-4bf2-b4bc-d5c78d778457
+  - outputNodeGUID: faab5237-1017-442f-ae83-b020604487ba
+    outputNodePortGUID: 6604a9b0-d990-4856-82e8-019f209810ea
+    inputNodeGUID: 5551d8df-ede6-405a-b900-93344023adc6
+  - outputNodeGUID: 3fcd3785-a464-4e52-bab7-f7f0c753551d
+    outputNodePortGUID: a5016bb9-5f60-47ba-b37c-a2a376065a06
+    inputNodeGUID: 10e8a81b-8e79-4dd1-9939-b36f2c45b15f
+  - outputNodeGUID: 10e8a81b-8e79-4dd1-9939-b36f2c45b15f
+    outputNodePortGUID: 648e710b-c029-4814-99e1-48e189e2f734
+    inputNodeGUID: 9382618a-c225-4301-a4f4-df91fec87c6e
+  - outputNodeGUID: 3fcd3785-a464-4e52-bab7-f7f0c753551d
+    outputNodePortGUID: aa2e64b5-dcf8-47b8-9c23-c269fbe3643e
+    inputNodeGUID: 9382618a-c225-4301-a4f4-df91fec87c6e
+  - outputNodeGUID: 9382618a-c225-4301-a4f4-df91fec87c6e
+    outputNodePortGUID: 6987aaae-7df7-4c6d-aaf7-11abca9d69db
+    inputNodeGUID: 3d9efc50-7691-4cb7-b33b-c0465309bc5f
+  - outputNodeGUID: 5551d8df-ede6-405a-b900-93344023adc6
+    outputNodePortGUID: ccce4699-cec1-4f77-8eae-bfbd06a038c9
+    inputNodeGUID: 10e8a81b-8e79-4dd1-9939-b36f2c45b15f
+  - outputNodeGUID: 10e8a81b-8e79-4dd1-9939-b36f2c45b15f
+    outputNodePortGUID: 04e23976-1430-4ef6-aa1a-a7029a217e68
+    inputNodeGUID: 3fcd3785-a464-4e52-bab7-f7f0c753551d
+  - outputNodeGUID: dab4da3d-ad66-42bb-8833-77d31d8b5cd8
+    outputNodePortGUID: 99cfa60b-a10e-4d8f-a638-9a8f4d6dbef7
+    inputNodeGUID: 63e3b2f3-cbaa-49b9-aab2-1a8e0063738e

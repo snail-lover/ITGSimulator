@@ -1,0 +1,730 @@
+{
+    "greetingNodeID": "GREETING_NODE",
+    "entryPoints": [
+        {
+            "entryText": "Any news?",
+            "entryType": 3,
+            "startNodeID": "E_APPIVO_INTRO",
+            "worldStateConditions": [],
+            "requiredItem": {
+                "instanceID": 0
+            }
+        },
+        {
+            "entryText": "Do you have any plans?",
+            "entryType": 3,
+            "startNodeID": "E_SWEDISH",
+            "worldStateConditions": [],
+            "requiredItem": {
+                "instanceID": 0
+            }
+        },
+        {
+            "entryText": "What do you do for fun?",
+            "entryType": 3,
+            "startNodeID": "E_BAND",
+            "worldStateConditions": [],
+            "requiredItem": {
+                "instanceID": 0
+            }
+        },
+        {
+            "entryText": "How do you like being a teacher here?",
+            "entryType": 3,
+            "startNodeID": "E_TEACHER",
+            "worldStateConditions": [],
+            "requiredItem": {
+                "instanceID": 0
+            }
+        }
+    ],
+    "nodes": [
+        {
+            "nodeID": "GREETING_NODE",
+            "text": "Good day",
+            "choices": [],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_SWEDISH",
+            "text": "Yes! I'm planning on how many PMs students have to write this year",
+            "choices": [
+                {
+                    "choiceText": "How many do we have to write",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_3b46",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_BAND",
+            "text": "I play in a band",
+            "choices": [
+                {
+                    "choiceText": "That's cool! What instrument do you play?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_ac4a",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_ac4a",
+            "text": "I play the bass, it's kind of the heartbeat of the band",
+            "choices": [
+                {
+                    "choiceText": "ok",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_5dbe",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_5dbe",
+            "text": "badump, badump, badump!",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_3b46",
+            "text": "I'm not done planning yet",
+            "choices": [
+                {
+                    "choiceText": "ok",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_TEACHER",
+            "text": "It good!",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_ccd1",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_ccd1",
+            "text": "My colleagues are nice",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_f6b5",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_f6b5",
+            "text": "and the students are...",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_0006",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_0006",
+            "text": "Yeah its good",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_APPIVO_INTRO",
+            "text": "We have an exciting visitor next week!",
+            "choices": [
+                {
+                    "choiceText": "Who is it?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_6e70",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_23d7",
+            "text": "Everyone needs to be on their best behaviour so they see you are ready for hire after you graduate",
+            "choices": [
+                {
+                    "choiceText": "I will!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_c55b",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "It's ok, I'm planning on being a NEET",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_00c1",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_00c1",
+            "text": "How nice...",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_c55b",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_c55b",
+            "text": "And the school needs to look good. That poster in the hall needs to go",
+            "choices": [
+                {
+                    "choiceText": "Which poster?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_ae1a",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "I like the poster",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_ae1a",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [
+                        {
+                            "conditionKey": "",
+                            "requiredValue": true
+                        }
+                    ],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "I agree",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_ae1a",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [
+                        {
+                            "conditionKey": "",
+                            "requiredValue": true
+                        }
+                    ],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_ae1a",
+            "text": "I swear to god, Alex will be the death of me...",
+            "choices": [
+                {
+                    "choiceText": "how so?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_0894",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_0894",
+            "text": "I'm sorry, that's between me and Alex. Anyway, be on your best behaviour",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "PLAYER_KNOWS_PER_DONT_LIKE_POSTER",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_6e70",
+            "text": "It's a company called appivo. They have developed a new way of building apps. You and other student will develop your own apps",
+            "choices": [
+                {
+                    "choiceText": "Cool!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_23d7",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "PLAYER_KNOWS_APPIVO",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "ok",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_23d7",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "PLAYER_KNOWS_APPIVO",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "I've heard!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_23d7",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [
+                        {
+                            "conditionKey": "PLAYER_KNOWS_APPIVO",
+                            "requiredValue": true
+                        }
+                    ],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        }
+    ]
+}

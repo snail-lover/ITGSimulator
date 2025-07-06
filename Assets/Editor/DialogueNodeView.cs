@@ -45,19 +45,27 @@ public class DialogueNodeEditorDataWrapper : ScriptableObject
     private DialogueNodeSaveData _originalData;
     public System.Action<string> NodeViewTitleUpdateAction;
 
-
-    // This method is crucial for the InspectorView to update the underlying data
     private void OnValidate()
     {
-        // Apply changes immediately when a field is changed in the inspector
-        // This makes the inspector feel responsive.
         if (_originalData != null)
         {
             bool titleChanged = _originalData.nodeID != nodeID;
             _originalData.nodeID = nodeID;
             _originalData.dialogueText = dialogueText;
             // Deep copy back if ItemGate is a class
-            _originalData.itemGate = itemGate != null ? new ItemGate { itemName = itemGate.itemName, requiredItem = itemGate.requiredItem } : null;
+            if (itemGate != null)
+            {
+                _originalData.itemGate = new ItemGate
+                {
+                    itemName = itemGate.itemName,
+                    requiredItemID = itemGate.requiredItemID,
+                    removeItemOnSelect = itemGate.removeItemOnSelect
+                };
+            }
+            else
+            {
+                _originalData.itemGate = null;
+            }
 
             if (titleChanged && NodeViewTitleUpdateAction != null)
             {
@@ -66,18 +74,27 @@ public class DialogueNodeEditorDataWrapper : ScriptableObject
         }
     }
 
-
     public void Initialize(DialogueNodeSaveData originalData)
     {
         _originalData = originalData;
         nodeID = originalData.nodeID;
         dialogueText = originalData.dialogueText;
-        itemGate = originalData.itemGate != null ? new ItemGate { itemName = originalData.itemGate.itemName, requiredItem = originalData.itemGate.requiredItem } : new ItemGate(); // Ensure not null
-        NodeViewTitleUpdateAction = null; // Reset
+        if (originalData.itemGate != null)
+        {
+            itemGate = new ItemGate
+            {
+                itemName = originalData.itemGate.itemName,
+                requiredItemID = originalData.itemGate.requiredItemID,
+                removeItemOnSelect = originalData.itemGate.removeItemOnSelect
+            };
+        }
+        else
+        {
+            itemGate = new ItemGate();
+        }
+        NodeViewTitleUpdateAction = null;
     }
 
-    // This method might be less necessary if OnValidate handles live updates.
-    // Could be used for a specific "Apply" button if OnValidate is too aggressive.
     public void ApplyChangesToOriginal()
     {
         if (_originalData != null)
@@ -85,14 +102,23 @@ public class DialogueNodeEditorDataWrapper : ScriptableObject
             bool titleChanged = _originalData.nodeID != nodeID;
             _originalData.nodeID = nodeID;
             _originalData.dialogueText = dialogueText;
-            _originalData.itemGate = itemGate != null ? new ItemGate { itemName = itemGate.itemName, requiredItem = itemGate.requiredItem } : null;
+            if (itemGate != null)
+            {
+                _originalData.itemGate = new ItemGate
+                {
+                    itemName = itemGate.itemName,
+                    requiredItemID = itemGate.requiredItemID,
+                    removeItemOnSelect = itemGate.removeItemOnSelect
+                };
+            }
+            else
+            {
+                _originalData.itemGate = null;
+            }
             if (titleChanged && NodeViewTitleUpdateAction != null)
             {
                 NodeViewTitleUpdateAction.Invoke(nodeID);
             }
         }
     }
-
-    // OnDisable might be too late or called unexpectedly for inspector changes. OnValidate is better for live edits.
-    // private void OnDisable() { ApplyChangesToOriginal(); } 
 }

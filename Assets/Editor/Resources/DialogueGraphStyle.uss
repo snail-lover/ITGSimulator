@@ -1,0 +1,50 @@
+/* DialogueNodeView Styling */
+Node {
+    background-color: rgb(72, 72, 72);
+    border-color: rgb(40, 40, 40);
+    border-width: 2px;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+/* Node Title Styling */
+#title {
+    -unity-font-style: bold;
+    font-size: 14px;
+    background-color: rgb(55, 55, 55);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(40, 40, 40);
+}
+
+#title-button-container {
+    padding: 2px;
+}
+
+/* Container for input/output ports */
+#input {
+    background-color: rgb(60, 60, 60);
+}
+
+#output {
+    background-color: rgb(60, 60, 60);
+}
+
+/* Styling for the main content area of the node */
+.main-container {
+    padding: 5px;
+}
+
+/* Styling for choice text fields */
+.unity-foldout > .unity-toggle {
+    background-color: rgb(80, 80, 80);
+}
+
+.unity-text-field {
+    margin-bottom: 5px;
+}
+
+.unity-object-field {
+    margin-bottom: 5px;
+}

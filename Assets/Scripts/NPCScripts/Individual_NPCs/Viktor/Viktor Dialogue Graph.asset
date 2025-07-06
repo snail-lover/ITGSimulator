@@ -1,0 +1,559 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcbff4ebcfbf5544bcb20250fece632, type: 3}
+  m_Name: Viktor Dialogue Graph
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::DialogueGraphSO
+  greetingNodeID: GREETINGS_NODE
+  entryPoints:
+  - entryText: I heard you're doing something with chargers?
+    entryType: 0
+    startNodeID: E_CHARGER
+    worldStateConditions:
+    - conditionKey: PLAYER_KNOWS_LUDWIG_CHARGER_MISSING
+      requiredValue: 1
+  - entryText: What do you do for fun?
+    entryType: 3
+    startNodeID: E_FUN
+    worldStateConditions: []
+  - entryText: What do you usually do during breaks?
+    entryType: 3
+    startNodeID: E_BBB
+    worldStateConditions: []
+  - entryText: What are you up to?
+    entryType: 3
+    startNodeID: E_RUNME3
+    worldStateConditions: []
+  nodes:
+  - nodeGUID: bd0b96ff-aeef-4d70-a6ce-667ade801946
+    nodeID: GREETINGS_NODE
+    dialogueText: yo
+    position: {x: 471, y: 412}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices: []
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 41571e95-0018-495b-8999-7afa46587f6c
+    nodeID: Node_2f1d
+    dialogueText: It's so clean! Because it simplifies installation by using a single
+      Ethernet cable for both power and data, granting you the freedom to place devices
+      exactly where they are most effective.
+    position: {x: 1763, y: 801}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 696a0c82-519d-4451-9b83-e785e24395c1
+      choiceText: very cool...very good
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    - outputPortGUID: 57cb0d64-615e-44c3-a2e9-b309ed144052
+      choiceText: Isn't designing a home around Power over Ethernet is a deeply impractical
+        and expensive
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 45232409-1458-4bd1-a58b-b36e34c00fa6
+    nodeID: Node_45d6
+    dialogueText: yeah well...it's clean
+    position: {x: 3067, y: 1515}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: efb0878e-f807-4ca5-815f-27f90fdf36fe
+      choiceText: anyway, I heard you had some chargers?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 3c9b6b6a-f8e1-4a83-8f95-100736b845cf
+    nodeID: Node_7e62
+    dialogueText: It is
+    position: {x: 3067, y: 642}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: c1cbf076-1e28-4af1-bdf9-ebde1de7c735
+      choiceText: I heard you had some chargers?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 774b4da0-bb7b-4cd4-aef0-657df0cf9da3
+    nodeID: Node_74d4
+    dialogueText: Yeah i'm converting peoples charher to POE, that's what we call
+      power over ethernet. When they see how clean it is, they will understand
+    position: {x: 3799, y: 1320}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 1cb34c4e-05a4-44c5-a778-3b1e48f9c310
+      choiceText: I see, where are you conducting these improvements?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: e469a05a-e3db-491e-89d1-30e66fdb9e24
+    nodeID: Node_a9ea
+    dialogueText: In Javads classroom of course. He has the best tools
+    position: {x: 4820, y: 1320}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: d000f5f2-8f97-4d03-9cc1-02c3937bc0bc
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 9cb1deb5-cfa9-4e34-830d-0a13603d69e9
+    nodeID: E_CHARGER
+    dialogueText: OMG! you're also interested in power over ethernet?
+    position: {x: 1033, y: 547}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 7378ddf7-cc1b-490e-8043-a298c904c38b
+      choiceText: Power over ethernet?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    - outputPortGUID: 2507cb06-d083-4ca5-9d74-b888484f1948
+      choiceText: very interested!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 41330928-4fe5-4496-985e-203ceb7aa1bf
+    nodeID: E_FUN
+    dialogueText: I go and drive around in my Volvo
+    position: {x: 1320, y: 2504}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 06faa7bd-84ee-4b5e-899b-f999a589f8ce
+      choiceText: That sounds fun!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 1a4e215f-3f09-47ad-805a-2d3c2530fcf6
+    nodeID: Node_efb4
+    dialogueText: Yeah, when you drive towards people on the sidewalk and they get
+      scared
+    position: {x: 1921, y: 2531}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: e4766842-0e1a-47ee-b0e0-06e4f75b695e
+      choiceText: haha! classic
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 15537499-0319-4d4a-b2c5-8e2a1dbad872
+    nodeID: E_BBB
+    dialogueText: Have you heard of BBB?
+    position: {x: 1824, y: 3389}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 68f295b2-3c25-4261-a8de-18d07b501c2a
+      choiceText: BBB?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 9b2e95a0-1fe1-4311-9860-b7b978a9a928
+    nodeID: Node_0be8
+    dialogueText: Big boy bets
+    position: {x: 2414, y: 3389}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 6932f37e-6151-498f-b860-01e5876c414d
+      choiceText: What's that?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 07587d11-d36e-46b4-ae6e-30722822e4ab
+    nodeID: Node_e3ba
+    dialogueText: It's poker, but with runescape gold
+    position: {x: 2992, y: 3389}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 97997a5b-9037-4b94-84eb-6944bf4622b2
+      choiceText: oh, you don't want to just play regular poker?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 2a672f44-843f-40cc-90c3-73f42b4e2b0c
+    nodeID: Node_24b7
+    dialogueText: I do that as well!
+    position: {x: 3535, y: 3389}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 77aa55e6-656c-46a5-88ae-fde2518b12b7
+      choiceText: nice!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 7336b1b9-e801-4a12-9c56-9bf3dd8db706
+    nodeID: E_RUNME3
+    dialogueText: I'm working on a coding project, add me on discord
+    position: {x: 2069, y: 4190}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: f4d17b44-d5d0-4600-9e4f-89f8f9b576eb
+      choiceText: Ok i'll add you
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 80278496-4417-4224-b09a-646d635a37e1
+    nodeID: Node_374d
+    dialogueText: I'm gonna send you a file, you're gonna then open that file
+    position: {x: 2660, y: 4148}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: e89dff71-ed2e-467e-9e23-f68bfff1d33b
+      choiceText: What does it do?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 35e46ccc-132a-4638-a3c4-ded03ebf45a7
+    nodeID: Node_dc15
+    dialogueText: Nothing, it's just code
+    position: {x: 3258, y: 4148}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 04071bbb-535e-4335-8ab3-b20142a96147
+      choiceText: Doesn't the code do something?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 174c528c-e714-4110-af5c-f9cda87f0bc5
+    nodeID: Node_9021
+    dialogueText: Yeah it just checks the status of your machine, too make sure it
+      runs good
+    position: {x: 3748, y: 4314}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: cfb0bc97-4d0f-4445-beac-32fb2eabee0f
+      choiceText: What's this file called?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 5cd4fe67-f4f1-4a6d-981a-dcd119680d2e
+    nodeID: Node_fe3b
+    dialogueText: runme3.exe
+    position: {x: 4446, y: 4388}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 91ec864e-db54-4511-8c6d-f4d5c8592741
+      choiceText: What did runeme1 and runeme2 do?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 1656be24-cf46-4afd-b0be-89f97150d1d5
+    nodeID: Node_c8c0
+    dialogueText: They called methods, maybe functions and stuff
+    position: {x: 5048, y: 4478}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 00fdb1b0-7650-44c9-a698-d2245f7c3cfa
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  edges:
+  - outputNodeGUID: 9cb1deb5-cfa9-4e34-830d-0a13603d69e9
+    outputNodePortGUID: 7378ddf7-cc1b-490e-8043-a298c904c38b
+    inputNodeGUID: 41571e95-0018-495b-8999-7afa46587f6c
+  - outputNodeGUID: 9cb1deb5-cfa9-4e34-830d-0a13603d69e9
+    outputNodePortGUID: 2507cb06-d083-4ca5-9d74-b888484f1948
+    inputNodeGUID: 41571e95-0018-495b-8999-7afa46587f6c
+  - outputNodeGUID: 41571e95-0018-495b-8999-7afa46587f6c
+    outputNodePortGUID: 696a0c82-519d-4451-9b83-e785e24395c1
+    inputNodeGUID: 3c9b6b6a-f8e1-4a83-8f95-100736b845cf
+  - outputNodeGUID: 41571e95-0018-495b-8999-7afa46587f6c
+    outputNodePortGUID: 57cb0d64-615e-44c3-a2e9-b309ed144052
+    inputNodeGUID: 45232409-1458-4bd1-a58b-b36e34c00fa6
+  - outputNodeGUID: 45232409-1458-4bd1-a58b-b36e34c00fa6
+    outputNodePortGUID: efb0878e-f807-4ca5-815f-27f90fdf36fe
+    inputNodeGUID: 774b4da0-bb7b-4cd4-aef0-657df0cf9da3
+  - outputNodeGUID: 3c9b6b6a-f8e1-4a83-8f95-100736b845cf
+    outputNodePortGUID: c1cbf076-1e28-4af1-bdf9-ebde1de7c735
+    inputNodeGUID: 774b4da0-bb7b-4cd4-aef0-657df0cf9da3
+  - outputNodeGUID: 774b4da0-bb7b-4cd4-aef0-657df0cf9da3
+    outputNodePortGUID: 1cb34c4e-05a4-44c5-a778-3b1e48f9c310
+    inputNodeGUID: e469a05a-e3db-491e-89d1-30e66fdb9e24
+  - outputNodeGUID: 41330928-4fe5-4496-985e-203ceb7aa1bf
+    outputNodePortGUID: 06faa7bd-84ee-4b5e-899b-f999a589f8ce
+    inputNodeGUID: 1a4e215f-3f09-47ad-805a-2d3c2530fcf6
+  - outputNodeGUID: 15537499-0319-4d4a-b2c5-8e2a1dbad872
+    outputNodePortGUID: 68f295b2-3c25-4261-a8de-18d07b501c2a
+    inputNodeGUID: 9b2e95a0-1fe1-4311-9860-b7b978a9a928
+  - outputNodeGUID: 9b2e95a0-1fe1-4311-9860-b7b978a9a928
+    outputNodePortGUID: 6932f37e-6151-498f-b860-01e5876c414d
+    inputNodeGUID: 07587d11-d36e-46b4-ae6e-30722822e4ab
+  - outputNodeGUID: 07587d11-d36e-46b4-ae6e-30722822e4ab
+    outputNodePortGUID: 97997a5b-9037-4b94-84eb-6944bf4622b2
+    inputNodeGUID: 2a672f44-843f-40cc-90c3-73f42b4e2b0c
+  - outputNodeGUID: 7336b1b9-e801-4a12-9c56-9bf3dd8db706
+    outputNodePortGUID: f4d17b44-d5d0-4600-9e4f-89f8f9b576eb
+    inputNodeGUID: 80278496-4417-4224-b09a-646d635a37e1
+  - outputNodeGUID: 80278496-4417-4224-b09a-646d635a37e1
+    outputNodePortGUID: e89dff71-ed2e-467e-9e23-f68bfff1d33b
+    inputNodeGUID: 35e46ccc-132a-4638-a3c4-ded03ebf45a7
+  - outputNodeGUID: 35e46ccc-132a-4638-a3c4-ded03ebf45a7
+    outputNodePortGUID: 04071bbb-535e-4335-8ab3-b20142a96147
+    inputNodeGUID: 174c528c-e714-4110-af5c-f9cda87f0bc5
+  - outputNodeGUID: 174c528c-e714-4110-af5c-f9cda87f0bc5
+    outputNodePortGUID: cfb0bc97-4d0f-4445-beac-32fb2eabee0f
+    inputNodeGUID: 5cd4fe67-f4f1-4a6d-981a-dcd119680d2e
+  - outputNodeGUID: 5cd4fe67-f4f1-4a6d-981a-dcd119680d2e
+    outputNodePortGUID: 91ec864e-db54-4511-8c6d-f4d5c8592741
+    inputNodeGUID: 1656be24-cf46-4afd-b0be-89f97150d1d5

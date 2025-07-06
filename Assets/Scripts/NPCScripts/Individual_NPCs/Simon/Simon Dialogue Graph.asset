@@ -1,0 +1,584 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcbff4ebcfbf5544bcb20250fece632, type: 3}
+  m_Name: Simon Dialogue Graph
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::DialogueGraphSO
+  greetingNodeID: GREETING_NODE
+  entryPoints:
+  - entryText: Do you know where i can get a camera?
+    entryType: 3
+    startNodeID: E_LUDWIG_APPIVO
+    worldStateConditions:
+    - conditionKey: PLAYER_KNOWS_NEED_CAMERA
+      requiredValue: 1
+    - conditionKey: LUDWIG_GAVE_PLAYER_CAMERA
+      requiredValue: 0
+    requiredItem: {fileID: 0}
+  - entryText: What's up?
+    entryType: 3
+    startNodeID: E_TROLL
+    worldStateConditions: []
+    requiredItem: {fileID: 0}
+  - entryText: How's it going?
+    entryType: 3
+    startNodeID: E_WINDOW_LINUX
+    worldStateConditions: []
+    requiredItem: {fileID: 0}
+  - entryText: Excuse me?
+    entryType: 3
+    startNodeID: E_PHONE
+    worldStateConditions: []
+    requiredItem: {fileID: 0}
+  nodes:
+  - nodeGUID: 61981960-789a-4467-9a43-773c5f8b0d73
+    nodeID: GREETING_NODE
+    dialogueText: Greetings!
+    position: {x: 603, y: 243}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices: []
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 58325c42-300c-4783-bf4b-37bd7394982a
+    nodeID: Node_235f
+    dialogueText: Sorry I thought you were someone else
+    position: {x: 2319, y: 704}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: ff2bac0d-130f-4f0e-825f-beb4930cb9c9
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: bbbe13e9-b65d-4b55-95b0-8f944383d80d
+    nodeID: Node_964a
+    dialogueText: IF YOU WANNA GET IN TO THAT BOYS HOLE
+    position: {x: 1817, y: 695}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: f4d81d3a-dd67-494f-b654-eca327364abc
+      choiceText: I don't have any money
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: ff01dac2-941a-44f2-8684-fcac6560af27
+    nodeID: E_TROLL
+    dialogueText: YOU GOTTA PAY THE TROLL TOLL
+    position: {x: 1300, y: 695}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 95bf8777-ebe7-4057-bda9-4fb3216bbb91
+      choiceText: What?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: c7ac54cb-0232-463a-aafd-86c94e85c765
+    nodeID: Node_0734
+    dialogueText: Good choice, God bless America
+    position: {x: 2003, y: 1334}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 309959aa-0cd5-4178-b499-04b264229111
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 07c862fc-b658-4718-9df8-d1ea4714350a
+    nodeID: Node_e605
+    dialogueText: Linux is not even on the stock market!
+    position: {x: 2027, y: 1996}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: fbaa69d0-152b-40fc-bfca-1d3daa46159a
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: ba5d3845-d931-4bb3-94a3-24b65334a9ba
+    nodeID: Node_ec4f
+    dialogueText: Some people here use Linux, but like...what stock value goes up
+      when you use that project?
+    position: {x: 2605, y: 1325}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: fe91ab17-5f7a-4299-9ff6-1bce42a47b31
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 9d3ae60d-e63d-49d4-933c-790e30bd5736
+    nodeID: Node_2f03
+    dialogueText: The answer is none
+    position: {x: 3350, y: 1334}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 6fd8e5a0-aedd-417e-b93c-82cdde5d2c52
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 20b574d8-c901-43b1-a112-735ec112a13b
+    nodeID: E_WINDOW_LINUX
+    dialogueText: Do you use Windows or Linux?
+    position: {x: 1318, y: 1391}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 9f37a7f7-8753-4bb1-add2-e884a6c1b60a
+      choiceText: Windows
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    - outputPortGUID: c07879db-c7a6-4053-8c80-80d51f290049
+      choiceText: Linux
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: ee4ba665-cdf8-4d50-9bfd-5456fa92d5e3
+    nodeID: E_PHONE
+    dialogueText: '*Simon looks down at his phone*'
+    position: {x: 1389, y: 2819}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: e2825639-3100-43b4-9a5a-b321ded19824
+      choiceText: Ehm..
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 676c1644-c0f0-434f-b8d3-217e6eba7a78
+    nodeID: Node_40fe
+    dialogueText: '*Simon keeps scrolling the news*'
+    position: {x: 1995, y: 2715}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 0cd6605b-378f-4fb8-aef9-5487c77121d0
+      choiceText: Hello?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: cc0c478f-f6cc-4981-8ab1-9e8566161880
+    nodeID: Node_3e27
+    dialogueText: Yeah....Yeah... *Simon keeps reading the news*
+    position: {x: 2597, y: 2827}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: dd2d0cd9-e145-4180-bc07-047283191437
+      choiceText: What are you up to?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 225ea22d-72fc-47d7-81f0-7d784618d0b9
+    nodeID: Node_927f
+    dialogueText: '*Simon looks up*'
+    position: {x: 3164, y: 2817}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 06ec81c3-9e17-4a46-a37c-565738618492
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: d25f21ff-fab2-4597-9ea4-370a37ca487c
+    nodeID: Node_c161
+    dialogueText: I'm just reading the news
+    position: {x: 3717, y: 2827}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: b29d142f-78dd-4c43-8fbf-ce1832de6254
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: c607269b-415c-4b97-a98d-434cc6aef0fb
+    nodeID: Node_715b
+    dialogueText: It was this article about this huge thing, there was a big ev-....
+    position: {x: 4247, y: 2959}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: d50865f0-dd2f-4dfc-9569-8297dea4e5d1
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: a40678f9-f534-4d00-aaff-b1043aed4c4d
+    nodeID: Node_5987
+    dialogueText: '*Simon gets a notification*'
+    position: {x: 4825, y: 3002}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: cac3315c-84be-424f-9a94-5b17307789d9
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: a7104aae-894e-470e-9bb4-bf64734d8f33
+    nodeID: Node_a4c3
+    dialogueText: '*Simon looks back at his phone*'
+    position: {x: 5346, y: 3157}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 9eb15b59-db6a-4b7c-8e0c-0837cd0e14b8
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 13cef6d4-ab97-4d3a-b1d1-abe8bc50166e
+    nodeID: Node_b911
+    dialogueText: One sec...
+    position: {x: 5857, y: 3141}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: f762bccc-f8e0-4757-b7c4-8838b8d2fda1
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 41908cc0-22f1-4a0e-acf2-e373eec27487
+    nodeID: E_LUDWIG_APPIVO
+    dialogueText: i Think Ludwig is working on a camera for his appivo project
+    position: {x: 1262, y: -127}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: a03ed26e-97c1-42b1-97b6-bc5b9addb5e2
+      choiceText: ok thanks!
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    - outputPortGUID: 74944605-b464-46ed-88ca-d4e0b147bcf4
+      choiceText: appivo?
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 9aa1a133-f110-4477-9f40-84e4bf2105f2
+    nodeID: Node_9c35
+    dialogueText: some programming company that is comming to the school, but they
+      are not even publicly traded so who cares
+    position: {x: 1871, y: 188}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: f4a4e020-9df4-4042-ab22-93b391a97f6f
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect:
+      - stateKey: PLAYER_KNOWS_APPIVO
+        stateValue: 1
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  edges:
+  - outputNodeGUID: ff01dac2-941a-44f2-8684-fcac6560af27
+    outputNodePortGUID: 95bf8777-ebe7-4057-bda9-4fb3216bbb91
+    inputNodeGUID: bbbe13e9-b65d-4b55-95b0-8f944383d80d
+  - outputNodeGUID: bbbe13e9-b65d-4b55-95b0-8f944383d80d
+    outputNodePortGUID: f4d81d3a-dd67-494f-b654-eca327364abc
+    inputNodeGUID: 58325c42-300c-4783-bf4b-37bd7394982a
+  - outputNodeGUID: 20b574d8-c901-43b1-a112-735ec112a13b
+    outputNodePortGUID: 9f37a7f7-8753-4bb1-add2-e884a6c1b60a
+    inputNodeGUID: c7ac54cb-0232-463a-aafd-86c94e85c765
+  - outputNodeGUID: 20b574d8-c901-43b1-a112-735ec112a13b
+    outputNodePortGUID: c07879db-c7a6-4053-8c80-80d51f290049
+    inputNodeGUID: 07c862fc-b658-4718-9df8-d1ea4714350a
+  - outputNodeGUID: ba5d3845-d931-4bb3-94a3-24b65334a9ba
+    outputNodePortGUID: fe91ab17-5f7a-4299-9ff6-1bce42a47b31
+    inputNodeGUID: 9d3ae60d-e63d-49d4-933c-790e30bd5736
+  - outputNodeGUID: c7ac54cb-0232-463a-aafd-86c94e85c765
+    outputNodePortGUID: 309959aa-0cd5-4178-b499-04b264229111
+    inputNodeGUID: ba5d3845-d931-4bb3-94a3-24b65334a9ba
+  - outputNodeGUID: ee4ba665-cdf8-4d50-9bfd-5456fa92d5e3
+    outputNodePortGUID: e2825639-3100-43b4-9a5a-b321ded19824
+    inputNodeGUID: 676c1644-c0f0-434f-b8d3-217e6eba7a78
+  - outputNodeGUID: 676c1644-c0f0-434f-b8d3-217e6eba7a78
+    outputNodePortGUID: 0cd6605b-378f-4fb8-aef9-5487c77121d0
+    inputNodeGUID: cc0c478f-f6cc-4981-8ab1-9e8566161880
+  - outputNodeGUID: cc0c478f-f6cc-4981-8ab1-9e8566161880
+    outputNodePortGUID: dd2d0cd9-e145-4180-bc07-047283191437
+    inputNodeGUID: 225ea22d-72fc-47d7-81f0-7d784618d0b9
+  - outputNodeGUID: 225ea22d-72fc-47d7-81f0-7d784618d0b9
+    outputNodePortGUID: 06ec81c3-9e17-4a46-a37c-565738618492
+    inputNodeGUID: d25f21ff-fab2-4597-9ea4-370a37ca487c
+  - outputNodeGUID: d25f21ff-fab2-4597-9ea4-370a37ca487c
+    outputNodePortGUID: b29d142f-78dd-4c43-8fbf-ce1832de6254
+    inputNodeGUID: c607269b-415c-4b97-a98d-434cc6aef0fb
+  - outputNodeGUID: c607269b-415c-4b97-a98d-434cc6aef0fb
+    outputNodePortGUID: d50865f0-dd2f-4dfc-9569-8297dea4e5d1
+    inputNodeGUID: a40678f9-f534-4d00-aaff-b1043aed4c4d
+  - outputNodeGUID: a40678f9-f534-4d00-aaff-b1043aed4c4d
+    outputNodePortGUID: cac3315c-84be-424f-9a94-5b17307789d9
+    inputNodeGUID: a7104aae-894e-470e-9bb4-bf64734d8f33
+  - outputNodeGUID: a7104aae-894e-470e-9bb4-bf64734d8f33
+    outputNodePortGUID: 9eb15b59-db6a-4b7c-8e0c-0837cd0e14b8
+    inputNodeGUID: 13cef6d4-ab97-4d3a-b1d1-abe8bc50166e
+  - outputNodeGUID: 41908cc0-22f1-4a0e-acf2-e373eec27487
+    outputNodePortGUID: 74944605-b464-46ed-88ca-d4e0b147bcf4
+    inputNodeGUID: 9aa1a133-f110-4477-9f40-84e4bf2105f2

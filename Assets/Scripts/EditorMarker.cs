@@ -1,16 +1,44 @@
 using UnityEngine;
 
+/// <summary>
+/// Draws customizable gizmos in the Unity Editor for scene visualization.
+/// Attach this component to any GameObject to display a gizmo at its position.
+/// </summary>
 public class EditorMarker : MonoBehaviour
 {
+    /// <summary>
+    /// The color of the gizmo.
+    /// </summary>
     public Color gizmoColor = Color.yellow;
+
+    /// <summary>
+    /// The size (radius or edge length) of the gizmo.
+    /// </summary>
     public float gizmoSize = 0.5f;
-    public enum GizmoType { Sphere, Cube, WireSphere, WireCube }
+
+    /// <summary>
+    /// Types of gizmos that can be drawn.
+    /// </summary>
+    public enum GizmoType
+    {
+        Sphere,
+        Cube,
+        WireSphere,
+        WireCube
+    }
+
+    /// <summary>
+    /// The selected gizmo type to draw.
+    /// </summary>
     public GizmoType type = GizmoType.Sphere;
 
-    // This function is called by the editor when Gizmos are being drawn
+    /// <summary>
+    /// Draws the selected gizmo in the Scene view.
+    /// Called automatically by the Unity Editor.
+    /// </summary>
     void OnDrawGizmos()
     {
-        Gizmos.color = gizmoColor; // Set the color of the Gizmo
+        Gizmos.color = gizmoColor;
 
         switch (type)
         {
@@ -27,16 +55,14 @@ public class EditorMarker : MonoBehaviour
                 Gizmos.DrawWireCube(transform.position, new Vector3(gizmoSize, gizmoSize, gizmoSize));
                 break;
         }
-
-        // You can also draw lines, text, etc.
-        // Gizmos.DrawLine(transform.position, transform.position + Vector3.up * 2);
-        // UnityEditor.Handles.Label(transform.position + Vector3.up, gameObject.name); // For text (requires using UnityEditor;)
     }
 
-    // If you only want it to draw when selected, use OnDrawGizmosSelected()
+    /*
+    // Uncomment to draw gizmo only when the object is selected in the editor.
     // void OnDrawGizmosSelected()
     // {
     //     Gizmos.color = Color.blue;
-    //     Gizmos.DrawSphere(transform.position, gizmoSize * 1.2f); // Make it slightly larger when selected
+    //     Gizmos.DrawSphere(transform.position, gizmoSize * 1.2f);
     // }
+    */
 }

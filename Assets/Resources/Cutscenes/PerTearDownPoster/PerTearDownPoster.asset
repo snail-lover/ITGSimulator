@@ -1,0 +1,256 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caddbd5778f86e74fb0ea9f048be8b61, type: 3}
+  m_Name: PerTearDownPoster
+  m_EditorClassIdentifier: Assembly-CSharp::Cutscene
+  actions:
+  - actionName: MoveCamera
+    type: 6
+    targetNPCIdentifier: 
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: 
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 0
+    cameraIdentifier: Main Camera
+    cameraTargetMarkerName: CameraStartingPointPerTearDownPoster
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 0}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 1
+    sceneNameToLoad: 
+    worldStateKey: 
+    worldStateValue: 0
+    duration: 0
+    stringParameter: Poster2
+    dialogueFile: {fileID: 4900000, guid: 72cef442d52d5b44287ba94fefd9f658, type: 3}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: Dialogue0
+    type: 4
+    targetNPCIdentifier: PerModel
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: 
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 0
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 0}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    worldStateKey: 
+    worldStateValue: 0
+    duration: 0
+    stringParameter: Poster0
+    dialogueFile: {fileID: 4900000, guid: 72cef442d52d5b44287ba94fefd9f658, type: 3}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: TP Player
+    type: 2
+    targetNPCIdentifier: Temp Character
+    targetIsPlayer: 1
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: PlayerStartingPointPerTearDownPoster
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 1
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 0}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    worldStateKey: 
+    worldStateValue: 0
+    duration: 0
+    stringParameter: Poster2
+    dialogueFile: {fileID: 4900000, guid: 72cef442d52d5b44287ba94fefd9f658, type: 3}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: TP Per
+    type: 2
+    targetNPCIdentifier: PerModel
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: PerStartingPointPerTearDownPoster
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 1
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 0}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    worldStateKey: 
+    worldStateValue: 0
+    duration: 0
+    stringParameter: Poster2
+    dialogueFile: {fileID: 4900000, guid: 72cef442d52d5b44287ba94fefd9f658, type: 3}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: wait
+    type: 0
+    targetNPCIdentifier: PerModel
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: 
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 0
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 0}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    worldStateKey: 
+    worldStateValue: 0
+    duration: 0.3
+    stringParameter: Poster2
+    dialogueFile: {fileID: 4900000, guid: 72cef442d52d5b44287ba94fefd9f658, type: 3}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: Dialogue1
+    type: 4
+    targetNPCIdentifier: PerModel
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: 
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 0
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 0}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    worldStateKey: 
+    worldStateValue: 0
+    duration: 0
+    stringParameter: Poster1
+    dialogueFile: {fileID: 4900000, guid: 72cef442d52d5b44287ba94fefd9f658, type: 3}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: Disable Poster
+    type: 7
+    targetNPCIdentifier: 
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: 
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 0
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 0}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    worldStateKey: 
+    worldStateValue: 0
+    duration: 0
+    stringParameter: 
+    dialogueFile: {fileID: 0}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: Poster
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: Flag Poster
+    type: 10
+    targetNPCIdentifier: 
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: 
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 0
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 0}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    worldStateKey: POSTER_TORN_DOWN
+    worldStateValue: 1
+    duration: 0
+    stringParameter: 
+    dialogueFile: {fileID: 0}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: wait
+    type: 0
+    targetNPCIdentifier: PerModel
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: 
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 0
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 0}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    worldStateKey: 
+    worldStateValue: 0
+    duration: 0.3
+    stringParameter: Poster2
+    dialogueFile: {fileID: 4900000, guid: 72cef442d52d5b44287ba94fefd9f658, type: 3}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  - actionName: Dialogue2
+    type: 4
+    targetNPCIdentifier: PerModel
+    targetIsPlayer: 0
+    targetTransform: {fileID: 0}
+    targetTransformMarkerName: 
+    targetPosition: {x: 0, y: 0, z: 0}
+    useTargetTransformForPosition: 0
+    cameraIdentifier: 
+    cameraTargetMarkerName: 
+    cameraTargetPosition: {x: 0, y: 0, z: 0}
+    cameraTargetRotation: {x: 0, y: 0, z: 0, w: 0}
+    cameraMoveDuration: 0
+    cameraWaitForMoveCompletion: 0
+    sceneNameToLoad: 
+    worldStateKey: 
+    worldStateValue: 0
+    duration: 0
+    stringParameter: Poster2
+    dialogueFile: {fileID: 4900000, guid: 72cef442d52d5b44287ba94fefd9f658, type: 3}
+    gameObjectToToggle: {fileID: 0}
+    gameObjectToToggleName: 
+    activateState: 0
+    waitForCompletion: 1
+  involvedNPCsOverrideIdentifiers: []

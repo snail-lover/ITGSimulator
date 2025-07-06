@@ -1,0 +1,701 @@
+{
+    "greetingNodeID": "GREETINGS_NODE",
+    "entryPoints": [
+        {
+            "entryText": "I heard you're doing something with chargers?",
+            "entryType": 0,
+            "startNodeID": "E_CHARGER",
+            "worldStateConditions": [
+                {
+                    "conditionKey": "PLAYER_KNOWS_LUDWIG_CHARGER_MISSING",
+                    "requiredValue": true
+                }
+            ]
+        },
+        {
+            "entryText": "What do you do for fun?",
+            "entryType": 3,
+            "startNodeID": "E_FUN",
+            "worldStateConditions": []
+        },
+        {
+            "entryText": "What do you usually do during breaks?",
+            "entryType": 3,
+            "startNodeID": "E_BBB",
+            "worldStateConditions": []
+        },
+        {
+            "entryText": "What are you up to?",
+            "entryType": 3,
+            "startNodeID": "E_RUNME3",
+            "worldStateConditions": []
+        }
+    ],
+    "nodes": [
+        {
+            "nodeID": "GREETINGS_NODE",
+            "text": "yo",
+            "choices": [],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_2f1d",
+            "text": "It's so clean! Because it simplifies installation by using a single Ethernet cable for both power and data, granting you the freedom to place devices exactly where they are most effective.",
+            "choices": [
+                {
+                    "choiceText": "very cool...very good",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_7e62",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "Isn't designing a home around Power over Ethernet is a deeply impractical and expensive",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_45d6",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_45d6",
+            "text": "yeah well...it's clean",
+            "choices": [
+                {
+                    "choiceText": "anyway, I heard you had some chargers?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_74d4",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_7e62",
+            "text": "It is",
+            "choices": [
+                {
+                    "choiceText": "I heard you had some chargers?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_74d4",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_74d4",
+            "text": "Yeah i'm converting peoples charher to POE, that's what we call power over ethernet. When they see how clean it is, they will understand",
+            "choices": [
+                {
+                    "choiceText": "I see, where are you conducting these improvements?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_a9ea",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_a9ea",
+            "text": "In Javads classroom of course. He has the best tools",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_CHARGER",
+            "text": "OMG! you're also interested in power over ethernet?",
+            "choices": [
+                {
+                    "choiceText": "Power over ethernet?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_2f1d",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "very interested!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_2f1d",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_FUN",
+            "text": "I go and drive around in my Volvo",
+            "choices": [
+                {
+                    "choiceText": "That sounds fun!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_efb4",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_efb4",
+            "text": "Yeah, when you drive towards people on the sidewalk and they get scared",
+            "choices": [
+                {
+                    "choiceText": "haha! classic",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_BBB",
+            "text": "Have you heard of BBB?",
+            "choices": [
+                {
+                    "choiceText": "BBB?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_0be8",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_0be8",
+            "text": "Big boy bets",
+            "choices": [
+                {
+                    "choiceText": "What's that?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_e3ba",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_e3ba",
+            "text": "It's poker, but with runescape gold",
+            "choices": [
+                {
+                    "choiceText": "oh, you don't want to just play regular poker?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_24b7",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_24b7",
+            "text": "I do that as well!",
+            "choices": [
+                {
+                    "choiceText": "nice!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_RUNME3",
+            "text": "I'm working on a coding project, add me on discord",
+            "choices": [
+                {
+                    "choiceText": "Ok i'll add you",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_374d",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_374d",
+            "text": "I'm gonna send you a file, you're gonna then open that file",
+            "choices": [
+                {
+                    "choiceText": "What does it do?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_dc15",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_dc15",
+            "text": "Nothing, it's just code",
+            "choices": [
+                {
+                    "choiceText": "Doesn't the code do something?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_9021",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_9021",
+            "text": "Yeah it just checks the status of your machine, too make sure it runs good",
+            "choices": [
+                {
+                    "choiceText": "What's this file called?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_fe3b",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_fe3b",
+            "text": "runme3.exe",
+            "choices": [
+                {
+                    "choiceText": "What did runeme1 and runeme2 do?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_c8c0",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_c8c0",
+            "text": "They called methods, maybe functions and stuff",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        }
+    ]
+}

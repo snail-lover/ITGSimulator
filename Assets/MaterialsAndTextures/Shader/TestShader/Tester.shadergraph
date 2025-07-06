@@ -38,6 +38,9 @@
         },
         {
             "m_Id": "8acf3e38d2b84a75826ac540af40f3c7"
+        },
+        {
+            "m_Id": "c7ec05231ad7465299f0ed83230bbef3"
         }
     ],
     "m_Keywords": [],
@@ -158,6 +161,9 @@
         },
         {
             "m_Id": "0d4de48417f2469f88a92cd899f68140"
+        },
+        {
+            "m_Id": "4b128e28e5994541b629d477cd9d9a22"
         }
     ],
     "m_GroupDatas": [],
@@ -1184,6 +1190,9 @@
         },
         {
             "m_Id": "8acf3e38d2b84a75826ac540af40f3c7"
+        },
+        {
+            "m_Id": "c7ec05231ad7465299f0ed83230bbef3"
         }
     ]
 }
@@ -1674,6 +1683,42 @@
         "m_SerializableColors": []
     },
     "m_SerializedDescriptor": "SurfaceDescription.Smoothness"
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "4b128e28e5994541b629d477cd9d9a22",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 276.0,
+            "y": 504.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "c7a9c516ea5a49f98a20153df99d2e5a"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "c7ec05231ad7465299f0ed83230bbef3"
+    }
 }
 
 {
@@ -3629,6 +3674,61 @@
     "m_Property": {
         "m_Id": "0a7b1cf49453495baf02dbc2bc844889"
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "c7a9c516ea5a49f98a20153df99d2e5a",
+    "m_Id": 0,
+    "m_DisplayName": "_Blend",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "c7ec05231ad7465299f0ed83230bbef3",
+    "m_Guid": {
+        "m_GuidSerialized": "de209a2c-cd2f-4d90-8639-221aa0f2d32a"
+    },
+    "m_Name": "_Blend",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "_Blend",
+    "m_DefaultReferenceName": "_Blend",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_PerRendererData": false,
+    "m_customAttributes": [],
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    },
+    "m_SliderType": 0,
+    "m_SliderPower": 3.0,
+    "m_EnumType": 0,
+    "m_CSharpEnumString": "",
+    "m_EnumNames": [
+        "Default"
+    ],
+    "m_EnumValues": [
+        0
+    ]
 }
 
 {

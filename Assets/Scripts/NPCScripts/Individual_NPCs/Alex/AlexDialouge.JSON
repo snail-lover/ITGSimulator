@@ -1,0 +1,1332 @@
+{
+    "greetingNodeID": "GREETINGS_NODE",
+    "entryPoints": [
+        {
+            "entryText": "Nice weather today",
+            "entryType": 3,
+            "startNodeID": "E_WEATHER",
+            "worldStateConditions": [],
+            "requiredItem": {
+                "instanceID": 0
+            }
+        },
+        {
+            "entryText": "What's your favorite subject?",
+            "entryType": 3,
+            "startNodeID": "E_FAVORITESUBJECT",
+            "worldStateConditions": [],
+            "requiredItem": {
+                "instanceID": 0
+            }
+        },
+        {
+            "entryText": "Any news lately?",
+            "entryType": 3,
+            "startNodeID": "E_ANYNEWS",
+            "worldStateConditions": [],
+            "requiredItem": {
+                "instanceID": 0
+            }
+        },
+        {
+            "entryText": "What have you been up to?",
+            "entryType": 3,
+            "startNodeID": "E_UPTO",
+            "worldStateConditions": [],
+            "requiredItem": {
+                "instanceID": 0
+            }
+        },
+        {
+            "entryText": "I heard Per doesn't like your poster",
+            "entryType": 0,
+            "startNodeID": "E_PER_TAKING_DOWN_POSTER",
+            "worldStateConditions": [
+                {
+                    "conditionKey": "PLAYER_KNOWS_PER_DONT_LIKE_POSTER",
+                    "requiredValue": true
+                },
+                {
+                    "conditionKey": "POSTER_TORN_DOWN",
+                    "requiredValue": false
+                }
+            ],
+            "requiredItem": {
+                "instanceID": 0
+            }
+        },
+        {
+            "entryText": "Per took down your poster",
+            "entryType": 0,
+            "startNodeID": "E_PER_TOOK_DOWN_POSTER",
+            "worldStateConditions": [
+                {
+                    "conditionKey": "POSTER_TORN_DOWN",
+                    "requiredValue": true
+                }
+            ],
+            "requiredItem": {
+                "instanceID": 0
+            }
+        }
+    ],
+    "nodes": [
+        {
+            "nodeID": "E_WEATHER",
+            "text": "Yeah I guess",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_FAVORITESUBJECT",
+            "text": "Alex Laughs",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_63f1",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_63f1",
+            "text": "I don't really have a favorite subject",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_f92a",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_f92a",
+            "text": "English maybe",
+            "choices": [
+                {
+                    "choiceText": "That's cool",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "Bad choice",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_78b3",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_78b3",
+            "text": "wow, okay, fuck you then",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "GREETINGS_NODE",
+            "text": "Sup.",
+            "choices": [],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_ANYNEWS",
+            "text": "We have some company coming to the school",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_bd01",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_bd01",
+            "text": "I think they're called Apptivo or something",
+            "choices": [
+                {
+                    "choiceText": "That sounds fun",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_65f8",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "Why are they coming here?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_ad8d",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_ad8d",
+            "text": "I don't know",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_4346",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_65f8",
+            "text": "Not really",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_4346",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_4346",
+            "text": "It's something to do with programming so I can't be bothered.",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "PLAYER_KNOWS_APPIVO",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_0a4e",
+            "text": "Based",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_03d4",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_b73b",
+            "text": "It's a proclamation about how great it is that Trump won over the libtards",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_d430",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_d430",
+            "text": "You should go and check it out",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_d088",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_PER_TAKING_DOWN_POSTER",
+            "text": "That fucking Liberal...",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_8aec",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_8aec",
+            "text": "I swear if he touches my poster, I'll sue him",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_0b24",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_0b24",
+            "text": "That is my private property and he has no right to touch it...",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_2d56",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_2d56",
+            "text": "He probably will take it down. You need to help me.",
+            "choices": [
+                {
+                    "choiceText": "How can I help?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_4a03",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_d253",
+            "text": "You'll then get video proof of Per taking down my poster, and then I will have the proof to take him to court",
+            "choices": [
+                {
+                    "choiceText": "Ok I will go and to that!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "Where can I get ahold of a camera?",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_5700",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_5700",
+            "text": "I don't know, ask around",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_4a03",
+            "text": "Get ahold of a camera, set it up on a nearby table, and film the poster",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_d253",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [
+                        {
+                            "stateKey": "PLAYER_KNOWS_NEED_CAMERA",
+                            "stateValue": true
+                        }
+                    ],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_UPTO",
+            "text": "I was up all night following the presidential election",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_beac",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_beac",
+            "text": "Who were you rooting for?",
+            "choices": [
+                {
+                    "choiceText": "Trump",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_0a4e",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "Hillary",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_8736",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "I didn't have a preference",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_c15f",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_03d4",
+            "text": "Have you seen my poster?",
+            "choices": [
+                {
+                    "choiceText": "No",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_b73b",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "I've seen it, but I have not really looked at it",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_b73b",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "I have!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_82c6",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [
+                        {
+                            "conditionKey": "VIEWED_POSTER",
+                            "requiredValue": true
+                        }
+                    ],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_82c6",
+            "text": "Well then you have seen my masterpiece!",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_d088",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_8736",
+            "text": "Cuck",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_03d4",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_c15f",
+            "text": "Fucking Centrist",
+            "choices": [
+                {
+                    "choiceText": "Continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_03d4",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_d088",
+            "text": "I can't wait to collect those liberal tears",
+            "choices": [
+                {
+                    "choiceText": "mmh tasty",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "ok",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "I heard per doesn't like the poster",
+                    "lovePointChange": 0,
+                    "nextNodeID": "E_PER_TAKING_DOWN_POSTER",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [
+                        {
+                            "conditionKey": "PLAYER_KNOWS_PER_DONT_LIKE_POSTER",
+                            "requiredValue": true
+                        },
+                        {
+                            "conditionKey": "POSTER_TORN_DOWN",
+                            "requiredValue": false
+                        }
+                    ],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "E_PER_TOOK_DOWN_POSTER",
+            "text": "HE DID?! Did you get it on camera?",
+            "choices": [
+                {
+                    "choiceText": "Yes",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_0a55",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                },
+                {
+                    "choiceText": "No (Gaslight)",
+                    "lovePointChange": 0,
+                    "nextNodeID": "Node_3d0b",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_3d0b",
+            "text": "You dumb bitch",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "Node_0a55",
+            "text": "Great! see you in court Per!",
+            "choices": [
+                {
+                    "choiceText": "continue",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemSO": {
+                            "instanceID": 0
+                        },
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGive": {
+                        "instanceID": 0
+                    }
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemSO": {
+                    "instanceID": 0
+                },
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        }
+    ]
+}

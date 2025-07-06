@@ -1,0 +1,268 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcbff4ebcfbf5544bcb20250fece632, type: 3}
+  m_Name: TESTDIALOGUE
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::DialogueGraphSO
+  greetingNodeID: GREETING_NODE
+  entryPoints:
+  - entryText: Quest1
+    entryType: 0
+    startNodeID: QUEST_DIALOGUE_1
+    worldStateConditions:
+    - conditionKey: VIEWED_POSTER
+      requiredValue: 1
+    - conditionKey: PLAYER_KNOWS_APPIVO
+      requiredValue: 0
+  - entryText: Quest2
+    entryType: 0
+    startNodeID: QUEST_DIALOGUE_2
+    worldStateConditions: []
+  - entryText: Test Item
+    entryType: 3
+    startNodeID: SIMON_GENERAL_3
+    worldStateConditions: []
+  - entryText: CONTEXT
+    entryType: 2
+    startNodeID: SIMON_CONTEXT_1
+    worldStateConditions: []
+  nodes:
+  - nodeGUID: e9e357b4-1d98-42dc-8e22-87f25428d2ed
+    nodeID: SIMON_GENERAL_1
+    dialogueText: 
+    position: {x: 744, y: 2324}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 9a4ff204-d823-4bc7-a2b4-8f3e13df8966
+      choiceText: Quit
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 89641a9d-40e2-4dd0-9320-925daf65ae8e
+    nodeID: SIMON_GENERAL_2
+    dialogueText: 
+    position: {x: 744, y: 2836}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 410fd521-7c6d-44a7-8683-fabe33dde550
+      choiceText: Quit
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 1205cd7f-9cb3-440e-90b3-63c96239f0e3
+    nodeID: SIMON_GENERAL_3
+    dialogueText: Hi This is simon General 3
+    position: {x: 744, y: 3349}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 21e8fdec-b472-44e0-88db-e2ac60b46eb8
+      choiceText: You don't have the Item
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    - outputPortGUID: a70dc42b-26d6-49e8-97d3-1895dab53257
+      choiceText: You have the item
+      lovePointChange: 0
+      itemGate:
+        itemName: Charger
+        requiredItemSO: {fileID: 11400000, guid: ad7ced6abb07d85408708116363279cc, type: 2}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 6fab6755-bd02-4090-9520-88a1796ed308
+    nodeID: QUEST_DIALOGUE_2
+    dialogueText: This is a quest dialogue 2
+    position: {x: 626, y: -805}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 105f1267-1893-4dcd-99bd-fddb01fd7582
+      choiceText: QUEST DIALOGUE_2
+      lovePointChange: 1
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: ef8c26e3-8979-4415-a46f-cc8303539b11
+    nodeID: Node_2afd
+    dialogueText: That's cool, the system works
+    position: {x: 1258, y: -803}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 3e6b1e94-b1e3-454a-92d9-7ca15293add2
+      choiceText: SIMON_TEST = TRUE
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect:
+      - stateKey: SIMON_TEST
+        stateValue: 1
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: e65b12ea-1e16-4267-9916-b181f91d255a
+    nodeID: SIMON_CONTEXT_1
+    dialogueText: You have the charger
+    position: {x: 758, y: 987}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: f3d8cd8f-336e-4331-809f-0384adc3332b
+      choiceText: Remove the charger
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 11400000, guid: ad7ced6abb07d85408708116363279cc, type: 2}
+        removeItemOnSelect: 1
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: c5608983-e8b1-47d9-a438-7f0cba43de84
+    nodeID: GREETING_NODE
+    dialogueText: This is the start?
+    position: {x: -36, y: 570}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices: []
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: a91108e9-61a0-478a-97df-aec0c7c2c2d4
+    nodeID: QUEST_DIALOGUE_1
+    dialogueText: This is a quest dialogue 1
+    position: {x: 479, y: -176}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 2044178a-7528-47b9-94e1-4b5ed2f391ff
+      choiceText: "L\xC5NG L\xC5NG  L\xC5NG L\xC5NG  L\xC5NG L\xC5NG  L\xC5NG L\xC5NG 
+        L\xC5NG L\xC5NG  L\xC5NG L\xC5NG  L\xC5NG L\xC5NG  L\xC5NG L\xC5NG  L\xC5NG
+        L\xC5NG  L\xC5NG L\xC5NG  L\xC5NG L\xC5NG  L\xC5NG L\xC5NG  L\xC5NG L\xC5NG 
+        L\xC5NG L\xC5NG  "
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 11400000, guid: 27953b6f2ff1d8248ae5adeee0183a24, type: 2}
+    - outputPortGUID: c9855462-12d4-470b-96e5-8c26cd7ff22d
+      choiceText: Organic
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 32
+      itemToGive: {fileID: 0}
+    - outputPortGUID: 6cea6b67-858f-49a6-ab29-79183eac29c3
+      choiceText: ' click poster + PLAYER_KNOWS_APPIVO false'
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions:
+      - conditionKey: VIEWED_POSTER
+        requiredValue: 1
+      - conditionKey: PLAYER_KNOWS_APPIVO
+        requiredValue: 0
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  edges:
+  - outputNodeGUID: 6fab6755-bd02-4090-9520-88a1796ed308
+    outputNodePortGUID: 105f1267-1893-4dcd-99bd-fddb01fd7582
+    inputNodeGUID: ef8c26e3-8979-4415-a46f-cc8303539b11

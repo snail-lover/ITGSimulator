@@ -30,17 +30,25 @@ Material:
     m_Ints: []
     m_Floats:
     - _AnimationSpeed: 0.078
+    - _CloudCoverage: 0.18
+    - _CloudScale: 1.2
+    - _CloudSharpness: 0.097
     - _FadeOutEndHeight: 1
     - _FadeOutStartHeight: 1
+    - _HighlightIntensity: 0.07
+    - _HorizonBias: 0.7
     - _InitialPixelHeight: 0.1045
     - _MaxThinningFactor: 0.55
     - _NoiseScale: 65.2
     - _NoiseThreshold: 0.277
+    - _Octaves: 6
     - _ParticleLifetime: 1.512
     - _PixelColumns: 128
     - _PixelDensity: 25.6
     - _PixelDensityHorizontal: 80.7
     - _PixelDensityVertical: 4
+    - _ScrollSpeed1: 0.02
+    - _ScrollSpeed2: 0.03
     - _SpawnNoiseScale: 71.2
     - _SpawnNoiseThreshold: 0.45
     - _ThinningFactor: 0.51
@@ -48,7 +56,13 @@ Material:
     m_Colors:
     - _BackgroundColor: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 0.6517565, b: 0, a: 1}
+    - _CloudColor: {r: 0.8867924, g: 0.8575115, b: 0.8575115, a: 1}
     - _ColorBottom: {r: 0, g: 0, b: 1, a: 1}
     - _ColorTop: {r: 1, g: 0, b: 0, a: 1}
+    - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowColor: {r: 0.70980394, g: 0.82402337, b: 1, a: 1}
+    - _SkyColor: {r: 0.25943398, g: 0.47754613, b: 1, a: 1}
+    - _SkyColorBottom: {r: 0.5784977, g: 0.7370153, b: 0.9811321, a: 1}
+    - _SkyColorTop: {r: 0.08495018, g: 0.31763986, b: 0.7830189, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

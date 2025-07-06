@@ -1,0 +1,253 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcbff4ebcfbf5544bcb20250fece632, type: 3}
+  m_Name: Dialog_PerTearDownPoster
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::DialogueGraphSO
+  greetingNodeID: 
+  entryPoints: []
+  nodes:
+  - nodeGUID: bf60336c-19e0-4469-ba72-950f1e05c9d9
+    nodeID: Poster1
+    dialogueText: This can't be here!
+    position: {x: 350, y: 215}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 873c7762-00a0-4184-86cd-fc3d8332f2a6
+      choiceText: continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: aa040184-8a9f-4397-ba31-2c8c877fe893
+    nodeID: Poster0
+    dialogueText: '*You set the camera down and walk away*'
+    position: {x: -220, y: 281}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 1c541c86-b2d3-48a8-9189-92cf9c9ac945
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: ec912692-b40c-437b-9a13-fbbf58cbfffa
+    nodeID: Node_eefa
+    dialogueText: Appivo will think we are facists!
+    position: {x: 957, y: -234}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: c4becc3b-4d47-416e-bdc5-e13153a62ec0
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 1feb7737-2158-43ec-9ab1-f88aafb8f3ba
+    nodeID: Poster2
+    dialogueText: RAWR!
+    position: {x: 1396, y: 420}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 6c4a9a28-da6e-4b05-9c01-25b51c246d73
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 4ad11e0c-72fc-4203-8259-b8a8dc749721
+    nodeID: Node_a238
+    dialogueText: That will show Alex!
+    position: {x: 1978, y: 420}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 8a217c82-45ad-4c2e-85b6-033b4ad8dc9a
+      choiceText: Contunue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: aa5166dc-ac59-43cc-9986-f9a3e9beec85
+    nodeID: Node_2e1a
+    dialogueText: Stupid students, They're gonna drag this schools reputation in
+      the mud!
+    position: {x: 2478, y: 420}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 2630598a-efb1-4773-a3b1-46af292006d2
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: b7ee8249-325e-44cf-9a4f-9515f402a084
+    nodeID: Node_607d
+    dialogueText: '*Sniff* *Sniff*'
+    position: {x: 3113, y: 420}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: 87d09f81-e5bf-4f95-9350-72ec871840fe
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 16898ad5-460e-4fec-8090-e2da1a0b03e2
+    nodeID: Node_9d5b
+    dialogueText: Someones...chatting...Through an online communication service
+    position: {x: 3872, y: 563}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: cc3559da-dd5a-4aa4-9125-a6e978f8a046
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  - nodeGUID: 7fc88f72-8415-4e5b-8adf-858695adfd8d
+    nodeID: Node_60ba
+    dialogueText: Not on my watch
+    position: {x: 4474, y: 659}
+    itemGate:
+      itemName: 
+      requiredItemSO: {fileID: 0}
+      removeItemOnSelect: 0
+    choices:
+    - outputPortGUID: a6f9431f-60b8-4f5e-ba4d-cc7a7d020eac
+      choiceText: Continue
+      lovePointChange: 0
+      itemGate:
+        itemName: 
+        requiredItemSO: {fileID: 0}
+        removeItemOnSelect: 0
+      overrideNextNodeID: 
+      triggerCutscene: {fileID: 0}
+      stateChangesOnSelect: []
+      worldStateConditions: []
+      requiredTag: 0
+      itemToGive: {fileID: 0}
+    isEntryPoint: 0
+    worldStateConditions: []
+  edges:
+  - outputNodeGUID: bf60336c-19e0-4469-ba72-950f1e05c9d9
+    outputNodePortGUID: 873c7762-00a0-4184-86cd-fc3d8332f2a6
+    inputNodeGUID: ec912692-b40c-437b-9a13-fbbf58cbfffa
+  - outputNodeGUID: 1feb7737-2158-43ec-9ab1-f88aafb8f3ba
+    outputNodePortGUID: 6c4a9a28-da6e-4b05-9c01-25b51c246d73
+    inputNodeGUID: 4ad11e0c-72fc-4203-8259-b8a8dc749721
+  - outputNodeGUID: 4ad11e0c-72fc-4203-8259-b8a8dc749721
+    outputNodePortGUID: 8a217c82-45ad-4c2e-85b6-033b4ad8dc9a
+    inputNodeGUID: aa5166dc-ac59-43cc-9986-f9a3e9beec85
+  - outputNodeGUID: aa5166dc-ac59-43cc-9986-f9a3e9beec85
+    outputNodePortGUID: 2630598a-efb1-4773-a3b1-46af292006d2
+    inputNodeGUID: b7ee8249-325e-44cf-9a4f-9515f402a084
+  - outputNodeGUID: b7ee8249-325e-44cf-9a4f-9515f402a084
+    outputNodePortGUID: 87d09f81-e5bf-4f95-9350-72ec871840fe
+    inputNodeGUID: 16898ad5-460e-4fec-8090-e2da1a0b03e2
+  - outputNodeGUID: 16898ad5-460e-4fec-8090-e2da1a0b03e2
+    outputNodePortGUID: cc3559da-dd5a-4aa4-9125-a6e978f8a046
+    inputNodeGUID: 7fc88f72-8415-4e5b-8adf-858695adfd8d
