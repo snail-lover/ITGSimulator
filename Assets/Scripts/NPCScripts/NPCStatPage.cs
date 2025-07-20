@@ -68,7 +68,6 @@ public class NPCStatPage : MonoBehaviour
         }
 
         isPanelVisible = true;
-        LoadStats(); // Load data before showing
         containerAnimator.SetTrigger("Show");
         Debug.Log("[NPCStatPage] Triggering Show animation.");
     }
@@ -83,9 +82,4 @@ public class NPCStatPage : MonoBehaviour
         Debug.Log("[NPCStatPage] Triggering Hide animation.");
     }
 
-    private void LoadStats()
-    {
-        if (statsText == null) return;
-        statsText.text = (currentNPC != null) ? currentNPC.GetCurrentStats() : "No NPC selected.";
-    }
 }

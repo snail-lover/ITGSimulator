@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bd93f7ec26ac6548a11430eeeede781, type: 3}
+  m_Name: TestCharacter_config
+  m_EditorClassIdentifier: Assembly-CSharp::NpcConfig
+  npcName: TestCharacter
+  npcImage: {fileID: 0}
+  dialogueFile: {fileID: 4900000, guid: 33e5840d865afc7438832bdbfc34e28f, type: 3}
+  npcAge: 0
+  npcGender: 
+  npcBloodType: 
+  npcZodiacSign: 
+  npcCockLength: 0
+  npcLikes: 
+  npcDislikes: 
+  taskIDPool: []
+  finalLoveCutsceneAsset: {fileID: 0}
+  initialLove: 0
+  personalityGoals:
+  - goalName: Want good grades
+    associatedTags:
+    - Study
+    - Academic
+    priority: 0.297
+  hungerDecay: 0.5
+  energyDecay: 0.2
+  bladderDecay: 0.8
+  funDecay: 0.4
+  interactRange: 2
+  rotationSpeed: 5
+  speedParameterName: Speed
+  taskCompletionDelay: 0.01
+  highPriorityDialogues:
+  - description: TEST
+    triggeringFlag: HPD_TRUE
+    dialogueNodeID: TEST_HPD
+    approachDistance: 3
+    uniqueTriggerID: HPD_TALKED
+  noticePlayerAnimationTrigger: NoticePlayer
+  noticePlayerAnimationDuration: 1.5
+  noticePlayerSound: {fileID: 8300000, guid: e0805c66d742eed429ea5e1ee5ca1f85, type: 3}

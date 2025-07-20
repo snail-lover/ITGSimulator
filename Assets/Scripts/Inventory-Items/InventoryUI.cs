@@ -1,61 +1,63 @@
-// --- START OF FILE InventoryUI.cs --- // (Updated)
-
+// InventoryUI.cs (Refactored for Drag & Drop)
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using System.Collections.Generic;
 
 public class InventoryUI : MonoBehaviour
 {
-    public GameObject inventoryDisplayPanel;
-    public GameObject itemTextPrefab;
-    public Transform itemContainer;
+    [Header("UI Prefabs")]
+    [Tooltip("Drag the InventoryPanel PREFAB here from your Project folder.")]
+    public GameObject inventoryPanelPrefab;
 
-    private bool isPanelVisible = false;
+    [Header("Runtime References")]
+    [Tooltip("The parent Canvas for the UI. If null, will try to find it by tag.")]
+    public Canvas mainCanvas;
+
+    private GameObject currentPanelInstance;
+
+    // --- NEW: Subscribe to drag events ---
+    private void OnEnable()
+    {
+        Draggable.OnDragStarted += OpenInventoryPanel;
+        Draggable.OnDragEnded += CloseInventoryPanel;
+    }
+
+    // --- NEW: Unsubscribe to prevent memory leaks ---
+    private void OnDisable()
+    {
+        Draggable.OnDragStarted -= OpenInventoryPanel;
+        Draggable.OnDragEnded -= CloseInventoryPanel;
+    }
+    private void OpenInventoryPanel(Draggable draggedItem)
+    {
+        // Your logic to make the inventory panel appear.
+        Debug.Log($"Drag of '{draggedItem.name}' started, opening inventory panel.");
+    }
+
+    // Same fix for this method.
+    private void CloseInventoryPanel(Draggable draggedItem)
+    {
+        // Your logic to make the inventory panel disappear.
+        Debug.Log($"Drag of '{draggedItem.name}' ended, closing inventory panel.");
+    }
 
     void Start()
     {
-        if (inventoryDisplayPanel == null)
+        if (inventoryPanelPrefab == null)
         {
-            Debug.LogError("InventoryDisplayPanel is not assigned in the Inspector!");
-            enabled = false;
-            return;
-        }
-        if (itemTextPrefab == null)
-        {
-            Debug.LogError("ItemTextPrefab is not assigned in the Inspector!");
-            enabled = false;
-            return;
-        }
-        if (itemContainer == null)
-        {
-            Debug.LogError("ItemContainer (for dynamic items) is not assigned in the Inspector!");
+            Debug.LogError("InventoryPanelPrefab is not assigned in the Inspector!", this);
             enabled = false;
             return;
         }
 
-        inventoryDisplayPanel.SetActive(false);
-
-        // Subscribe to the inventory changed event
-        if (Inventory.Instance != null)
+        if (mainCanvas == null)
         {
-            Inventory.Instance.OnInventoryChanged += HandleInventoryChanged;
-        }
-        else
-        {
-            // This might happen if InventoryUI initializes before Inventory.
-            // Consider a more robust way to handle this if it becomes an issue,
-            // e.g., by having Inventory find and notify UI or using a delayed subscription.
-            Debug.LogWarning("Inventory.Instance was null when InventoryUI tried to subscribe. UI might not auto-update.");
-        }
-    }
-
-    private void OnDestroy() // Or OnDisable if this object can be disabled/enabled
-    {
-        // Unsubscribe to prevent errors if InventoryUI is destroyed before Inventory
-        if (Inventory.Instance != null)
-        {
-            Inventory.Instance.OnInventoryChanged -= HandleInventoryChanged;
+            GameObject canvasObj = GameObject.FindGameObjectWithTag("MainCanvas");
+            if (canvasObj != null) mainCanvas = canvasObj.GetComponent<Canvas>();
+            else
+            {
+                Debug.LogError("Could not find a Canvas tagged 'MainCanvas'. Please assign it in the Inspector.", this);
+                enabled = false;
+                return;
+            }
         }
     }
 
@@ -67,86 +69,42 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    // --- MODIFIED: Split Toggle into Open/Close methods ---
+
+    public void OpenInventoryPanel()
+    {
+        // Only create the panel if it doesn't already exist
+        if (currentPanelInstance == null)
+        {
+            if (inventoryPanelPrefab != null && mainCanvas != null)
+            {
+                currentPanelInstance = Instantiate(inventoryPanelPrefab, mainCanvas.transform);
+                Debug.Log("Inventory panel instantiated.");
+            }
+        }
+    }
+
+    public void CloseInventoryPanel()
+    {
+        // Only destroy the panel if it exists
+        if (currentPanelInstance != null)
+        {
+            Destroy(currentPanelInstance);
+            currentPanelInstance = null; // Clear the reference
+            Debug.Log("Inventory panel closed and destroyed.");
+        }
+    }
+
     public void ToggleInventoryPanel()
     {
-        isPanelVisible = !isPanelVisible;
-        inventoryDisplayPanel.SetActive(isPanelVisible);
-
-        if (isPanelVisible)
+        // The toggle now just calls the appropriate open/close method
+        if (currentPanelInstance != null)
         {
-            UpdateInventoryDisplay(); // Fresh update when opening
-        }
-    }
-
-    // This method will be called when the OnInventoryChanged event is fired
-    private void HandleInventoryChanged()
-    {
-
-        Debug.Log("[InventoryUI] HandleInventoryChanged event received!");
-        if (isPanelVisible) // Only update the UI if it's currently showing
-        {
-            Debug.Log("Inventory changed, updating UI display.");
-            UpdateInventoryDisplay();
+            CloseInventoryPanel();
         }
         else
         {
-            Debug.Log("Inventory changed, but UI is not visible. No immediate UI update.");
-        }
-    }
-
-    public void UpdateInventoryDisplay()
-    {
-        // --- THIS IS THE NEW LOGIC ---
-
-        Debug.Log("[InventoryUI] Executing UpdateInventoryDisplay().");
-        // Safety checks for the new systems
-        if (WorldDataManager.Instance == null || ItemDatabase.Instance == null || itemContainer == null) return;
-
-        // Clear previous items
-        foreach (Transform child in itemContainer)
-        {
-            Destroy(child.gameObject);
-        }
-
-        // 1. Get the list of item IDs from the central data store.
-        List<string> playerItemIDs = WorldDataManager.Instance.saveData.playerInventory.itemIDs;
-
-        // Populate with current items
-        if (playerItemIDs.Count == 0)
-        {
-            GameObject noItemEntry = Instantiate(itemTextPrefab, itemContainer);
-            TextMeshProUGUI itemTextComponent = noItemEntry.GetComponent<TextMeshProUGUI>();
-            if (itemTextComponent != null)
-            {
-                itemTextComponent.text = "Inventory is empty.";
-            }
-        }
-        else
-        {
-            // 2. Loop through the list of IDs.
-            foreach (string itemID in playerItemIDs)
-            {
-                // 3. For each ID, look up the full item data from our new database.
-                CreateInventoryItem itemData = ItemDatabase.Instance.GetItemByID(itemID);
-
-                // Make sure we found the item data (it might be null if an ID is invalid)
-                if (itemData != null)
-                {
-                    // 4. Create the UI element and set its text to the item's NAME.
-                    GameObject itemEntry = Instantiate(itemTextPrefab, itemContainer);
-                    TextMeshProUGUI itemTextComponent = itemEntry.GetComponent<TextMeshProUGUI>();
-                    if (itemTextComponent != null)
-                    {
-                        // Use the human-readable name for display!
-                        itemTextComponent.text = itemData.itemName;
-                    }
-                }
-                else
-                {
-                    Debug.LogWarning($"[InventoryUI] FAILED to find item in ItemDatabase with ID: '{itemID}'. Check your ScriptableObject asset.");
-                    Debug.LogWarning($"[InventoryUI] Could not find item data for ID: {itemID}. It will not be displayed.");
-                }
-            }
+            OpenInventoryPanel();
         }
     }
 }

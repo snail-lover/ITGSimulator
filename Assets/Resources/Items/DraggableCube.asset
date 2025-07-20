@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f5628be461d964dbb17532e858e8f1, type: 3}
+  m_Name: DraggableCube
+  m_EditorClassIdentifier: Assembly-CSharp::CreateInventoryItem
+  id: 999
+  itemName: Draggable Cube
+  icon: {fileID: 0}
+  tags: -1
+  worldPrefab: {fileID: 790834865468084207, guid: b522bbcec4a82e144982b53494ae09dc, type: 3}

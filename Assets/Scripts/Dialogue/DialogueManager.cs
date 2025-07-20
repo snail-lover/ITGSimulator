@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     private PointAndClickMovement playerMovement;
     private Action currentCutsceneSegmentCompletionCallback;
     private bool isInCutsceneDialogueMode = false;
+    private string _currentHighPriorityTriggerID;
 
     private const int FINAL_CUTSCENE_LOVE_THRESHOLD = 10;
 
@@ -109,8 +110,17 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    // Replace the entire StartDialogue method in DialogueManager.cs with this one.
     public void StartDialogue(NpcController npc)
+    {
+        StartDialogue(npc, null, null);
+    }
+
+    public void StartDialogue(NpcController npc, string specificStartNodeID)
+    {
+        StartDialogue(npc, specificStartNodeID, null);
+    }
+
+    public void StartDialogue(NpcController npc, string specificStartNodeID = null, string uniqueTriggerID = null)
     {
         if (isDialogueActive) return;
 
@@ -121,118 +131,102 @@ public class DialogueManager : MonoBehaviour
         }
 
         currentNPC = npc;
-        currentData = npc.GetDialogueData();
-        if (currentData == null || currentData.entryPoints == null)
+        currentData = npc.Interaction.GetDialogueData();
+        if (currentData == null)
         {
-            Debug.LogError($"[DialogueManager] Dialogue data or entry points for {npc.npcConfig.npcName} are missing.");
-            EndDialogue(); // Use EndDialogue to safely clean up.
+            Debug.LogError($"[DialogueManager] Dialogue data for {npc.npcConfig.npcName} is missing.");
+            EndDialogue();
             return;
         }
 
+        _currentHighPriorityTriggerID = uniqueTriggerID;
+
+        // --- THIS IS THE FIX ---
+        // Mark the dialogue as completed the moment it successfully starts.
+        // This prevents re-triggers even if the player quits during the conversation.
+        if (!string.IsNullOrEmpty(uniqueTriggerID))
+        {
+            WorldDataManager.Instance.MarkHighPriorityDialogueAsCompleted(uniqueTriggerID);
+            Debug.Log($"[DialogueManager] High-priority dialogue '{uniqueTriggerID}' is starting and has been marked as completed.");
+        }
+        // --- END OF FIX ---
+
         LockPlayerMovement();
+        isDialogueActive = true;
 
-        // --- NEW GATHER, CLASSIFY, and GROUP LOGIC ---
+        DialogueNode finalDisplayNode;
+        bool isGreeting = false;
 
-        // 1. GATHER & CLASSIFY available topics
-        _questTopics.Clear();
-        _loveTopics.Clear();
-        _contextualTopics.Clear();
-        _generalTopics.Clear();
-
-        foreach (var entryPoint in currentData.entryPoints)
+        if (!string.IsNullOrEmpty(specificStartNodeID))
         {
-            if (IsEntryPointAvailable(entryPoint))
+            if (currentData.nodeDictionary.TryGetValue(specificStartNodeID, out DialogueNode targetNode))
             {
-                // Convert the entry point into a DialogueChoice for consistency
-                var topicAsChoice = new DialogueChoice { choiceText = entryPoint.entryText, nextNodeID = entryPoint.startNodeID };
-                switch (entryPoint.entryType)
-                {
-                    case DialogueEntryPointType.Quest: _questTopics.Add(topicAsChoice); break;
-                    case DialogueEntryPointType.Love: _loveTopics.Add(topicAsChoice); break;
-                    case DialogueEntryPointType.Contextual: _contextualTopics.Add(topicAsChoice); break;
-                    case DialogueEntryPointType.General: _generalTopics.Add(topicAsChoice); break;
-                }
-            }
-        }
-
-        // 2. GROUP topics into the final list based on your rules
-        var finalTopics = new List<DialogueChoice>();
-
-        // Rule A: Quests & Romance are always displayed individually at the top.
-        finalTopics.AddRange(_questTopics);
-        finalTopics.AddRange(_loveTopics);
-
-        // Rule B: Contextual Dialogue
-        if (_contextualTopics.Count == 1)
-        {
-            finalTopics.Add(_contextualTopics[0]); // Display the single option directly
-        }
-        else if (_contextualTopics.Count > 1)
-        {
-            // Group into a nested menu
-            finalTopics.Add(new DialogueChoice { choiceText = "I was wondering about something...", nextNodeID = CONTEXTUAL_GROUP_ID });
-        }
-
-        // Rule C: General Dialogue
-        bool hasHigherPriorityOptions = (_questTopics.Count + _loveTopics.Count + _contextualTopics.Count) > 0;
-        if (_generalTopics.Count > 0)
-        {
-            if (hasHigherPriorityOptions)
-            {
-                // Group into a nested menu if other topics exist
-                finalTopics.Add(new DialogueChoice { choiceText = "I have a general question...", nextNodeID = GENERAL_GROUP_ID });
+                finalDisplayNode = targetNode;
+                dialogueUIInstance.isShowingGreetingDialogue = false;
+                isGreeting = false;
             }
             else
             {
-                // Display individually if they are the ONLY topics available
-                finalTopics.AddRange(_generalTopics);
+                Debug.LogError($"[DialogueManager] High-priority dialogue failed. Node ID '{specificStartNodeID}' not found for {npc.npcConfig.npcName}.");
+                EndDialogue();
+                return;
             }
-        }
-
-        // 3. CREATE the dynamic greeting node that combines the greeting text with the generated choices.
-        string greetingText = "(They look at you expectantly.)"; // A default greeting.
-
-        // Try to find the custom greeting text from the greeting node.
-        if (!string.IsNullOrEmpty(currentData.greetingNodeID) && currentData.nodeDictionary.TryGetValue(currentData.greetingNodeID, out DialogueNode greetingNode))
-        {
-            greetingText = greetingNode.text;
-        }
-
-        DialogueNode finalDisplayNode;
-        if (finalTopics.Count > 0)
-        {
-            // We have topics, so create a node with the greeting text and the topic choices.
-            finalDisplayNode = new DialogueNode
-            {
-                text = greetingText,
-                choices = finalTopics.ToArray()
-            };
         }
         else
         {
-            // No topics are available. Display the greeting text with NO choices.
-            // The Exit button will allow the player to leave.
-            finalDisplayNode = new DialogueNode
+            // This is the standard greeting/topic logic (no changes needed here)
+            _questTopics.Clear();
+            _loveTopics.Clear();
+            _contextualTopics.Clear();
+            _generalTopics.Clear();
+
+            foreach (var entryPoint in currentData.entryPoints)
             {
-                text = greetingText,
-                choices = new DialogueChoice[0]
-            };
+                if (IsEntryPointAvailable(entryPoint))
+                {
+                    var topicAsChoice = new DialogueChoice { choiceText = entryPoint.entryText, nextNodeID = entryPoint.startNodeID };
+                    switch (entryPoint.entryType)
+                    {
+                        case DialogueEntryPointType.Quest: _questTopics.Add(topicAsChoice); break;
+                        case DialogueEntryPointType.Love: _loveTopics.Add(topicAsChoice); break;
+                        case DialogueEntryPointType.Contextual: _contextualTopics.Add(topicAsChoice); break;
+                        case DialogueEntryPointType.General: _generalTopics.Add(topicAsChoice); break;
+                    }
+                }
+            }
+            var finalTopics = new List<DialogueChoice>();
+            finalTopics.AddRange(_questTopics);
+            finalTopics.AddRange(_loveTopics);
+            if (_contextualTopics.Count == 1) { finalTopics.Add(_contextualTopics[0]); }
+            else if (_contextualTopics.Count > 1) { finalTopics.Add(new DialogueChoice { choiceText = "I was wondering about something...", nextNodeID = CONTEXTUAL_GROUP_ID }); }
+            bool hasHigherPriorityOptions = (_questTopics.Count + _loveTopics.Count + _contextualTopics.Count) > 0;
+            if (_generalTopics.Count > 0)
+            {
+                if (hasHigherPriorityOptions) { finalTopics.Add(new DialogueChoice { choiceText = "I have a general question...", nextNodeID = GENERAL_GROUP_ID }); }
+                else { finalTopics.AddRange(_generalTopics); }
+            }
+            string greetingText = "(They look at you expectantly.)";
+            if (!string.IsNullOrEmpty(currentData.greetingNodeID) && currentData.nodeDictionary.TryGetValue(currentData.greetingNodeID, out DialogueNode greetingNode))
+            {
+                greetingText = greetingNode.text;
+            }
+
+            if (finalTopics.Count > 0)
+            {
+                finalDisplayNode = new DialogueNode { text = greetingText, choices = finalTopics.ToArray() };
+            }
+            else
+            {
+                finalDisplayNode = new DialogueNode { text = greetingText, choices = new DialogueChoice[0] };
+            }
+
+            dialogueUIInstance.isShowingGreetingDialogue = true;
+            isGreeting = true;
         }
 
-        // --- START OF THE FIX ---
-        // 4. DISPLAY the final result using the correct UI method.
-        isDialogueActive = true;
-        currentNode = finalDisplayNode; // Set the manager's current node state.
-
-        dialogueUIInstance.isShowingGreetingDialogue = true; // Explicitly set the flag for the UI
-
-        // This is the key change. We call ShowDialogue and pass 'isGreeting: true'.
-        // This tells the UI to use icons and handle the initial animation.
-        // The old calls to AnimateIn() and DisplayNode() are no longer needed here.
-        dialogueUIInstance.ShowDialogue(this, finalDisplayNode, currentNPC.npcConfig.npcName, currentNPC.npcConfig.npcImage, isGreeting: true);
-
+        currentNode = finalDisplayNode;
+        dialogueUIInstance.ShowDialogue(this, finalDisplayNode, currentNPC.npcConfig.npcName, currentNPC.npcConfig.npcImage, isGreeting);
         SetupStatsButton();
-        // --- END OF THE FIX ---
     }
 
 
@@ -248,6 +242,8 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        _currentHighPriorityTriggerID = null;
+
         isDialogueActive = false;
         Debug.Log($"[DialogueManager] Ending Dialogue. isDialogueActive set to {isDialogueActive}.");
         if (isInCutsceneDialogueMode)
@@ -416,7 +412,7 @@ public class DialogueManager : MonoBehaviour
 
         // Capture the NPC who spoke for consistent logging and cleanup
         NpcController npcThatSpokeThisLine = currentNPC;
-        Debug.Log($"[DialogueManager] Choice selected: '{choice.choiceText}' -> Next Node: '{choice.nextNodeID}'");
+        //Debug.Log($"[DialogueManager] Choice selected: '{choice.choiceText}' -> Next Node: '{choice.nextNodeID}'");
 
         // Apply side-effects only in normal dialogue mode
         if (!isInCutsceneDialogueMode)
@@ -512,7 +508,7 @@ public class DialogueManager : MonoBehaviour
         // Find and display the next node, or end the dialogue if the node is invalid/not found.
         if (string.IsNullOrEmpty(choice.nextNodeID) || !currentData.nodeDictionary.TryGetValue(choice.nextNodeID, out DialogueNode nextNode) || nextNode == null)
         {
-            Debug.Log($"[DialogueManager] Dialogue with {npcThatSpokeThisLine?.name} ends here. (Next node ID: '{choice.nextNodeID}' is null, empty, or invalid).");
+            //Debug.Log($"[DialogueManager] Dialogue with {npcThatSpokeThisLine?.name} ends here. (Next node ID: '{choice.nextNodeID}' is null, empty, or invalid).");
             if (isInCutsceneDialogueMode)
             {
                 // Invalid next node during a cutscene is treated as the end of the segment.
@@ -638,18 +634,6 @@ public class DialogueManager : MonoBehaviour
 
         Debug.Log($"[DialogueManager] FINAL CUTSCENE BUTTON CLICKED for {currentNPC.npcConfig.npcName}. Love: {currentNPC.runtimeData.currentLove}");
 
-
-        NpcController npcForCutscene = currentNPC;
-        PrepareForCutsceneHandoff();
-
-        if (npcForCutscene != null)
-        {
-            npcForCutscene.TriggerFinalCutscene();
-        }
-        else
-        {
-            Debug.LogError("[DialogueManager] npcForCutscene was null after assignment. This shouldn't happen.");
-        }
     }
 
     private void PrepareForCutsceneHandoff()
@@ -763,7 +747,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentNPC == null) return;
         currentNPC.runtimeData.currentLove += changeAmount;
-        Debug.Log($"[DialogueManager] Applied {changeAmount} love. New total for {currentNPC.npcConfig.npcName}: {currentNPC.runtimeData.currentLove}. Choice: '{choice.choiceText}'");
+        //Debug.Log($"[DialogueManager] Applied {changeAmount} love. New total for {currentNPC.npcConfig.npcName}: {currentNPC.runtimeData.currentLove}. Choice: '{choice.choiceText}'");
     }
 
     private void LockPlayerMovement() { if (playerMovement != null) playerMovement.HardLockPlayerMovement(); else Debug.LogWarning("[DialogueManager] PlayerMovement script not found on Lock."); }
@@ -814,7 +798,7 @@ public class DialogueManager : MonoBehaviour
             return false;
         }
 
-        Debug.Log("[DialogueManager] Successfully instantiated DialogueUI prefab.");
+        //Debug.Log("[DialogueManager] Successfully instantiated DialogueUI prefab.");
         return true;
     }
 
@@ -822,7 +806,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (dialogueUIInstance != null)
         {
-            Debug.Log("[DialogueManager] Destroying DialogueUI instance.");
+            //Debug.Log("[DialogueManager] Destroying DialogueUI instance.");
             Destroy(dialogueUIInstance.gameObject);
             dialogueUIInstance = null;
         }

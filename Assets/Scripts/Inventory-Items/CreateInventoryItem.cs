@@ -11,4 +11,9 @@ public class CreateInventoryItem : ScriptableObject
     [Header("Properties & Categories")]
     [Tooltip("What kind of item is this? Can be multiple things.")]
     public ItemTag tags; // Our new tagging field!
+
+    [Header("Model Prefab")]
+    [Tooltip("The 3D prefab that will be instantiated when this item is dropped into the world.")]
+    public GameObject worldPrefab;
+
 }

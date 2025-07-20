@@ -464,16 +464,24 @@ public class CutsceneManager : MonoBehaviour
                 break;
 
             case CutsceneActionType.CustomNPCMethod:
-                if (characterForAction != null && !string.IsNullOrEmpty(action.stringParameter))
+                // --- THIS IS THE FIX ---
+                // We check if the target has a controller, and if that controller has a brain.
+                if (characterForAction != null && characterForAction.Brain != null && !string.IsNullOrEmpty(action.stringParameter))
                 {
-                    characterForAction.PerformCutsceneAction(action.stringParameter);
+                    // Then we call the method on the Brain component.
+                    characterForAction.Brain.PerformCutsceneAction(action.stringParameter);
+
                     if (action.waitForCompletion && action.duration > 0)
                     {
                         yield return new WaitForSeconds(action.duration);
                     }
                 }
-                else if (characterForAction == null) Debug.LogWarning($"CustomNPCMethod: Target NPC (NpcController component) could not be resolved for action '{action.actionName}'.");
-                else Debug.LogWarning($"CustomNPCMethod: Method name (stringParameter) is empty for action '{action.actionName}'.");
+                else if (characterForAction == null)
+                    Debug.LogWarning($"CustomNPCMethod: Target NPC (NpcController) could not be resolved for action '{action.actionName}'.");
+                else if (characterForAction.Brain == null)
+                    Debug.LogWarning($"CustomNPCMethod: Target NPC '{characterForAction.name}' is missing an NpcBrain component for action '{action.actionName}'.");
+                else
+                    Debug.LogWarning($"CustomNPCMethod: Method name (stringParameter) is empty for action '{action.actionName}'.");
                 break;
             case CutsceneActionType.CameraControl:
                 Camera cameraToControl = Camera.main; // Default

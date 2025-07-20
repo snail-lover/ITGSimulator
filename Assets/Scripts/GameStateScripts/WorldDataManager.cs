@@ -182,4 +182,28 @@ public class WorldDataManager : MonoBehaviour // Renamed from WorldStateManager
             Debug.LogWarning("No save file found to load.");
         }
     }
+
+    /// <summary>
+    /// Marks a high-priority dialogue as having been completed.
+    /// This prevents it from triggering again.
+    /// </summary>
+    public void MarkHighPriorityDialogueAsCompleted(string triggerID)
+    {
+        if (string.IsNullOrEmpty(triggerID)) return;
+
+        if (saveData.completedHighPriorityDialogueIDs.Add(triggerID))
+        {
+            Debug.Log($"[WorldDataManager] Marked high-priority dialogue '{triggerID}' as completed.");
+        }
+    }
+
+    /// <summary>
+    /// Checks if a high-priority dialogue has already been completed.
+    /// </summary>
+    public bool HasHighPriorityDialogueBeenCompleted(string triggerID)
+    {
+        if (string.IsNullOrEmpty(triggerID)) return true; // Treat empty IDs as "completed" to be safe
+
+        return saveData.completedHighPriorityDialogueIDs.Contains(triggerID);
+    }
 }

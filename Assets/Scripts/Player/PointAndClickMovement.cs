@@ -1,3 +1,5 @@
+// --- START OF FILE PointAndClickMovement.cs (Refactored) ---
+
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,15 +12,18 @@ public class PointAndClickMovement : MonoBehaviour
     public LayerMask clickableLayers;
     private NavMeshAgent agent;
 
+    // --- State ---
     public static IClickable currentTarget;
-    private bool isPlayerInputLocked = false; // True when player cannot issue ANY move commands via clicks (Dialogue/Cutscene).
-    private bool isApproachingTarget = false; // True when player is programmatically moving towards currentTarget (e.g. NPC).
+    private bool isPlayerInputLocked = false; // True during cutscenes/dialogue
+    private bool isApproachingTarget = false; // True when moving programmatically towards a target
+    private bool isMovingToGroundPoint = false; // True when the last command was a ground click
+    private Vector3 currentGroundDestination;
 
+    // --- Events ---
     public static event System.Action<Vector3> OnMoveCommandIssued;
     public static event System.Action OnMovementStoppedOrCancelled;
-
-    private bool isMovingToGroundPoint = false; // Tracks if last command was to ground
-    private Vector3 currentGroundDestination; // <<< --- ADDED THIS DECLARATION
+    public static event System.Action<IClickable> OnNewTargetSet;
+    public static event System.Action OnTargetCleared;
 
     void Awake()
     {
@@ -28,34 +33,25 @@ public class PointAndClickMovement : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         if (agent == null) Debug.LogError("[PointClick] NavMeshAgent component missing from Player.");
         if (mainCamera == null) mainCamera = Camera.main;
-        if (mainCamera == null) Debug.LogError("[PointClick] Main camera not found. Please assign in Inspector or tag a camera 'MainCamera'.");
+        if (mainCamera == null) Debug.LogError("[PointClick] Main camera not found.");
     }
 
-    // --- NEW SECTION: APPLYING LOADED DATA ---
-    // Start() is called after Awake(), so our agent and WorldDataManager will be ready.
     private void Start()
     {
-        // Check if a WorldDataManager exists and if it has valid saved data for the player's position.
+        // (No changes to Start, OnEnable, OnDisable, CaptureStateBeforeSave)
         if (WorldDataManager.Instance != null)
         {
             Vector3 savedPosition = WorldDataManager.Instance.saveData.playerState.lastKnownPosition;
-
-            // We only apply the position if it's not the default (0,0,0),
-            // which prevents the player from teleporting to the origin on a new game.
             if (savedPosition != Vector3.zero)
             {
-                // IMPORTANT: For NavMeshAgents, it's safest to disable them before teleporting.
                 agent.enabled = false;
                 transform.position = savedPosition;
                 agent.enabled = true;
-
-                Debug.Log($"[PointClick] Player position loaded and applied: {transform.position}");
+                Debug.Log($"[PointClick] Player position loaded: {transform.position}");
             }
         }
     }
 
-    // --- NEW SECTION: SAVING DATA ---
-    // Subscribe to the save event when this component is enabled.
     private void OnEnable()
     {
         if (WorldDataManager.Instance != null)
@@ -64,7 +60,6 @@ public class PointAndClickMovement : MonoBehaviour
         }
     }
 
-    // Unsubscribe when disabled to prevent memory leaks or errors.
     private void OnDisable()
     {
         if (WorldDataManager.Instance != null)
@@ -73,14 +68,11 @@ public class PointAndClickMovement : MonoBehaviour
         }
     }
 
-    // This method is called by the OnBeforeSave event from WorldDataManager.
     private void CaptureStateBeforeSave()
     {
         if (WorldDataManager.Instance != null)
         {
-            // Update the player's position directly in the master save data object.
             WorldDataManager.Instance.saveData.playerState.lastKnownPosition = transform.position;
-            Debug.Log($"[PointClick] Captured player position for saving: {transform.position}");
         }
     }
 
@@ -90,119 +82,97 @@ public class PointAndClickMovement : MonoBehaviour
     {
         HandleMovementInput();
 
+        // Check for arrival at a ground point
         if (isMovingToGroundPoint && agent != null && agent.hasPath && !agent.pathPending)
         {
-            // Using a slightly more generous check for ground points.
-            if (agent.remainingDistance <= agent.stoppingDistance + 0.1f || (currentGroundDestination - transform.position).sqrMagnitude < 0.05f)
+            if (agent.remainingDistance <= agent.stoppingDistance + 0.1f)
             {
-                // Debug.Log("[PointClick] Player arrived at ground destination. Stopping visuals.");
                 isMovingToGroundPoint = false;
                 OnMovementStoppedOrCancelled?.Invoke();
-                // Optional: agent.ResetPath();
             }
         }
     }
 
+    // =========================================================================
+    // --- THIS IS THE FULLY REFACTORED AND SIMPLIFIED CLICK HANDLING LOGIC ---
+    // =========================================================================
     private void HandleMovementInput()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!Input.GetMouseButtonDown(0) || mainCamera == null) return;
+
+        if (isPlayerInputLocked)
         {
-            if (isPlayerInputLocked)
+            //Debug.Log("[PointClick] Click ignored: Player input is locked.");
+            return;
+        }
+
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, clickableLayers))
+        {
+            // The new system is much simpler. We just check for the IClickable interface.
+            // This works for Interactable.cs, Draggable.cs, NpcController.cs, etc.
+            IClickable newClickedTarget = hit.collider.GetComponent<IClickable>();
+
+            if (newClickedTarget != null)
             {
-                Debug.Log("[PointClick] Click ignored, player input is (hard) locked.");
-                return;
+                // --- CASE 1: We clicked an interactable object ---
+                isMovingToGroundPoint = false;
+
+                if (isApproachingTarget && newClickedTarget == currentTarget)
+                {
+                    // This is a re-click on the target we are already approaching.
+                    // We pass the click along to the target, which might use it to
+                    // register a drag intent (like Draggable.cs does).
+                    Debug.Log($"[PointClick] Re-clicked current target: {((MonoBehaviour)currentTarget)?.name}.");
+                    currentTarget?.OnClick();
+                }
+                else
+                {
+                    // This is a click on a new target, or the first click.
+                    // Cancel any previous interaction.
+                    if (currentTarget != null)
+                    {
+                        Debug.Log($"[PointClick] New target clicked. Cancelling old interaction with {((MonoBehaviour)currentTarget)?.name}.");
+                        currentTarget.ResetInteractionState();
+                    }
+
+                    // Set the new target and tell it to start its interaction process.
+                    currentTarget = newClickedTarget;
+                    OnNewTargetSet?.Invoke(currentTarget);
+                    Debug.Log($"[PointClick] New target set: {((MonoBehaviour)currentTarget)?.name}.");
+                    currentTarget.OnClick();
+                }
             }
-
-            if (mainCamera == null || agent == null) return;
-
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, clickableLayers))
+            else
             {
-                IClickable newClickedInteractable = hit.collider.GetComponent<IClickable>();
+                // --- CASE 2: We clicked the ground (or a non-interactive object) ---
 
-                if (newClickedInteractable != null) // Clicked on an IClickable (NPC, Item)
+                // If we were interacting with anything, cancel it.
+                if (currentTarget != null)
                 {
-                    isMovingToGroundPoint = false;
-
-                    if (isApproachingTarget)
-                    {
-                        if (newClickedInteractable == currentTarget)
-                        {
-                            Debug.Log($"[PointClick] Re-clicked current approach target ({((MonoBehaviour)currentTarget)?.name ?? "null"}). Letting it handle.");
-                            currentTarget?.OnClick();
-                        }
-                        else
-                        {
-                            Debug.Log($"[PointClick] Clicked new target ({((MonoBehaviour)newClickedInteractable)?.name ?? "null"}) while approaching ({((MonoBehaviour)currentTarget)?.name ?? "null"}). Cancelling old, starting new.");
-                            currentTarget?.ResetInteractionState();
-
-                            currentTarget = newClickedInteractable;
-                            currentTarget?.OnClick();
-                        }
-                    }
-                    else
-                    {
-                        if (currentTarget != null && currentTarget != newClickedInteractable && !(currentTarget as UnityEngine.Object == null))
-                        {
-                            //Debug.Log($"[PointClick] New target ({((MonoBehaviour)newClickedInteractable).name}). Resetting old ({((MonoBehaviour)currentTarget).name}).");
-                            currentTarget.ResetInteractionState();
-                        }
-                        currentTarget = newClickedInteractable;
-                        //Debug.Log($"[PointClick] Standard click on target: {((MonoBehaviour)currentTarget).name}");
-                        currentTarget.OnClick();
-                    }
-                }
-                else // Clicked on Ground
-                {
-                    //Debug.Log($"[PointClick] Clicked on ground at {hit.point}. CurrentTarget: {((MonoBehaviour)currentTarget)?.name}, IsApproaching: {isApproachingTarget}");
-
-                    if (isApproachingTarget && currentTarget != null)
-                    {
-                        //Debug.Log($"[PointClick] Ground click is cancelling approach to {((MonoBehaviour)currentTarget).name}.");
-                        currentTarget.ResetInteractionState();
-                        // The NPC's ResetInteractionState should call UnlockPlayerApproach()
-                    }
-                    else if (currentTarget != null) // Had a non-approaching target, just deselect
-                    {
-                        //Debug.Log($"[PointClick] Ground click. Had target {((MonoBehaviour)currentTarget).name}, resetting it.");
-                        currentTarget.ResetInteractionState();
-                    }
-
+                    //Debug.Log($"[PointClick] Ground clicked. Resetting previous target: {((MonoBehaviour)currentTarget)?.name}.");
+                    currentTarget.ResetInteractionState();
                     currentTarget = null;
-                    SetPlayerDestination(hit.point, false); // Player input, not programmatic
-                    // isMovingToGroundPoint and currentGroundDestination are set inside SetPlayerDestination now
+                    OnTargetCleared?.Invoke();
                 }
+
+                // Issue a standard move command to the clicked point.
+                SetPlayerDestination(hit.point, false);
             }
         }
     }
 
     public void SetPlayerDestination(Vector3 destination, bool isProgrammaticCall)
     {
-        if (agent == null || !agent.isOnNavMesh)
-        {
-            //Debug.LogError("[PointClick] Agent not available or not on NavMesh to set destination.");
-            return;
-        }
+        if (agent == null || !agent.isOnNavMesh) return;
 
         if (isProgrammaticCall || !isPlayerInputLocked)
         {
             agent.SetDestination(destination);
             OnMoveCommandIssued?.Invoke(destination);
 
-            isMovingToGroundPoint = !isProgrammaticCall; // True only if it's a direct ground click by player
-            if (isProgrammaticCall)
-            {
-                currentGroundDestination = Vector3.zero; // Not relevant for programmatic moves
-            }
-            else
-            {
-                currentGroundDestination = destination; // Store for ground click arrival check
-            }
-            // Debug.Log($"[PointClick] SetPlayerDestination. Programmatic: {isProgrammaticCall}, Dest: {destination}, IsMovingToGround: {isMovingToGroundPoint}");
-        }
-        else
-        {
-            //Debug.LogWarning($"[PointClick] SetPlayerDestination for {destination} blocked. Programmatic: {isProgrammaticCall}, PlayerInputLocked: {isPlayerInputLocked}");
+            isMovingToGroundPoint = !isProgrammaticCall;
+            currentGroundDestination = isProgrammaticCall ? Vector3.zero : destination;
         }
     }
 
@@ -210,15 +180,12 @@ public class PointAndClickMovement : MonoBehaviour
     {
         if (agent != null && agent.isOnNavMesh)
         {
-            bool wasMoving = agent.hasPath || agent.pathPending;
             isMovingToGroundPoint = false;
-            agent.ResetPath();
-            // Only fire event if we actually stopped something or intended to stop.
-            // if (wasMoving) // Or always fire to ensure visuals are cleared. Let's try always.
-            // {
+            if (agent.hasPath)
+            {
+                agent.ResetPath();
+            }
             OnMovementStoppedOrCancelled?.Invoke();
-            // }
-            //if (wasMoving) Debug.Log("[PointClick] Player movement and path explicitly reset.");
         }
     }
 
@@ -226,7 +193,6 @@ public class PointAndClickMovement : MonoBehaviour
     {
         if (!isPlayerInputLocked)
         {
-            //Debug.Log("[PointClick] Player Movement Input HARD LOCKED (e.g., Dialogue/Cutscene).");
             isPlayerInputLocked = true;
             isApproachingTarget = false;
             StopPlayerMovementAndNotify();
@@ -237,35 +203,25 @@ public class PointAndClickMovement : MonoBehaviour
     {
         if (isPlayerInputLocked)
         {
-            //Debug.Log("[PointClick] Player Movement Input HARD UNLOCKED.");
             isPlayerInputLocked = false;
         }
     }
 
     public void LockPlayerApproach(IClickable target)
     {
-        // It's possible a hard lock is already in place (e.g. dialogue starting then NPC moves player slightly)
-        // In that case, we don't want to override the hard lock's control, but we still note the approach.
         if (isPlayerInputLocked)
         {
-            //Debug.LogWarning($"[PointClick] LockPlayerApproach called for {((MonoBehaviour)target)?.name}, but player input is already HARD LOCKED. Approach will proceed programmatically.");
+            Debug.LogWarning($"[PointClick] LockPlayerApproach called for {((MonoBehaviour)target)?.name}, but input is already HARD LOCKED.");
         }
 
-        //Debug.Log($"[PointClick] Player Approach soft-LOCKED for target {((MonoBehaviour)target).name}.");
         isApproachingTarget = true;
-        currentTarget = target;
-
-        bool wasPreviouslyMovingToGround = isMovingToGroundPoint;
+        currentTarget = target; // Ensure current target is set.
         isMovingToGroundPoint = false;
 
-        if (agent.hasPath && wasPreviouslyMovingToGround)
+        // Quietly stop any previous movement path
+        if (agent.hasPath)
         {
-            StopPlayerMovementAndNotify(); // Properly stop and notify if interrupting a ground move
-        }
-        else if (agent.hasPath)
-        {
-            agent.ResetPath(); // Quietly stop other paths
-            //Debug.Log("[PointClick] Player agent path reset (quietly) because NPC is taking control of movement.");
+            agent.ResetPath();
         }
     }
 
@@ -273,20 +229,9 @@ public class PointAndClickMovement : MonoBehaviour
     {
         if (isApproachingTarget)
         {
-            Debug.Log($"[PointClick] Player Approach UNLOCKED from target {((MonoBehaviour)currentTarget)?.name}.");
             isApproachingTarget = false;
-            // If no new command is issued immediately, and we were approaching, the visuals should stop.
-            // Check if player should be idle or if a ground click already re-targeted.
-            // If currentTarget is now null (due to ground click during approach), visuals would have been handled.
-            // If currentTarget is still the NPC (e.g. NPC reached player), and no new movement, notify.
-            if (!agent.pathPending && (!agent.hasPath || agent.remainingDistance <= agent.stoppingDistance))
-            {
-                // Debug.Log("[PointClick] Approach unlocked and player is not actively pathing. Firing stop event for visuals.");
-                // OnMovementStoppedOrCancelled?.Invoke(); // This might be too aggressive / cause flicker.
-                // The PlayerApproachCoroutine ending in BaseNPC
-                // OR the player clicking ground (which calls ResetInteractionState on NPC)
-                // should be the primary drivers for stopping visuals/agent.
-            }
+            // The responsibility for stopping movement is now on the IClickable itself
+            // when it finishes or is cancelled, so this method is much simpler.
         }
     }
 }

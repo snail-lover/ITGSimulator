@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class HolmBehaviur : BaseInteract //This wonderfull script is made by Tadus
+public class HolmBehaviur : Action_SimpleInteract //This wonderfull script is made by Tadus
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 

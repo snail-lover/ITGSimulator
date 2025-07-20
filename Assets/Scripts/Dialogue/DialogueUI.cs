@@ -296,25 +296,25 @@ public class DialogueUI : MonoBehaviour
                 continue;
             }
 
-            Debug.Log($"Button {i} BEFORE positioning:");
-            Debug.Log($"  - Name: {currentButton.name}");
-            Debug.Log($"  - Size: {currentButtonRect.sizeDelta}");
-            Debug.Log($"  - Position: {currentButtonRect.anchoredPosition}");
-            Debug.Log($"  - Previous button is: {(previousButtonRect == null ? "NULL (first button)" : previousButtonRect.name)}");
+           // Debug.Log($"Button {i} BEFORE positioning:");
+            //Debug.Log($"  - Name: {currentButton.name}");
+            //Debug.Log($"  - Size: {currentButtonRect.sizeDelta}");
+           // Debug.Log($"  - Position: {currentButtonRect.anchoredPosition}");
+           // Debug.Log($"  - Previous button is: {(previousButtonRect == null ? "NULL (first button)" : previousButtonRect.name)}");
 
             if (previousButtonRect != null)
             {
-                Debug.Log($"  - Previous button size: {previousButtonRect.sizeDelta}");
-                Debug.Log($"  - Previous button position: {previousButtonRect.anchoredPosition}");
-                Debug.Log($"  - Previous button rect height: {previousButtonRect.rect.height}");
+               // Debug.Log($"  - Previous button size: {previousButtonRect.sizeDelta}");
+               // Debug.Log($"  - Previous button position: {previousButtonRect.anchoredPosition}");
+               // Debug.Log($"  - Previous button rect height: {previousButtonRect.rect.height}");
             }
 
             // THIS IS THE CRITICAL CALL
             currentButton.ApplyLayoutSpacing(previousButtonRect);
 
-            Debug.Log($"Button {i} AFTER positioning:");
-            Debug.Log($"  - Position: {currentButtonRect.anchoredPosition}");
-            Debug.Log($"  - Size: {currentButtonRect.sizeDelta}");
+           // Debug.Log($"Button {i} AFTER positioning:");
+            //Debug.Log($"  - Position: {currentButtonRect.anchoredPosition}");
+            //Debug.Log($"  - Size: {currentButtonRect.sizeDelta}");
 
             // This is the CRITICAL ASSIGNMENT for the next loop
             previousButtonRect = currentButtonRect;
@@ -324,7 +324,7 @@ public class DialogueUI : MonoBehaviour
                 Debug.LogError($"CRITICAL FAILURE: RectTransform assignment failed for button {i}", currentButton.gameObject);
             }
         }
-        Debug.Log("--- Finished Button Positioning ---");
+        //Debug.Log("--- Finished Button Positioning ---");
 
         // STEP 4: FINALIZE
         choicesScrollRect.gameObject.SetActive(true);

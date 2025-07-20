@@ -72,9 +72,7 @@ public class DefaultInteraction
     public bool valueToSet = true;
 }
 
-
-[RequireComponent(typeof(BaseInteract))]
-public class ConditionalInteractionHandler : MonoBehaviour
+public class ConditionalInteractionHandler : MonoBehaviour, IInteractableAction
 {
     [Header("UI Popup")]
     [Tooltip("A UI prefab containing a TextMeshPro component. This will be instantiated on interact.")]
@@ -91,6 +89,7 @@ public class ConditionalInteractionHandler : MonoBehaviour
     // Private references
     private Canvas mainCanvas;
     private GameObject activePopupInstance;
+    private AudioSource audioSource;
 
     // Static reference to manage active popups globally
     private static ConditionalInteractionHandler activeHandler = null;
@@ -100,11 +99,14 @@ public class ConditionalInteractionHandler : MonoBehaviour
         mainCanvas = FindFirstObjectByType<Canvas>();
         if (mainCanvas == null) { Debug.LogError($"[{gameObject.name}] Cannot find a Canvas in the scene!"); }
         if (popupPrefab == null) { Debug.LogError($"[{gameObject.name}] Missing its Popup Prefab."); }
+
+        // Get or add an AudioSource for playing sounds
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) { audioSource = gameObject.AddComponent<AudioSource>(); }
     }
 
     private void Update()
     {
-        // This input check dismisses a text popup. Cutscenes will manage their own state.
         if (activeHandler == this && activePopupInstance != null && Input.GetMouseButtonDown(0))
         {
             DismissPopup();
@@ -112,9 +114,25 @@ public class ConditionalInteractionHandler : MonoBehaviour
     }
 
     /// <summary>
+    /// This is the new entry point called by Interactable.cs when the player is in range.
+    /// </summary>
+    public void ExecuteAction()
+    {
+        EvaluateAndExecute();
+    }
+
+    /// <summary>
+    /// Called by Interactable.cs if the interaction is cancelled.
+    /// </summary>
+    public void ResetAction()
+    {
+        DismissPopup();
+    }
+
+    /// <summary>
     /// REWRITTEN: This method now evaluates world states AND inventory conditions.
     /// </summary>
-    public bool EvaluateAndExecute(AudioSource audioSource)
+    public bool EvaluateAndExecute()
     {
         if (activeHandler != null && activeHandler != this)
         {
@@ -158,13 +176,13 @@ public class ConditionalInteractionHandler : MonoBehaviour
             if (conditionMet)
             {
                 // We found a matching condition, execute its outcome and stop checking.
-                ExecuteConditionalInteraction(condition, audioSource);
+                ExecuteConditionalInteraction(condition);
                 return true; // Indicates a specific interaction was successful.
             }
         }
 
         // If we get here, no specific conditions were met. Run the default interaction.
-        ExecuteDefaultInteraction(audioSource);
+        ExecuteDefaultInteraction();
         return false; // Indicates the default interaction was used.
     }
 
@@ -172,7 +190,7 @@ public class ConditionalInteractionHandler : MonoBehaviour
     /// NEW: Handles the outcome of a successful condition check.
     /// It prioritizes playing a cutscene over showing a popup.
     /// </summary>
-    private void ExecuteConditionalInteraction(InteractionCondition condition, AudioSource source)
+    private void ExecuteConditionalInteraction(InteractionCondition condition)
     {
         // --- 1. Handle the primary outcome (Cutscene > Popup) ---
         if (condition.cutsceneToPlay != null)
@@ -187,9 +205,9 @@ public class ConditionalInteractionHandler : MonoBehaviour
         }
 
         // --- 2. Play Sound Effect ---
-        if (condition.soundEffect != null && source != null)
+        if (condition.soundEffect != null && audioSource != null)
         {
-            source.PlayOneShot(condition.soundEffect);
+            audioSource.PlayOneShot(condition.soundEffect);
         }
 
         // --- 3. Set World State ---
@@ -220,13 +238,13 @@ public class ConditionalInteractionHandler : MonoBehaviour
     /// <summary>
     /// NEW: The logic for the default interaction, moved into its own method for clarity.
     /// </summary>
-    private void ExecuteDefaultInteraction(AudioSource source)
+    private void ExecuteDefaultInteraction()
     {
         ShowPopup(defaultInteraction.popupMessage);
 
-        if (defaultInteraction.soundEffect != null && source != null)
+        if (defaultInteraction.soundEffect != null && this.audioSource != null)
         {
-            source.PlayOneShot(defaultInteraction.soundEffect);
+            this.audioSource.PlayOneShot(defaultInteraction.soundEffect);
         }
 
         if (!string.IsNullOrEmpty(defaultInteraction.stateToSetOnSuccess))
