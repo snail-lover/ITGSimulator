@@ -17,15 +17,12 @@ public class DialogueGraphView : GraphView
    
     private List<ISelectable> _lastSelection = new List<ISelectable>();
 
-    // A static reference to the item database to avoid finding it repeatedly.
-    private static ItemDatabase _itemDatabaseInstance;
 
     public DialogueGraphView(DialogueGraphEditorWindow editorWindow)
     {
         _editorWindow = editorWindow;
 
         // Ensure the ItemDatabase is ready for use by the editor.
-        EnsureItemDatabase();
         var styleSheet = Resources.Load<StyleSheet>("DialogueGraphStyle");
         if (styleSheet != null)
         {
@@ -295,22 +292,10 @@ public class DialogueGraphView : GraphView
         nodeItemNameField.RegisterValueChangedCallback(evt => nodeData.itemGate.itemName = evt.newValue);
 
         // Find the full item object from its saved ID to display in the UI.
-        CreateInventoryItem initialItem = GetItemFromID(nodeData.itemGate.requiredItemID);
 
-        var nodeItemObjectField = new ObjectField("Required Item (SO):")
-        {
-            objectType = typeof(CreateInventoryItem),
-            value = initialItem
-        };
-        nodeItemObjectField.RegisterValueChangedCallback(evt => {
-            var selectedItem = evt.newValue as CreateInventoryItem;
-            // When an item is selected, save its ID. If cleared, save null.
-            nodeData.itemGate.requiredItemID = selectedItem?.id;
-            if (selectedItem != null) nodeItemNameField.value = selectedItem.itemName;
-        });
+
 
         nodeItemGateFoldout.Add(nodeItemNameField);
-        nodeItemGateFoldout.Add(nodeItemObjectField);
         nodeView.mainContainer.Add(nodeItemGateFoldout);
 
         nodeView.mainContainer.Add(CreateConditionsUI(nodeData.worldStateConditions));
@@ -370,24 +355,11 @@ public class DialogueGraphView : GraphView
         var choiceItemNameField = new TextField("Item Name:") { value = choiceData.itemGate.itemName };
         choiceItemNameField.RegisterValueChangedCallback(evt => choiceData.itemGate.itemName = evt.newValue);
 
-        CreateInventoryItem initialChoiceItem = GetItemFromID(choiceData.itemGate.requiredItemID);
-
-        var choiceItemObjectField = new ObjectField("Required Item (SO):")
-        {
-            objectType = typeof(CreateInventoryItem),
-            value = initialChoiceItem
-        };
-        choiceItemObjectField.RegisterValueChangedCallback(evt => {
-            var selectedItem = evt.newValue as CreateInventoryItem;
-            choiceData.itemGate.requiredItemID = selectedItem?.id;
-            if (selectedItem != null) choiceItemNameField.value = selectedItem.itemName;
-        });
 
         var removeItemToggle = new Toggle("Remove on Select:") { value = choiceData.itemGate.removeItemOnSelect };
         removeItemToggle.RegisterValueChangedCallback(evt => choiceData.itemGate.removeItemOnSelect = evt.newValue);
 
         choiceItemGateFoldout.Add(choiceItemNameField);
-        choiceItemGateFoldout.Add(choiceItemObjectField);
         choiceItemGateFoldout.Add(removeItemToggle);
         detailsContainer.Add(choiceItemGateFoldout);
 
@@ -398,29 +370,11 @@ public class DialogueGraphView : GraphView
         detailsContainer.Add(CreateConditionsUI(choiceData.worldStateConditions));
         detailsContainer.Add(CreateStateChangesUI(choiceData.stateChangesOnSelect));
 
-        var cutsceneObjectField = new ObjectField("Trigger Cutscene:")
-        {
-            objectType = typeof(Cutscene),
-            value = choiceData.triggerCutscene,
-            allowSceneObjects = false
-        };
-        cutsceneObjectField.RegisterValueChangedCallback(evt => choiceData.triggerCutscene = evt.newValue as Cutscene);
-        detailsContainer.Add(cutsceneObjectField);
+        // Add the "Starts Hangout" checkbox
+        var startsHangoutToggle = new Toggle("Starts Hangout:") { value = choiceData.startsHangout };
+        startsHangoutToggle.RegisterValueChangedCallback(evt => choiceData.startsHangout = evt.newValue);
+        detailsContainer.Add(startsHangoutToggle);
 
-        // --- ITEM TO GIVE REFACTOR ---
-        CreateInventoryItem initialItemToGive = GetItemFromID(choiceData.itemToGiveID);
-        var itemToGiveField = new ObjectField("Item to Give:")
-        {
-            objectType = typeof(CreateInventoryItem),
-            value = initialItemToGive,
-            allowSceneObjects = false
-        };
-        itemToGiveField.RegisterValueChangedCallback(evt =>
-        {
-            var selectedItem = evt.newValue as CreateInventoryItem;
-            choiceData.itemToGiveID = selectedItem?.id;
-        });
-        detailsContainer.Add(itemToGiveField);
 
         nodeView.outputContainer.Add(choiceRowContainer);
         nodeView.outputContainer.Add(detailsContainer);
@@ -525,42 +479,10 @@ public class DialogueGraphView : GraphView
     /// <summary>
     /// Ensures the ItemDatabase is loaded and available for the editor.
     /// </summary>
-    private static void EnsureItemDatabase()
-    {
-        if (_itemDatabaseInstance != null) return;
-
-        _itemDatabaseInstance = UnityEngine.Object.FindObjectOfType<ItemDatabase>();
-        if (_itemDatabaseInstance == null)
-        {
-            // As a fallback, try to find a prefab in a "Resources/Editor" folder.
-            // This is a common pattern for editor-only assets.
-            var prefab = Resources.Load<ItemDatabase>("Editor/ItemDatabasePrefab");
-            if (prefab != null)
-            {
-                _itemDatabaseInstance = UnityEngine.Object.Instantiate(prefab);
-                _itemDatabaseInstance.name = "EditorOnly_ItemDatabase_Instance";
-            }
-            else
-            {
-                Debug.LogError("[DialogueGraphView] Could not find an ItemDatabase instance in the scene or as a prefab in 'Resources/Editor'. Item fields will not work correctly.");
-                return;
-            }
-        }
-        // Force the database to initialize its internal dictionary.
-        _itemDatabaseInstance.InitializeDatabase();
-    }
 
     /// <summary>
     /// A safe helper method to get an item from the database using its ID.
     /// </summary>
-    private CreateInventoryItem GetItemFromID(string itemID)
-    {
-        if (string.IsNullOrEmpty(itemID) || _itemDatabaseInstance == null)
-        {
-            return null;
-        }
-        return _itemDatabaseInstance.GetItemByID(itemID);
-    }
 
     #endregion
 }

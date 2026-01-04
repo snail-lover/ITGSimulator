@@ -1,0 +1,83 @@
+{
+    "greetingNodeID": "GREETINGS_NODE",
+    "entryPoints": [
+        {
+            "entryText": "Let's hang out",
+            "entryType": 0,
+            "startNodeID": "EXIT_ENTRY",
+            "worldStateConditions": [],
+            "requiredItemID": ""
+        }
+    ],
+    "nodes": [
+        {
+            "nodeID": "TEST_HPD",
+            "text": "bitchbitchvitch",
+            "choices": [
+                {
+                    "choiceText": "bitch",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": "",
+                    "startsHangout": false
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "GREETINGS_NODE",
+            "text": "hello\nHello",
+            "choices": [],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        },
+        {
+            "nodeID": "EXIT_ENTRY",
+            "text": "That sounds fun",
+            "choices": [
+                {
+                    "choiceText": "Let's go!",
+                    "lovePointChange": 0,
+                    "nextNodeID": "",
+                    "itemGate": {
+                        "itemName": "",
+                        "requiredItemID": "",
+                        "removeItemOnSelect": false
+                    },
+                    "itemsToGive": [],
+                    "requiredTag": 0,
+                    "triggerCutsceneName": "",
+                    "stateChangesOnSelect": [],
+                    "worldStateConditions": [],
+                    "itemToGiveID": "",
+                    "startsHangout": true
+                }
+            ],
+            "itemGate": {
+                "itemName": "",
+                "requiredItemID": "",
+                "removeItemOnSelect": false
+            },
+            "worldStateConditions": []
+        }
+    ]
+}

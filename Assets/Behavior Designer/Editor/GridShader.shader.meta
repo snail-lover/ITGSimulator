@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: afbd9f0fb1c22d1409403fdef158479f
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Editor/GridShader.shader
+  uploadId: 732694

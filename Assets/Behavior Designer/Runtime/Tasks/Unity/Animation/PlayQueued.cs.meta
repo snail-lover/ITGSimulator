@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bb55ee97bf8cb3d479de025d77a9c4b6
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/Animation/PlayQueued.cs
+  uploadId: 732694

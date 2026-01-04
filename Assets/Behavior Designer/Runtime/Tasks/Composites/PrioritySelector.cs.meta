@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8b5aa86ad86e94f41841abd04bd96f2a
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Composites/PrioritySelector.cs
+  uploadId: 732694

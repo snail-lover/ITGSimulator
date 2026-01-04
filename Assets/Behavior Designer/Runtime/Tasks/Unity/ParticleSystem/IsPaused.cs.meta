@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e4e9ab132f20dfa4095b3c90303ebf74
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/ParticleSystem/IsPaused.cs
+  uploadId: 732694

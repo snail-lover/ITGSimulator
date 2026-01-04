@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 86ff0dd68e1e479408158dfe30d4258f
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Variables/SharedLayerMask.cs
+  uploadId: 732694

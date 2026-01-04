@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fe5e2655abffbe94eba3f6a0abd34b5c
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/Vector3/Dot.cs
+  uploadId: 732694

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ec553c7ad9360a24fb7ce3bf3bc48c97
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/AudioSource/SetMute.cs
+  uploadId: 732694

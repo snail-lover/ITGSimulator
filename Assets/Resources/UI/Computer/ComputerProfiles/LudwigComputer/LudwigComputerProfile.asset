@@ -9,20 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb313d9c006a38b43a441c7319a27fc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 78c5b3606bf3f3e4a848ea420f8dc722, type: 3}
   m_Name: LudwigComputerProfile
   m_EditorClassIdentifier: Assembly-CSharp::ComputerProfile
-  ownerName: Ludwig
-  profilePicture: {fileID: 21300000, guid: 425da1a09509da142bdf895e96990350, type: 3}
-  backgroundImage: {fileID: 21300000, guid: 7fc8438d4473f5048ade79d438870a67, type: 3}
-  requiresPassword: 1
-  password: lidl
+  ownerName: Public Terminal
+  profilePicture: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  requiresPassword: 0
+  password: 
   systemInfoText: 
-  notes:
-  - title: Lidl
-    content: ooooooh...i want to go to lidl
-  - title: bonestretch
-    content: mmmmhi want ttthee bone sttterreeettch!!!!
-  imageGallery:
-  - {fileID: 21300000, guid: c002d62c025ceff458cbab46776f00a5, type: 3}
-  - {fileID: 21300000, guid: 8daf4ebe3b1bcba4ab4f23cedb47d9ef, type: 3}
+  notes: []
+  imageGallery: []

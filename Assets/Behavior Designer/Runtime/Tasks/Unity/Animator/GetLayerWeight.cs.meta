@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 346c4295a827d9e4c8029cd29a8e18ca
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/Animator/GetLayerWeight.cs
+  uploadId: 732694

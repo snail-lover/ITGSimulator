@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a21f70566ff2afc4e95454d3d658c1fa
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/SharedVariables/CompareSharedTransform.cs
+  uploadId: 732694

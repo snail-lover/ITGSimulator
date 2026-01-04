@@ -9,28 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb313d9c006a38b43a441c7319a27fc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 78c5b3606bf3f3e4a848ea420f8dc722, type: 3}
   m_Name: ViktorComputer
   m_EditorClassIdentifier: Assembly-CSharp::ComputerProfile
-  ownerName: Viktor
+  ownerName: Vitkor
   profilePicture: {fileID: 21300000, guid: 63d6eebe77cb2d549a4ac443dfd4a9cf, type: 3}
   backgroundImage: {fileID: 21300000, guid: 11eb3eccebbdffd4dad4a6c8621e6952, type: 3}
-  requiresPassword: 0
-  password: 
-  systemInfoText: This is viktors computer
+  requiresPassword: 1
+  password: realmspyisbest1
+  systemInfoText: tst
   notes:
-  - title: Passwords
-    content: 'Zozk Password: lundby12
-
-      Alex Password: donttreadonme
-
-      Simon
-      Password: himym
-
-      Ludwig Password: lidl'
-  - title: note
-    content: funny thing, i need two notes. If i don't have more than two notes,
-      the notes fuck up somehow lol
+  - title: qwrwrq
+    content: wqrrwqwqr
   imageGallery:
-  - {fileID: 21300000, guid: 87c5077353acb7a4ba5ad7c175af928b, type: 3}
   - {fileID: 21300000, guid: 1e67b73c4942e8048bf6345c64d78b4b, type: 3}

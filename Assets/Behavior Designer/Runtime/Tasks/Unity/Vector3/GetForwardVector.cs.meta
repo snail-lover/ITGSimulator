@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b09c11f987794eb45b65e0ef249cdb3f
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/Vector3/GetForwardVector.cs
+  uploadId: 732694

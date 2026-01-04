@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 66c6175d42bd49e48be458378e0a7875
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/Rigidbody2D/GetIsKinematic.cs
+  uploadId: 732694

@@ -3,27 +3,27 @@
     {
       "id": "generic_hello_01",
       "type": "generic",
-      "text": "Hello there!"
+      "text": "generic_greeting"
     },
     {
       "id": "generic_greeting_02",
       "type": "generic",
-      "text": "Nice day, isn't it?"
+      "text": "generic_greeting"
     },
     {
       "id": "player_greeting_01",
       "type": "greeting",
-      "text": "fuck you"
+      "text": "player_greeting 1"
     },
     {
       "id": "player_greeting_02",
       "type": "greeting",
-      "text": "super gay"
+      "text": "player_greeting 2"
     },
     {
       "id": "player_greeting_03",
       "type": "greeting",
-      "text": "gay"
+      "text": "player_greeting 3"
     }
   ]
 }

@@ -208,7 +208,6 @@ GameObject:
   - component: {fileID: 111036686863792590}
   - component: {fileID: 2284100776260617788}
   - component: {fileID: 4194901011533010367}
-  - component: {fileID: 1236132560657319467}
   - component: {fileID: 6816630107821360951}
   m_Layer: 5
   m_Name: StatsPanel
@@ -275,20 +274,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1236132560657319467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1839841016036817955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2f8ab66a3b028545ba5d1476c1d2a10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCStatPage
-  statsText: {fileID: 744679959588076972}
-  currentNPC: {fileID: 0}
 --- !u!225 &6816630107821360951
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -726,7 +711,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000015957281}
+  m_AnchoredPosition: {x: 0, y: -0.000006919556}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &3119520992598367088
@@ -1469,7 +1454,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7121797863528193243}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9994573
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1957,11 +1942,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3408326365436774021}
   - component: {fileID: 4041720518535260001}
-  - component: {fileID: 378411035127385559}
   - component: {fileID: 8010547173644264044}
   - component: {fileID: 1362084299340687332}
   - component: {fileID: 1681229398624444922}
   - component: {fileID: 7621883142398298921}
+  - component: {fileID: -7072291334631799743}
   m_Layer: 5
   m_Name: DialogueUI_Prefab
   m_TagString: Untagged
@@ -2006,38 +1991,6 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &378411035127385559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7851141520086256613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf84f10e725dc414eaccd513d3ff265c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueSystemCanvasGroup: {fileID: 4041720518535260001}
-  speakerNameText: {fileID: 1889639743930276095}
-  visibleDialogueText: {fileID: 5854278538287163914}
-  sizingDialogueText: {fileID: 4326670229472743009}
-  characterPortraitImage: {fileID: 0}
-  charactersPerSecond: 50
-  typingSound: {fileID: 8300000, guid: 13c9bd8679190e94b91ac720b42998f2, type: 3}
-  playSoundEveryNChars: 5
-  choicesContainer: {fileID: 6016774307792100369}
-  choiceButtonPrefab: {fileID: 9146664480788046620, guid: ebb03b36bf2e1f34c99e61774514ab65, type: 3}
-  choicesScrollRect: {fileID: 1289403986956834338}
-  questIcon: {fileID: 0}
-  loveIcon: {fileID: 0}
-  contextualIcon: {fileID: 0}
-  generalIcon: {fileID: 0}
-  exitButton: {fileID: 7427302682573728580}
-  statsButton: {fileID: 1940573017170972849}
-  finalCutsceneButton: {fileID: 2800392828901904339}
-  showSound: {fileID: 8300000, guid: 23a94f686bd0e9144affd6ece23b4826, type: 3}
-  isShowingGreetingDialogue: 0
 --- !u!222 &8010547173644264044
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2195,6 +2148,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-7072291334631799743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7851141520086256613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf84f10e725dc414eaccd513d3ff265c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSystemCanvasGroup: {fileID: 4041720518535260001}
+  speakerNameText: {fileID: 1889639743930276095}
+  visibleDialogueText: {fileID: 5854278538287163914}
+  sizingDialogueText: {fileID: 4326670229472743009}
+  characterPortraitImage: {fileID: 0}
+  charactersPerSecond: 50
+  typingSound: {fileID: 8300000, guid: 5dff2839beb3b3e46ae60bd307c8735c, type: 3}
+  playSoundEveryNChars: 2
+  choicesContainer: {fileID: 6016774307792100369}
+  choiceButtonPrefab: {fileID: 1040088715181186929, guid: ebb03b36bf2e1f34c99e61774514ab65, type: 3}
+  choicesScrollRect: {fileID: 1289403986956834338}
+  questIcon: {fileID: 0}
+  loveIcon: {fileID: 0}
+  contextualIcon: {fileID: 0}
+  generalIcon: {fileID: 0}
+  exitButton: {fileID: 7427302682573728580}
+  statsButton: {fileID: 1940573017170972849}
+  finalCutsceneButton: {fileID: 0}
+  showSound: {fileID: 0}
+  isShowingGreetingDialogue: 0
 --- !u!1 &8499285525869587535
 GameObject:
   m_ObjectHideFlags: 0

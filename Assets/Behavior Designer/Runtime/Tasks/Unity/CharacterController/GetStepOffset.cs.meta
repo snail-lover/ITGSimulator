@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d9bb8d4be247f4d4cb9b2b05a6efd48f
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/CharacterController/GetStepOffset.cs
+  uploadId: 732694

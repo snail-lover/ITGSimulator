@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 98dff23734f3a834cbf5ccf87c9904f7
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/Rigidbody2D/GetPosition.cs
+  uploadId: 732694

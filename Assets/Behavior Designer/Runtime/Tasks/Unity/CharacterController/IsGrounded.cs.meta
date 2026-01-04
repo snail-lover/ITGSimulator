@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e8541a996b0a37b4f8bce82dd23ddb84
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/CharacterController/IsGrounded.cs
+  uploadId: 732694

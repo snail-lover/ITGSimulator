@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Holm
+  - MainCanvas
+  - RoomTrigger
   layers:
   - Default
   - TransparentFX
@@ -20,10 +22,10 @@ TagManager:
   - Floor_Second
   - MapUI
   - Draggable
-  - 
-  - 
-  - 
-  - 
+  - MainCanvas
+  - PlacementPreview
+  - Moveable
+  - Walkable
   - 
   - 
   - 
@@ -45,3 +47,5 @@ TagManager:
     locked: 0
   m_RenderingLayers:
   - Default
+  - Inside
+  - Outside

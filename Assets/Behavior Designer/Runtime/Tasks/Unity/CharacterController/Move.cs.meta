@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 546770f14f8265d4c83b94210630b644
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/CharacterController/Move.cs
+  uploadId: 732694

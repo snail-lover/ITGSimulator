@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: eff6d0a1593e4f7459f0194f9cbd79f1
+timeCreated: 1523364189
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/Animator/WaitForState.cs
+  uploadId: 732694

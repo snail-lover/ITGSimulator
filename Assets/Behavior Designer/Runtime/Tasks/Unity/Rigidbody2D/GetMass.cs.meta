@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 72d52ef5efe5e974994c91279536555e
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/Rigidbody2D/GetMass.cs
+  uploadId: 732694

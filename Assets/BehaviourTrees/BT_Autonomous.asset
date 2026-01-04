@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23f08d2ae4cba14087c1ed36193d82b, type: 3}
+  m_Name: BT_Autonomous
+  m_EditorClassIdentifier: 
+  mBehaviorSource:
+    behaviorName: BT_Autonomous
+    behaviorDescription: BT_Autonomous
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(888.543457,12.2608948)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-95.45654,149.2609)"},"ID":1,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"InitializeBrain","NodeData":{"Offset":"(-4.456543,167.2609)"},"ID":2,"Name":"Initialize
+        Brain","Instant":true,"SharedNpcBrainNpcBrain":{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(260,180)"},"ID":3,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(183.229645,307.9076)"},"ID":4,"Name":"Watch
+        Player Drag","Instant":true,"AbortTypeabortType":"Both","Children":[{"Type":"IsVisibleDraggedObject","NodeData":{"Offset":"(-0.5841236,148.747177)"},"ID":5,"Name":"Is
+        Visible Dragged Object","Instant":true,"SharedNpcBrainNpcBrain":{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true}},{"Type":"LookAtDraggedObject","NodeData":{"Offset":"(202.118561,148.747208)"},"ID":6,"Name":"Look
+        At Dragged Object","Instant":true,"SharedNpcBrainNpcBrain":{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true},"SharedFloatTurnSpeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":5}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(966.4551,-252.555542)"},"ID":7,"Name":"Handle
+        Critical Needs","Instant":true,"AbortTypeabortType":"LowerPriority","Children":[{"Type":"IsNeedCritical","NodeData":{"Offset":"(-731.991455,179.115143)"},"ID":8,"Name":"Is
+        Need Critical","Instant":true,"SharedNpcBrainNpcBrain":{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true},"SinglecriticalThreshold":50},{"Type":"FindRememberedActivityLocation","NodeData":{"Offset":"(-408.256653,187.614319)"},"ID":9,"Name":"Find
+        Remembered Activity Location","Instant":true,"SharedNpcBrainNpcBrain":{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true},"SinglecriticalThreshold":50,"SharedStringOutActivityID":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":"TargetActivityID","IsShared":true},"SharedVector3OutStalePosition":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"TargetPosition","IsShared":true,"Vector3mValue":"(0,0,0)"}},{"Type":"MoveToPosition","NodeData":{"Offset":"(-201.499573,187.614044)"},"ID":10,"Name":"Move
+        To Position","Instant":true,"SharedNpcBrainNpcBrain":{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true},"SharedVector3InTargetPosition":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"TargetPosition","IsShared":true,"Vector3mValue":"(0,0,0)"}},{"Type":"VerifyOrForgetActivity","NodeData":{"Offset":"(1.45990753,197.871277)"},"ID":11,"Name":"Verify
+        Or Forget Activity","Instant":true,"SharedNpcBrainNpcBrain":{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true},"SharedStringInActivityID":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":"TargetActivityID","IsShared":true},"SharedGameObjectOutActivityObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ActivityTarget","IsShared":true}},{"Type":"PerformActivity","NodeData":{"Offset":"(194.914276,176.54657)"},"ID":12,"Name":"Perform
+        Activity","Instant":true,"SharedNpcBrainNpcBrain":{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true},"SharedGameObjectInActivityTarget":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ActivityTarget","IsShared":true}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(1331.86938,-276.091553)"},"ID":13,"Name":"SearchForNeed","Instant":true,"AbortTypeabortType":"LowerPriority","Children":[{"Type":"IsNeedCritical","NodeData":{"Offset":"(287.074921,179.7959)"},"ID":14,"Name":"Is
+        Need Critical","Instant":true,"SharedNpcBrainNpcBrain":{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true},"SinglecriticalThreshold":50},{"Type":"FindBestZoneForNeed","NodeData":{"Offset":"(467.281372,180.076767)"},"ID":15,"Name":"Find
+        Best Zone For Need","Instant":true,"SharedNpcBrainNpcBrain":{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true},"SinglecriticalThreshold":50,"SharedGameObjectOutZoneTarget":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ZoneTarget","IsShared":true}},{"Type":"MoveToZone","NodeData":{"Offset":"(630.546631,180.0768)"},"ID":16,"Name":"Move
+        To Zone","Instant":true,"SharedNpcBrainNpcBrain":{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true},"SharedGameObjectInZoneTarget":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ZoneTarget","IsShared":true}},{"Type":"SearchInZone","NodeData":{"Offset":"(768.3014,181.0972)"},"ID":17,"Name":"Search
+        In Zone","Instant":true,"SharedNpcBrainNpcBrain":{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true},"SinglesearchDuration":10,"SinglemeanderRadius":5}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(2115.41675,123.096924)"},"ID":18,"Name":"meander","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"FindRandomPoint","NodeData":{"Offset":"(51.51703,151.352173)"},"ID":19,"Name":"Find
+        Random Point","Instant":true,"SharedNpcBrainNpcBrain":{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true},"SharedFloatRadius":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":10},"SharedVector3StoreResult":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"WanderTarget","IsShared":true,"Vector3mValue":"(0,0,0)"}},{"Type":"MoveToPosition","NodeData":{"Offset":"(218.183731,151.352173)"},"ID":20,"Name":"Move
+        To Position","Instant":true,"SharedNpcBrainNpcBrain":{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true},"SharedVector3InTargetPosition":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"WanderTarget","IsShared":true,"Vector3mValue":"(0,0,0)"}},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(380.683716,151.352173)"},"ID":21,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":2},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":5}}]}]}]},"Variables":[{"Type":"SharedNpcBrain","Name":"NpcBrain","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ActivityTarget","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"ZoneTarget","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedString","Name":"TargetActivityID","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"TargetPosition","IsShared":true,"Vector3mValue":"(0,0,0)"},{"Type":"BehaviorDesigner.Runtime.SharedString","Name":"UniqueTriggerID","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedString","Name":"DialogueNodeID","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"ApproachDistance","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"WanderTarget","IsShared":true,"Vector3mValue":"(0,0,0)"},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"_hasNoticedPlayer","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedString","Name":"MovementState","IsShared":true,"IsDynamic":true}]}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects: []
+        byteData: 
+        byteDataArray: 
+      Version: 1.7.12

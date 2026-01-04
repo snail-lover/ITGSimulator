@@ -223,12 +223,11 @@ GameObject:
   - component: {fileID: 4558858698036060075}
   - component: {fileID: 323503169547006775}
   - component: {fileID: 5443614369700332513}
-  - component: {fileID: 9146664480788046620}
   - component: {fileID: 1286927744902474417}
   - component: {fileID: 7570337706678256681}
-  - component: {fileID: 2740531448817762106}
   - component: {fileID: 6312022573138779912}
-  - component: {fileID: 5887390310226081531}
+  - component: {fileID: 482436367566718560}
+  - component: {fileID: 1040088715181186929}
   m_Layer: 5
   m_Name: ChoiceButton
   m_TagString: Untagged
@@ -339,30 +338,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &9146664480788046620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6586117987399952414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 069891942c62f1e4e80e7c6ce0ac2931, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DynamicButton
-  textComponent: {fileID: 2298237960023363336}
-  buttonImage: {fileID: 323503169547006775}
-  iconImage: {fileID: 1092902374326931908}
-  maxWidth: 550
-  padding:
-    left: 20
-    right: 20
-    top: 20
-    bottom: 20
-  spacing: 30
-  iconSize: 24
-  iconXOffset: 30
 --- !u!95 &1286927744902474417
 Animator:
   serializedVersion: 7
@@ -482,20 +457,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2740531448817762106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6586117987399952414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81c1a6bc2dc9b224baf180cd4481d3d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UISoundPlayer
-  hoverSound: {fileID: 8300000, guid: 93fcf4cf3bac1054f8fc9af21bea4f86, type: 3}
-  clickSound: {fileID: 0}
 --- !u!114 &6312022573138779912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,7 +474,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2740531448817762106}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UISoundPlayer, Assembly-CSharp
           m_MethodName: PlayHoverSound
           m_Mode: 1
@@ -525,7 +486,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &5887390310226081531
+--- !u!114 &482436367566718560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -534,6 +495,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 6586117987399952414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 377945490f7c3cd4784cea8b3995bdeb, type: 3}
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIEventForwarder
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
+--- !u!114 &1040088715181186929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6586117987399952414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c66cfd7b736d92941a1a0d6a22c3f835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 2298237960023363336}
+  buttonImage: {fileID: 323503169547006775}
+  iconImage: {fileID: 0}
+  maxWidth: 400
+  padding:
+    left: 20
+    right: 20
+    top: 20
+    bottom: 20
+  spacing: 10
+  iconSize: 24
+  iconXOffset: 10

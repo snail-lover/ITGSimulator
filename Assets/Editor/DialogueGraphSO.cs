@@ -106,6 +106,7 @@ public class DialogueGraphSO : ScriptableObject
                     choiceText = savedChoice.choiceText,
                     lovePointChange = savedChoice.lovePointChange,
                     nextNodeID = nextNodeIDForChoice,
+                    startsHangout = savedChoice.startsHangout,
 
                     itemGate = savedChoice.itemGate != null ? new ItemGate
                     {
@@ -114,7 +115,6 @@ public class DialogueGraphSO : ScriptableObject
                         removeItemOnSelect = savedChoice.itemGate.removeItemOnSelect
                     } : null,
 
-                    triggerCutsceneName = (savedChoice.triggerCutscene != null) ? savedChoice.triggerCutscene.name : null,
                     stateChangesOnSelect = new List<WorldStateChange>(savedChoice.stateChangesOnSelect ?? new List<WorldStateChange>()),
                     worldStateConditions = new List<WorldStateCondition>(savedChoice.worldStateConditions),
 
@@ -164,11 +164,12 @@ public class ChoiceSaveData
     public int lovePointChange;
     public ItemGate itemGate;
     public string overrideNextNodeID;
-    public Cutscene triggerCutscene;
     public List<WorldStateChange> stateChangesOnSelect = new List<WorldStateChange>();
     public List<WorldStateCondition> worldStateConditions = new List<WorldStateCondition>();
     public ItemTag requiredTag = ItemTag.None;
     public string itemToGiveID;
+    [Tooltip("If true, selecting this choice will end the dialogue and start a hangout.")]
+    public bool startsHangout = false;
 }
 
 [Serializable]

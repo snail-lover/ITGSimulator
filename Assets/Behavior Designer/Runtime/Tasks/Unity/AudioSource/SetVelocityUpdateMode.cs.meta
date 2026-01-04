@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c26ea6b22d3fa7843a73e5088376996c
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/AudioSource/SetVelocityUpdateMode.cs
+  uploadId: 732694

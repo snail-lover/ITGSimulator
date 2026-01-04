@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ab5531c4ed335b643a6f310c048a6b00
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/Math/FloatAbs.cs
+  uploadId: 732694

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1ec5ca504fe011b449506c42d3e5ac7f
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Variables/SharedQuaternion.cs
+  uploadId: 732694

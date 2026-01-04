@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bc3d67c80371297439385b30f4be506c
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Actions/StartBehaviorTree.cs
+  uploadId: 732694

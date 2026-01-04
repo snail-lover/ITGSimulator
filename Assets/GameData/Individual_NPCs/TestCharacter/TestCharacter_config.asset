@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa37ec2ee3325004d9ff2556c09f11c3, type: 3}
+  m_Name: TestCharacter_config
+  m_EditorClassIdentifier: Assembly-CSharp::NpcConfig
+  npcName: TestCharacter
+  npcImage: {fileID: 21300000, guid: 5cd5823e286cbaf4bb934611422b29d6, type: 3}
+  dialogueFile: {fileID: 4900000, guid: 33e5840d865afc7438832bdbfc34e28f, type: 3}
+  valueSystem:
+  - axis: 2
+    npcTraitValue: 0
+    importance: 0
+  autonomousBehaviorTree: {fileID: 11400000, guid: 2b52b35f171019241b4b60acb8880d9f, type: 2}
+  hangoutBehaviorTree: {fileID: 11400000, guid: 27287fdd49d098749a32ee9c9e28abda, type: 2}
+  taskIDPool: []
+  initialLove: 0
+  personalityGoals: []
+  hungerDecay: 0.5
+  energyDecay: 0.2
+  bladderDecay: 0.8
+  funDecay: 0.4
+  interactRange: 2
+  rotationSpeed: 5
+  speedParameterName: Speed
+  taskCompletionDelay: 2
+  noticePlayerAnimationTrigger: NoticePlayer
+  noticePlayerAnimationDuration: 1.5
+  noticePlayerSound: {fileID: 0}

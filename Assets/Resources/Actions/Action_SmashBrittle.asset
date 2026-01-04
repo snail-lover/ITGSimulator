@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74d25533b77e6746ba13672e84d8911, type: 3}
+  m_Name: Action_SmashBrittle
+  m_EditorClassIdentifier: 
+  actionName: Smah Brittle
+  priority: 20
+  blockedByStates:
+  - {fileID: 11400000, guid: 9d0ef0235850b57418ad3e15c0c0e43a, type: 2}
+  requiredTag: {fileID: 11400000, guid: 947ec0243dc45ed46908880d36a8bfe0, type: 2}
+  brokenState: {fileID: 11400000, guid: 9d0ef0235850b57418ad3e15c0c0e43a, type: 2}
+  menuLabel: Smash

@@ -1,0 +1,22 @@
+{
+    "name": "Game.Features",
+    "rootNamespace": "",
+    "references": [
+        "GUID:93b7197b6918ee348b0c5d4cad6269a6",
+        "GUID:1a72102bc8073274cb6e1d1a56c9a445",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:4525447ddc567674ca434914f815b6f2",
+        "GUID:df380645f10b7bc4b97d4f5eb6303d95",
+        "GUID:15fc0a57446b3144c949da3e2b9737a9",
+        "GUID:8c4dd21966739024fbd72155091d199e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

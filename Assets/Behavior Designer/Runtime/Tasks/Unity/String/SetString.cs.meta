@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: da59105cbc94b5d4da3c805897f4a099
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Tasks/Unity/String/SetString.cs
+  uploadId: 732694

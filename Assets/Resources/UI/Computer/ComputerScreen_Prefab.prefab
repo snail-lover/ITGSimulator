@@ -946,7 +946,8 @@ GameObject:
   - component: {fileID: 6646606423470384720}
   - component: {fileID: 3345535105770709983}
   - component: {fileID: 4354928098767313779}
-  - component: {fileID: 4874434769349777613}
+  - component: {fileID: 6109339787332519114}
+  - component: {fileID: 6663630603758882473}
   m_Layer: 5
   m_Name: ComputerScreen_Prefab
   m_TagString: Untagged
@@ -1039,7 +1040,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4874434769349777613
+--- !u!114 &6109339787332519114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1048,38 +1049,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 1123130977214210509}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 083354f8371d6374e8c7d679557a0169, type: 3}
+  m_Script: {fileID: 11500000, guid: e8f277b317ffe834fa3a234f49b95081, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ComputerScreenUI
-  passwordScreenPanel: {fileID: 350610337836027885}
-  desktopPanel: {fileID: 1015903328988310966}
-  startMenuPanel: {fileID: 1997933311811636005}
-  backgroundImageComponent: {fileID: 7638926707106988626}
-  profilePictureImage: {fileID: 8353865890560426441}
+  m_EditorClassIdentifier: 
+  backgroundImage: {fileID: 7638926707106988626}
+  backgroundMaterialInstance: {fileID: 2100000, guid: 636eaaf1ae283a94e9c3ea0a38d78f36, type: 2}
+  passwordScreenRoot: {fileID: 350610337836027885}
   ownerNameText: {fileID: 9141195026258528303}
+  ownerPictureImage: {fileID: 8353865890560426441}
   passwordInputField: {fileID: 9221262082295683024}
-  submitButton: {fileID: 3229780830626908233}
   feedbackText: {fileID: 1194685956016818894}
+  submitButton: {fileID: 3229780830626908233}
   exitButtonPassword: {fileID: 1909552313986607571}
-  startButton: {fileID: 1243043139307904618}
-  clockText: {fileID: 2943844711231122591}
-  notesAppIcon: {fileID: 1825183712558236876}
-  imageViewerIcon: {fileID: 8786053634059705762}
-  notesButtonStartMenu: {fileID: 8409003844764853677}
-  shutdownButtonStartMenu: {fileID: 847076820862322668}
+  desktopRoot: {fileID: 1015903328988310966}
   startMenuBlockerButton: {fileID: 1461684428652228731}
-  imageViewerButtonStartMenu: {fileID: 8490254546793704478}
-  notesAppPanel: {fileID: 7244397706814719303}
-  noteButtonPrefab: {fileID: 3172435466500930158, guid: 4a4cee64e23243c4fb04bfa98b0fe8be, type: 3}
+  startButton: {fileID: 1243043139307904618}
+  shutdownButtonStartMenu: {fileID: 847076820862322668}
+  notesAppIcon: {fileID: 1825183712558236876}
+  notesButtonStartMenu: {fileID: 8409003844764853677}
+  notesAppRoot: {fileID: 7244397706814719303}
   sidebarContentArea: {fileID: 6295306266653174745}
   noteContentText: {fileID: 5758080730437773458}
+  noteButtonPrefab: {fileID: 3172435466500930158, guid: 4a4cee64e23243c4fb04bfa98b0fe8be, type: 3}
   closeNotesAppButton: {fileID: 2991938486912380879}
-  imageViewerPanel: {fileID: 8989996918511088735}
-  mainDisplayImage: {fileID: 680525438488979932}
-  mainDisplayFitter: {fileID: 932514022330726241}
+  imageViewerIcon: {fileID: 8786053634059705762}
+  imageViewerButtonStartMenu: {fileID: 8490254546793704478}
+  imageViewerRoot: {fileID: 8989996918511088735}
+  imageViewerDisplayImage: {fileID: 8272020409401917589}
   previousImageButton: {fileID: 4990541054793606865}
   nextImageButton: {fileID: 3558009678457254525}
   closeImageViewerButton: {fileID: 4782050163740419185}
+  startMenuRoot: {fileID: 1997933311811636005}
+--- !u!225 &6663630603758882473
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123130977214210509}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1224857166745827785
 GameObject:
   m_ObjectHideFlags: 0

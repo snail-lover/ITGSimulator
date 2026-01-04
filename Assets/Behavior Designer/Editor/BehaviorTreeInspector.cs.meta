@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 94693c6931cea70439c26417a1fc0d33
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Editor/BehaviorTreeInspector.cs
+  uploadId: 732694

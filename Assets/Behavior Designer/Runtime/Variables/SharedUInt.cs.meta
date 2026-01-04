@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f63201b0b2f3043409fc893c5556cd35
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15277
+  packageName: Behavior Designer - Behavior Trees for Everyone
+  packageVersion: 1.7.12
+  assetPath: Assets/Behavior Designer/Runtime/Variables/SharedUInt.cs
+  uploadId: 732694

@@ -2,14 +2,14 @@
 using System.IO; // For Path operations
 using UnityEditor;
 using UnityEditor.Callbacks; // For OnOpenAsset
-using UnityEditor.UIElements; // <--- ADDED for InspectorView
+using UnityEditor.UIElements; // <--- for InspectorView
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class DialogueGraphEditorWindow : EditorWindow
 {
     private DialogueGraphView _graphView;
-    internal DialogueGraphSO _currentGraphSO; // <--- CHANGED from private to internal
+    internal DialogueGraphSO _currentGraphSO; 
     private Label _fileNameLabel;
     private InspectorView _inspectorView;
 
