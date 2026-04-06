@@ -1,20 +1,30 @@
-// Game.Core
+using System;
+
 namespace Game.Core
 {
-    using System;
-
     public static class SelectedItemState
     {
         public static string SelectedItemID { get; private set; }
-        public static event Action<string> OnChanged;
+        public static string SelectedUniqueID { get; private set; } // <--- NEW
 
-        public static void Set(string itemID)
+        public static event Action OnChanged; // Removed string arg to force pulling from properties
+
+        public static void Set(string itemID, string uniqueID)
         {
-            if (SelectedItemID == itemID) return;
+            // Only update if something changed
+            if (SelectedUniqueID == uniqueID) return;
+
             SelectedItemID = itemID;
-            OnChanged?.Invoke(SelectedItemID);
+            SelectedUniqueID = uniqueID;
+            
+            OnChanged?.Invoke();
         }
 
-        public static void Clear() => Set(null);
+        public static void Clear()
+        {
+            SelectedItemID = null;
+            SelectedUniqueID = null;
+            OnChanged?.Invoke();
+        }
     }
 }

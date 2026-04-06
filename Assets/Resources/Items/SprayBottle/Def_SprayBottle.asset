@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 890df1367ed37464eba9405e412aa4cf, type: 3}
+  m_Name: Def_SprayBottle
+  m_EditorClassIdentifier: 
+  id: Spray_Bottle
+  itemName: Spray Bottle
+  icon: {fileID: 21300000, guid: c4ac62c8a24af9748871bd35139653f7, type: 3}
+  tags:
+  - {fileID: 11400000, guid: e48c4eb99483db348ace28a04571e9ee, type: 2}
+  - {fileID: 11400000, guid: 670e80e1ff94eb04facecf4d98553dd3, type: 2}
+  worldPrefab: {fileID: 130975148724934097, guid: b28d004ac32218c4c9af2782b5639f29, type: 3}
+  holdPositionOffset: {x: 0, y: 0, z: 0}
+  holdRotationOffset: {x: 0, y: 0, z: 0}
+  useBumperCollider: 1

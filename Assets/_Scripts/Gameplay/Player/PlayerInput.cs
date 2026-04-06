@@ -8,9 +8,12 @@ public class PlayerInput : MonoBehaviour
     [Header("Setup")]
     public Camera mainCamera;
     public LayerMask clickableLayers;
+    
+    // References to the "Body Parts"
     public PlayerMotor motor;
+    public PlayerHoldController holder;
+    public PlayerDragController dragger; // <--- NEW REFERENCE
 
-    // Core events other systems can subscribe to
     public static event System.Action<IInteractable> OnInteractCommand;
     public static event System.Action<IInteractable, string> OnUseItemCommand;
 
@@ -19,6 +22,8 @@ public class PlayerInput : MonoBehaviour
     void Awake()
     {
         if (motor == null) motor = GetComponent<PlayerMotor>();
+        if (holder == null) holder = GetComponent<PlayerHoldController>();
+        if (dragger == null) dragger = GetComponent<PlayerDragController>(); // <--- Auto Get
     }
 
     void Start()
@@ -35,8 +40,53 @@ public class PlayerInput : MonoBehaviour
 
         HandleMovement();
         HandleMouseClick();
+        HandleKeyboardAction(); 
+    }
+    
+    private void HandleKeyboardAction()
+    {
+        // "Holster" (F)
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            // If dragging, F could also stop dragging? 
+            // For now, let's keep F for inventory holstering only, or mirror Q.
+            if (dragger != null && dragger.IsDragging)
+            {
+                dragger.StopDrag();
+                return;
+            }
+
+            if (holder != null)
+            {
+                holder.DropItem(); 
+                SelectedItemState.Clear();
+            }
+        }
+
+        // "Drop / Stop Interaction" (Q)
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            // --- NEW LOGIC START ---
+            
+            // 1. Priority: If dragging, STOP dragging.
+            if (dragger != null && dragger.IsDragging)
+            {
+                dragger.StopDrag();
+                return; // Do NOT throw an item if we just stopped dragging
+            }
+
+            // 2. Secondary: If not dragging, Throw held item.
+            if (holder != null)
+            {
+                holder.DropHeldItemToWorld();
+                SelectedItemState.Clear();
+            }
+            
+            // --- NEW LOGIC END ---
+        }
     }
 
+    // ... (Keep HandleMovement, HandleMouseClick, etc. exactly as they were) ...
     private void HandleMovement()
     {
         if (motor == null) return;
@@ -65,35 +115,26 @@ public class PlayerInput : MonoBehaviour
 
     private void HandleMouseClick()
     {
-        // --- RIGHT CLICK (Context Menu) ---
         if (Input.GetMouseButtonDown(1))
         {
-            // 1. First, check if we hit a valid interactable
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, clickableLayers))
             {
                 IInteractable interactable = hit.collider.GetComponentInParent<IInteractable>();
-
                 if (interactable != null)
                 {
-                    // We hit something! Open the menu.
-                    // IMPORTANT: We do NOT clear the selected item here.
-                    // The InteractionController will see the selected item and include "Use [Item]" options.
                     InteractionController.Instance.OnRightClickInteract(interactable);
-                    return; // Stop here.
+                    return; 
                 }
             }
 
-            // 2. If we missed everything (or hit a non-interactable wall), THEN clear selection.
             if (!string.IsNullOrEmpty(SelectedItemState.SelectedItemID))
             {
                 SelectedItemState.Clear();
-                Debug.Log("[PlayerInput] Right-click on empty space: Selection cleared.");
             }
             return;
         }
 
-        // --- LEFT CLICK (Standard Interaction) ---
         if (Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
@@ -106,15 +147,12 @@ public class PlayerInput : MonoBehaviour
     private void PerformRaycastInteraction()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, clickableLayers))
         {
             IInteractable interactable = hit.collider.GetComponentInParent<IInteractable>();
-
             if (interactable != null)
             {
                 var selectedItemID = SelectedItemState.SelectedItemID;
-
                 if (!string.IsNullOrEmpty(selectedItemID))
                 {
                     OnUseItemCommand?.Invoke(interactable, selectedItemID);
@@ -127,20 +165,12 @@ public class PlayerInput : MonoBehaviour
             }
             else
             {
-                // Ground/Wall Click
-                if (!string.IsNullOrEmpty(SelectedItemState.SelectedItemID))
-                {
-                    SelectedItemState.Clear();
-                }
+                if (!string.IsNullOrEmpty(SelectedItemState.SelectedItemID)) SelectedItemState.Clear();
             }
         }
         else
         {
-            // Sky Click
-            if (!string.IsNullOrEmpty(SelectedItemState.SelectedItemID))
-            {
-                SelectedItemState.Clear();
-            }
+            if (!string.IsNullOrEmpty(SelectedItemState.SelectedItemID)) SelectedItemState.Clear();
         }
     }
 

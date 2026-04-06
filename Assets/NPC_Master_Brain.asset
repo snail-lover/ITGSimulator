@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23f08d2ae4cba14087c1ed36193d82b, type: 3}
+  m_Name: NPC_Master_Brain
+  m_EditorClassIdentifier: 
+  mBehaviorSource:
+    behaviorName: Behavior
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(836.0169,-63)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-83.98309,114)"},"ID":1,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"Game.Gameplay.AI.Tasks.CheckNotInDialogue","NodeData":{"Offset":"(-65.8393555,107.424438)"},"ID":2,"Name":"Check
+        Not In Dialogue","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(160,100)"},"ID":3,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-133.754349,248.720688)"},"ID":4,"Name":"Satisfy
+        Need","Instant":true,"AbortTypeabortType":"Both","Children":[{"Type":"Game.Gameplay.AI.Tasks.HasTarget","NodeData":{"Offset":"(-545.3663,106.591591)"},"ID":5,"Name":"Has
+        Target","Instant":true,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"TargetObject","IsShared":true}},{"Type":"Game.Gameplay.LockBrain","NodeData":{"Offset":"(-420.1565,113.1374)"},"ID":6,"Name":"Lock
+        Brain","Instant":true},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-282.0439,141.553345)"},"ID":7,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-153.206543,155.041992)"},"ID":8,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"Game.Gameplay.AI.Tasks.MoveToDestination","NodeData":{"Offset":"(-38.8370743,168.139511)"},"ID":9,"Name":"Move
+        To Destination","Instant":true,"SharedGameObjectinteractionPoint":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"InteractionPoint","IsShared":true},"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"TargetObject","IsShared":true},"SinglestopDistance":0.5},{"Type":"Game.Gameplay.AI.Tasks.RunSmartObjectBehavior","NodeData":{"Offset":"(160.46521,175.1163)"},"ID":10,"Name":"Run
+        Smart Object Behavior","Instant":true,"SharedObjecttargetBehaviorTree":{"Type":"BehaviorDesigner.Runtime.SharedObject","Name":"TargetBehaviorTree","IsShared":true},"ExternalBehavior[]externalBehaviors":[],"SharedNamedVariable[]variables":[],"Booleancollapsed":false},{"Type":"Game.Gameplay.SatisfyNeed","NodeData":{"Offset":"(343.2558,190)"},"ID":11,"Name":"Satisfy
+        Need","Instant":true,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"TargetObject","IsShared":true}}]},{"Type":"Game.Gameplay.UnlockBrain","NodeData":{"Offset":"(129.3229,149.795)"},"ID":12,"Name":"Unlock
+        Brain","Instant":true}]},{"Type":"Game.Gameplay.AI.Tasks.ResetInteraction","NodeData":{"Offset":"(-4.3766346,140.483337)"},"ID":13,"Name":"Reset
+        Interaction","Instant":true,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"TargetObject","IsShared":true},"SharedObjecttargetBehaviorTree":{"Type":"BehaviorDesigner.Runtime.SharedObject","Name":"TargetBehaviorTree","IsShared":true}},{"Type":"Game.Gameplay.UnlockBrain","NodeData":{"Offset":"(157.243088,170.780273)"},"ID":14,"Name":"Unlock
+        Brain","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(224.49324,241.943771)"},"ID":15,"Name":"Wander","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"Game.Gameplay.AI.Tasks.Wander","NodeData":{"Offset":"(16.0168457,147)"},"ID":16,"Name":"Wander","Instant":true,"SinglewanderRadius":32,"SingleminWanderDistance":1.5,"SinglearrivalDistance":0.5,"SingleminIdleTime":1,"SinglemaxIdleTime":1}]}]}]},"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"TargetObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"InteractionPoint","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedObject","Name":"TargetBehaviorTree","IsShared":true}]}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects: []
+        byteData: 
+        byteDataArray: 
+      Version: 1.7.12

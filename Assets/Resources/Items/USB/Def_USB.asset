@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 890df1367ed37464eba9405e412aa4cf, type: 3}
+  m_Name: Def_USB
+  m_EditorClassIdentifier: 
+  id: USB
+  itemName: USB
+  icon: {fileID: 21300000, guid: bc4372bdd4e4421448ecedda959f1482, type: 3}
+  tags:
+  - {fileID: 11400000, guid: 5328535d94e06ed4296c6f4a2f060db9, type: 2}
+  worldPrefab: {fileID: 7811252854151971608, guid: a52f0da8fb5473a48b68c957955c9128, type: 3}
+  holdPositionOffset: {x: 0, y: 0, z: 0}
+  holdRotationOffset: {x: 0, y: 0, z: 0}
+  useBumperCollider: 1

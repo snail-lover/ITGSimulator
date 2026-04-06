@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using Game.Core;
+using Game.Core; 
 using Game.Gameplay;
 
 namespace Game.Gameplay
@@ -10,30 +10,39 @@ namespace Game.Gameplay
     public class InteractionController : MonoBehaviour
     {
         public static InteractionController Instance { get; private set; }
+        
+        [Header("Global System")]
+        public InteractionRegistry globalRegistry; 
 
         [Header("Settings")]
         public float interactionRange = 3f;
 
         [Header("Line of Sight")]
-        [Tooltip("Layers that block interactions (Walls, Doors, etc). Usually 'Default'.")]
         public LayerMask occlusionLayers;
-        [Tooltip("How high up to shoot the ray from (to avoid hitting the floor).")]
         public float lineOfSightHeight = 1.0f;
 
         [Header("Debug")]
         public bool showDebugGizmos = true;
 
-        // References
         private Transform _playerTransform;
+        private PlayerHoldController _playerHolder;
         private IInteractable _activeContextTarget;
 
-        public static event Action<List<InteractionOption>, Vector2> OnOpenContextMenu;
+        // Track the warning state so we don't spam the event
+        private bool _isOutOfRange = false;
+
+        // Events
         public static event Action OnClearContextMenu;
+        
+        // NEW: Event sends TRUE if too far, FALSE if close enough
+        public static event Action<bool> OnRangeWarningChanged; 
 
         void Awake()
         {
             if (Instance == null) Instance = this;
             else Destroy(gameObject);
+
+            if (globalRegistry != null) globalRegistry.Initialize();
         }
 
         void Start()
@@ -42,10 +51,7 @@ namespace Game.Gameplay
             if (playerInput != null)
             {
                 _playerTransform = playerInput.transform;
-            }
-            else
-            {
-                Debug.LogError("[InteractionController] Could not find PlayerInput!");
+                _playerHolder = playerInput.GetComponent<PlayerHoldController>();
             }
         }
 
@@ -63,21 +69,38 @@ namespace Game.Gameplay
 
         void Update()
         {
-            // Monitor the active target (if any)
+            // Only run logic if we have an open context menu target
             if (_activeContextTarget != null)
             {
-                // Re-use your existing validation logic!
-                if (!IsValidInteraction(_activeContextTarget))
-                {
-                    // It is no longer valid (walked away, wall in between, etc.)
-                    _activeContextTarget = null;
+                MonoBehaviour targetMb = _activeContextTarget as MonoBehaviour;
 
-                    // Tell the UI to close
-                    OnClearContextMenu?.Invoke();
+                // 1. Target Destroyed check
+                if (targetMb == null)
+                {
+                    ClearContext();
+                    return;
+                }
+
+                // 2. Line of Sight Check (Hard Constraint - Close menu if lost)
+                if (!HasLineOfSight(targetMb))
+                {
+                    ClearContext();
+                    return;
+                }
+
+                // 3. Distance Check (Soft Constraint - Toggle Warning Text)
+                float dist = Vector3.Distance(_playerTransform.position, targetMb.transform.position);
+                
+                bool currentlyOutOfRange = dist > interactionRange;
+
+                // If the state changed (e.g., walked from Far -> Close), fire event
+                if (currentlyOutOfRange != _isOutOfRange)
+                {
+                    _isOutOfRange = currentlyOutOfRange;
+                    OnRangeWarningChanged?.Invoke(_isOutOfRange);
                 }
             }
         }
-
 
         private void OnLeftClickInteract(IInteractable target) => HandleInteraction(target, null, false);
         private void OnItemUsed(IInteractable target, string itemID) => HandleInteraction(target, itemID, false);
@@ -87,122 +110,121 @@ namespace Game.Gameplay
         {
             if (target == null || _playerTransform == null) return;
 
-            // 1. Check if Valid (Distance + Wall Check)
-            if (!IsValidInteraction(target))
-            {
-                // IsValidInteraction handles the Debug.Logs for us
-                return;
-            }
-
-            // 2. Build Context
-            InteractionContext context = new InteractionContext
-            {
-                Source = _playerTransform.gameObject,
-                HeldItemID = itemID ?? SelectedItemState.SelectedItemID
-            };
-
-            // 3. Get Options
-            List<InteractionOption> options = target.GetInteractions(context);
-
-            if (options == null || options.Count == 0)
-            {
-                Debug.Log($"<color=gray>[Interaction]</color> No interactions available.");
-                return;
-            }
-
-            // 4. Execute
+            // --- CRITICAL CHANGE ---
+            // For Right Click, we ONLY check Line of Sight, we ignore Distance.
+            // For Left Click, we still enforce distance immediately.
             if (isRightClick)
             {
-                if (options.Count > 0)
-                {
-                    options = options.OrderByDescending(x => x.Priority).ToList();
-
-                    _activeContextTarget = target;
-                    OnOpenContextMenu?.Invoke(options, Input.mousePosition);
-                }
+                if (!HasLineOfSight(target as MonoBehaviour)) return;
             }
             else
             {
+                if (!IsValidInteraction(target)) return;
+            }
+            // -----------------------
+
+            // Setup Context Data
+            string contextItemID = itemID; 
+            if (string.IsNullOrEmpty(contextItemID)) contextItemID = SelectedItemState.SelectedItemID;
+            if (string.IsNullOrEmpty(contextItemID) && _playerHolder != null) contextItemID = _playerHolder.GetHeldItemID();
+
+            ItemDefinition contextItemData = null;
+            if (!string.IsNullOrEmpty(contextItemID)) contextItemData = ItemDatabase.Instance.GetItemByID(contextItemID);
+
+            InteractionContext context = new InteractionContext
+            {
+                Source = _playerTransform.gameObject,
+                HeldItem = contextItemData
+            };
+
+            List<InteractionOption> options = target.GetInteractions(context);
+            if (options == null || options.Count == 0) return;
+
+            if (isRightClick)
+            {
+                options = options.OrderByDescending(x => x.Priority).ToList();
+                _activeContextTarget = target;
+                
+                // Force an initial check so the UI is correct the moment it opens
+                float dist = Vector3.Distance(_playerTransform.position, (target as MonoBehaviour).transform.position);
+                _isOutOfRange = dist > interactionRange;
+                
+                // Open Menu
+                UIEvents.RequestContextMenu(options, Input.mousePosition, target.GetName());
+                
+                // Update Warning immediately
+                OnRangeWarningChanged?.Invoke(_isOutOfRange);
+            }
+            else
+            {
+                // Left click logic remains the same
                 var bestOption = options.OrderByDescending(x => x.Priority).FirstOrDefault();
                 if (bestOption != null)
                 {
-                    Debug.Log($"<color=green>[Action]</color> Executing: {bestOption.Label}");
                     bestOption.ActionToRun?.Invoke();
-                    _activeContextTarget = null; OnClearContextMenu?.Invoke();
+                    ClearContext();
                 }
             }
         }
+
+        private void ClearContext()
+        {
+            _activeContextTarget = null;
+            OnClearContextMenu?.Invoke();
+        }
+
         public void ClearTracking()
         {
             _activeContextTarget = null;
         }
 
-        // --- VALIDATION LOGIC ---
-
+        // Used for Left Clicks (Enforces Distance)
         public bool IsValidInteraction(IInteractable target)
         {
             if (_playerTransform == null) return false;
-
             MonoBehaviour targetMb = target as MonoBehaviour;
-            if (targetMb == null) return true; // Non-physical targets are always valid
+            if (targetMb == null) return true; 
 
-            // A. Distance Check
             float dist = Vector3.Distance(_playerTransform.position, targetMb.transform.position);
-            if (dist > interactionRange)
-            {
-                Debug.Log($"<color=yellow>[Interaction]</color> Too far! ({dist:F1}m)");
-                return false;
-            }
+            if (dist > interactionRange) return false;
 
-            // B. Line of Sight (Wall) Check
-            if (!HasLineOfSight(targetMb))
-            {
-                Debug.Log($"<color=red>[Interaction]</color> Something is blocking the view!");
-                return false;
-            }
+            if (!HasLineOfSight(targetMb)) return false;
 
             return true;
         }
 
         private bool HasLineOfSight(MonoBehaviour targetMb)
         {
-            // Calculate start and end points raised by the height offset
-            // This prevents the ray from skimming the ground and failing
+            // ... (Keep your existing Line of Sight logic exactly as is) ...
             Vector3 start = _playerTransform.position + Vector3.up * lineOfSightHeight;
-            Vector3 end = targetMb.transform.position + Vector3.up * lineOfSightHeight;
+            Vector3 end;
+            Collider targetCol = targetMb.GetComponentInChildren<Collider>();
 
-            // If the target has a collider, try to aim for its center instead of its pivot
-            // This helps if the pivot is at the feet but the object is tall (like a fridge)
-            Collider targetCol = targetMb.GetComponent<Collider>();
-            if (targetCol != null) end = targetCol.bounds.center;
-
-            Vector3 direction = end - start;
-            float distance = direction.magnitude;
-
-            // Cast a Ray
-            if (Physics.Raycast(start, direction.normalized, out RaycastHit hit, distance, occlusionLayers))
+            if (targetCol != null)
             {
-                // We hit something!
-
-                // Check if we hit the target itself (or a child of it). If so, that's fine.
-                if (hit.transform == targetMb.transform || hit.transform.IsChildOf(targetMb.transform))
-                {
-                    return true;
-                }
-
-                // We hit something else (a wall)
-                return false;
+                end = targetCol.ClosestPoint(start);
+                if (end == start) end = targetCol.bounds.center;
+            }
+            else
+            {
+                end = targetMb.transform.position + Vector3.up * lineOfSightHeight;
             }
 
-            // Raycast hit nothing, meaning clear path
+            Vector3 direction = end - start;
+            float targetDistance = direction.magnitude;
+
+            if (Physics.Raycast(start, direction.normalized, out RaycastHit hit, targetDistance, occlusionLayers))
+            {
+                if (hit.transform == targetMb.transform || hit.transform.IsChildOf(targetMb.transform)) return true;
+                if (Mathf.Abs(hit.distance - targetDistance) < 0.05f) return true; 
+                return false;
+            }
             return true;
         }
 
-        // --- VISUAL DEBUGGING ---
         void OnDrawGizmos()
         {
             if (!showDebugGizmos || _playerTransform == null) return;
-
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(_playerTransform.position, interactionRange);
         }

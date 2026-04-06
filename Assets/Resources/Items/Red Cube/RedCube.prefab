@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7105113233845914269}
   - component: {fileID: 4048069716765760038}
   - component: {fileID: -2554118938027814782}
+  - component: {fileID: 8847645508875965016}
   m_Layer: 6
   m_Name: RedCube
   m_TagString: Untagged
@@ -150,6 +151,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: Red Cube
+  receptorTags:
+  - {fileID: 11400000, guid: dccfb273dcd62d74f803250a38fca038, type: 2}
   interactionActions:
   - {fileID: 11400000, guid: 37687c1ed88c2604db669e01f99e9e68, type: 2}
   initialStates: []
+  inspectDescriptions: []
+--- !u!114 &8847645508875965016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6342216320652697993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed9c643f08256640b30d523ff30a398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: b68a4a5aef2db5c45a45026da9f079c8, type: 2}

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86efe749f708a848a7077fa183abe17, type: 3}
+  m_Name: Action_FillContainer
+  m_EditorClassIdentifier: 
+  actionName: Fill Container
+  priority: 0
+  blockedByStates: []
+  sourceTag: {fileID: 11400000, guid: 4c0595b8c26ced5409557717d55aa8a4, type: 2}
+  containerTag: {fileID: 11400000, guid: 670e80e1ff94eb04facecf4d98553dd3, type: 2}
+  stateFillLevel: {fileID: 11400000, guid: 7216a689d4fb74546ba608f90ddb352f, type: 2}
+  stateFluidID: {fileID: 11400000, guid: 48845bf6ab7d25349839f29edcb84f79, type: 2}

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a65426007c49642a3b20a7d98c4372, type: 3}
+  m_Name: GlobalRules
+  m_EditorClassIdentifier: 
+  AlwaysAvailableActions:
+  - {fileID: 11400000, guid: f609f9505c6eed145862b4d66973d487, type: 2}
+  Rules:
+  - tag: {fileID: 11400000, guid: c89f2c663d9cff64180dba08e954d398, type: 2}
+    actions:
+    - {fileID: 11400000, guid: 3e024e0f52f069e4dba0854fdcf74ce4, type: 2}
+  - tag: {fileID: 11400000, guid: dccfb273dcd62d74f803250a38fca038, type: 2}
+    actions:
+    - {fileID: 11400000, guid: 37687c1ed88c2604db669e01f99e9e68, type: 2}
+  - tag: {fileID: 11400000, guid: e7e0514777849284c825a1f0581d5d33, type: 2}
+    actions:
+    - {fileID: 11400000, guid: b6b1827c57460734885c8759102b517f, type: 2}
+  - tag: {fileID: 11400000, guid: de88db4d1c3f86843bc66195bf92dda1, type: 2}
+    actions:
+    - {fileID: 11400000, guid: acc45710131e9ad4082079363796fd81, type: 2}
+  - tag: {fileID: 11400000, guid: 84135959d52c3be428f51caa8dbe6859, type: 2}
+    actions:
+    - {fileID: 11400000, guid: 3130d0b4e3733294f9023ebdc7fa4f84, type: 2}

@@ -7,8 +7,8 @@ namespace Game.Core
     public class InteractionContext
     {
         public GameObject Source; // The Player
-        public string HeldItemID; // Example: "crowbar"
-        // In the future: public List<string> HeldItemTags; 
+        public ItemDefinition HeldItem;
+
     }
 
     // The Result: "What can you do?"

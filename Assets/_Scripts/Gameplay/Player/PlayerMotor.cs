@@ -14,6 +14,9 @@ public class PlayerMotor : MonoBehaviour
     private Rigidbody rb;
     private Vector3 _inputDirection;
     private float _currentSpeedModifier = 1f;
+    
+    private Transform _facingTarget; // If set, we look at this instead of input dir
+    private bool _isDragging = false;
 
     void Awake()
     {
@@ -21,6 +24,11 @@ public class PlayerMotor : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+    }
+    public void SetFacingTarget(Transform target)
+    {
+        _facingTarget = target;
+        _isDragging = (target != null);
     }
 
     void OnEnable()
@@ -78,6 +86,9 @@ public class PlayerMotor : MonoBehaviour
         // 2. Preserve Gravity
         // We only want to control X and Z. We must keep the current Y (falling speed).
         Vector3 velocityChange = new Vector3(targetVelocity.x, rb.linearVelocity.y, targetVelocity.z);
+        
+        //2.1 dragging velocity
+        if (_isDragging) targetVelocity *= 0.7f;
 
         // 3. Apply directly
         // Previously we had an "if (input < 0.1) return" here. 
@@ -93,10 +104,24 @@ public class PlayerMotor : MonoBehaviour
 
     private void Turn()
     {
-        if (_inputDirection.magnitude < 0.1f) return;
-
-        Quaternion targetRotation = Quaternion.LookRotation(_inputDirection);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.fixedDeltaTime);
+        // MODE A: Dragging (Face the Object)
+        if (_isDragging && _facingTarget != null)
+        {
+            Vector3 lookPos = _facingTarget.position - transform.position;
+            lookPos.y = 0; // Keep looking flat
+            if (lookPos.sqrMagnitude > 0.01f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(lookPos);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.fixedDeltaTime);
+            }
+        }
+        // MODE B: Normal (Face Movement)
+        else 
+        {
+            if (_inputDirection.magnitude < 0.1f) return;
+            Quaternion targetRotation = Quaternion.LookRotation(_inputDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.fixedDeltaTime);
+        }
     }
 
     // --- SAVE / LOAD SYSTEM ---

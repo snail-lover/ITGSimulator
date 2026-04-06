@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &941314881710876800
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 46.1691
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.122743
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.909896
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_Name
+      value: SprayBottle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8513859187771203891, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8108687210831911517}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5992291429698017119}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7378462887502951363}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5909574825855779209}
+  m_SourcePrefab: {fileID: 100100000, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+--- !u!1 &130975148724934097 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d3c1301ee79b4fb498601a7d2f3c27d5, type: 3}
+  m_PrefabInstance: {fileID: 941314881710876800}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8108687210831911517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130975148724934097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 632414eab88db2244802cf70376eea4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectName: Spray Bottle
+  receptorTags:
+  - {fileID: 11400000, guid: dccfb273dcd62d74f803250a38fca038, type: 2}
+  interactionActions: []
+  initialStates: []
+  inspectDescriptions: []
+  interactionWeight: 1
+--- !u!114 &5992291429698017119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130975148724934097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed9c643f08256640b30d523ff30a398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 8dc86c88a48231a4881790d477ecc93b, type: 2}
+--- !u!65 &-7378462887502951363
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130975148724934097}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.1389198, y: 5.08876, z: 2.039916}
+  m_Center: {x: -0.49041557, y: 2.3752625, z: 0}
+--- !u!54 &-5909574825855779209
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130975148724934097}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

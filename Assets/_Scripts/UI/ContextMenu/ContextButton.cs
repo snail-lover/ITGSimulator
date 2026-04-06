@@ -1,26 +1,34 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Assuming you use TextMeshPro
-using Game.Core;
+using TMPro; 
+using Game.Core; 
 using System;
+using UnityEngine.EventSystems;
 
 namespace Game.UI
 {
-    public class ContextMenuButton : MonoBehaviour
+    public class ContextMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [Header("Components")]
         public Button button;
         public TextMeshProUGUI labelText;
-        public Image iconImage; // Optional
+        public Image iconImage; 
 
+        [Header("Style Settings")]
+        public Color normalColor = Color.white;
+        public Color hoverColor = new Color(1f, 0.8f, 0f); // Gold/Yellow
+        public Color disabledColor = new Color(0.5f, 0.5f, 0.5f, 0.5f); // Grey/Transparent
+        
         private Action _callback;
 
         public void Setup(InteractionOption option, Action closeMenuCallback)
         {
-            // Set Text
             labelText.text = option.Label;
+            
+            // Default to normal state
+            labelText.color = normalColor;
+            button.interactable = true;
 
-            // Set Icon (if available)
             if (option.Icon != null)
             {
                 iconImage.sprite = option.Icon;
@@ -31,16 +39,41 @@ namespace Game.UI
                 iconImage.gameObject.SetActive(false);
             }
 
-            // Setup Click Event
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() =>
             {
-                // 1. Run the actual game logic (e.g., Break Door)
                 option.ActionToRun?.Invoke();
-
-                // 2. Tell the menu to close itself
                 closeMenuCallback?.Invoke();
             });
+        }
+
+        // --- NEW: Handle Disabled State ---
+        public void SetInteractable(bool state)
+        {
+            button.interactable = state;
+
+            // Immediate Visual Update
+            if (state)
+            {
+                labelText.color = normalColor;
+            }
+            else
+            {
+                labelText.color = disabledColor;
+            }
+        }
+
+        // --- HOVER LOGIC ---
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (button.interactable)
+                labelText.color = hoverColor;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (button.interactable)
+                labelText.color = normalColor;
         }
     }
 }

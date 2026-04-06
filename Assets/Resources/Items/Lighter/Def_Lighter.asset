@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 890df1367ed37464eba9405e412aa4cf, type: 3}
+  m_Name: Def_Lighter
+  m_EditorClassIdentifier: 
+  id: Lighter
+  itemName: Lighter
+  icon: {fileID: 21300000, guid: 9cb4d682d4c01064cb73f39adacd98a9, type: 3}
+  description: 
+  tags:
+  - {fileID: 11400000, guid: 005fe1aed0d69124683958175c88e923, type: 2}
+  worldPrefab: {fileID: 8527500862882325305, guid: 9b48bb4549b3d934e96f2f67d8bafe71, type: 3}
+  holdPositionOffset: {x: 0, y: 0, z: 0}
+  holdRotationOffset: {x: 0, y: 0, z: 0}
+  useBumperCollider: 1
+  previewRotation: {x: -90, y: 0, z: 0}
+  previewScale: 1

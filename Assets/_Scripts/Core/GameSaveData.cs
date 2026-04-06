@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine; // Needed for ISerializationCallbackReceiver
 using System.Linq;
+using Game.Core; 
 
 [System.Serializable]
 public class GameSaveData : ISerializationCallbackReceiver
 {
     // --- Chapter 1: Global Flags ---
     public Dictionary<string, bool> globalFlags = new Dictionary<string, bool>();
-
-    // --- Chapter 2: The State of All NPCs ---
-    public Dictionary<string, NpcRuntimeData> allNpcRuntimeData = new Dictionary<string, NpcRuntimeData>();
+    
 
     // --- Chapter 3: Inventory ---
     public InventoryState playerInventory = new InventoryState();
@@ -28,14 +27,17 @@ public class GameSaveData : ISerializationCallbackReceiver
     // Because PlayerPersonalityProfile is [System.Serializable], JsonUtility will handle it.
     public PlayerPersonalityProfile playerPersonality = new PlayerPersonalityProfile();
 
+    // 8 NPC relationships
+    public Dictionary<string, float> npcRelationships = new Dictionary<string, float>();
+
 
     // --- Serialization Helpers (The Magic for Dictionaries) ---
     [SerializeField] private List<string> _flagKeys = new List<string>();
     [SerializeField] private List<bool> _flagValues = new List<bool>();
     [SerializeField] private List<string> _npcKeys = new List<string>();
-    [SerializeField] private List<NpcRuntimeData> _npcValues = new List<NpcRuntimeData>();
     [SerializeField] private List<string> _completedHighPriorityDialogueIDsList = new List<string>();
-
+    [SerializeField] private List<string> _relationshipKeys = new List<string>();
+    [SerializeField] private List<float> _relationshipValues = new List<float>();
 
     public void OnBeforeSerialize()
     {
@@ -50,14 +52,15 @@ public class GameSaveData : ISerializationCallbackReceiver
             _flagKeys.Add(kvp.Key);
             _flagValues.Add(kvp.Value);
         }
+        _relationshipKeys.Clear();
+        _relationshipValues.Clear();
+        foreach (var kvp in npcRelationships)
+        {
+            _relationshipKeys.Add(kvp.Key);
+            _relationshipValues.Add(kvp.Value);
+        }
 
         _npcKeys.Clear();
-        _npcValues.Clear();
-        foreach (var kvp in allNpcRuntimeData)
-        {
-            _npcKeys.Add(kvp.Key);
-            _npcValues.Add(kvp.Value);
-        }
 
         _completedHighPriorityDialogueIDsList = completedHighPriorityDialogueIDs.ToList();
     }
@@ -71,11 +74,9 @@ public class GameSaveData : ISerializationCallbackReceiver
             globalFlags.Add(_flagKeys[i], _flagValues[i]);
         }
 
-        allNpcRuntimeData = new Dictionary<string, NpcRuntimeData>();
-        for (int i = 0; i < _npcKeys.Count; i++)
-        {
-            allNpcRuntimeData.Add(_npcKeys[i], _npcValues[i]);
-        }
+        npcRelationships = new Dictionary<string, float>();
+        for (int i = 0; i < _relationshipKeys.Count; i++)
+            npcRelationships.Add(_relationshipKeys[i], _relationshipValues[i]);
 
         completedHighPriorityDialogueIDs = new HashSet<string>(_completedHighPriorityDialogueIDsList);
 

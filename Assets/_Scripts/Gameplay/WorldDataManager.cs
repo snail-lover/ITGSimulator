@@ -15,6 +15,12 @@ public class WorldDataManager : MonoBehaviour // Renamed from WorldStateManager
 {
     // --- The New Singleton Pattern ---
 
+    private static bool _isQuitting = false;
+    private void OnApplicationQuit()
+{
+    _isQuitting = true;
+}
+
     // 1. The private variable that holds the actual instance.
     private static WorldDataManager _instance;
 
@@ -23,14 +29,10 @@ public class WorldDataManager : MonoBehaviour // Renamed from WorldStateManager
     {
         get
         {
-            // 3. This is the magic. We check if the instance is null *when it is requested*.
-            if (_instance == null)
+            if (_instance == null && !_isQuitting)
             {
-                // 4. If it's null, we log a detailed, helpful error message.
                 Debug.LogError("WorldDataManager.Instance is null! This usually means the WorldDataManager is missing from the scene or has been destroyed. Please ensure a GameObject with the WorldDataManager component exists and is active in your scene.");
             }
-
-            // 5. We return the instance (which will be null if the error was triggered).
             return _instance;
         }
     }
@@ -117,56 +119,50 @@ public class WorldDataManager : MonoBehaviour // Renamed from WorldStateManager
         // It now writes to the 'globalFlags' chapter of the save data.
         saveData.globalFlags[key] = value;
     }
+    
 
-    /// <summary>
-    /// Gets or creates the runtime data for a specific NPC.
-    /// The NpcController calls this in its Awake() to get its persistent state.
-    /// </summary>
-    public NpcRuntimeData GetOrCreateNpcData(string npcId, System.Func<NpcRuntimeData> createDataFunc)
+    // --- INVENTORY LOGIC (UPDATED) ---
+
+    // 1. New method: Adds a fully formed item (with states like "Full" or "Hot")
+    public void AddItemInstance(InventoryItemInstance newItem)
     {
-        // Check if we already have data for this NPC.
-        if (saveData.allNpcRuntimeData.TryGetValue(npcId, out NpcRuntimeData existingData))
-        {
-            // Found it! Return the existing data from the save file.
-            return existingData;
-        }
-
-        // Not found. This must be a new game or a newly added NPC.
-        // We call the function that was passed to us from the higher-level script.
-        Debug.Log($"No data found for NPC '{npcId}'. Creating new data.");
-        NpcRuntimeData newData = createDataFunc();
-
-        // Add the new data to our central database so it gets saved.
-        saveData.allNpcRuntimeData.Add(npcId, newData);
-
-        return newData;
+        saveData.playerInventory.items.Add(newItem);
+        Debug.Log($"[WorldDataManager] Added item instance '{newItem.itemID}' (States: {newItem.savedStates.Count})");
     }
 
+    // 2. Backward Compatibility: Adds a simple item by string ID (creates a default instance)
     public void AddItemToInventory(string itemID)
     {
-        if (!saveData.playerInventory.itemIDs.Contains(itemID))
+        // Create a fresh instance with a unique GUID
+        var newInstance = new InventoryItemInstance
         {
-            saveData.playerInventory.itemIDs.Add(itemID);
-            Debug.Log($"[WorldDataManager] Added '{itemID}' to inventory.");
-        }
+            itemID = itemID,
+            uniqueID = System.Guid.NewGuid().ToString()
+        };
+        
+        saveData.playerInventory.items.Add(newInstance);
+        Debug.Log($"[WorldDataManager] Added basic item '{itemID}' to inventory.");
     }
 
+    // 3. Updated: Find an item by string ID and remove the first match
     public void RemoveItemFromInventory(string itemID)
     {
-        if (saveData.playerInventory.itemIDs.Contains(itemID))
+        // Find the object in the list that matches the ID
+        var itemToRemove = saveData.playerInventory.items.Find(x => x.itemID == itemID);
+
+        if (itemToRemove != null)
         {
-            saveData.playerInventory.itemIDs.Remove(itemID);
+            saveData.playerInventory.items.Remove(itemToRemove);
             Debug.Log($"[WorldDataManager] Removed '{itemID}' from inventory.");
         }
     }
 
+    // 4. Updated: Check if any item in the list has this ID
     public bool PlayerHasItem(string itemID)
     {
-        return saveData.playerInventory.itemIDs.Contains(itemID);
+        // Return true if Find returns something not null
+        return saveData.playerInventory.items.Exists(x => x.itemID == itemID);
     }
-
-
-
 
     // --- Saving and Loading Logic ---
 
@@ -232,4 +228,12 @@ public class WorldDataManager : MonoBehaviour // Renamed from WorldStateManager
 
         return saveData.completedHighPriorityDialogueIDs.Contains(triggerID);
     }
+
+        /// <summary>Returns all world flags for debug display.</summary>
+    public IReadOnlyDictionary<string, bool> GetAllFlags()
+        => saveData.globalFlags;
+
+    /// <summary>Returns all completed one-time dialogue entry IDs for debug display.</summary>
+    public IReadOnlyCollection<string> GetCompletedDialogues()
+        => saveData.completedHighPriorityDialogueIDs;
 }

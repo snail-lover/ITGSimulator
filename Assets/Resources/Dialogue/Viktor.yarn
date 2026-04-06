@@ -1,0 +1,9 @@
+﻿title: Viktor
+---
+Viktor: Here, take this.
+-> Take Item
+    <<give_item Knife>>
+    Viktor: knife knife knife!!!
+-> ...
+    Viktor: Right.
+===

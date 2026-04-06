@@ -9,23 +9,20 @@ namespace Game.UI
     {
         [Header("Setup")]
         public GameObject slotPrefab;
-        public Transform gridContainer; // The object with GridLayoutGroup
-        public int totalSlots = 40; // 10x4
+        public Transform gridContainer; 
+        public int totalSlots = 40; 
 
         private List<InventorySlot> _slots = new List<InventorySlot>();
 
         void Start()
         {
             GenerateGrid();
-
-            // Initial Draw
             RedrawUI();
 
-            // Subscribe to events
             if (Inventory.Instance != null)
                 Inventory.Instance.OnInventoryChanged += RedrawUI;
 
-            // Subscribe to selection changes to update outlines
+            // FIX: Match the new parameterless signature
             SelectedItemState.OnChanged += OnSelectionChanged;
         }
 
@@ -39,11 +36,7 @@ namespace Game.UI
 
         private void GenerateGrid()
         {
-            // Clear existing children (useful for testing)
-            foreach (Transform child in gridContainer)
-            {
-                Destroy(child.gameObject);
-            }
+            foreach (Transform child in gridContainer) Destroy(child.gameObject);
             _slots.Clear();
 
             for (int i = 0; i < totalSlots; i++)
@@ -56,34 +49,26 @@ namespace Game.UI
 
         private void RedrawUI()
         {
-            // 1. Get the list of Item IDs from the Save Data
-            List<string> inventoryIDs = WorldDataManager.Instance.saveData.playerInventory.itemIDs;
+            List<InventoryItemInstance> inventoryItems = WorldDataManager.Instance.saveData.playerInventory.items;
 
-            // 2. Loop through our UI slots
             for (int i = 0; i < _slots.Count; i++)
             {
-                if (i < inventoryIDs.Count)
+                if (i < inventoryItems.Count)
                 {
-                    // This slot has an item
-                    string id = inventoryIDs[i];
-                    ItemDefinition def = ItemDatabase.Instance.GetItemByID(id);
-                    _slots[i].Setup(def);
+                    _slots[i].Setup(inventoryItems[i]);
                 }
                 else
                 {
-                    // This slot is empty
                     _slots[i].Clear();
                 }
             }
         }
 
-        private void OnSelectionChanged(string newID)
+        // --- FIX: Remove the 'string newID' parameter ---
+        private void OnSelectionChanged()
         {
-            // Just refresh visual outlines
-            foreach (var slot in _slots)
-            {
-                slot.UpdateSelectionVisual();
-            }
+            // The slots will internally check SelectedItemState.SelectedUniqueID
+            foreach (var slot in _slots) slot.UpdateSelectionVisual();
         }
     }
 }

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f49088e7df10e034ba53e1b078e71ca9, type: 3}
+  m_Name: Action_Study
+  m_EditorClassIdentifier: 
+  actionName: Study
+  priority: 0
+  blockedByStates:
+  - {fileID: 11400000, guid: 9d0ef0235850b57418ad3e15c0c0e43a, type: 2}
+  amount: 1
+  label: Study
+  oneTimeFlag: {fileID: 0}
